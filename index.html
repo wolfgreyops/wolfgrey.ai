@@ -531,10 +531,10 @@
     }
     .ship-section .container {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       text-align: center;
-      margin-bottom: auto;
       padding-top: 40px;
+      padding-bottom: 20px;
     }
     .ship-section .section-title {
       max-width: 600px;
@@ -546,8 +546,10 @@
       text-align: center;
     }
     .ship-wrap {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      position: relative;
+      width: 100%;
+      flex: 1;
+      min-height: 450px;
       pointer-events: none;
       z-index: 1;
     }
