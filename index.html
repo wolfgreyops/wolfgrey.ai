@@ -505,6 +505,72 @@
       section { padding: 80px 24px; }
     }
 
+    /* ── SHIP SECTION ── */
+    .ship-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ship-section .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .ship-section .section-title {
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+    .ship-section .section-subtitle {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .ship-wrap {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .ship-img {
+      position: absolute;
+      width: clamp(260px, 40vw, 480px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 0 40px rgba(255,111,97,0.25)) drop-shadow(0 0 80px rgba(218,165,32,0.15));
+      transition: transform 0.15s ease-out;
+      animation: shipHover 4s ease-in-out infinite;
+    }
+    @keyframes shipHover {
+      0%, 100% { margin-top: 0; }
+      50% { margin-top: -14px; }
+    }
+    .feature-tag {
+      position: absolute;
+      padding: 6px 16px;
+      background: rgba(28, 28, 28, 0.75);
+      border: 1px solid rgba(255, 111, 97, 0.25);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+      animation: featureFloat 5s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(255, 111, 97, 0.1);
+    }
+    .feature-tag.gold {
+      border-color: rgba(218, 165, 32, 0.3);
+      box-shadow: 0 0 12px rgba(218, 165, 32, 0.1);
+    }
+    @keyframes featureFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
     /* ── ANIMATIONS ── */
     .fade-up {
       opacity: 0;
@@ -691,6 +757,25 @@
     </div>
   </section>
 
+
+  <!-- SHIP SECTION -->
+  <section class="ship-section" id="ship-section">
+    <div class="ship-wrap">
+      <img src="ship.png" alt="" class="ship-img" id="shipImg">
+      <div class="feature-tag" style="top: 12%; left: 8%; animation-delay: 0s;">Automated Reports</div>
+      <div class="feature-tag gold" style="top: 18%; right: 10%; animation-delay: 0.6s;">Sales Automation</div>
+      <div class="feature-tag" style="top: 40%; left: 3%; animation-delay: 1.2s;">Content Pipelines</div>
+      <div class="feature-tag gold" style="top: 38%; right: 4%; animation-delay: 0.3s;">Lead Generation</div>
+      <div class="feature-tag gold" style="bottom: 28%; left: 6%; animation-delay: 0.9s;">Data Processing</div>
+      <div class="feature-tag" style="bottom: 30%; right: 7%; animation-delay: 1.5s;">Email Sequences</div>
+      <div class="feature-tag" style="bottom: 12%; left: 15%; animation-delay: 0.4s;">Custom Workflows</div>
+      <div class="feature-tag gold" style="bottom: 10%; right: 14%; animation-delay: 1.1s;">Prompt Libraries</div>
+    </div>
+    <div class="container">
+      <div class="section-label">No Small Business Left Behind</div>
+      <h2 class="section-title">Take your business into the future with the right guidance. It's a new world.</h2>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="cta-section">
@@ -925,6 +1010,36 @@
         mouse.x = (e.clientX - rect.left) / w;
         mouse.y = (e.clientY - rect.top) / h;
       });
+    })();
+
+    // Ship mouse follow
+    (function() {
+      const section = document.getElementById('ship-section');
+      const ship = document.getElementById('shipImg');
+      if (!section || !ship) return;
+
+      let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+
+      section.addEventListener('mousemove', (e) => {
+        const rect = section.getBoundingClientRect();
+        targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+        targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+      });
+
+      section.addEventListener('mouseleave', () => {
+        targetX = 0;
+        targetY = 0;
+      });
+
+      function animate() {
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+        const tiltX = currentY * 0.15;
+        const tiltY = -currentX * 0.15;
+        ship.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
     })();
 
   </script>
