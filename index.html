@@ -503,15 +503,19 @@
         gap: 32px;
       }
       section { padding: 80px 24px; }
-      .ship-section { min-height: 500px; }
-      .ship-img { width: clamp(180px, 55vw, 280px) !important; }
-      .feature-tag {
-        font-size: 0.75rem !important;
-        padding: 5px 12px !important;
+      .ship-section { min-height: auto; }
+      .ship-img { width: clamp(180px, 60vw, 300px) !important; }
+      .feature-tag.floating { display: none; }
+      .feature-list {
+        display: flex;
+      }
+      .feature-list .feature-tag {
+        font-size: 0.8rem;
+        padding: 6px 14px;
       }
       .ship-wrap {
         position: relative !important;
-        min-height: 400px;
+        min-height: 300px;
       }
     }
 
@@ -582,6 +586,19 @@
     @keyframes featureFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
+    }
+    .feature-list {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 24px 24px 0;
+      position: relative;
+      z-index: 2;
+    }
+    .feature-list .feature-tag {
+      position: static;
+      animation: none;
     }
 
     /* ── ANIMATIONS ── */
@@ -779,14 +796,24 @@
     </div>
     <div class="ship-wrap">
       <img src="ship-small.png" alt="" class="ship-img" id="shipImg">
-      <div class="feature-tag" style="top: 12%; left: 8%; animation-delay: 0s;">Automated Reports</div>
-      <div class="feature-tag gold" style="top: 18%; right: 10%; animation-delay: 0.6s;">Sales Automation</div>
-      <div class="feature-tag" style="top: 40%; left: 3%; animation-delay: 1.2s;">Content Pipelines</div>
-      <div class="feature-tag gold" style="top: 38%; right: 4%; animation-delay: 0.3s;">Lead Generation</div>
-      <div class="feature-tag gold" style="bottom: 28%; left: 6%; animation-delay: 0.9s;">Data Processing</div>
-      <div class="feature-tag" style="bottom: 30%; right: 7%; animation-delay: 1.5s;">Email Sequences</div>
-      <div class="feature-tag" style="bottom: 12%; left: 15%; animation-delay: 0.4s;">Custom Workflows</div>
-      <div class="feature-tag gold" style="bottom: 10%; right: 14%; animation-delay: 1.1s;">Prompt Libraries</div>
+      <div class="feature-tag floating" style="top: 12%; left: 8%; animation-delay: 0s;">Automated Reports</div>
+      <div class="feature-tag gold floating" style="top: 18%; right: 10%; animation-delay: 0.6s;">Sales Automation</div>
+      <div class="feature-tag floating" style="top: 40%; left: 3%; animation-delay: 1.2s;">Content Pipelines</div>
+      <div class="feature-tag gold floating" style="top: 38%; right: 4%; animation-delay: 0.3s;">Lead Generation</div>
+      <div class="feature-tag gold floating" style="bottom: 28%; left: 6%; animation-delay: 0.9s;">Data Processing</div>
+      <div class="feature-tag floating" style="bottom: 30%; right: 7%; animation-delay: 1.5s;">Email Sequences</div>
+      <div class="feature-tag floating" style="bottom: 12%; left: 15%; animation-delay: 0.4s;">Custom Workflows</div>
+      <div class="feature-tag gold floating" style="bottom: 10%; right: 14%; animation-delay: 1.1s;">Prompt Libraries</div>
+    </div>
+    <div class="feature-list">
+      <span class="feature-tag">Automated Reports</span>
+      <span class="feature-tag gold">Sales Automation</span>
+      <span class="feature-tag">Content Pipelines</span>
+      <span class="feature-tag gold">Lead Generation</span>
+      <span class="feature-tag gold">Data Processing</span>
+      <span class="feature-tag">Email Sequences</span>
+      <span class="feature-tag">Custom Workflows</span>
+      <span class="feature-tag gold">Prompt Libraries</span>
     </div>
   </section>
 
