@@ -937,7 +937,7 @@
       });
     })();
 
-    // Neon floating business graphic
+    // Neon starship with Saturn rings
     (function() {
       const canvas = document.getElementById('neonBiz');
       const ctx = canvas.getContext('2d');
@@ -945,19 +945,16 @@
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const mouse = { x: 0.5, y: 0.5 };
 
-      const capabilities = [
-        { label: 'Automated Reports', angle: 0 },
-        { label: 'Content Pipelines', angle: Math.PI * 0.35 },
-        { label: 'Lead Generation', angle: Math.PI * 0.65 },
-        { label: 'Sales Automation', angle: Math.PI },
-        { label: 'Data Processing', angle: Math.PI * 1.35 },
-        { label: 'Email Sequences', angle: Math.PI * 1.65 },
-        { label: 'Custom Workflows', angle: Math.PI * 0.18 + Math.PI },
-        { label: 'Prompt Libraries', angle: Math.PI * 0.82 },
+      const rings = [
+        { rx: 1.0, ry: 0.28, speed: 0.12, items: [
+          'Automated Reports', 'Sales Automation', 'Lead Generation', 'Email Sequences'
+        ]},
+        { rx: 1.35, ry: 0.38, speed: -0.08, items: [
+          'Content Pipelines', 'Data Processing', 'Custom Workflows', 'Prompt Libraries'
+        ]},
       ];
 
       function resize() {
-        const rect = canvas.parentElement.getBoundingClientRect();
         w = canvas.offsetWidth;
         h = canvas.offsetHeight;
         canvas.width = w * dpr;
@@ -968,209 +965,268 @@
       let time = 0;
       function draw() {
         if (!started) return;
-        time += 0.012;
+        time += 0.01;
         ctx.clearRect(0, 0, w, h);
 
         const cx = w / 2;
         const cy = h / 2;
-        const bob = Math.sin(time) * 8;
-        const tilt = Math.sin(time * 0.7) * 0.03;
-
-        // 3D rotation from mouse
-        const rotX = (mouse.y - 0.5) * 0.15;
-        const rotY = (mouse.x - 0.5) * 0.2;
-
-        ctx.save();
-        ctx.translate(cx, cy + bob);
-
-        // Draw building - minimalist storefront
-        const bw = Math.min(w * 0.18, 140);
-        const bh = bw * 1.3;
-        const bx = -bw / 2;
-        const by = -bh / 2;
-
-        // 3D skew from mouse
-        ctx.transform(1, rotX, rotY + tilt, 1, 0, 0);
-
-        // Neon glow function
-        function neonStroke(color, lw) {
-          ctx.shadowColor = color;
-          ctx.shadowBlur = 20;
-          ctx.strokeStyle = color;
-          ctx.lineWidth = lw || 1.5;
-        }
-
-        // Building body
+        const bob = Math.sin(time * 0.8) * 6;
+        const scale = Math.min(w, h) / 700;
         const coral = '#FF6F61';
         const gold = '#DAA520';
 
-        neonStroke(coral, 1.5);
+        function neon(color, blur, lw) {
+          ctx.shadowColor = color;
+          ctx.shadowBlur = blur || 15;
+          ctx.strokeStyle = color;
+          ctx.lineWidth = (lw || 1.5) * scale;
+        }
 
-        // Main structure
+        // Mouse tilt
+        const mx = (mouse.x - 0.5) * 0.12;
+        const my = (mouse.y - 0.5) * 0.08;
+
+        // --- Draw back ring (behind ship) ---
+        drawRing(1, true);
+
+        ctx.save();
+        ctx.translate(cx, cy + bob);
+        ctx.transform(1, my, mx, 1, 0, 0);
+
+        const s = scale;
+
+        // === STARSHIP - graphic novel style ===
+        // Engine glow
+        const engGlow = ctx.createRadialGradient(0, 55 * s, 0, 0, 55 * s, 35 * s);
+        engGlow.addColorStop(0, `rgba(255, 111, 97, ${0.15 + Math.sin(time * 4) * 0.08})`);
+        engGlow.addColorStop(1, 'rgba(255, 111, 97, 0)');
+        ctx.fillStyle = engGlow;
         ctx.beginPath();
-        ctx.moveTo(bx, by + bh);
-        ctx.lineTo(bx, by + bh * 0.25);
-        // Roof peak
-        ctx.lineTo(bx + bw * 0.1, by + bh * 0.15);
-        ctx.lineTo(bx + bw * 0.5, by);
-        ctx.lineTo(bx + bw * 0.9, by + bh * 0.15);
-        ctx.lineTo(bx + bw, by + bh * 0.25);
-        ctx.lineTo(bx + bw, by + bh);
+        ctx.ellipse(0, 58 * s, 30 * s, 35 * s, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Main hull - angular wedge shape
+        neon(coral, 20, 2);
+        ctx.beginPath();
+        // Nose
+        ctx.moveTo(0, -90 * s);
+        // Right side
+        ctx.lineTo(18 * s, -50 * s);
+        ctx.lineTo(28 * s, -10 * s);
+        ctx.lineTo(35 * s, 30 * s);
+        ctx.lineTo(25 * s, 50 * s);
+        // Bottom
+        ctx.lineTo(10 * s, 55 * s);
+        ctx.lineTo(-10 * s, 55 * s);
+        // Left side
+        ctx.lineTo(-25 * s, 50 * s);
+        ctx.lineTo(-35 * s, 30 * s);
+        ctx.lineTo(-28 * s, -10 * s);
+        ctx.lineTo(-18 * s, -50 * s);
+        ctx.closePath();
         ctx.stroke();
 
-        // Door
-        const dw = bw * 0.25;
-        const dh = bh * 0.35;
-        const dx = -dw / 2;
-        const dy = by + bh - dh;
+        // Hull panel lines - graphic novel hatching
+        neon(coral, 8, 0.8);
+        // Center spine
         ctx.beginPath();
-        ctx.moveTo(dx, by + bh);
-        ctx.lineTo(dx, dy + 5);
-        ctx.quadraticCurveTo(dx, dy, dx + 5, dy);
-        ctx.lineTo(dx + dw - 5, dy);
-        ctx.quadraticCurveTo(dx + dw, dy, dx + dw, dy + 5);
-        ctx.lineTo(dx + dw, by + bh);
+        ctx.moveTo(0, -85 * s);
+        ctx.lineTo(0, 50 * s);
         ctx.stroke();
 
-        // Door handle
+        // Cross panels
         ctx.beginPath();
-        ctx.arc(dx + dw * 0.75, dy + dh * 0.5, 2, 0, Math.PI * 2);
+        ctx.moveTo(-22 * s, -20 * s);
+        ctx.lineTo(22 * s, -20 * s);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-30 * s, 15 * s);
+        ctx.lineTo(30 * s, 15 * s);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-20 * s, 40 * s);
+        ctx.lineTo(20 * s, 40 * s);
         ctx.stroke();
 
-        // Windows
-        neonStroke(gold, 1.2);
-        const winW = bw * 0.2;
-        const winH = bh * 0.18;
-        const winY = by + bh * 0.35;
-
-        // Left window
-        ctx.strokeRect(bx + bw * 0.1, winY, winW, winH);
-        // Window cross
-        ctx.beginPath();
-        ctx.moveTo(bx + bw * 0.1 + winW / 2, winY);
-        ctx.lineTo(bx + bw * 0.1 + winW / 2, winY + winH);
-        ctx.moveTo(bx + bw * 0.1, winY + winH / 2);
-        ctx.lineTo(bx + bw * 0.1 + winW, winY + winH / 2);
-        ctx.stroke();
-
-        // Right window
-        ctx.strokeRect(bx + bw * 0.7, winY, winW, winH);
-        ctx.beginPath();
-        ctx.moveTo(bx + bw * 0.7 + winW / 2, winY);
-        ctx.lineTo(bx + bw * 0.7 + winW / 2, winY + winH);
-        ctx.moveTo(bx + bw * 0.7, winY + winH / 2);
-        ctx.lineTo(bx + bw * 0.7 + winW, winY + winH / 2);
-        ctx.stroke();
-
-        // Signboard
-        neonStroke(coral, 1);
-        const signW = bw * 0.5;
-        const signH = bh * 0.08;
-        const signY = by + bh * 0.58;
-        ctx.strokeRect(-signW / 2, signY, signW, signH);
-
-        // AI text on sign
-        ctx.shadowColor = coral;
-        ctx.shadowBlur = 15;
-        ctx.fillStyle = coral;
-        ctx.font = `bold ${Math.max(10, bw * 0.09)}px Inter, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('AI POWERED', 0, signY + signH / 2);
-
-        // Antenna / signal on roof
-        neonStroke(gold, 1);
-        ctx.beginPath();
-        ctx.moveTo(0, by);
-        ctx.lineTo(0, by - bh * 0.12);
-        ctx.stroke();
-        // Signal waves
-        for (let i = 1; i <= 3; i++) {
-          const waveAlpha = 0.3 + Math.sin(time * 3 + i) * 0.3;
-          ctx.strokeStyle = `rgba(218, 165, 32, ${waveAlpha})`;
-          ctx.shadowColor = `rgba(218, 165, 32, ${waveAlpha})`;
+        // Diagonal hatching on left panel
+        neon(coral, 4, 0.4);
+        for (let i = 0; i < 4; i++) {
+          const y1 = (-15 + i * 8) * s;
+          const y2 = (-10 + i * 8) * s;
           ctx.beginPath();
-          ctx.arc(0, by - bh * 0.12, i * 6, -Math.PI * 0.8, -Math.PI * 0.2);
+          ctx.moveTo(-25 * s, y1);
+          ctx.lineTo(-10 * s, y2);
+          ctx.stroke();
+        }
+        // Right panel hatching
+        for (let i = 0; i < 4; i++) {
+          const y1 = (-15 + i * 8) * s;
+          const y2 = (-10 + i * 8) * s;
+          ctx.beginPath();
+          ctx.moveTo(25 * s, y1);
+          ctx.lineTo(10 * s, y2);
           ctx.stroke();
         }
 
+        // Cockpit window
+        neon(gold, 18, 1.5);
+        ctx.beginPath();
+        ctx.moveTo(0, -75 * s);
+        ctx.lineTo(8 * s, -55 * s);
+        ctx.lineTo(0, -48 * s);
+        ctx.lineTo(-8 * s, -55 * s);
+        ctx.closePath();
+        ctx.stroke();
+        // Cockpit inner glow
+        ctx.fillStyle = `rgba(218, 165, 32, ${0.08 + Math.sin(time * 2) * 0.04})`;
+        ctx.fill();
+
+        // Wing struts - left
+        neon(coral, 15, 1.5);
+        ctx.beginPath();
+        ctx.moveTo(-28 * s, -5 * s);
+        ctx.lineTo(-70 * s, 10 * s);
+        ctx.lineTo(-75 * s, 25 * s);
+        ctx.lineTo(-65 * s, 30 * s);
+        ctx.lineTo(-35 * s, 25 * s);
+        ctx.stroke();
+
+        // Wing struts - right
+        ctx.beginPath();
+        ctx.moveTo(28 * s, -5 * s);
+        ctx.lineTo(70 * s, 10 * s);
+        ctx.lineTo(75 * s, 25 * s);
+        ctx.lineTo(65 * s, 30 * s);
+        ctx.lineTo(35 * s, 25 * s);
+        ctx.stroke();
+
+        // Wing detail lines
+        neon(coral, 6, 0.6);
+        ctx.beginPath();
+        ctx.moveTo(-40 * s, 5 * s);
+        ctx.lineTo(-68 * s, 18 * s);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(40 * s, 5 * s);
+        ctx.lineTo(68 * s, 18 * s);
+        ctx.stroke();
+
+        // Engine pods - left
+        neon(gold, 12, 1.2);
+        ctx.beginPath();
+        ctx.moveTo(-30 * s, 35 * s);
+        ctx.lineTo(-35 * s, 35 * s);
+        ctx.lineTo(-38 * s, 50 * s);
+        ctx.lineTo(-27 * s, 50 * s);
+        ctx.closePath();
+        ctx.stroke();
+
+        // Engine pods - right
+        ctx.beginPath();
+        ctx.moveTo(30 * s, 35 * s);
+        ctx.lineTo(35 * s, 35 * s);
+        ctx.lineTo(38 * s, 50 * s);
+        ctx.lineTo(27 * s, 50 * s);
+        ctx.closePath();
+        ctx.stroke();
+
+        // Engine burn
+        const burnAlpha = 0.4 + Math.sin(time * 6) * 0.2;
+        ctx.fillStyle = `rgba(255, 111, 97, ${burnAlpha})`;
+        ctx.shadowColor = coral;
+        ctx.shadowBlur = 20;
+        ctx.beginPath();
+        ctx.ellipse(-32.5 * s, 52 * s, 4 * s, 6 * s, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(32.5 * s, 52 * s, 4 * s, 6 * s, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Center engine
+        ctx.beginPath();
+        ctx.ellipse(0, 57 * s, 6 * s, 8 * s, 0, 0, Math.PI * 2);
+        ctx.fill();
+
         ctx.restore();
 
-        // Floating capability labels with dotted neon lines
-        const orbitRx = Math.min(w * 0.38, 320);
-        const orbitRy = Math.min(h * 0.38, 220);
+        // --- Draw front ring (in front of ship) ---
+        drawRing(0, false);
+        drawRing(1, false);
 
-        for (let i = 0; i < capabilities.length; i++) {
-          const cap = capabilities[i];
-          const a = cap.angle + time * 0.15;
-          const floatY = Math.sin(time * 1.5 + i * 0.8) * 6;
+        function drawRing(ringIdx, backOnly) {
+          const ring = rings[ringIdx];
+          const baseRx = Math.min(w * 0.4, 300) * ring.rx;
+          const baseRy = Math.min(h * 0.3, 160) * ring.ry;
+          const itemCount = ring.items.length;
+          const ringColor = ringIdx === 0 ? coral : gold;
 
-          const lx = cx + Math.cos(a) * orbitRx;
-          const ly = cy + Math.sin(a) * orbitRy * 0.6 + floatY;
+          // Draw ring ellipse path
+          if (!backOnly) {
+            ctx.save();
+            ctx.strokeStyle = `rgba(${ringIdx === 0 ? '255,111,97' : '218,165,32'}, 0.08)`;
+            ctx.shadowColor = ringColor;
+            ctx.shadowBlur = 6;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.ellipse(cx, cy + bob, baseRx, baseRy, mx * 0.5, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+          }
 
-          // Dotted line from building center to label
-          ctx.save();
-          ctx.setLineDash([4, 6]);
-          const lineAlpha = 0.3 + Math.sin(time * 2 + i) * 0.15;
-          ctx.strokeStyle = `rgba(255, 111, 97, ${lineAlpha})`;
-          ctx.shadowColor = 'rgba(255, 111, 97, 0.4)';
-          ctx.shadowBlur = 8;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(cx, cy + bob);
-          ctx.lineTo(lx, ly);
-          ctx.stroke();
-          ctx.setLineDash([]);
+          for (let i = 0; i < itemCount; i++) {
+            const a = (i / itemCount) * Math.PI * 2 + time * ring.speed;
+            const ix = cx + Math.cos(a) * baseRx;
+            const iy = cy + bob + Math.sin(a) * baseRy;
+            const depth = Math.sin(a);
 
-          // Small node at connection point
-          ctx.fillStyle = `rgba(218, 165, 32, ${0.6 + Math.sin(time * 2 + i) * 0.3})`;
-          ctx.shadowColor = 'rgba(218, 165, 32, 0.6)';
-          ctx.shadowBlur = 10;
-          ctx.beginPath();
-          ctx.arc(lx, ly, 3, 0, Math.PI * 2);
-          ctx.fill();
+            // Only draw back items if backOnly, front items if not
+            if (backOnly && depth > -0.1) continue;
+            if (!backOnly && depth <= -0.1) continue;
 
-          // Label text
-          ctx.shadowColor = 'rgba(255, 111, 97, 0.6)';
-          ctx.shadowBlur = 12;
-          ctx.fillStyle = '#F5E8D8';
-          ctx.font = `600 ${Math.max(11, Math.min(14, w * 0.012))}px Inter, sans-serif`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
+            const depthAlpha = 0.4 + (depth + 1) * 0.3;
+            const depthScale = 0.85 + (depth + 1) * 0.15;
 
-          // Background pill
-          const metrics = ctx.measureText(cap.label);
-          const pillW = metrics.width + 20;
-          const pillH = 26;
-          const pillX = lx - pillW / 2;
-          const pillY = ly - 22 - pillH / 2;
+            ctx.save();
+            const fontSize = Math.max(10, Math.min(13, w * 0.011)) * depthScale;
+            ctx.font = `600 ${fontSize}px Inter, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
 
-          ctx.shadowBlur = 0;
-          ctx.fillStyle = 'rgba(28, 28, 28, 0.8)';
-          ctx.beginPath();
-          ctx.roundRect(pillX, pillY, pillW, pillH, 13);
-          ctx.fill();
+            const label = ring.items[i];
+            const metrics = ctx.measureText(label);
+            const pillW = metrics.width + 18;
+            const pillH = 24 * depthScale;
+            const pillX = ix - pillW / 2;
+            const pillY = iy - pillH / 2;
 
-          ctx.strokeStyle = `rgba(255, 111, 97, ${0.3 + Math.sin(time + i) * 0.15})`;
-          ctx.shadowColor = 'rgba(255, 111, 97, 0.3)';
-          ctx.shadowBlur = 6;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.roundRect(pillX, pillY, pillW, pillH, 13);
-          ctx.stroke();
+            // Pill background
+            ctx.fillStyle = `rgba(28, 28, 28, ${0.7 * depthAlpha})`;
+            ctx.beginPath();
+            ctx.roundRect(pillX, pillY, pillW, pillH, 12);
+            ctx.fill();
 
-          ctx.shadowColor = 'rgba(255, 111, 97, 0.4)';
-          ctx.shadowBlur = 8;
-          ctx.fillStyle = '#F5E8D8';
-          ctx.fillText(cap.label, lx, pillY + pillH / 2);
+            // Pill border
+            const borderAlpha = 0.25 * depthAlpha + Math.sin(time * 1.5 + i) * 0.1;
+            ctx.strokeStyle = `rgba(${ringIdx === 0 ? '255,111,97' : '218,165,32'}, ${borderAlpha})`;
+            ctx.shadowColor = ringColor;
+            ctx.shadowBlur = 8 * depthAlpha;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.roundRect(pillX, pillY, pillW, pillH, 12);
+            ctx.stroke();
 
-          ctx.restore();
+            // Label text
+            ctx.fillStyle = `rgba(245, 232, 216, ${depthAlpha})`;
+            ctx.shadowColor = ringColor;
+            ctx.shadowBlur = 6 * depthAlpha;
+            ctx.fillText(label, ix, iy);
+
+            ctx.restore();
+          }
         }
 
         requestAnimationFrame(draw);
       }
 
-      // Intersection observer to start animation when visible
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting && !started) {
@@ -1182,9 +1238,7 @@
       }, { threshold: 0.1 });
       obs.observe(canvas);
 
-      window.addEventListener('resize', () => {
-        resize();
-      });
+      window.addEventListener('resize', resize);
 
       canvas.parentElement.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
