@@ -511,13 +511,16 @@
       overflow: hidden;
       min-height: 700px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .ship-section .container {
       position: relative;
       z-index: 2;
       text-align: center;
+      margin-bottom: auto;
+      padding-top: 40px;
     }
     .ship-section .section-title {
       max-width: 600px;
@@ -550,11 +553,11 @@
     }
     .feature-tag {
       position: absolute;
-      padding: 6px 16px;
+      padding: 10px 22px;
       background: rgba(28, 28, 28, 0.75);
       border: 1px solid rgba(255, 111, 97, 0.25);
-      border-radius: 20px;
-      font-size: 0.8rem;
+      border-radius: 24px;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--white);
       white-space: nowrap;
@@ -760,6 +763,10 @@
 
   <!-- SHIP SECTION -->
   <section class="ship-section" id="ship-section">
+    <div class="container">
+      <div class="section-label">No Small Business Left Behind</div>
+      <h2 class="section-title">Take your business into the future with the right guidance. It's a new world.</h2>
+    </div>
     <div class="ship-wrap">
       <img src="ship-small.png" alt="" class="ship-img" id="shipImg">
       <div class="feature-tag" style="top: 12%; left: 8%; animation-delay: 0s;">Automated Reports</div>
@@ -770,10 +777,6 @@
       <div class="feature-tag" style="bottom: 30%; right: 7%; animation-delay: 1.5s;">Email Sequences</div>
       <div class="feature-tag" style="bottom: 12%; left: 15%; animation-delay: 0.4s;">Custom Workflows</div>
       <div class="feature-tag gold" style="bottom: 10%; right: 14%; animation-delay: 1.1s;">Prompt Libraries</div>
-    </div>
-    <div class="container">
-      <div class="section-label">No Small Business Left Behind</div>
-      <h2 class="section-title">Take your business into the future with the right guidance. It's a new world.</h2>
     </div>
   </section>
 
