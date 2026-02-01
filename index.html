@@ -732,12 +732,15 @@
       });
     });
 
-    // Galaxy background
+    // Flowing mesh background
     (function() {
       const canvas = document.getElementById('galaxy');
       const ctx = canvas.getContext('2d');
-      let w, h, stars, nebulae, mouse = { x: 0, y: 0 };
+      let w, h, nodes;
+      const mouse = { x: -1000, y: -1000 };
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const connectDist = 160;
+      const mouseRadius = 200;
 
       function resize() {
         const hero = canvas.parentElement;
@@ -750,91 +753,105 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
-      function createStars(count) {
-        stars = [];
+      function createNodes() {
+        nodes = [];
+        const count = Math.min(Math.floor((w * h) / 6000), 180);
         for (let i = 0; i < count; i++) {
-          stars.push({
+          nodes.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 1.4 + 0.3,
-            baseAlpha: Math.random() * 0.5 + 0.15,
-            phase: Math.random() * Math.PI * 2,
-            speed: Math.random() * 0.003 + 0.001,
-            drift: (Math.random() - 0.5) * 0.08,
-            driftY: (Math.random() - 0.5) * 0.04,
-            hue: Math.random() < 0.3 ? 8 : Math.random() < 0.5 ? 30 : 220
+            ox: 0, oy: 0,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            r: Math.random() * 1.5 + 0.5,
+            phase: Math.random() * Math.PI * 2
           });
         }
       }
 
-      function createNebulae() {
-        nebulae = [
-          { x: w * 0.3, y: h * 0.4, rx: w * 0.35, ry: h * 0.3, alpha: 0.018, hue: 8, sat: 70 },
-          { x: w * 0.7, y: h * 0.3, rx: w * 0.25, ry: h * 0.25, alpha: 0.012, hue: 25, sat: 50 },
-          { x: w * 0.5, y: h * 0.7, rx: w * 0.3, ry: h * 0.2, alpha: 0.010, hue: 280, sat: 30 },
-        ];
-      }
-
       function init() {
         resize();
-        const count = Math.min(Math.floor((w * h) / 3500), 300);
-        createStars(count);
-        createNebulae();
+        createNodes();
       }
 
       let time = 0;
       function draw() {
-        time += 1;
+        time += 0.008;
         ctx.clearRect(0, 0, w, h);
 
-        // Nebula clouds
-        for (const n of nebulae) {
-          const pulse = 1 + Math.sin(time * 0.005 + n.hue) * 0.15;
-          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.rx * pulse);
-          grad.addColorStop(0, `hsla(${n.hue}, ${n.sat}%, 65%, ${n.alpha * 1.5})`);
-          grad.addColorStop(0.4, `hsla(${n.hue}, ${n.sat}%, 55%, ${n.alpha})`);
-          grad.addColorStop(1, 'hsla(0, 0%, 100%, 0)');
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.ellipse(n.x, n.y, n.rx * pulse, n.ry * pulse, 0, 0, Math.PI * 2);
-          ctx.fill();
+        // Update node positions
+        for (const n of nodes) {
+          // Gentle wave motion
+          n.ox = Math.sin(time + n.phase) * 20 + Math.sin(time * 0.7 + n.phase * 1.3) * 10;
+          n.oy = Math.cos(time * 0.8 + n.phase) * 15 + Math.cos(time * 0.5 + n.phase * 0.7) * 8;
+
+          // Drift
+          n.x += n.vx;
+          n.y += n.vy;
+
+          // Mouse repulsion
+          const mdx = (n.x + n.ox) - mouse.x;
+          const mdy = (n.y + n.oy) - mouse.y;
+          const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mDist < mouseRadius && mDist > 0) {
+            const force = (1 - mDist / mouseRadius) * 30;
+            n.ox += (mdx / mDist) * force;
+            n.oy += (mdy / mDist) * force;
+          }
+
+          // Wrap
+          if (n.x < -50) n.x = w + 50;
+          if (n.x > w + 50) n.x = -50;
+          if (n.y < -50) n.y = h + 50;
+          if (n.y > h + 50) n.y = -50;
         }
 
-        // Stars
-        for (const s of stars) {
-          s.x += s.drift;
-          s.y += s.driftY;
+        // Draw connections
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          const ax = a.x + a.ox;
+          const ay = a.y + a.oy;
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const bx = b.x + b.ox;
+            const by = b.y + b.oy;
+            const dx = ax - bx;
+            const dy = ay - by;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < connectDist) {
+              const alpha = (1 - dist / connectDist) * 0.12;
+              ctx.strokeStyle = `rgba(160, 160, 160, ${alpha})`;
+              ctx.lineWidth = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(ax, ay);
+              ctx.lineTo(bx, by);
+              ctx.stroke();
+            }
+          }
+        }
 
-          // Parallax from mouse
-          const px = (mouse.x - w / 2) * 0.005 * s.r;
-          const py = (mouse.y - h / 2) * 0.005 * s.r;
+        // Draw nodes
+        for (const n of nodes) {
+          const nx = n.x + n.ox;
+          const ny = n.y + n.oy;
+          const pulse = Math.sin(time * 2 + n.phase) * 0.3 + 0.7;
+          const alpha = 0.15 * pulse;
 
-          // Wrap around
-          if (s.x < -10) s.x = w + 10;
-          if (s.x > w + 10) s.x = -10;
-          if (s.y < -10) s.y = h + 10;
-          if (s.y > h + 10) s.y = -10;
-
-          const twinkle = Math.sin(time * s.speed * 3 + s.phase) * 0.35 + 0.65;
-          const alpha = s.baseAlpha * twinkle;
-          const dx = s.x + px;
-          const dy = s.y + py;
-
-          // Glow
-          if (s.r > 1) {
-            const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, s.r * 4);
-            glow.addColorStop(0, `hsla(${s.hue}, 60%, 70%, ${alpha * 0.3})`);
-            glow.addColorStop(1, 'hsla(0, 0%, 100%, 0)');
+          // Soft glow
+          if (n.r > 1) {
+            const glow = ctx.createRadialGradient(nx, ny, 0, nx, ny, n.r * 6);
+            glow.addColorStop(0, `rgba(180, 180, 180, ${alpha * 0.4})`);
+            glow.addColorStop(1, 'rgba(180, 180, 180, 0)');
             ctx.fillStyle = glow;
             ctx.beginPath();
-            ctx.arc(dx, dy, s.r * 4, 0, Math.PI * 2);
+            ctx.arc(nx, ny, n.r * 6, 0, Math.PI * 2);
             ctx.fill();
           }
 
-          // Star dot
-          ctx.fillStyle = `hsla(${s.hue}, 40%, 55%, ${alpha})`;
+          // Node dot
+          ctx.fillStyle = `rgba(160, 160, 160, ${alpha + 0.08})`;
           ctx.beginPath();
-          ctx.arc(dx, dy, s.r, 0, Math.PI * 2);
+          ctx.arc(nx, ny, n.r, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -844,14 +861,17 @@
       init();
       draw();
 
-      window.addEventListener('resize', () => {
-        init();
-      });
+      window.addEventListener('resize', init);
 
       document.querySelector('.hero').addEventListener('mousemove', (e) => {
         const rect = canvas.parentElement.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
+      });
+
+      document.querySelector('.hero').addEventListener('mouseleave', () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
       });
     })();
   </script>
