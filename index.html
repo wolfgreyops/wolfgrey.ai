@@ -446,6 +446,16 @@
       background: radial-gradient(circle, rgba(255,111,97,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
+    .cta-mascot {
+      width: clamp(120px, 18vw, 180px);
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 30px rgba(218,165,32,0.2));
+      animation: mascotHover 3s ease-in-out infinite;
+    }
+    @keyframes mascotHover {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
     .cta-section .section-title { max-width: 700px; margin: 0 auto 20px; }
     .cta-section .section-subtitle { margin: 0 auto 48px; text-align: center; }
 
@@ -822,6 +832,7 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
+      <img src="mascot.png" alt="" class="cta-mascot">
       <div class="section-label">Get Started</div>
       <h2 class="section-title">Stop reading about AI.<br>Start building with it.</h2>
       <p class="section-subtitle">Grab the free guide, explore the playbook, or let us build your system. Every path leads to the same place — a business that runs smarter.</p>
