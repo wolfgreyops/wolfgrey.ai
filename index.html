@@ -613,6 +613,32 @@
       animation: none;
     }
 
+    /* ── HERO SHIP ── */
+    .hero-ship {
+      position: absolute;
+      bottom: 60px;
+      right: 5%;
+      width: clamp(200px, 30vw, 400px);
+      filter: drop-shadow(0 0 30px rgba(100,180,255,0.2));
+      animation: heroShipFloat 4s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @keyframes heroShipFloat {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(0deg); }
+    }
+    @media (max-width: 768px) {
+      .hero-ship {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        display: block;
+        margin: 40px auto 0;
+        width: clamp(200px, 70vw, 320px);
+      }
+    }
+
     /* ── ANIMATIONS ── */
     .fade-up {
       opacity: 0;
@@ -654,6 +680,7 @@
         <a href="https://wolfgrey.gumroad.com" target="_blank" rel="noopener" class="btn btn-secondary">Free AI Quick-Start Guide</a>
       </div>
     </div>
+    <img src="xwing.png" alt="" class="hero-ship">
   </section>
 
   <!-- SERVICES -->
