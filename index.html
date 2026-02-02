@@ -440,6 +440,15 @@
     .course-visual .prompt { color: var(--accent); }
     .course-visual .cmd { color: #f0f0f0; }
     .course-visual .comment { color: #555555; }
+    .course-visual .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--accent);
+      vertical-align: text-bottom;
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
 
     /* ── CTA ── */
     .cta-section {
@@ -792,26 +801,7 @@
           </ul>
           <a href="#" class="btn btn-primary" style="margin-top: 32px;">Join the Waitlist →</a>
         </div>
-        <div class="course-visual">
-          <div class="comment"># Your morning. Automated.</div>
-          <br>
-          <div><span class="prompt">$</span> <span class="cmd">run weekly-report</span></div>
-          <div>→ Pulling sales data...</div>
-          <div>→ Generating insights...</div>
-          <div>→ Report delivered to inbox ✓</div>
-          <br>
-          <div><span class="prompt">$</span> <span class="cmd">run content-pipeline</span></div>
-          <div>→ Drafting 5 LinkedIn posts...</div>
-          <div>→ Creating email sequence...</div>
-          <div>→ Scheduled for this week ✓</div>
-          <br>
-          <div><span class="prompt">$</span> <span class="cmd">run lead-research</span></div>
-          <div>→ Scanning 50 prospects...</div>
-          <div>→ Building outreach list...</div>
-          <div>→ Personalized messages ready ✓</div>
-          <br>
-          <div class="comment"># Time spent: 0 minutes.</div>
-        </div>
+        <div class="course-visual" id="courseTerminal"></div>
       </div>
     </div>
   </section>
@@ -1113,6 +1103,114 @@
         requestAnimationFrame(animate);
       }
       animate();
+    })();
+
+    // Terminal typing animation
+    (function() {
+      const terminal = document.getElementById('courseTerminal');
+      if (!terminal) return;
+
+      const script = [
+        { type: 'comment', text: '# Your morning. Automated.' },
+        { type: 'blank' },
+        { type: 'cmd', text: 'run weekly-report' },
+        { type: 'output', text: '→ Pulling sales data...' },
+        { type: 'output', text: '→ Generating insights...' },
+        { type: 'output', text: '→ Report delivered to inbox ✓' },
+        { type: 'blank' },
+        { type: 'cmd', text: 'run content-pipeline' },
+        { type: 'output', text: '→ Drafting 5 LinkedIn posts...' },
+        { type: 'output', text: '→ Creating email sequence...' },
+        { type: 'output', text: '→ Scheduled for this week ✓' },
+        { type: 'blank' },
+        { type: 'cmd', text: 'run lead-research' },
+        { type: 'output', text: '→ Scanning 50 prospects...' },
+        { type: 'output', text: '→ Building outreach list...' },
+        { type: 'output', text: '→ Personalized messages ready ✓' },
+        { type: 'blank' },
+        { type: 'comment', text: '# Time spent: 0 minutes.' }
+      ];
+
+      let lineIdx = 0, charIdx = 0, currentLine = null, started = false;
+
+      function addCursor() {
+        const c = terminal.querySelector('.cursor');
+        if (c) c.remove();
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        if (currentLine) currentLine.appendChild(cursor);
+      }
+
+      function typeLine() {
+        if (lineIdx >= script.length) {
+          setTimeout(function() {
+            terminal.innerHTML = '';
+            lineIdx = 0;
+            charIdx = 0;
+            currentLine = null;
+            typeLine();
+          }, 3000);
+          return;
+        }
+
+        const item = script[lineIdx];
+
+        if (item.type === 'blank') {
+          terminal.appendChild(document.createElement('br'));
+          lineIdx++;
+          setTimeout(typeLine, 100);
+          return;
+        }
+
+        if (!currentLine) {
+          currentLine = document.createElement('div');
+          terminal.appendChild(currentLine);
+          charIdx = 0;
+
+          if (item.type === 'cmd') {
+            const prompt = document.createElement('span');
+            prompt.className = 'prompt';
+            prompt.textContent = '$ ';
+            currentLine.appendChild(prompt);
+            const cmd = document.createElement('span');
+            cmd.className = 'cmd';
+            currentLine.appendChild(cmd);
+          }
+        }
+
+        const fullText = item.text;
+        const speed = item.type === 'cmd' ? 45 : item.type === 'comment' ? 30 : 20;
+
+        if (charIdx < fullText.length) {
+          if (item.type === 'cmd') {
+            currentLine.querySelector('.cmd').textContent = fullText.substring(0, charIdx + 1);
+          } else if (item.type === 'comment') {
+            currentLine.className = 'comment';
+            currentLine.textContent = fullText.substring(0, charIdx + 1);
+          } else {
+            currentLine.textContent = fullText.substring(0, charIdx + 1);
+          }
+          charIdx++;
+          addCursor();
+          setTimeout(typeLine, speed);
+        } else {
+          const c = terminal.querySelector('.cursor');
+          if (c) c.remove();
+          currentLine = null;
+          lineIdx++;
+          const pause = item.type === 'cmd' ? 400 : item.text.includes('✓') ? 600 : 150;
+          setTimeout(typeLine, pause);
+        }
+      }
+
+      // Start when section scrolls into view
+      const observer = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting && !started) {
+          started = true;
+          typeLine();
+        }
+      }, { threshold: 0.3 });
+      observer.observe(terminal);
     })();
 
 
