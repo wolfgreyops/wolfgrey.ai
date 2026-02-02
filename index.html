@@ -205,6 +205,8 @@
       transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .service-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
     .service-card:hover {
@@ -245,10 +247,11 @@
       color: var(--gray-400);
       font-size: 0.95rem;
       line-height: 1.7;
+      margin-bottom: 20px;
     }
     .service-price {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: auto;
       padding: 6px 14px;
       background: rgba(255,111,97,0.12);
       border: 1px solid rgba(255,111,97,0.2);
