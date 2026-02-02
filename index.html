@@ -622,7 +622,11 @@
       filter: drop-shadow(0 0 30px rgba(100,180,255,0.2));
       animation: heroShipFloat 4s ease-in-out infinite;
       z-index: 1;
-      pointer-events: none;
+      cursor: grab;
+    }
+    .hero-ship.dragging {
+      animation: none !important;
+      cursor: grabbing;
     }
     @keyframes heroShipFloat {
       0%, 100% { transform: translateY(0) rotate(-2deg); }
@@ -1120,6 +1124,59 @@
         requestAnimationFrame(animate);
       }
       animate();
+    })();
+
+    // Hero ship drag within hero bounds
+    (function() {
+      const ship = document.querySelector('.hero-ship');
+      const hero = document.querySelector('.hero');
+      if (!ship || !hero) return;
+
+      let dragging = false, offX = 0, offY = 0;
+
+      function startDrag(e) {
+        e.preventDefault();
+        dragging = true;
+        ship.classList.add('dragging');
+        const pt = e.touches ? e.touches[0] : e;
+        const rect = ship.getBoundingClientRect();
+        offX = pt.clientX - rect.left;
+        offY = pt.clientY - rect.top;
+        ship.style.position = 'absolute';
+        ship.style.margin = '0';
+      }
+
+      function doDrag(e) {
+        if (!dragging) return;
+        e.preventDefault();
+        const pt = e.touches ? e.touches[0] : e;
+        const bounds = hero.getBoundingClientRect();
+        const sw = ship.offsetWidth;
+        const sh = ship.offsetHeight;
+
+        let x = pt.clientX - bounds.left - offX;
+        let y = pt.clientY - bounds.top - offY;
+
+        x = Math.max(0, Math.min(x, bounds.width - sw));
+        y = Math.max(0, Math.min(y, bounds.height - sh));
+
+        ship.style.left = x + 'px';
+        ship.style.top = y + 'px';
+        ship.style.right = 'auto';
+        ship.style.bottom = 'auto';
+      }
+
+      function endDrag() {
+        dragging = false;
+        ship.classList.remove('dragging');
+      }
+
+      ship.addEventListener('mousedown', startDrag);
+      ship.addEventListener('touchstart', startDrag, { passive: false });
+      document.addEventListener('mousemove', doDrag);
+      document.addEventListener('touchmove', doDrag, { passive: false });
+      document.addEventListener('mouseup', endDrag);
+      document.addEventListener('touchend', endDrag);
     })();
 
   </script>
