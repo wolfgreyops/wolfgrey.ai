@@ -549,10 +549,11 @@
       margin-bottom: 4px;
     }
     .demo-terminal .prompt { color: var(--accent); }
-    .demo-terminal .cmd { color: #f0f4ff; }
+    .demo-terminal .cmd { color: #f0f4ff; font-weight: 500; }
     .demo-terminal .output { color: #8892b0; }
-    .demo-terminal .success { color: var(--accent2); }
+    .demo-terminal .success { color: var(--accent2); font-weight: 500; }
     .demo-terminal .comment { color: #5a6480; }
+    .demo-terminal .error { color: var(--accent); }
     .demo-terminal-input-line {
       display: flex;
       align-items: center;
@@ -1031,7 +1032,7 @@
             <input type="text" class="demo-terminal-input" id="demoInput" placeholder="Type 'help' to see commands..." autocomplete="off" spellcheck="false">
           </div>
         </div>
-        <p class="demo-hint">Try: <code>help</code> <code>build landing-page</code> <code>run weekly-report</code> <code>explain</code></p>
+        <p class="demo-hint">Try: <code>help</code> <code>build landing-page</code> <code>run weekly-report</code> <code>run lead-research</code> <code>deploy</code></p>
       </div>
     </div>
   </section>
@@ -1407,91 +1408,151 @@
 
       const commands = {
         help: {
-          response: `Available commands:
+          response: `<span class="success">Claude Code — AI-powered development agent</span>
 
-  <span class="cmd">help</span>           Show this help message
-  <span class="cmd">build</span> [page]   Generate a webpage (try: build landing-page)
-  <span class="cmd">run</span> [task]     Run an automation (try: run weekly-report)
-  <span class="cmd">explain</span>        Explain how this site was built
-  <span class="cmd">clear</span>          Clear the terminal
+  <span class="cmd">build</span> [page]   Generate a complete webpage
+  <span class="cmd">run</span> [task]     Execute an automation workflow
+  <span class="cmd">explain</span>        See how this site was built
+  <span class="cmd">deploy</span>         Ship to production
+  <span class="cmd">clear</span>          Clear terminal
 
-Type any command to see Claude Code in action.`
+<span class="comment">Try: build landing-page, run weekly-report, run lead-research</span>`
         },
         clear: { clear: true },
         explain: {
           steps: [
-            { text: 'Analyzing ./index.html...', delay: 600 },
-            { text: '', delay: 200 },
-            { text: '<span class="success">This site is a single HTML file with:</span>', delay: 400 },
-            { text: '  → Inline CSS (~600 lines) for all styling', delay: 100 },
-            { text: '  → Inline JS (~400 lines) for animations', delay: 100 },
-            { text: '  → Zero external dependencies', delay: 100 },
-            { text: '  → Canvas-based starfield with parallax', delay: 100 },
-            { text: '  → CSS Grid responsive layouts', delay: 100 },
-            { text: '  → Intersection Observer for scroll animations', delay: 100 },
-            { text: '', delay: 200 },
-            { text: '<span class="comment"># Built iteratively through natural language conversation.</span>', delay: 300 },
-            { text: '<span class="comment"># Each design change deployed in seconds.</span>', delay: 100 }
+            { text: '<span class="success">⚡ Scanning ./index.html</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '<span class="cmd">Analysis complete:</span>', delay: 150 },
+            { text: '  ├─ <span class="success">1,500+</span> lines of production code', delay: 40 },
+            { text: '  ├─ <span class="success">Zero</span> dependencies or frameworks', delay: 40 },
+            { text: '  ├─ <span class="success">Canvas</span> starfield with parallax + shooting stars', delay: 40 },
+            { text: '  ├─ <span class="success">Interactive</span> terminal (you\'re using it now)', delay: 40 },
+            { text: '  ├─ <span class="success">40+</span> design iterations shipped', delay: 40 },
+            { text: '  └─ <span class="success">100%</span> mobile responsive', delay: 40 },
+            { text: '', delay: 100 },
+            { text: '<span class="comment"># Total development time: ~4 hours</span>', delay: 80 },
+            { text: '<span class="comment"># Traditional agency quote: $5,000-$15,000</span>', delay: 80 },
+            { text: '<span class="comment"># Built entirely through conversation.</span>', delay: 80 }
+          ]
+        },
+        deploy: {
+          steps: [
+            { text: '<span class="success">⚡ Deploying to production...</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Running pre-flight checks...', delay: 100 },
+            { text: '  ├─ Minifying assets... <span class="success">-23% size</span>', delay: 100 },
+            { text: '  ├─ Pushing to GitHub...', delay: 150 },
+            { text: '  ├─ Triggering CDN invalidation...', delay: 100 },
+            { text: '  └─ Verifying SSL certificate...', delay: 100 },
+            { text: '', delay: 80 },
+            { text: '<span class="success">✓ Live at https://wolfgrey.ai</span>', delay: 50 },
+            { text: '<span class="comment"># Deploy time: 8 seconds</span>', delay: 50 }
           ]
         },
         'build landing-page': {
           steps: [
-            { text: '<span class="comment"># Generating landing page...</span>', delay: 400 },
-            { text: '', delay: 200 },
-            { text: 'Creating hero section with headline...', delay: 300 },
-            { text: '<span class="output">&lt;section class="hero"&gt;</span>', delay: 80 },
-            { text: '<span class="output">  &lt;h1&gt;Your Product, Simplified&lt;/h1&gt;</span>', delay: 80 },
-            { text: '<span class="output">  &lt;p&gt;The fastest way to get started.&lt;/p&gt;</span>', delay: 80 },
-            { text: '<span class="output">  &lt;button class="cta"&gt;Get Started&lt;/button&gt;</span>', delay: 80 },
-            { text: '<span class="output">&lt;/section&gt;</span>', delay: 80 },
-            { text: '', delay: 300 },
-            { text: 'Adding features grid...', delay: 200 },
-            { text: 'Adding testimonials...', delay: 200 },
-            { text: 'Adding pricing table...', delay: 200 },
-            { text: 'Generating responsive CSS...', delay: 300 },
-            { text: '', delay: 200 },
-            { text: '<span class="success">✓ Landing page generated (847 lines)</span>', delay: 100 },
-            { text: '<span class="success">✓ Mobile responsive</span>', delay: 100 },
-            { text: '<span class="success">✓ Ready to deploy</span>', delay: 100 }
+            { text: '<span class="success">⚡ Generating landing-page</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: 'Scaffolding structure...', delay: 100 },
+            { text: '<span class="output">&lt;!DOCTYPE html&gt;</span>', delay: 30 },
+            { text: '<span class="output">&lt;html lang="en"&gt;</span>', delay: 30 },
+            { text: '<span class="output">&lt;head&gt;</span>', delay: 30 },
+            { text: '<span class="output">  &lt;meta charset="UTF-8"&gt;</span>', delay: 20 },
+            { text: '<span class="output">  &lt;title&gt;Your Product&lt;/title&gt;</span>', delay: 20 },
+            { text: '<span class="output">  &lt;style&gt;/* 400+ lines */&lt;/style&gt;</span>', delay: 20 },
+            { text: '<span class="output">&lt;/head&gt;</span>', delay: 20 },
+            { text: '', delay: 50 },
+            { text: 'Building sections:', delay: 80 },
+            { text: '  ├─ Hero with CTA... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Features grid (6 cards)... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Social proof (testimonials)... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Pricing table (3 tiers)... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ FAQ accordion... <span class="success">✓</span>', delay: 60 },
+            { text: '  └─ Footer with links... <span class="success">✓</span>', delay: 60 },
+            { text: '', delay: 50 },
+            { text: 'Adding interactivity:', delay: 80 },
+            { text: '  ├─ Smooth scroll... <span class="success">✓</span>', delay: 40 },
+            { text: '  ├─ Mobile nav toggle... <span class="success">✓</span>', delay: 40 },
+            { text: '  └─ Form validation... <span class="success">✓</span>', delay: 40 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ Generated 1,247 lines in 3.2 seconds</span>', delay: 50 },
+            { text: '<span class="success">✓ Lighthouse score: 98/100</span>', delay: 50 },
+            { text: '<span class="success">✓ Ready to deploy</span>', delay: 50 }
           ]
         },
         'run weekly-report': {
           steps: [
-            { text: '<span class="comment"># Running weekly-report automation...</span>', delay: 400 },
-            { text: '', delay: 200 },
-            { text: '→ Connecting to sales database...', delay: 500 },
-            { text: '→ Pulling transactions from last 7 days...', delay: 400 },
-            { text: '→ Aggregating by product category...', delay: 300 },
-            { text: '→ Calculating week-over-week growth...', delay: 300 },
-            { text: '', delay: 200 },
-            { text: '→ Generating insights with AI...', delay: 600 },
-            { text: '  <span class="output">"Revenue up 12% driven by Enterprise tier"</span>', delay: 100 },
-            { text: '  <span class="output">"Churn decreased to 2.1% (down from 2.8%)"</span>', delay: 100 },
-            { text: '  <span class="output">"Top performer: West region (+23%)"</span>', delay: 100 },
-            { text: '', delay: 300 },
-            { text: '→ Formatting report...', delay: 200 },
-            { text: '→ Sending to team@company.com...', delay: 400 },
-            { text: '', delay: 200 },
-            { text: '<span class="success">✓ Weekly report delivered to inbox</span>', delay: 100 },
-            { text: '<span class="comment"># Time spent: 0 minutes.</span>', delay: 200 }
+            { text: '<span class="success">⚡ Executing weekly-report</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Connecting to Stripe API...', delay: 100 },
+            { text: '  ├─ Pulling 2,847 transactions...', delay: 150 },
+            { text: '  ├─ Querying PostgreSQL (3 tables)...', delay: 100 },
+            { text: '  ├─ Joining with HubSpot CRM data...', delay: 100 },
+            { text: '  └─ Aggregating metrics...', delay: 100 },
+            { text: '', delay: 80 },
+            { text: '<span class="cmd">AI Analysis:</span>', delay: 100 },
+            { text: '  <span class="output">"MRR increased 18% to $127,400"</span>', delay: 50 },
+            { text: '  <span class="output">"Enterprise segment up 34% (3 new logos)"</span>', delay: 50 },
+            { text: '  <span class="output">"Churn dropped to 1.8% (best quarter)"</span>', delay: 50 },
+            { text: '  <span class="output">"CAC payback: 4.2 months (target: 6)"</span>', delay: 50 },
+            { text: '  <span class="output">"Recommend: increase ad spend on LinkedIn"</span>', delay: 50 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Generating PDF report...', delay: 100 },
+            { text: '  ├─ Creating exec summary...', delay: 80 },
+            { text: '  └─ Sending to 5 stakeholders...', delay: 100 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ Report delivered to inbox</span>', delay: 50 },
+            { text: '<span class="comment"># Manual time: ~3 hours → Automated: 12 seconds</span>', delay: 50 }
           ]
         },
         'run content-pipeline': {
           steps: [
-            { text: '<span class="comment"># Running content-pipeline...</span>', delay: 400 },
-            { text: '', delay: 200 },
-            { text: '→ Analyzing brand voice guidelines...', delay: 400 },
-            { text: '→ Generating 5 LinkedIn posts...', delay: 600 },
-            { text: '  <span class="output">Post 1: "Why we rebuilt our pricing..."</span>', delay: 100 },
-            { text: '  <span class="output">Post 2: "3 lessons from scaling to 10K users"</span>', delay: 100 },
-            { text: '  <span class="output">Post 3: "The automation that saved us 20hrs/week"</span>', delay: 100 },
-            { text: '  <span class="output">Post 4: "Hot take: AI won\'t replace you..."</span>', delay: 100 },
-            { text: '  <span class="output">Post 5: "Our tech stack for 2026"</span>', delay: 100 },
-            { text: '', delay: 300 },
-            { text: '→ Creating email sequence (3 emails)...', delay: 500 },
-            { text: '→ Scheduling for optimal engagement times...', delay: 300 },
-            { text: '', delay: 200 },
-            { text: '<span class="success">✓ Content scheduled for this week</span>', delay: 100 }
+            { text: '<span class="success">⚡ Executing content-pipeline</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Loading brand voice profile...', delay: 80 },
+            { text: '  ├─ Analyzing top-performing posts...', delay: 100 },
+            { text: '  └─ Identifying trending topics...', delay: 100 },
+            { text: '', delay: 80 },
+            { text: 'Generating LinkedIn posts:', delay: 100 },
+            { text: '  <span class="output">1. "We just hit $100K MRR. Here\'s what nobody tells you..."</span>', delay: 40 },
+            { text: '  <span class="output">2. "I replaced 3 tools with one AI workflow. Thread:"</span>', delay: 40 },
+            { text: '  <span class="output">3. "The \'boring\' metric that predicts startup success"</span>', delay: 40 },
+            { text: '  <span class="output">4. "Why I stopped hiring for this role (AI does it better)"</span>', delay: 40 },
+            { text: '  <span class="output">5. "Our 2026 predictions for small business AI"</span>', delay: 40 },
+            { text: '', delay: 80 },
+            { text: 'Generating email sequence:', delay: 100 },
+            { text: '  ├─ Welcome email... <span class="success">✓</span>', delay: 50 },
+            { text: '  ├─ Value prop email... <span class="success">✓</span>', delay: 50 },
+            { text: '  ├─ Case study email... <span class="success">✓</span>', delay: 50 },
+            { text: '  └─ CTA email... <span class="success">✓</span>', delay: 50 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ 5 posts + 4 emails scheduled</span>', delay: 50 },
+            { text: '<span class="comment"># Content calendar: full for 2 weeks</span>', delay: 50 }
+          ]
+        },
+        'run lead-research': {
+          steps: [
+            { text: '<span class="success">⚡ Executing lead-research</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Scraping LinkedIn Sales Navigator...', delay: 150 },
+            { text: '  ├─ Filtering by ICP criteria...', delay: 100 },
+            { text: '  └─ Found 847 matches...', delay: 100 },
+            { text: '', delay: 80 },
+            { text: 'Enriching top 50 prospects:', delay: 100 },
+            { text: '  ├─ Company data (Clearbit)... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Tech stack (BuiltWith)... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Funding history (Crunchbase)... <span class="success">✓</span>', delay: 60 },
+            { text: '  └─ Intent signals (G2, Capterra)... <span class="success">✓</span>', delay: 60 },
+            { text: '', delay: 80 },
+            { text: 'Writing personalized outreach:', delay: 100 },
+            { text: '  ├─ Analyzing prospect LinkedIn activity...', delay: 80 },
+            { text: '  ├─ Generating 50 custom openers...', delay: 100 },
+            { text: '  └─ Creating follow-up sequences...', delay: 80 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ 50 prospects ready in outreach queue</span>', delay: 50 },
+            { text: '<span class="success">✓ Avg personalization score: 94%</span>', delay: 50 },
+            { text: '<span class="comment"># Manual research time: ~25 hours → Done: 47 seconds</span>', delay: 50 }
           ]
         }
       };
@@ -1542,25 +1603,35 @@ Type any command to see Claude Code in action.`
             isTyping = false;
           }
         } else if (trimmed.startsWith('build ')) {
+          const name = trimmed.slice(6);
           addLine('');
           typeSteps([
-            { text: '<span class="comment"># Building ' + trimmed.slice(6) + '...</span>', delay: 400 },
-            { text: '→ Analyzing requirements...', delay: 300 },
-            { text: '→ Generating structure...', delay: 400 },
-            { text: '→ Writing HTML & CSS...', delay: 500 },
-            { text: '→ Adding responsive styles...', delay: 300 },
-            { text: '', delay: 200 },
-            { text: '<span class="success">✓ ' + trimmed.slice(6) + ' generated successfully</span>', delay: 100 }
+            { text: '<span class="success">⚡ Generating ' + name + '</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Analyzing requirements...', delay: 80 },
+            { text: '  ├─ Scaffolding structure...', delay: 80 },
+            { text: '  ├─ Writing HTML... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Generating CSS... <span class="success">✓</span>', delay: 60 },
+            { text: '  ├─ Adding interactivity... <span class="success">✓</span>', delay: 60 },
+            { text: '  └─ Mobile optimization... <span class="success">✓</span>', delay: 60 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ ' + name + ' generated (980 lines)</span>', delay: 50 },
+            { text: '<span class="success">✓ Ready to deploy</span>', delay: 50 }
           ]);
         } else if (trimmed.startsWith('run ')) {
+          const name = trimmed.slice(4);
           addLine('');
           typeSteps([
-            { text: '<span class="comment"># Running ' + trimmed.slice(4) + '...</span>', delay: 400 },
-            { text: '→ Initializing task...', delay: 300 },
-            { text: '→ Processing...', delay: 500 },
-            { text: '→ Generating output...', delay: 400 },
-            { text: '', delay: 200 },
-            { text: '<span class="success">✓ ' + trimmed.slice(4) + ' completed</span>', delay: 100 }
+            { text: '<span class="success">⚡ Executing ' + name + '</span>', delay: 150 },
+            { text: '', delay: 80 },
+            { text: '  ├─ Initializing workflow...', delay: 80 },
+            { text: '  ├─ Connecting to APIs...', delay: 100 },
+            { text: '  ├─ Processing data... <span class="success">✓</span>', delay: 80 },
+            { text: '  ├─ Generating output... <span class="success">✓</span>', delay: 80 },
+            { text: '  └─ Validating results... <span class="success">✓</span>', delay: 60 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ ' + name + ' completed</span>', delay: 50 },
+            { text: '<span class="comment"># Execution time: 8.3 seconds</span>', delay: 50 }
           ]);
         } else {
           addLine('');
@@ -1585,8 +1656,8 @@ Type any command to see Claude Code in action.`
       });
 
       // Show initial hint
-      addLine('<span class="comment"># Welcome to Claude Code</span>');
-      addLine('<span class="comment"># Type "help" to see available commands</span>');
+      addLine('<span class="success">⚡ Claude Code ready</span>');
+      addLine('<span class="comment"># Type "help" for commands, or try "build landing-page"</span>');
       addLine('');
     })();
 
