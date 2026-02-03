@@ -488,6 +488,49 @@
     .cta-section .section-title { max-width: 700px; margin: 0 auto 20px; }
     .cta-section .section-subtitle { margin: 0 auto 48px; text-align: center; }
 
+    /* ── BUILT BY AI ── */
+    .built-by-ai {
+      background: var(--gray-900);
+      border-top: 1px solid var(--gray-700);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .built-by-ai .section-label { margin-bottom: 16px; }
+    .built-by-ai h2 { margin-bottom: 12px; }
+    .built-by-ai .section-subtitle { margin-bottom: 56px; }
+    .ai-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .ai-stat {
+      padding: 32px 16px;
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      background: var(--gray-800);
+    }
+    .ai-stat-number {
+      font-family: 'Clash Display', 'Inter', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .ai-stat-label {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      line-height: 1.4;
+    }
+    .ai-stat-context {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      margin-top: 6px;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--gray-800);
@@ -544,6 +587,11 @@
       .course-visual {
         min-height: 380px;
       }
+      .ai-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .ai-stat-number { font-size: 2rem; }
       section { padding: 80px 24px; }
       .ship-section { min-height: auto; }
       .ship-img { width: clamp(180px, 60vw, 300px) !important; }
@@ -855,6 +903,37 @@
       <div class="hero-buttons">
         <a href="https://wolfgrey.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Visit the Shop →</a>
         <a href="#services" class="btn btn-secondary">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT BY AI -->
+  <section class="built-by-ai">
+    <div class="container">
+      <div class="section-label">Built by AI</div>
+      <h2 class="section-title">This entire site was designed and built with Claude Code</h2>
+      <p class="section-subtitle">No designers. No developers. No templates. Just one operator and an AI agent.</p>
+      <div class="ai-stats">
+        <div class="ai-stat fade-up">
+          <div class="ai-stat-number">1,200+</div>
+          <div class="ai-stat-label">Lines of code</div>
+          <div class="ai-stat-context">Single HTML file, zero dependencies</div>
+        </div>
+        <div class="ai-stat fade-up">
+          <div class="ai-stat-number">40+</div>
+          <div class="ai-stat-label">Iterations shipped</div>
+          <div class="ai-stat-context">Design to deploy in seconds</div>
+        </div>
+        <div class="ai-stat fade-up">
+          <div class="ai-stat-number">~$0</div>
+          <div class="ai-stat-label">Development cost</div>
+          <div class="ai-stat-context">vs. $5,000+ agency quote</div>
+        </div>
+        <div class="ai-stat fade-up">
+          <div class="ai-stat-number">1</div>
+          <div class="ai-stat-label">Day to launch</div>
+          <div class="ai-stat-context">From zero to live with custom domain</div>
+        </div>
       </div>
     </div>
   </section>
