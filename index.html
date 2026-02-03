@@ -581,6 +581,30 @@
       border-radius: 4px;
       color: var(--accent);
     }
+    .demo-jet {
+      position: absolute;
+      right: -180px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 150px;
+      opacity: 0;
+      transition: opacity 0.5s, transform 0.5s;
+      filter: drop-shadow(0 0 20px rgba(255, 77, 77, 0.4));
+      animation: jetHover 3s ease-in-out infinite;
+    }
+    .demo-jet.visible {
+      opacity: 1;
+    }
+    @keyframes jetHover {
+      0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+      50% { transform: translateY(calc(-50% - 10px)) rotate(-5deg); }
+    }
+    .demo-terminal-wrap {
+      position: relative;
+    }
+    @media (max-width: 1100px) {
+      .demo-jet { display: none; }
+    }
     .built-by-ai .section-label { margin-bottom: 16px; }
     .built-by-ai h2 { margin-bottom: 12px; }
     .built-by-ai .section-subtitle { margin-bottom: 56px; }
@@ -1032,7 +1056,7 @@
             <input type="text" class="demo-terminal-input" id="demoInput" placeholder="Type 'help' to see commands..." autocomplete="off" spellcheck="false">
           </div>
         </div>
-        <p class="demo-hint">Try: <code>help</code> <code>set accent #00ff88</code> <code>confetti</code> <code>build landing-page</code> <code>reset</code></p>
+        <p class="demo-hint">Try: <code>help</code> <code>add jet</code> <code>set accent #00ff88</code> <code>confetti</code> <code>reset</code></p>
       </div>
     </div>
   </section>
@@ -1420,11 +1444,12 @@
   <span class="cmd">set accent</span> [color]       Change accent color
   <span class="cmd">set text</span> [color]         Change text color
   <span class="cmd">toggle stars</span>             Toggle starfield animation
+  <span class="cmd">add jet</span>                  Deploy fighter escort
   <span class="cmd">confetti</span>                 Launch celebration
   <span class="cmd">reset</span>                    Restore original theme
   <span class="cmd">clear</span>                    Clear terminal
 
-<span class="comment">Try: set accent #00ff88, set background #1a1a2e, confetti</span>`
+<span class="comment">Try: add jet, set accent #00ff88, confetti</span>`
         },
         clear: { clear: true },
         explain: {
@@ -1718,6 +1743,8 @@
           document.body.style.background = '';
           const canvas = document.getElementById('galaxy');
           if (canvas) { canvas.style.opacity = '1'; starsEnabled = true; }
+          const jet = document.querySelector('.demo-jet');
+          if (jet) jet.classList.remove('visible');
           typeSteps([
             { text: '<span class="success">⚡ Resetting theme</span>', delay: 100 },
             { text: '  ├─ Background... <span class="success">✓</span>', delay: 40 },
@@ -1725,6 +1752,36 @@
             { text: '  ├─ Text color... <span class="success">✓</span>', delay: 40 },
             { text: '  └─ Starfield... <span class="success">✓</span>', delay: 40 },
             { text: '<span class="success">✓ Original theme restored</span>', delay: 50 }
+          ]);
+        } else if (trimmed === 'add jet' || trimmed === 'add fighter' || trimmed === 'add ship') {
+          addLine('');
+          let jet = document.querySelector('.demo-jet');
+          if (!jet) {
+            jet = document.createElement('img');
+            jet.src = 'xwing.png';
+            jet.className = 'demo-jet';
+            jet.alt = 'X-Wing Fighter';
+            document.querySelector('.demo-terminal-wrap').appendChild(jet);
+          }
+          setTimeout(() => jet.classList.add('visible'), 100);
+          typeSteps([
+            { text: '<span class="success">⚡ Deploying fighter escort</span>', delay: 100 },
+            { text: '  ├─ Loading X-Wing assets...', delay: 80 },
+            { text: '  ├─ Initializing hover thrusters...', delay: 80 },
+            { text: '  └─ Applying glow effect...', delay: 80 },
+            { text: '<span class="success">✓ Fighter deployed to starboard</span>', delay: 50 }
+          ]);
+        } else if (trimmed === 'remove jet' || trimmed === 'remove fighter' || trimmed === 'remove ship') {
+          addLine('');
+          const jet = document.querySelector('.demo-jet');
+          if (jet) {
+            jet.classList.remove('visible');
+            setTimeout(() => jet.remove(), 500);
+          }
+          typeSteps([
+            { text: '<span class="success">⚡ Recalling fighter</span>', delay: 100 },
+            { text: '  └─ Returning to hangar...', delay: 80 },
+            { text: '<span class="success">✓ Fighter recalled</span>', delay: 50 }
           ]);
         } else if (trimmed.startsWith('build ')) {
           const name = trimmed.slice(6);
