@@ -496,6 +496,90 @@
       text-align: center;
     }
     .ai-stat { text-align: center; }
+
+    /* ── INTERACTIVE TERMINAL ── */
+    .demo-terminal-wrap {
+      margin-top: 64px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .demo-terminal-header {
+      background: #1e2940;
+      border-radius: 12px 12px 0 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .demo-terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #5a6480;
+    }
+    .demo-terminal-dot.red { background: #ff5f56; }
+    .demo-terminal-dot.yellow { background: #ffbd2e; }
+    .demo-terminal-dot.green { background: #27ca40; }
+    .demo-terminal-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .demo-terminal {
+      background: #0a0f1a;
+      border: 1px solid #1e2940;
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 24px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      min-height: 350px;
+      max-height: 450px;
+      overflow-y: auto;
+    }
+    .demo-terminal-output {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .demo-terminal-line {
+      margin-bottom: 4px;
+    }
+    .demo-terminal .prompt { color: var(--accent); }
+    .demo-terminal .cmd { color: #f0f4ff; }
+    .demo-terminal .output { color: #8892b0; }
+    .demo-terminal .success { color: var(--accent2); }
+    .demo-terminal .comment { color: #5a6480; }
+    .demo-terminal-input-line {
+      display: flex;
+      align-items: center;
+    }
+    .demo-terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #f0f4ff;
+      font-family: inherit;
+      font-size: inherit;
+      caret-color: var(--accent);
+    }
+    .demo-terminal-input::placeholder { color: #5a6480; }
+    .demo-hint {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+    .demo-hint code {
+      background: var(--gray-800);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
     .built-by-ai .section-label { margin-bottom: 16px; }
     .built-by-ai h2 { margin-bottom: 12px; }
     .built-by-ai .section-subtitle { margin-bottom: 56px; }
@@ -593,6 +677,8 @@
         gap: 16px;
       }
       .ai-stat-number { font-size: 2rem; }
+      .demo-terminal { font-size: 0.8rem; min-height: 300px; }
+      .demo-hint code { margin: 4px 2px; }
       section { padding: 80px 24px; }
       .ship-section { min-height: auto; }
       .ship-img { width: clamp(180px, 60vw, 300px) !important; }
@@ -930,6 +1016,22 @@
           <div class="ai-stat-label">Day to launch</div>
           <div class="ai-stat-context">From zero to live with custom domain</div>
         </div>
+      </div>
+      <div class="demo-terminal-wrap fade-up">
+        <div class="demo-terminal-header">
+          <div class="demo-terminal-dot red"></div>
+          <div class="demo-terminal-dot yellow"></div>
+          <div class="demo-terminal-dot green"></div>
+          <div class="demo-terminal-title">claude-code — Try it yourself</div>
+        </div>
+        <div class="demo-terminal" id="demoTerminal">
+          <div class="demo-terminal-output" id="demoOutput"></div>
+          <div class="demo-terminal-input-line">
+            <span class="prompt">$ </span>
+            <input type="text" class="demo-terminal-input" id="demoInput" placeholder="Type 'help' to see commands..." autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+        <p class="demo-hint">Try: <code>help</code> <code>build landing-page</code> <code>run weekly-report</code> <code>explain</code></p>
       </div>
     </div>
   </section>
@@ -1294,6 +1396,198 @@
         }
       }, { threshold: 0.3 });
       observer.observe(terminal);
+    })();
+
+    // Interactive demo terminal
+    (function() {
+      const input = document.getElementById('demoInput');
+      const output = document.getElementById('demoOutput');
+      const terminal = document.getElementById('demoTerminal');
+      if (!input || !output) return;
+
+      const commands = {
+        help: {
+          response: `Available commands:
+
+  <span class="cmd">help</span>           Show this help message
+  <span class="cmd">build</span> [page]   Generate a webpage (try: build landing-page)
+  <span class="cmd">run</span> [task]     Run an automation (try: run weekly-report)
+  <span class="cmd">explain</span>        Explain how this site was built
+  <span class="cmd">clear</span>          Clear the terminal
+
+Type any command to see Claude Code in action.`
+        },
+        clear: { clear: true },
+        explain: {
+          steps: [
+            { text: 'Analyzing ./index.html...', delay: 600 },
+            { text: '', delay: 200 },
+            { text: '<span class="success">This site is a single HTML file with:</span>', delay: 400 },
+            { text: '  → Inline CSS (~600 lines) for all styling', delay: 100 },
+            { text: '  → Inline JS (~400 lines) for animations', delay: 100 },
+            { text: '  → Zero external dependencies', delay: 100 },
+            { text: '  → Canvas-based starfield with parallax', delay: 100 },
+            { text: '  → CSS Grid responsive layouts', delay: 100 },
+            { text: '  → Intersection Observer for scroll animations', delay: 100 },
+            { text: '', delay: 200 },
+            { text: '<span class="comment"># Built iteratively through natural language conversation.</span>', delay: 300 },
+            { text: '<span class="comment"># Each design change deployed in seconds.</span>', delay: 100 }
+          ]
+        },
+        'build landing-page': {
+          steps: [
+            { text: '<span class="comment"># Generating landing page...</span>', delay: 400 },
+            { text: '', delay: 200 },
+            { text: 'Creating hero section with headline...', delay: 300 },
+            { text: '<span class="output">&lt;section class="hero"&gt;</span>', delay: 80 },
+            { text: '<span class="output">  &lt;h1&gt;Your Product, Simplified&lt;/h1&gt;</span>', delay: 80 },
+            { text: '<span class="output">  &lt;p&gt;The fastest way to get started.&lt;/p&gt;</span>', delay: 80 },
+            { text: '<span class="output">  &lt;button class="cta"&gt;Get Started&lt;/button&gt;</span>', delay: 80 },
+            { text: '<span class="output">&lt;/section&gt;</span>', delay: 80 },
+            { text: '', delay: 300 },
+            { text: 'Adding features grid...', delay: 200 },
+            { text: 'Adding testimonials...', delay: 200 },
+            { text: 'Adding pricing table...', delay: 200 },
+            { text: 'Generating responsive CSS...', delay: 300 },
+            { text: '', delay: 200 },
+            { text: '<span class="success">✓ Landing page generated (847 lines)</span>', delay: 100 },
+            { text: '<span class="success">✓ Mobile responsive</span>', delay: 100 },
+            { text: '<span class="success">✓ Ready to deploy</span>', delay: 100 }
+          ]
+        },
+        'run weekly-report': {
+          steps: [
+            { text: '<span class="comment"># Running weekly-report automation...</span>', delay: 400 },
+            { text: '', delay: 200 },
+            { text: '→ Connecting to sales database...', delay: 500 },
+            { text: '→ Pulling transactions from last 7 days...', delay: 400 },
+            { text: '→ Aggregating by product category...', delay: 300 },
+            { text: '→ Calculating week-over-week growth...', delay: 300 },
+            { text: '', delay: 200 },
+            { text: '→ Generating insights with AI...', delay: 600 },
+            { text: '  <span class="output">"Revenue up 12% driven by Enterprise tier"</span>', delay: 100 },
+            { text: '  <span class="output">"Churn decreased to 2.1% (down from 2.8%)"</span>', delay: 100 },
+            { text: '  <span class="output">"Top performer: West region (+23%)"</span>', delay: 100 },
+            { text: '', delay: 300 },
+            { text: '→ Formatting report...', delay: 200 },
+            { text: '→ Sending to team@company.com...', delay: 400 },
+            { text: '', delay: 200 },
+            { text: '<span class="success">✓ Weekly report delivered to inbox</span>', delay: 100 },
+            { text: '<span class="comment"># Time spent: 0 minutes.</span>', delay: 200 }
+          ]
+        },
+        'run content-pipeline': {
+          steps: [
+            { text: '<span class="comment"># Running content-pipeline...</span>', delay: 400 },
+            { text: '', delay: 200 },
+            { text: '→ Analyzing brand voice guidelines...', delay: 400 },
+            { text: '→ Generating 5 LinkedIn posts...', delay: 600 },
+            { text: '  <span class="output">Post 1: "Why we rebuilt our pricing..."</span>', delay: 100 },
+            { text: '  <span class="output">Post 2: "3 lessons from scaling to 10K users"</span>', delay: 100 },
+            { text: '  <span class="output">Post 3: "The automation that saved us 20hrs/week"</span>', delay: 100 },
+            { text: '  <span class="output">Post 4: "Hot take: AI won\'t replace you..."</span>', delay: 100 },
+            { text: '  <span class="output">Post 5: "Our tech stack for 2026"</span>', delay: 100 },
+            { text: '', delay: 300 },
+            { text: '→ Creating email sequence (3 emails)...', delay: 500 },
+            { text: '→ Scheduling for optimal engagement times...', delay: 300 },
+            { text: '', delay: 200 },
+            { text: '<span class="success">✓ Content scheduled for this week</span>', delay: 100 }
+          ]
+        }
+      };
+
+      let isTyping = false;
+
+      function addLine(html, className = '') {
+        const line = document.createElement('div');
+        line.className = 'demo-terminal-line ' + className;
+        line.innerHTML = html;
+        output.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+
+      function typeSteps(steps, idx = 0) {
+        if (idx >= steps.length) {
+          isTyping = false;
+          return;
+        }
+        const step = steps[idx];
+        addLine(step.text);
+        setTimeout(() => typeSteps(steps, idx + 1), step.delay || 100);
+      }
+
+      function runCommand(cmd) {
+        const trimmed = cmd.trim().toLowerCase();
+
+        // Echo the command
+        addLine('<span class="prompt">$</span> <span class="cmd">' + cmd + '</span>');
+
+        if (!trimmed) {
+          isTyping = false;
+          return;
+        }
+
+        const command = commands[trimmed];
+
+        if (command) {
+          if (command.clear) {
+            output.innerHTML = '';
+            isTyping = false;
+          } else if (command.steps) {
+            addLine('');
+            typeSteps(command.steps);
+          } else if (command.response) {
+            addLine('');
+            addLine(command.response);
+            isTyping = false;
+          }
+        } else if (trimmed.startsWith('build ')) {
+          addLine('');
+          typeSteps([
+            { text: '<span class="comment"># Building ' + trimmed.slice(6) + '...</span>', delay: 400 },
+            { text: '→ Analyzing requirements...', delay: 300 },
+            { text: '→ Generating structure...', delay: 400 },
+            { text: '→ Writing HTML & CSS...', delay: 500 },
+            { text: '→ Adding responsive styles...', delay: 300 },
+            { text: '', delay: 200 },
+            { text: '<span class="success">✓ ' + trimmed.slice(6) + ' generated successfully</span>', delay: 100 }
+          ]);
+        } else if (trimmed.startsWith('run ')) {
+          addLine('');
+          typeSteps([
+            { text: '<span class="comment"># Running ' + trimmed.slice(4) + '...</span>', delay: 400 },
+            { text: '→ Initializing task...', delay: 300 },
+            { text: '→ Processing...', delay: 500 },
+            { text: '→ Generating output...', delay: 400 },
+            { text: '', delay: 200 },
+            { text: '<span class="success">✓ ' + trimmed.slice(4) + ' completed</span>', delay: 100 }
+          ]);
+        } else {
+          addLine('');
+          addLine('<span class="output">Command not found: ' + cmd + '</span>');
+          addLine('<span class="comment">Type "help" for available commands.</span>');
+          isTyping = false;
+        }
+      }
+
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !isTyping) {
+          isTyping = true;
+          const cmd = input.value;
+          input.value = '';
+          runCommand(cmd);
+        }
+      });
+
+      // Focus input when clicking terminal
+      terminal.addEventListener('click', function() {
+        input.focus();
+      });
+
+      // Show initial hint
+      addLine('<span class="comment"># Welcome to Claude Code</span>');
+      addLine('<span class="comment"># Type "help" to see available commands</span>');
+      addLine('');
     })();
 
 
