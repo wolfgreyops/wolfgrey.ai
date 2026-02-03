@@ -1973,7 +1973,7 @@
         aliens.push({
           x: Math.random() * (gameCanvas.width - 40) + 20,
           y: -30,
-          size: 20 + Math.random() * 15,
+          size: 15 + Math.random() * 11,
           speed: 1 + Math.random() * 2 + (wave * 0.3),
           wobble: Math.random() * Math.PI * 2,
           type: Math.floor(Math.random() * 3)
@@ -2128,7 +2128,7 @@
         ctx.save();
         ctx.translate(ship.x, ship.y);
         if (ship.img && ship.img.complete) {
-          ctx.rotate(-Math.PI / 2);
+          ctx.rotate(Math.PI);  // Face up (image is nose-down by default)
           ctx.drawImage(ship.img, -30, -30, 60, 60);
         } else {
           // Fallback triangle ship
