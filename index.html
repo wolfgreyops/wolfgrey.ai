@@ -1032,7 +1032,7 @@
             <input type="text" class="demo-terminal-input" id="demoInput" placeholder="Type 'help' to see commands..." autocomplete="off" spellcheck="false">
           </div>
         </div>
-        <p class="demo-hint">Try: <code>help</code> <code>build landing-page</code> <code>run weekly-report</code> <code>run lead-research</code> <code>deploy</code></p>
+        <p class="demo-hint">Try: <code>help</code> <code>set accent #00ff88</code> <code>confetti</code> <code>build landing-page</code> <code>reset</code></p>
       </div>
     </div>
   </section>
@@ -1410,13 +1410,21 @@
         help: {
           response: `<span class="success">Claude Code — AI-powered development agent</span>
 
-  <span class="cmd">build</span> [page]   Generate a complete webpage
-  <span class="cmd">run</span> [task]     Execute an automation workflow
-  <span class="cmd">explain</span>        See how this site was built
-  <span class="cmd">deploy</span>         Ship to production
-  <span class="cmd">clear</span>          Clear terminal
+  <span class="cmd">build</span> [page]        Generate a complete webpage
+  <span class="cmd">run</span> [task]          Execute an automation workflow
+  <span class="cmd">explain</span>             See how this site was built
+  <span class="cmd">deploy</span>              Ship to production
 
-<span class="comment">Try: build landing-page, run weekly-report, run lead-research</span>`
+  <span class="success">Live page controls:</span>
+  <span class="cmd">set background</span> [color]   Change page background
+  <span class="cmd">set accent</span> [color]       Change accent color
+  <span class="cmd">set text</span> [color]         Change text color
+  <span class="cmd">toggle stars</span>             Toggle starfield animation
+  <span class="cmd">confetti</span>                 Launch celebration
+  <span class="cmd">reset</span>                    Restore original theme
+  <span class="cmd">clear</span>                    Clear terminal
+
+<span class="comment">Try: set accent #00ff88, set background #1a1a2e, confetti</span>`
         },
         clear: { clear: true },
         explain: {
@@ -1558,6 +1566,52 @@
       };
 
       let isTyping = false;
+      let starsEnabled = true;
+      const originalColors = {
+        dark: getComputedStyle(document.documentElement).getPropertyValue('--dark').trim(),
+        accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+        white: getComputedStyle(document.documentElement).getPropertyValue('--white').trim()
+      };
+
+      function setColor(prop, value) {
+        document.documentElement.style.setProperty(prop, value);
+      }
+
+      function launchConfetti() {
+        const colors = ['#ff4d4d', '#00e5cc', '#f0f4ff', '#ffbd2e', '#27ca40'];
+        for (let i = 0; i < 150; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.cssText = `
+            position: fixed;
+            width: ${Math.random() * 10 + 5}px;
+            height: ${Math.random() * 10 + 5}px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            left: ${Math.random() * 100}vw;
+            top: -20px;
+            border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+            pointer-events: none;
+            z-index: 9999;
+            animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
+          `;
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5000);
+        }
+      }
+
+      // Add confetti animation if not exists
+      if (!document.getElementById('confettiStyle')) {
+        const style = document.createElement('style');
+        style.id = 'confettiStyle';
+        style.textContent = `
+          @keyframes confettiFall {
+            to {
+              transform: translateY(100vh) rotate(${Math.random() * 720}deg);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
 
       function addLine(html, className = '') {
         const line = document.createElement('div');
@@ -1602,6 +1656,76 @@
             addLine(command.response);
             isTyping = false;
           }
+        } else if (trimmed.startsWith('set background ') || trimmed.startsWith('set bg ')) {
+          const color = trimmed.replace('set background ', '').replace('set bg ', '').trim();
+          addLine('');
+          setColor('--dark', color);
+          setColor('--gray-900', color);
+          document.body.style.background = color;
+          typeSteps([
+            { text: '<span class="success">⚡ Updating background</span>', delay: 100 },
+            { text: '  └─ Applied: <span class="cmd">' + color + '</span>', delay: 50 },
+            { text: '<span class="success">✓ Background updated</span>', delay: 50 }
+          ]);
+        } else if (trimmed.startsWith('set accent ')) {
+          const color = trimmed.replace('set accent ', '').trim();
+          addLine('');
+          setColor('--accent', color);
+          setColor('--btn', color);
+          typeSteps([
+            { text: '<span class="success">⚡ Updating accent color</span>', delay: 100 },
+            { text: '  └─ Applied: <span class="cmd">' + color + '</span>', delay: 50 },
+            { text: '<span class="success">✓ Accent color updated</span>', delay: 50 }
+          ]);
+        } else if (trimmed.startsWith('set text ')) {
+          const color = trimmed.replace('set text ', '').trim();
+          addLine('');
+          setColor('--white', color);
+          setColor('--white-bright', color);
+          typeSteps([
+            { text: '<span class="success">⚡ Updating text color</span>', delay: 100 },
+            { text: '  └─ Applied: <span class="cmd">' + color + '</span>', delay: 50 },
+            { text: '<span class="success">✓ Text color updated</span>', delay: 50 }
+          ]);
+        } else if (trimmed === 'toggle stars') {
+          addLine('');
+          const canvas = document.getElementById('galaxy');
+          if (canvas) {
+            starsEnabled = !starsEnabled;
+            canvas.style.opacity = starsEnabled ? '1' : '0';
+            typeSteps([
+              { text: '<span class="success">⚡ Toggling starfield</span>', delay: 100 },
+              { text: '  └─ Starfield: <span class="cmd">' + (starsEnabled ? 'ON' : 'OFF') + '</span>', delay: 50 },
+              { text: '<span class="success">✓ Animation ' + (starsEnabled ? 'enabled' : 'disabled') + '</span>', delay: 50 }
+            ]);
+          }
+        } else if (trimmed === 'confetti') {
+          addLine('');
+          launchConfetti();
+          typeSteps([
+            { text: '<span class="success">⚡ Launching celebration</span>', delay: 100 },
+            { text: '  └─ Spawning 150 particles...', delay: 50 },
+            { text: '<span class="success">✓ 🎉 Confetti deployed!</span>', delay: 50 }
+          ]);
+        } else if (trimmed === 'reset') {
+          addLine('');
+          setColor('--dark', originalColors.dark);
+          setColor('--gray-900', '#0a0f1a');
+          setColor('--accent', originalColors.accent);
+          setColor('--btn', originalColors.accent);
+          setColor('--white', originalColors.white);
+          setColor('--white-bright', originalColors.white);
+          document.body.style.background = '';
+          const canvas = document.getElementById('galaxy');
+          if (canvas) { canvas.style.opacity = '1'; starsEnabled = true; }
+          typeSteps([
+            { text: '<span class="success">⚡ Resetting theme</span>', delay: 100 },
+            { text: '  ├─ Background... <span class="success">✓</span>', delay: 40 },
+            { text: '  ├─ Accent color... <span class="success">✓</span>', delay: 40 },
+            { text: '  ├─ Text color... <span class="success">✓</span>', delay: 40 },
+            { text: '  └─ Starfield... <span class="success">✓</span>', delay: 40 },
+            { text: '<span class="success">✓ Original theme restored</span>', delay: 50 }
+          ]);
         } else if (trimmed.startsWith('build ')) {
           const name = trimmed.slice(6);
           addLine('');
@@ -1657,7 +1781,7 @@
 
       // Show initial hint
       addLine('<span class="success">⚡ Claude Code ready</span>');
-      addLine('<span class="comment"># Type "help" for commands, or try "build landing-page"</span>');
+      addLine('<span class="comment"># Type "help" for commands — or try "set accent #00ff88"</span>');
       addLine('');
     })();
 
