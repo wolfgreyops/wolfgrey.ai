@@ -394,7 +394,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 64px;
-      align-items: center;
+      align-items: stretch;
     }
     .course-block h3 {
       font-size: 2rem;
@@ -437,6 +437,11 @@
       font-size: 0.85rem;
       line-height: 1.8;
       color: #8892b0;
+      min-height: 420px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .course-visual .prompt { color: var(--accent); }
     .course-visual .cmd { color: #f0f4ff; }
@@ -535,6 +540,9 @@
         grid-template-columns: 1fr;
         padding: 32px;
         gap: 32px;
+      }
+      .course-visual {
+        min-height: 380px;
       }
       section { padding: 80px 24px; }
       .ship-section { min-height: auto; }
