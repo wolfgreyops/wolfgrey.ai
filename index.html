@@ -623,6 +623,7 @@
       width: 100%;
       height: 100%;
       display: block;
+      background: radial-gradient(ellipse at center, #0a0f1a 0%, #050810 100%);
     }
     .game-hud {
       position: absolute;
@@ -1925,33 +1926,41 @@
       function startGame() {
         if (!gameCanvas || !gameCtx) return;
 
-        // Size canvas
-        const rect = gameCanvas.parentElement.getBoundingClientRect();
-        gameCanvas.width = rect.width;
-        gameCanvas.height = rect.height;
-
-        // Reset state
-        score = 0;
-        wave = 1;
-        lasers = [];
-        aliens = [];
-        explosions = [];
-        lastAlienSpawn = 0;
-        scoreEl.textContent = '0';
-        waveEl.textContent = '1';
-
-        // Load ship
-        ship.img = new Image();
-        ship.img.src = 'xwing.png';
-        ship.x = gameCanvas.width / 2;
-        ship.y = gameCanvas.height - 60;
-
-        // Show overlay
+        // Show overlay first so we can measure
         gameOverlay.classList.add('active');
-        gameRunning = true;
 
-        // Start loop
-        gameLoop = requestAnimationFrame(updateGame);
+        // Wait a frame for layout, then size canvas
+        setTimeout(() => {
+          const rect = terminal.getBoundingClientRect();
+          gameCanvas.width = rect.width - 2;
+          gameCanvas.height = rect.height - 2;
+
+          // Reset state
+          score = 0;
+          wave = 1;
+          lasers = [];
+          aliens = [];
+          explosions = [];
+          lastAlienSpawn = Date.now();
+          scoreEl.textContent = '0';
+          waveEl.textContent = '1';
+
+          // Load ship
+          ship.img = new Image();
+          ship.img.src = 'xwing.png';
+          ship.x = gameCanvas.width / 2;
+          ship.y = gameCanvas.height - 60;
+
+          gameRunning = true;
+
+          // Spawn initial aliens
+          spawnAlien();
+          setTimeout(() => spawnAlien(), 500);
+          setTimeout(() => spawnAlien(), 1000);
+
+          // Start loop
+          gameLoop = requestAnimationFrame(updateGame);
+        }, 50);
       }
 
       function stopGame() {
@@ -2116,13 +2125,25 @@
         }
 
         // Draw ship
+        ctx.save();
+        ctx.translate(ship.x, ship.y);
         if (ship.img && ship.img.complete) {
-          ctx.save();
-          ctx.translate(ship.x, ship.y);
           ctx.rotate(-Math.PI / 2);
           ctx.drawImage(ship.img, -30, -30, 60, 60);
-          ctx.restore();
+        } else {
+          // Fallback triangle ship
+          ctx.fillStyle = '#00e5cc';
+          ctx.shadowColor = '#00e5cc';
+          ctx.shadowBlur = 15;
+          ctx.beginPath();
+          ctx.moveTo(0, -25);
+          ctx.lineTo(20, 20);
+          ctx.lineTo(-20, 20);
+          ctx.closePath();
+          ctx.fill();
+          ctx.shadowBlur = 0;
         }
+        ctx.restore();
 
         gameLoop = requestAnimationFrame(updateGame);
       }
