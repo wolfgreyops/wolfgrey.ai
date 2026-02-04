@@ -475,15 +475,31 @@
       background: radial-gradient(circle, rgba(255,77,77,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
-    .cta-mascot {
-      width: clamp(120px, 18vw, 180px);
+    .mascot-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: clamp(20px, 4vw, 40px);
       margin-bottom: 32px;
+    }
+    .cta-mascot {
+      width: clamp(100px, 15vw, 150px);
       filter: drop-shadow(0 0 30px rgba(218,165,32,0.2));
       animation: mascotHover 3s ease-in-out infinite;
+    }
+    .cta-wolf {
+      width: clamp(120px, 18vw, 180px);
+      filter: drop-shadow(0 0 30px rgba(100,150,180,0.3));
+      animation: wolfHover 3s ease-in-out infinite;
+      animation-delay: 0.5s;
     }
     @keyframes mascotHover {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
+    }
+    @keyframes wolfHover {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
     .cta-section .section-title { max-width: 700px; margin: 0 auto 20px; }
     .cta-section .section-subtitle { margin: 0 auto 48px; text-align: center; }
@@ -1049,7 +1065,10 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
-      <img src="mascot.png" alt="" class="cta-mascot">
+      <div class="mascot-container">
+        <img src="mascot.png" alt="" class="cta-mascot">
+        <img src="wolf.png" alt="" class="cta-wolf">
+      </div>
       <div class="section-label">Get Started</div>
       <h2 class="section-title">Stop reading about AI.<br>Start building with it.</h2>
       <p class="section-subtitle">Grab the free guide, explore the playbook, or let us build your system. Every path leads to the same place — a business that runs smarter.</p>
