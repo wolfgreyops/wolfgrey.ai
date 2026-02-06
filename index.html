@@ -263,6 +263,88 @@
       color: var(--accent);
     }
 
+    /* ── PRACTICAL USES ── */
+    #uses { background: var(--gray-900); }
+    .uses-header { margin-bottom: 64px; }
+    .uses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .use-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 40px 32px;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .use-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .use-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent2);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .use-card:hover::before { opacity: 1; }
+    .use-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0,229,204,0.12);
+      border: 1px solid rgba(0,229,204,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 24px;
+    }
+    .use-card h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .use-card p {
+      color: var(--gray-400);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .use-stats {
+      display: flex;
+      gap: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-700);
+    }
+    .use-stat {
+      text-align: left;
+    }
+    .use-stat-number {
+      font-family: 'Clash Display', 'Inter', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    .use-stat-label {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     /* ── PRODUCTS ── */
     .products-grid {
       display: grid;
@@ -885,6 +967,7 @@
       <div class="nav-links">
         <a href="#services">Services</a>
         <a href="#products">Products</a>
+        <a href="#uses">Uses</a>
         <a href="#ladder">Pricing</a>
         <a href="#course">Course</a>
         <a href="https://wolfgrey.gumroad.com" target="_blank" rel="noopener" class="nav-cta">Shop →</a>
@@ -961,6 +1044,64 @@
           <h3>Automation Template Packs</h3>
           <p>Pre-built scripts and workflow templates for specific use cases — sales automation, content pipelines, data analysis. Plug into your setup and run.</p>
           <a href="#" class="btn btn-secondary">Coming Soon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICAL USES -->
+  <section id="uses">
+    <div class="container">
+      <div class="uses-header">
+        <div class="section-label">Practical Uses</div>
+        <h2 class="section-title">AI that works where you do</h2>
+        <p class="section-subtitle">Real applications across your business — automating the repetitive so you can focus on growth.</p>
+      </div>
+      <div class="uses-grid">
+        <div class="use-card fade-up">
+          <div class="use-icon">📈</div>
+          <h3>Sales</h3>
+          <p>Generate personalized outreach sequences, qualify leads with AI-powered scoring, and automate follow-ups that actually convert. Spend less time prospecting, more time closing.</p>
+          <div class="use-stats">
+            <div class="use-stat">
+              <div class="use-stat-number">10hrs</div>
+              <div class="use-stat-label">Saved weekly</div>
+            </div>
+            <div class="use-stat">
+              <div class="use-stat-number">3x</div>
+              <div class="use-stat-label">More outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="use-card fade-up">
+          <div class="use-icon">📣</div>
+          <h3>Marketing</h3>
+          <p>Create content at scale — social posts, email campaigns, ad copy — all on-brand and on-message. Analyze performance and optimize messaging without the guesswork.</p>
+          <div class="use-stats">
+            <div class="use-stat">
+              <div class="use-stat-number">5x</div>
+              <div class="use-stat-label">Content output</div>
+            </div>
+            <div class="use-stat">
+              <div class="use-stat-number">80%</div>
+              <div class="use-stat-label">Faster drafts</div>
+            </div>
+          </div>
+        </div>
+        <div class="use-card fade-up">
+          <div class="use-icon">📊</div>
+          <h3>Accounting</h3>
+          <p>Automate invoice processing, categorize expenses intelligently, and generate financial reports in seconds. Turn hours of manual data entry into one-click workflows.</p>
+          <div class="use-stats">
+            <div class="use-stat">
+              <div class="use-stat-number">90%</div>
+              <div class="use-stat-label">Less manual entry</div>
+            </div>
+            <div class="use-stat">
+              <div class="use-stat-number">2min</div>
+              <div class="use-stat-label">Per report</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
