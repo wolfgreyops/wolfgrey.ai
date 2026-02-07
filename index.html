@@ -348,6 +348,67 @@
       letter-spacing: 0.5px;
     }
 
+    /* ── CUSTOM APPS ── */
+    #custom-apps { background: var(--dark); }
+    .apps-header { margin-bottom: 64px; }
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .app-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .app-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .app-card:hover::before { opacity: 1; }
+    .app-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,77,77,0.12);
+      border: 1px solid rgba(255,77,77,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+    }
+    .app-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .app-card p {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+
     /* ── PRODUCTS ── */
     .products-grid {
       display: grid;
@@ -1105,6 +1166,49 @@
               <div class="use-stat-label">Per report</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM APPS -->
+  <section id="custom-apps">
+    <div class="container">
+      <div class="apps-header">
+        <div class="section-label">Custom Apps</div>
+        <h2 class="section-title">Purpose-built apps for your operations</h2>
+        <p class="section-subtitle">Ready-to-deploy applications that automate specific business processes — no coding required.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card fade-up">
+          <div class="app-icon">📋</div>
+          <h3>Purchase Order Processor</h3>
+          <p>Automatically intake POs from email or uploads, validate line items against your catalog, flag discrepancies, and route for approval — all without manual data entry.</p>
+        </div>
+        <div class="app-card fade-up">
+          <div class="app-icon">🧾</div>
+          <h3>Invoice Data Extractor</h3>
+          <p>Extract vendor details, line items, totals, and due dates from any invoice format. Matches to POs, flags exceptions, and exports clean data to your accounting system.</p>
+        </div>
+        <div class="app-card fade-up">
+          <div class="app-icon">💰</div>
+          <h3>Vendor Price Analyzer</h3>
+          <p>Compare pricing across multiple vendors for the same products. Track price changes over time, identify savings opportunities, and generate cost comparison reports.</p>
+        </div>
+        <div class="app-card fade-up">
+          <div class="app-icon">📑</div>
+          <h3>Expense Categorizer</h3>
+          <p>Auto-classify expenses into the right GL codes, flag policy violations, and route to appropriate approvers. Turns receipt chaos into organized, audit-ready records.</p>
+        </div>
+        <div class="app-card fade-up">
+          <div class="app-icon">📄</div>
+          <h3>Contract Reviewer</h3>
+          <p>Analyze contracts for key terms, obligations, renewal dates, and potential risks. Surface what matters and create summaries your team can actually use.</p>
+        </div>
+        <div class="app-card fade-up">
+          <div class="app-icon">📦</div>
+          <h3>Inventory Forecaster</h3>
+          <p>Predict reorder points based on sales velocity, seasonality, and lead times. Get alerts before stockouts happen and optimize your working capital.</p>
         </div>
       </div>
     </div>
