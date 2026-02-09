@@ -830,6 +830,87 @@
       .demo-jet { display: none; }
     }
 
+    /* ── TETRIS GAME ── */
+    .tetris-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 8, 16, 0.98);
+      border-radius: 0 0 12px 12px;
+      z-index: 10;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .tetris-overlay.active { display: flex; }
+    .tetris-container {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .tetris-canvas {
+      display: block;
+      border: 2px solid var(--accent2);
+      box-shadow: 0 0 20px rgba(0, 229, 204, 0.3);
+    }
+    .tetris-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .tetris-score, .tetris-next {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--accent2);
+    }
+    .tetris-score span, .tetris-next span {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .tetris-next-canvas {
+      border: 1px solid var(--gray-700);
+      margin-top: 8px;
+    }
+    .tetris-controls {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.65rem;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+    .tetris-exit {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .tetris-exit:hover { color: var(--accent); }
+    .tetris-game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+    }
+    .tetris-game-over.active { display: block; }
+    .tetris-game-over h3 {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .tetris-game-over p {
+      font-family: 'SF Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--gray-400);
+    }
+
     .built-by-ai .section-label { margin-bottom: 16px; }
     .built-by-ai h2 { margin-bottom: 12px; }
     .built-by-ai .section-subtitle { margin-bottom: 56px; }
@@ -1385,8 +1466,29 @@
             <span class="prompt">$ </span>
             <input type="text" class="demo-terminal-input" id="demoInput" placeholder="Type 'help' to see commands..." autocomplete="off" spellcheck="false">
           </div>
+          <div class="tetris-overlay" id="tetrisOverlay">
+            <div class="tetris-container">
+              <canvas class="tetris-canvas" id="tetrisCanvas"></canvas>
+              <div class="tetris-sidebar">
+                <div class="tetris-score">SCORE<span id="tetrisScore">0</span></div>
+                <div class="tetris-score">LINES<span id="tetrisLines">0</span></div>
+                <div class="tetris-next">NEXT<canvas class="tetris-next-canvas" id="tetrisNextCanvas"></canvas></div>
+                <div class="tetris-controls">
+                  ← → Move<br>
+                  ↑ Rotate<br>
+                  ↓ Soft drop<br>
+                  SPACE Hard drop
+                </div>
+                <div class="tetris-exit" id="tetrisExit">ESC to exit</div>
+              </div>
+            </div>
+            <div class="tetris-game-over" id="tetrisGameOver">
+              <h3>GAME OVER</h3>
+              <p>Press SPACE to restart</p>
+            </div>
+          </div>
         </div>
-        <p class="demo-hint">Try: <code>help</code> <code>light-mode</code> <code>add jet</code> <code>set accent #00ff88</code> <code>confetti</code></p>
+        <p class="demo-hint">Try: <code>help</code> <code>tetris</code> <code>light-mode</code> <code>add jet</code> <code>set accent #00ff88</code></p>
       </div>
     </div>
   </section>
@@ -1777,10 +1879,11 @@
   <span class="cmd">add jet</span>                  Deploy fighter escort
   <span class="cmd">confetti</span>                 Launch celebration
   <span class="cmd">light-mode</span>               Toggle light mode theme
+  <span class="cmd">tetris</span>                   Play TETRIS
   <span class="cmd">reset</span>                    Restore original theme
   <span class="cmd">clear</span>                    Clear terminal
 
-<span class="comment">Try: light-mode, add jet, set accent #00ff88</span>`
+<span class="comment">Try: tetris, light-mode, set accent #00ff88</span>`
         },
         clear: { clear: true },
         explain: {
@@ -2141,6 +2244,24 @@
               { text: '<span class="success">✓ Dark mode restored</span>', delay: 50 }
             ]);
           }
+        } else if (trimmed === 'tetris' || trimmed === 'play tetris') {
+          addLine('');
+          typeSteps([
+            { text: '<span class="success">⚡ Initializing TETRIS</span>', delay: 100 },
+            { text: '  ├─ Loading tetrominoes...', delay: 60 },
+            { text: '  ├─ Setting up grid...', delay: 60 },
+            { text: '  └─ Ready to play!', delay: 60 },
+            { text: '', delay: 50 },
+            { text: '<span class="success">✓ Use arrow keys to play</span>', delay: 50 }
+          ]);
+          setTimeout(() => startTetris(), 500);
+        } else if (trimmed === 'stop tetris' || trimmed === 'exit tetris' || trimmed === 'quit tetris') {
+          addLine('');
+          stopTetris();
+          typeSteps([
+            { text: '<span class="success">⚡ Game ended</span>', delay: 100 },
+            { text: '<span class="comment"># Final score saved</span>', delay: 50 }
+          ]);
         } else if (trimmed.startsWith('build ')) {
           const name = trimmed.slice(6);
           addLine('');
@@ -2191,12 +2312,330 @@
 
       // Focus input when clicking terminal
       terminal.addEventListener('click', function(e) {
-        input.focus();
+        if (!document.getElementById('tetrisOverlay').classList.contains('active')) {
+          input.focus();
+        }
       });
+
+      // ══════════════════════════════════════════════
+      // TETRIS GAME
+      // ══════════════════════════════════════════════
+      let tetrisRunning = false;
+      let tetrisLoop = null;
+      let tetrisScore = 0;
+      let tetrisLinesCleared = 0;
+      const tetrisOverlay = document.getElementById('tetrisOverlay');
+      const tetrisCanvas = document.getElementById('tetrisCanvas');
+      const tetrisCtx = tetrisCanvas ? tetrisCanvas.getContext('2d') : null;
+      const tetrisNextCanvas = document.getElementById('tetrisNextCanvas');
+      const tetrisNextCtx = tetrisNextCanvas ? tetrisNextCanvas.getContext('2d') : null;
+      const tetrisScoreEl = document.getElementById('tetrisScore');
+      const tetrisLinesEl = document.getElementById('tetrisLines');
+      const tetrisExitBtn = document.getElementById('tetrisExit');
+      const tetrisGameOverEl = document.getElementById('tetrisGameOver');
+
+      const COLS = 10;
+      const ROWS = 20;
+      const BLOCK_SIZE = 16;
+      const NEXT_BLOCK_SIZE = 12;
+
+      const COLORS = ['#00e5cc', '#ff4d4d', '#ffbd2e', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
+      const TETROMINOES = [
+        [[1,1,1,1]], // I
+        [[1,1],[1,1]], // O
+        [[0,1,0],[1,1,1]], // T
+        [[0,1,1],[1,1,0]], // S
+        [[1,1,0],[0,1,1]], // Z
+        [[1,0,0],[1,1,1]], // J
+        [[0,0,1],[1,1,1]]  // L
+      ];
+
+      let grid = [];
+      let currentPiece = null;
+      let nextPiece = null;
+      let dropCounter = 0;
+      let dropInterval = 500;
+      let lastTime = 0;
+      let gameOver = false;
+
+      function createPiece() {
+        const type = Math.floor(Math.random() * TETROMINOES.length);
+        return {
+          shape: TETROMINOES[type].map(row => [...row]),
+          color: COLORS[type],
+          x: Math.floor(COLS / 2) - Math.ceil(TETROMINOES[type][0].length / 2),
+          y: 0
+        };
+      }
+
+      function resetGrid() {
+        grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
+      }
+
+      function collides(piece, offsetX = 0, offsetY = 0) {
+        for (let y = 0; y < piece.shape.length; y++) {
+          for (let x = 0; x < piece.shape[y].length; x++) {
+            if (piece.shape[y][x]) {
+              const newX = piece.x + x + offsetX;
+              const newY = piece.y + y + offsetY;
+              if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
+              if (newY >= 0 && grid[newY][newX]) return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      function merge(piece) {
+        for (let y = 0; y < piece.shape.length; y++) {
+          for (let x = 0; x < piece.shape[y].length; x++) {
+            if (piece.shape[y][x]) {
+              const gridY = piece.y + y;
+              if (gridY >= 0) {
+                grid[gridY][piece.x + x] = piece.color;
+              }
+            }
+          }
+        }
+      }
+
+      function rotate(piece) {
+        const rotated = piece.shape[0].map((_, i) =>
+          piece.shape.map(row => row[i]).reverse()
+        );
+        const prevShape = piece.shape;
+        piece.shape = rotated;
+        // Wall kick
+        if (collides(piece)) {
+          if (!collides(piece, -1, 0)) piece.x -= 1;
+          else if (!collides(piece, 1, 0)) piece.x += 1;
+          else if (!collides(piece, -2, 0)) piece.x -= 2;
+          else if (!collides(piece, 2, 0)) piece.x += 2;
+          else piece.shape = prevShape;
+        }
+      }
+
+      function clearLines() {
+        let linesCleared = 0;
+        for (let y = ROWS - 1; y >= 0; y--) {
+          if (grid[y].every(cell => cell !== null)) {
+            grid.splice(y, 1);
+            grid.unshift(Array(COLS).fill(null));
+            linesCleared++;
+            y++;
+          }
+        }
+        if (linesCleared > 0) {
+          const points = [0, 100, 300, 500, 800][linesCleared] || 0;
+          tetrisScore += points;
+          tetrisLinesCleared += linesCleared;
+          tetrisScoreEl.textContent = tetrisScore;
+          tetrisLinesEl.textContent = tetrisLinesCleared;
+          // Speed up
+          dropInterval = Math.max(100, 500 - tetrisLinesCleared * 20);
+        }
+      }
+
+      function drop() {
+        if (!collides(currentPiece, 0, 1)) {
+          currentPiece.y++;
+        } else {
+          merge(currentPiece);
+          clearLines();
+          currentPiece = nextPiece;
+          nextPiece = createPiece();
+          drawNextPiece();
+          if (collides(currentPiece)) {
+            gameOver = true;
+            tetrisGameOverEl.classList.add('active');
+          }
+        }
+      }
+
+      function hardDrop() {
+        while (!collides(currentPiece, 0, 1)) {
+          currentPiece.y++;
+          tetrisScore += 2;
+        }
+        tetrisScoreEl.textContent = tetrisScore;
+        drop();
+      }
+
+      function drawBlock(ctx, x, y, color, size) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x * size, y * size, size - 1, size - 1);
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fillRect(x * size, y * size, size - 1, 2);
+        ctx.fillRect(x * size, y * size, 2, size - 1);
+      }
+
+      function draw() {
+        tetrisCtx.fillStyle = '#0a0f1a';
+        tetrisCtx.fillRect(0, 0, tetrisCanvas.width, tetrisCanvas.height);
+
+        // Draw grid
+        for (let y = 0; y < ROWS; y++) {
+          for (let x = 0; x < COLS; x++) {
+            if (grid[y][x]) {
+              drawBlock(tetrisCtx, x, y, grid[y][x], BLOCK_SIZE);
+            }
+          }
+        }
+
+        // Draw ghost piece
+        if (currentPiece && !gameOver) {
+          let ghostY = currentPiece.y;
+          while (!collides({ ...currentPiece, y: ghostY + 1 })) {
+            ghostY++;
+          }
+          tetrisCtx.globalAlpha = 0.3;
+          for (let y = 0; y < currentPiece.shape.length; y++) {
+            for (let x = 0; x < currentPiece.shape[y].length; x++) {
+              if (currentPiece.shape[y][x]) {
+                drawBlock(tetrisCtx, currentPiece.x + x, ghostY + y, currentPiece.color, BLOCK_SIZE);
+              }
+            }
+          }
+          tetrisCtx.globalAlpha = 1;
+        }
+
+        // Draw current piece
+        if (currentPiece && !gameOver) {
+          for (let y = 0; y < currentPiece.shape.length; y++) {
+            for (let x = 0; x < currentPiece.shape[y].length; x++) {
+              if (currentPiece.shape[y][x]) {
+                drawBlock(tetrisCtx, currentPiece.x + x, currentPiece.y + y, currentPiece.color, BLOCK_SIZE);
+              }
+            }
+          }
+        }
+
+        // Draw grid lines
+        tetrisCtx.strokeStyle = '#1e2940';
+        tetrisCtx.lineWidth = 0.5;
+        for (let x = 0; x <= COLS; x++) {
+          tetrisCtx.beginPath();
+          tetrisCtx.moveTo(x * BLOCK_SIZE, 0);
+          tetrisCtx.lineTo(x * BLOCK_SIZE, ROWS * BLOCK_SIZE);
+          tetrisCtx.stroke();
+        }
+        for (let y = 0; y <= ROWS; y++) {
+          tetrisCtx.beginPath();
+          tetrisCtx.moveTo(0, y * BLOCK_SIZE);
+          tetrisCtx.lineTo(COLS * BLOCK_SIZE, y * BLOCK_SIZE);
+          tetrisCtx.stroke();
+        }
+      }
+
+      function drawNextPiece() {
+        tetrisNextCtx.fillStyle = '#0a0f1a';
+        tetrisNextCtx.fillRect(0, 0, tetrisNextCanvas.width, tetrisNextCanvas.height);
+        if (nextPiece) {
+          const offsetX = (tetrisNextCanvas.width / NEXT_BLOCK_SIZE - nextPiece.shape[0].length) / 2;
+          const offsetY = (tetrisNextCanvas.height / NEXT_BLOCK_SIZE - nextPiece.shape.length) / 2;
+          for (let y = 0; y < nextPiece.shape.length; y++) {
+            for (let x = 0; x < nextPiece.shape[y].length; x++) {
+              if (nextPiece.shape[y][x]) {
+                drawBlock(tetrisNextCtx, offsetX + x, offsetY + y, nextPiece.color, NEXT_BLOCK_SIZE);
+              }
+            }
+          }
+        }
+      }
+
+      function updateTetris(time = 0) {
+        if (!tetrisRunning) return;
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        dropCounter += deltaTime;
+        if (dropCounter > dropInterval && !gameOver) {
+          drop();
+          dropCounter = 0;
+        }
+        draw();
+        tetrisLoop = requestAnimationFrame(updateTetris);
+      }
+
+      function startTetris() {
+        if (!tetrisCanvas || !tetrisCtx) return;
+        tetrisCanvas.width = COLS * BLOCK_SIZE;
+        tetrisCanvas.height = ROWS * BLOCK_SIZE;
+        tetrisNextCanvas.width = 4 * NEXT_BLOCK_SIZE;
+        tetrisNextCanvas.height = 4 * NEXT_BLOCK_SIZE;
+
+        resetGrid();
+        tetrisScore = 0;
+        tetrisLinesCleared = 0;
+        dropInterval = 500;
+        dropCounter = 0;
+        lastTime = 0;
+        gameOver = false;
+        tetrisScoreEl.textContent = '0';
+        tetrisLinesEl.textContent = '0';
+        tetrisGameOverEl.classList.remove('active');
+
+        currentPiece = createPiece();
+        nextPiece = createPiece();
+        drawNextPiece();
+
+        tetrisOverlay.classList.add('active');
+        tetrisRunning = true;
+        tetrisLoop = requestAnimationFrame(updateTetris);
+      }
+
+      function stopTetris() {
+        tetrisRunning = false;
+        if (tetrisLoop) cancelAnimationFrame(tetrisLoop);
+        tetrisOverlay.classList.remove('active');
+        tetrisGameOverEl.classList.remove('active');
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (!tetrisRunning) return;
+        if (gameOver) {
+          if (e.code === 'Space') {
+            startTetris();
+          }
+          return;
+        }
+        switch (e.code) {
+          case 'ArrowLeft':
+            if (!collides(currentPiece, -1, 0)) currentPiece.x--;
+            e.preventDefault();
+            break;
+          case 'ArrowRight':
+            if (!collides(currentPiece, 1, 0)) currentPiece.x++;
+            e.preventDefault();
+            break;
+          case 'ArrowUp':
+            rotate(currentPiece);
+            e.preventDefault();
+            break;
+          case 'ArrowDown':
+            if (!collides(currentPiece, 0, 1)) {
+              currentPiece.y++;
+              tetrisScore += 1;
+              tetrisScoreEl.textContent = tetrisScore;
+            }
+            e.preventDefault();
+            break;
+          case 'Space':
+            hardDrop();
+            e.preventDefault();
+            break;
+          case 'Escape':
+            stopTetris();
+            break;
+        }
+      });
+
+      if (tetrisExitBtn) {
+        tetrisExitBtn.addEventListener('click', stopTetris);
+      }
 
       // Show initial hint
       addLine('<span class="success">⚡ Claude Code ready</span>');
-      addLine('<span class="comment"># Type "help" for commands — or try "light-mode"</span>');
+      addLine('<span class="comment"># Type "help" for commands — or try "tetris"</span>');
       addLine('');
     })();
 
