@@ -662,8 +662,64 @@
       border-top: 1px solid var(--gray-700);
       padding: 80px 24px;
       text-align: center;
+      transition: background 0.3s ease, color 0.3s ease;
     }
     .ai-stat { text-align: center; }
+
+    /* ── LIGHT MODE (last section only) ── */
+    .built-by-ai.light-mode {
+      background: #f5f7fa;
+      border-top-color: #dce3ed;
+    }
+    .built-by-ai.light-mode .section-label,
+    .built-by-ai.light-mode .section-title,
+    .built-by-ai.light-mode .section-subtitle,
+    .built-by-ai.light-mode .ai-stat-number,
+    .built-by-ai.light-mode .ai-stat-label,
+    .built-by-ai.light-mode .ai-stat-context {
+      color: #1a1a2e;
+    }
+    .built-by-ai.light-mode .section-subtitle,
+    .built-by-ai.light-mode .ai-stat-context {
+      color: #4b5563;
+    }
+    .built-by-ai.light-mode .ai-stat {
+      background: #ffffff;
+      border-color: #dce3ed;
+    }
+    .built-by-ai.light-mode .ai-stat-label {
+      color: #6b7280;
+    }
+    .built-by-ai.light-mode .demo-terminal-header {
+      background: #dce3ed;
+    }
+    .built-by-ai.light-mode .demo-terminal-title {
+      color: #4b5563;
+    }
+    .built-by-ai.light-mode .demo-terminal {
+      background: #ffffff;
+      border-color: #c9d3e0;
+    }
+    .built-by-ai.light-mode .demo-terminal .output,
+    .built-by-ai.light-mode .demo-terminal .comment {
+      color: #6b7280;
+    }
+    .built-by-ai.light-mode .demo-terminal .cmd {
+      color: #1a1a2e;
+    }
+    .built-by-ai.light-mode .demo-terminal-input {
+      color: #1a1a2e;
+    }
+    .built-by-ai.light-mode .demo-terminal-input::placeholder {
+      color: #9ca3af;
+    }
+    .built-by-ai.light-mode .demo-hint {
+      color: #4b5563;
+    }
+    .built-by-ai.light-mode .demo-hint code {
+      background: #e5e7eb;
+      color: #1a1a2e;
+    }
 
     /* ── INTERACTIVE TERMINAL ── */
     .demo-terminal-wrap {
@@ -774,46 +830,6 @@
       .demo-jet { display: none; }
     }
 
-    /* ── ASTEROID GAME ── */
-    .game-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(5, 8, 16, 0.95);
-      border-radius: 0 0 12px 12px;
-      z-index: 10;
-      display: none;
-    }
-    .game-overlay.active { display: block; }
-    .game-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-      background: radial-gradient(ellipse at center, #0a0f1a 0%, #050810 100%);
-    }
-    .game-hud {
-      position: absolute;
-      top: 12px;
-      left: 16px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: var(--accent2);
-      z-index: 11;
-    }
-    .game-score { margin-right: 24px; }
-    .game-exit {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 0.75rem;
-      color: var(--gray-400);
-      cursor: pointer;
-      z-index: 11;
-    }
-    .game-exit:hover { color: var(--accent); }
     .built-by-ai .section-label { margin-bottom: 16px; }
     .built-by-ai h2 { margin-bottom: 12px; }
     .built-by-ai .section-subtitle { margin-bottom: 56px; }
@@ -1369,13 +1385,8 @@
             <span class="prompt">$ </span>
             <input type="text" class="demo-terminal-input" id="demoInput" placeholder="Type 'help' to see commands..." autocomplete="off" spellcheck="false">
           </div>
-          <div class="game-overlay" id="gameOverlay">
-            <div class="game-hud"><span class="game-score">SCORE: <span id="gameScore">0</span></span><span>WAVE: <span id="gameWave">1</span></span></div>
-            <div class="game-exit" id="gameExit">ESC to exit</div>
-            <canvas class="game-canvas" id="gameCanvas"></canvas>
-          </div>
         </div>
-        <p class="demo-hint">Try: <code>help</code> <code>start game</code> <code>add jet</code> <code>set accent #00ff88</code> <code>confetti</code></p>
+        <p class="demo-hint">Try: <code>help</code> <code>light-mode</code> <code>add jet</code> <code>set accent #00ff88</code> <code>confetti</code></p>
       </div>
     </div>
   </section>
@@ -1765,11 +1776,11 @@
   <span class="cmd">toggle stars</span>             Toggle starfield animation
   <span class="cmd">add jet</span>                  Deploy fighter escort
   <span class="cmd">confetti</span>                 Launch celebration
-  <span class="cmd">start game</span>               Play ASTEROID DEFENSE
+  <span class="cmd">light-mode</span>               Toggle light mode theme
   <span class="cmd">reset</span>                    Restore original theme
   <span class="cmd">clear</span>                    Clear terminal
 
-<span class="comment">Try: start game, add jet, set accent #00ff88</span>`
+<span class="comment">Try: light-mode, add jet, set accent #00ff88</span>`
         },
         clear: { clear: true },
         explain: {
@@ -2061,6 +2072,9 @@
           setColor('--white', originalColors.white);
           setColor('--white-bright', originalColors.white);
           document.body.style.background = '';
+          // Reset light mode
+          const builtByAi = document.querySelector('.built-by-ai');
+          if (builtByAi) builtByAi.classList.remove('light-mode');
           const canvas = document.getElementById('galaxy');
           if (canvas) { canvas.style.opacity = '1'; starsEnabled = true; }
           const jet = document.querySelector('.demo-jet');
@@ -2103,24 +2117,30 @@
             { text: '  └─ Returning to hangar...', delay: 80 },
             { text: '<span class="success">✓ Fighter recalled</span>', delay: 50 }
           ]);
-        } else if (trimmed === 'start game' || trimmed === 'play game' || trimmed === 'game') {
+        } else if (trimmed === 'light-mode' || trimmed === 'lightmode' || trimmed === 'light mode') {
           addLine('');
-          typeSteps([
-            { text: '<span class="success">⚡ Initializing ASTEROID DEFENSE</span>', delay: 100 },
-            { text: '  ├─ Loading ship assets...', delay: 60 },
-            { text: '  ├─ Spawning alien waves...', delay: 60 },
-            { text: '  └─ Arming laser systems...', delay: 60 },
-            { text: '', delay: 50 },
-            { text: '<span class="success">✓ GAME READY — Move mouse to aim, click to fire!</span>', delay: 50 }
-          ]);
-          setTimeout(() => startGame(), 500);
-        } else if (trimmed === 'stop game' || trimmed === 'exit game' || trimmed === 'quit game') {
-          addLine('');
-          stopGame();
-          typeSteps([
-            { text: '<span class="success">⚡ Game ended</span>', delay: 100 },
-            { text: '<span class="comment"># Final score saved</span>', delay: 50 }
-          ]);
+          const section = document.querySelector('.built-by-ai');
+          const isLight = section.classList.toggle('light-mode');
+          if (isLight) {
+            typeSteps([
+              { text: '<span class="success">⚡ Switching to light mode</span>', delay: 100 },
+              { text: '  ├─ Adjusting background...', delay: 60 },
+              { text: '  ├─ Updating text colors...', delay: 60 },
+              { text: '  └─ Refreshing terminal...', delay: 60 },
+              { text: '', delay: 50 },
+              { text: '<span class="success">✓ Light mode enabled</span>', delay: 50 },
+              { text: '<span class="comment"># Type "light-mode" again to toggle back</span>', delay: 50 }
+            ]);
+          } else {
+            typeSteps([
+              { text: '<span class="success">⚡ Switching to dark mode</span>', delay: 100 },
+              { text: '  ├─ Restoring background...', delay: 60 },
+              { text: '  ├─ Updating text colors...', delay: 60 },
+              { text: '  └─ Refreshing terminal...', delay: 60 },
+              { text: '', delay: 50 },
+              { text: '<span class="success">✓ Dark mode restored</span>', delay: 50 }
+            ]);
+          }
         } else if (trimmed.startsWith('build ')) {
           const name = trimmed.slice(6);
           addLine('');
@@ -2171,301 +2191,12 @@
 
       // Focus input when clicking terminal
       terminal.addEventListener('click', function(e) {
-        if (!document.getElementById('gameOverlay').classList.contains('active')) {
-          input.focus();
-        }
-      });
-
-      // ══════════════════════════════════════════════
-      // ASTEROID DEFENSE GAME
-      // ══════════════════════════════════════════════
-      let gameRunning = false;
-      let gameLoop = null;
-      let score = 0;
-      let wave = 1;
-      const gameOverlay = document.getElementById('gameOverlay');
-      const gameCanvas = document.getElementById('gameCanvas');
-      const gameCtx = gameCanvas ? gameCanvas.getContext('2d') : null;
-      const scoreEl = document.getElementById('gameScore');
-      const waveEl = document.getElementById('gameWave');
-      const exitBtn = document.getElementById('gameExit');
-
-      let ship = { x: 0, y: 0, img: null };
-      let lasers = [];
-      let aliens = [];
-      let explosions = [];
-      let lastAlienSpawn = 0;
-
-      function startGame() {
-        if (!gameCanvas || !gameCtx) return;
-
-        // Show overlay first so we can measure
-        gameOverlay.classList.add('active');
-
-        // Wait a frame for layout, then size canvas
-        setTimeout(() => {
-          const rect = terminal.getBoundingClientRect();
-          gameCanvas.width = rect.width - 2;
-          gameCanvas.height = rect.height - 2;
-
-          // Reset state
-          score = 0;
-          wave = 1;
-          lasers = [];
-          aliens = [];
-          explosions = [];
-          lastAlienSpawn = Date.now();
-          scoreEl.textContent = '0';
-          waveEl.textContent = '1';
-
-          // Load ship
-          ship.img = new Image();
-          ship.img.src = 'xwing.png';
-          ship.x = gameCanvas.width / 2;
-          ship.y = gameCanvas.height - 60;
-
-          gameRunning = true;
-
-          // Spawn initial aliens
-          spawnAlien();
-          setTimeout(() => spawnAlien(), 500);
-          setTimeout(() => spawnAlien(), 1000);
-
-          // Start loop
-          gameLoop = requestAnimationFrame(updateGame);
-        }, 50);
-      }
-
-      function stopGame() {
-        gameRunning = false;
-        if (gameLoop) cancelAnimationFrame(gameLoop);
-        gameOverlay.classList.remove('active');
-      }
-
-      function spawnAlien() {
-        aliens.push({
-          x: Math.random() * (gameCanvas.width - 40) + 20,
-          y: -30,
-          size: 15 + Math.random() * 11,
-          speed: 1 + Math.random() * 2 + (wave * 0.3),
-          wobble: Math.random() * Math.PI * 2,
-          type: Math.floor(Math.random() * 3)
-        });
-      }
-
-      function fireLaser(targetX, targetY) {
-        const angle = Math.atan2(targetY - ship.y, targetX - ship.x);
-        lasers.push({
-          x: ship.x,
-          y: ship.y - 20,
-          vx: Math.cos(angle) * 12,
-          vy: Math.sin(angle) * 12
-        });
-      }
-
-      function spawnExplosion(x, y) {
-        for (let i = 0; i < 12; i++) {
-          const angle = (Math.PI * 2 / 12) * i;
-          explosions.push({
-            x: x,
-            y: y,
-            vx: Math.cos(angle) * (2 + Math.random() * 3),
-            vy: Math.sin(angle) * (2 + Math.random() * 3),
-            life: 1,
-            color: Math.random() > 0.5 ? '#ff4d4d' : '#00e5cc'
-          });
-        }
-      }
-
-      function updateGame() {
-        if (!gameRunning) return;
-
-        const ctx = gameCtx;
-        ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-
-        // Spawn aliens
-        const now = Date.now();
-        const spawnRate = Math.max(800, 2000 - wave * 150);
-        if (now - lastAlienSpawn > spawnRate && aliens.length < 8 + wave) {
-          spawnAlien();
-          lastAlienSpawn = now;
-        }
-
-        // Update & draw aliens
-        for (let i = aliens.length - 1; i >= 0; i--) {
-          const a = aliens[i];
-          a.y += a.speed;
-          a.wobble += 0.05;
-          a.x += Math.sin(a.wobble) * 0.5;
-
-          // Draw alien (neon shapes)
-          ctx.save();
-          ctx.translate(a.x, a.y);
-          ctx.strokeStyle = a.type === 0 ? '#ff4d4d' : a.type === 1 ? '#00e5cc' : '#ffbd2e';
-          ctx.lineWidth = 2;
-          ctx.shadowColor = ctx.strokeStyle;
-          ctx.shadowBlur = 10;
-          ctx.beginPath();
-          if (a.type === 0) { // Triangle
-            ctx.moveTo(0, -a.size);
-            ctx.lineTo(a.size, a.size);
-            ctx.lineTo(-a.size, a.size);
-            ctx.closePath();
-          } else if (a.type === 1) { // Hexagon
-            for (let j = 0; j < 6; j++) {
-              const ang = (Math.PI / 3) * j - Math.PI / 2;
-              const px = Math.cos(ang) * a.size;
-              const py = Math.sin(ang) * a.size;
-              j === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
-            }
-            ctx.closePath();
-          } else { // Diamond
-            ctx.moveTo(0, -a.size);
-            ctx.lineTo(a.size * 0.7, 0);
-            ctx.lineTo(0, a.size);
-            ctx.lineTo(-a.size * 0.7, 0);
-            ctx.closePath();
-          }
-          ctx.stroke();
-          ctx.restore();
-
-          // Remove if off screen
-          if (a.y > gameCanvas.height + 50) {
-            aliens.splice(i, 1);
-          }
-        }
-
-        // Update & draw lasers
-        for (let i = lasers.length - 1; i >= 0; i--) {
-          const l = lasers[i];
-          l.x += l.vx;
-          l.y += l.vy;
-
-          // Draw laser
-          ctx.strokeStyle = '#ff4d4d';
-          ctx.lineWidth = 3;
-          ctx.shadowColor = '#ff4d4d';
-          ctx.shadowBlur = 15;
-          ctx.beginPath();
-          ctx.moveTo(l.x, l.y);
-          ctx.lineTo(l.x - l.vx * 2, l.y - l.vy * 2);
-          ctx.stroke();
-          ctx.shadowBlur = 0;
-
-          // Remove if off screen
-          if (l.x < 0 || l.x > gameCanvas.width || l.y < 0 || l.y > gameCanvas.height) {
-            lasers.splice(i, 1);
-            continue;
-          }
-
-          // Check collision with aliens
-          for (let j = aliens.length - 1; j >= 0; j--) {
-            const a = aliens[j];
-            const dist = Math.hypot(l.x - a.x, l.y - a.y);
-            if (dist < a.size + 5) {
-              spawnExplosion(a.x, a.y);
-              aliens.splice(j, 1);
-              lasers.splice(i, 1);
-              score += 100;
-              scoreEl.textContent = score;
-              if (score > 0 && score % 500 === 0) {
-                wave++;
-                waveEl.textContent = wave;
-              }
-              break;
-            }
-          }
-        }
-
-        // Update & draw explosions
-        for (let i = explosions.length - 1; i >= 0; i--) {
-          const e = explosions[i];
-          e.x += e.vx;
-          e.y += e.vy;
-          e.life -= 0.03;
-
-          if (e.life <= 0) {
-            explosions.splice(i, 1);
-            continue;
-          }
-
-          ctx.fillStyle = e.color;
-          ctx.globalAlpha = e.life;
-          ctx.beginPath();
-          ctx.arc(e.x, e.y, 3 * e.life, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
-
-        // Draw ship
-        ctx.save();
-        ctx.translate(ship.x, ship.y);
-        if (ship.img && ship.img.complete) {
-          ctx.rotate(Math.PI);  // Face up (image is nose-down by default)
-          ctx.drawImage(ship.img, -30, -30, 60, 60);
-        } else {
-          // Fallback triangle ship
-          ctx.fillStyle = '#00e5cc';
-          ctx.shadowColor = '#00e5cc';
-          ctx.shadowBlur = 15;
-          ctx.beginPath();
-          ctx.moveTo(0, -25);
-          ctx.lineTo(20, 20);
-          ctx.lineTo(-20, 20);
-          ctx.closePath();
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-        ctx.restore();
-
-        gameLoop = requestAnimationFrame(updateGame);
-      }
-
-      // Game controls
-      if (gameCanvas) {
-        gameCanvas.addEventListener('mousemove', function(e) {
-          if (!gameRunning) return;
-          const rect = gameCanvas.getBoundingClientRect();
-          ship.x = e.clientX - rect.left;
-          ship.y = Math.min(e.clientY - rect.top, gameCanvas.height - 40);
-        });
-
-        gameCanvas.addEventListener('click', function(e) {
-          if (!gameRunning) return;
-          const rect = gameCanvas.getBoundingClientRect();
-          fireLaser(e.clientX - rect.left, e.clientY - rect.top);
-        });
-
-        gameCanvas.addEventListener('touchmove', function(e) {
-          if (!gameRunning) return;
-          e.preventDefault();
-          const rect = gameCanvas.getBoundingClientRect();
-          const touch = e.touches[0];
-          ship.x = touch.clientX - rect.left;
-          ship.y = Math.min(touch.clientY - rect.top, gameCanvas.height - 40);
-        }, { passive: false });
-
-        gameCanvas.addEventListener('touchstart', function(e) {
-          if (!gameRunning) return;
-          const rect = gameCanvas.getBoundingClientRect();
-          const touch = e.touches[0];
-          fireLaser(touch.clientX - rect.left, touch.clientY - rect.top);
-        });
-      }
-
-      if (exitBtn) {
-        exitBtn.addEventListener('click', stopGame);
-      }
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && gameRunning) {
-          stopGame();
-        }
+        input.focus();
       });
 
       // Show initial hint
       addLine('<span class="success">⚡ Claude Code ready</span>');
-      addLine('<span class="comment"># Type "help" for commands — or try "set accent #00ff88"</span>');
+      addLine('<span class="comment"># Type "help" for commands — or try "light-mode"</span>');
       addLine('');
     })();
 
