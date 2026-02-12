@@ -330,8 +330,8 @@
           <div class="prompt-placeholder">Configure your inputs and click "Generate Prompt" to create a structured AI prompt.</div>
         </div>
         <div class="output-actions" id="outputActions" style="display: none;">
-          <button class="btn btn-accent2 btn-copy" onclick="copyPrompt()">Copy to Clipboard</button>
-          <a href="https://wolfgrey.gumroad.com/l/prompt-pack" class="btn btn-primary btn-more">Get 10 More &rarr;</a>
+          <button class="btn btn-accent2 btn-copy" onclick="copyPrompt()" style="flex:1;">Copy to Clipboard</button>
+          <button class="btn btn-secondary" onclick="generatePrompt()" style="flex:1;">Generate Another</button>
         </div>
       </div>
     </div>
@@ -466,6 +466,5 @@
       });
     }
   </script>
-  <script src="https://gumroad.com/js/gumroad.js"></script>
 </body>
 </html>
