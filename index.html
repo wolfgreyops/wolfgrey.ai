@@ -226,6 +226,14 @@
       transition: opacity 0.3s;
     }
     .service-card:hover::before { opacity: 1; }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @keyframes iconPulse {
+      0%, 100% { opacity: 0.08; }
+      50% { opacity: 0.14; }
+    }
     .service-icon {
       width: 52px;
       height: 52px;
@@ -237,11 +245,18 @@
       justify-content: center;
       margin-bottom: 24px;
       color: var(--accent);
+      transition: transform 0.4s ease, background 0.4s ease;
+    }
+    .service-card:hover .service-icon {
+      animation: iconFloat 2.4s ease-in-out infinite;
+      background: rgba(255,77,77,0.14);
     }
     .service-icon svg {
       width: 26px;
       height: 26px;
+      transition: transform 0.3s ease;
     }
+    .service-card:hover .service-icon svg { transform: scale(1.08); }
     .service-card h3 {
       font-size: 1.25rem;
       font-weight: 500;
@@ -314,11 +329,18 @@
       justify-content: center;
       margin-bottom: 24px;
       color: var(--accent2);
+      transition: transform 0.4s ease, background 0.4s ease;
+    }
+    .use-card:hover .use-icon {
+      animation: iconFloat 2.4s ease-in-out infinite;
+      background: rgba(0,229,204,0.14);
     }
     .use-icon svg {
       width: 26px;
       height: 26px;
+      transition: transform 0.3s ease;
     }
+    .use-card:hover .use-icon svg { transform: scale(1.08); }
     .use-card h3 {
       font-size: 1.25rem;
       font-weight: 500;
@@ -524,8 +546,18 @@
       justify-content: center;
       margin-bottom: 24px;
       color: var(--accent2);
+      transition: transform 0.4s ease, background 0.4s ease;
     }
-    .resource-teaser-card .resource-icon svg { width: 26px; height: 26px; }
+    .resource-teaser-card:hover .resource-icon {
+      animation: iconFloat 2.4s ease-in-out infinite;
+      background: rgba(0,229,204,0.14);
+    }
+    .resource-teaser-card .resource-icon svg {
+      width: 26px;
+      height: 26px;
+      transition: transform 0.3s ease;
+    }
+    .resource-teaser-card:hover .resource-icon svg { transform: scale(1.08); }
     .resource-teaser-card h3 {
       font-size: 1.25rem;
       font-weight: 500;
@@ -1263,19 +1295,19 @@
       </div>
       <div class="services-grid">
         <div class="service-card fade-up">
-          <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2L4 8v12l10 6 10-6V8L14 2z"/><path d="M4 8l10 6 10-6"/><path d="M14 14v12"/><path d="M9 5l10 6"/><path d="M19 5L9 11"/></svg></div>
+          <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2L4 8v12l10 6 10-6V8L14 2z"/><path d="M4 8l10 6 10-6"/><path d="M14 14v12"/><path d="M9 5l10 6"/><path d="M19 5L9 11"/></svg></div>
           <h3>Custom Automation Builds</h3>
           <p>We design and deploy AI-powered workflows specific to your business — automated report generation, data processing pipelines, content systems — all running from your terminal.</p>
           <div class="service-price">From $500</div>
         </div>
         <div class="service-card fade-up">
-          <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="16" height="10" rx="2"/><path d="M10 14v4"/><path d="M18 14v4"/><rect x="4" y="18" width="20" height="6" rx="2"/><circle cx="9" cy="21" r="1"/><circle cx="14" cy="21" r="1"/></svg></div>
+          <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="16" height="10" rx="2"/><path d="M10 14v4"/><path d="M18 14v4"/><rect x="4" y="18" width="20" height="6" rx="2"/><circle cx="9" cy="21" r="1"/><circle cx="14" cy="21" r="1"/></svg></div>
           <h3>AI Operations Setup</h3>
           <p>Full installation and configuration of AI tooling for your team. Includes hands-on training, custom prompt libraries tailored to your workflows, and documentation.</p>
           <div class="service-price">Custom Quote</div>
         </div>
         <div class="service-card fade-up">
-          <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4L6 8.5v11L14 24l8-4.5v-11L14 4z"/><path d="M14 4v8"/><path d="M14 12L6 8.5"/><path d="M14 12l8-3.5"/><path d="M6 8.5v3l8 4.5 8-4.5v-3"/><path d="M6 15v4.5L14 24l8-4.5V15"/></svg></div>
+          <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4L6 8.5v11L14 24l8-4.5v-11L14 4z"/><path d="M14 4v8"/><path d="M14 12L6 8.5"/><path d="M14 12l8-3.5"/><path d="M6 8.5v3l8 4.5 8-4.5v-3"/><path d="M6 15v4.5L14 24l8-4.5V15"/></svg></div>
           <h3>Monthly Retainer</h3>
           <p>Ongoing access to our evolving library of AI workflows plus dedicated office hours where we troubleshoot implementations and build new automations as your needs grow.</p>
           <div class="service-price">Monthly</div>
@@ -1322,21 +1354,21 @@
       <div class="resources-teaser-grid">
         <div class="resource-teaser-card fade-up">
           <div class="resource-tag">Interactive Tool</div>
-          <div class="resource-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l6-8 5 4 9-14"/><path d="M19 4h5v5"/><rect x="3" y="22" width="22" height="3" rx="1"/><path d="M8 22v-3"/><path d="M13 22v-5"/><path d="M18 22v-8"/><path d="M23 22v-11"/></svg></div>
+          <div class="resource-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l6-8 5 4 9-14"/><path d="M19 4h5v5"/><rect x="3" y="22" width="22" height="3" rx="1"/><path d="M8 22v-3"/><path d="M13 22v-5"/><path d="M18 22v-8"/><path d="M23 22v-11"/></svg></div>
           <h3>AI ROI Calculator</h3>
           <p>Plug in your numbers and see exactly how much time and money AI automation could save your business this year.</p>
           <a href="tools/roi-calculator.html" class="btn btn-secondary">Try It Free →</a>
         </div>
         <div class="resource-teaser-card fade-up">
           <div class="resource-tag">Interactive Tool</div>
-          <div class="resource-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="18" height="22" rx="2"/><path d="M9 8h4"/><path d="M9 12h10"/><path d="M9 16h10"/><path d="M9 20h6"/><circle cx="20" cy="8" r="1.5"/></svg></div>
+          <div class="resource-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="18" height="22" rx="2"/><path d="M9 8h4"/><path d="M9 12h10"/><path d="M9 16h10"/><path d="M9 20h6"/><circle cx="20" cy="8" r="1.5"/></svg></div>
           <h3>AI Readiness Quiz</h3>
           <p>Answer 10 quick questions and get a personalized assessment of where your business stands — plus what to do next.</p>
           <a href="tools/ai-readiness-quiz.html" class="btn btn-secondary">Take the Quiz →</a>
         </div>
         <div class="resource-teaser-card fade-up">
           <div class="resource-tag">Interactive Tool</div>
-          <div class="resource-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l3-3h14l3 3"/><rect x="4" y="7" width="20" height="16" rx="2"/><path d="M8 12h2"/><path d="M8 16h12"/><path d="M8 20h8"/></svg></div>
+          <div class="resource-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l3-3h14l3 3"/><rect x="4" y="7" width="20" height="16" rx="2"/><path d="M8 12h2"/><path d="M8 16h12"/><path d="M8 20h8"/></svg></div>
           <h3>AI Prompt Generator</h3>
           <p>Select your business type and task — get a ready-to-use, structured AI prompt you can copy and run immediately.</p>
           <a href="tools/prompt-generator.html" class="btn btn-secondary">Generate Prompts →</a>
@@ -1358,7 +1390,7 @@
       </div>
       <div class="uses-grid">
         <div class="use-card fade-up">
-          <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l6-8 5 4 9-14"/><path d="M19 4h5v5"/><path d="M4 22h20"/><path d="M8 22v-4"/><path d="M13 22v-6"/><path d="M18 22v-9"/><path d="M23 22v-12"/></svg></div>
+          <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l6-8 5 4 9-14"/><path d="M19 4h5v5"/><path d="M4 22h20"/><path d="M8 22v-4"/><path d="M13 22v-6"/><path d="M18 22v-9"/><path d="M23 22v-12"/></svg></div>
           <h3>Sales</h3>
           <p>Generate personalized outreach sequences, qualify leads with AI-powered scoring, and automate follow-ups that actually convert. Spend less time prospecting, more time closing.</p>
           <div class="use-stats">
@@ -1373,7 +1405,7 @@
           </div>
         </div>
         <div class="use-card fade-up">
-          <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2l8 4.5v3L14 14 6 9.5v-3L14 2z"/><path d="M6 9.5v3L14 17l8-4.5v-3"/><path d="M6 12.5v3L14 20l8-4.5v-3"/><path d="M6 15.5v3L14 23l8-4.5v-3"/></svg></div>
+          <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2l8 4.5v3L14 14 6 9.5v-3L14 2z"/><path d="M6 9.5v3L14 17l8-4.5v-3"/><path d="M6 12.5v3L14 20l8-4.5v-3"/><path d="M6 15.5v3L14 23l8-4.5v-3"/></svg></div>
           <h3>Marketing</h3>
           <p>Create content at scale — social posts, email campaigns, ad copy — all on-brand and on-message. Analyze performance and optimize messaging without the guesswork.</p>
           <div class="use-stats">
@@ -1388,7 +1420,7 @@
           </div>
         </div>
         <div class="use-card fade-up">
-          <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="22" height="16" rx="2"/><path d="M3 12h22"/><path d="M10 6v16"/><path d="M17 12v10"/><path d="M6 9h2"/><path d="M13 15h2"/><path d="M13 19h2"/><path d="M20 15h2"/><path d="M20 19h2"/></svg></div>
+          <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="22" height="16" rx="2"/><path d="M3 12h22"/><path d="M10 6v16"/><path d="M17 12v10"/><path d="M6 9h2"/><path d="M13 15h2"/><path d="M13 19h2"/><path d="M20 15h2"/><path d="M20 19h2"/></svg></div>
           <h3>Accounting</h3>
           <p>Automate invoice processing, categorize expenses intelligently, and generate financial reports in seconds. Turn hours of manual data entry into one-click workflows.</p>
           <div class="use-stats">
