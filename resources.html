@@ -250,6 +250,108 @@
       margin-bottom: 20px;
     }
 
+    /* ── EMAIL GATE ── */
+    .gate-section {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 160px 24px 80px;
+    }
+    .gate-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 56px 40px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+    .gate-card .section-label { margin-bottom: 20px; }
+    .gate-card h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .gate-card .gate-subtitle {
+      font-size: 1rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .gate-form { text-align: left; }
+    .gate-form label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray-300);
+      margin-bottom: 6px;
+    }
+    .gate-form input {
+      width: 100%;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      color: var(--white);
+      padding: 14px 16px;
+      font-family: 'Satoshi', 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+    .gate-form input:focus {
+      outline: none;
+      border-color: var(--accent2);
+    }
+    .gate-form input::placeholder { color: var(--gray-600); }
+    .gate-form .gate-error {
+      color: var(--accent);
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .gate-btn {
+      width: 100%;
+      padding: 16px 32px;
+      background: var(--accent2);
+      color: var(--dark);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Satoshi', 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .gate-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .gate-tools-preview {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-700);
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+    .gate-tool-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(0,229,204,0.08);
+      border: 1px solid rgba(0,229,204,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent2);
+    }
+    .gate-tool-icon svg { width: 20px; height: 20px; }
+    .gate-fine-print {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+
     /* ── CTA SECTION ── */
     .resources-cta-section {
       text-align: center;
@@ -323,6 +425,8 @@
       .resources-grid { grid-template-columns: 1fr; }
       section { padding: 60px 24px; }
       .page-header { padding: 120px 24px 60px; }
+      .gate-section { padding: 120px 24px 60px; }
+      .gate-card { padding: 40px 24px; }
     }
   </style>
 </head>
@@ -344,11 +448,39 @@
     </div>
   </nav>
 
+  <!-- EMAIL GATE VIEW -->
+  <div id="gateView" style="display: none;">
+    <div class="gate-section">
+      <div class="gate-card">
+        <div class="section-label">Free Resources</div>
+        <h1>Unlock free AI tools<br>for your business</h1>
+        <p class="gate-subtitle">Enter your email to get instant access to all our interactive tools — ROI calculator, readiness quiz, and prompt generator.</p>
+        <form class="gate-form" id="gateForm" onsubmit="return handleGateSubmit(event)">
+          <label for="gateName">Name <span style="color: var(--gray-600);">(optional)</span></label>
+          <input type="text" id="gateName" name="name" placeholder="Your name" autocomplete="name">
+          <label for="gateEmail">Email</label>
+          <input type="email" id="gateEmail" name="email" placeholder="you@company.com" required autocomplete="email">
+          <div class="gate-error" id="gateError">Please enter a valid email address.</div>
+          <button type="submit" class="gate-btn">Get Free Access</button>
+        </form>
+        <div class="gate-tools-preview">
+          <div class="gate-tool-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l6-8 5 4 9-14"/><path d="M19 4h5v5"/></svg></div>
+          <div class="gate-tool-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="18" height="22" rx="2"/><path d="M9 8h4"/><path d="M9 12h10"/><path d="M9 16h10"/></svg></div>
+          <div class="gate-tool-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l3-3h14l3 3"/><rect x="4" y="7" width="20" height="16" rx="2"/><path d="M8 12h2"/></svg></div>
+        </div>
+        <p class="gate-fine-print">No spam. Just free tools. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNLOCKED VIEW (shown after email submitted) -->
+  <div id="unlockedView" style="display: none;">
+
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="section-label">Free Resources</div>
     <h1>Free tools to explore<br>what AI can do</h1>
-    <p>Interactive calculators, assessments, and generators you can use right now — no signup, no downloads, no commitment.</p>
+    <p>Interactive calculators, assessments, and generators you can use right now — all yours.</p>
   </div>
 
   <!-- INTERACTIVE TOOLS -->
@@ -390,6 +522,11 @@
     <a href="https://wolfgrey.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Get the Playbook &mdash; $49 &rarr;</a>
   </section>
 
+  </div><!-- /unlockedView -->
+
+  <!-- Hidden iframe for Google Form submission -->
+  <iframe name="gformIframe" id="gformIframe" style="display:none;"></iframe>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
@@ -403,6 +540,73 @@
   </footer>
 
   <script>
+    // ── Google Form config (update these after creating your form) ──
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+    const EMAIL_FIELD_ID = 'entry.XXXXXXXXXX';
+    const NAME_FIELD_ID = 'entry.XXXXXXXXXX';
+
+    // ── Gate logic ──
+    function checkAccess() {
+      if (localStorage.getItem('wolfgrey_access')) {
+        document.getElementById('gateView').style.display = 'none';
+        document.getElementById('unlockedView').style.display = 'block';
+      } else {
+        document.getElementById('gateView').style.display = 'block';
+        document.getElementById('unlockedView').style.display = 'none';
+      }
+    }
+
+    function handleGateSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('gateEmail').value.trim();
+      const name = document.getElementById('gateName').value.trim();
+      const errorEl = document.getElementById('gateError');
+
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errorEl.style.display = 'block';
+        return false;
+      }
+      errorEl.style.display = 'none';
+
+      // Submit to Google Form via hidden iframe
+      try {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = GOOGLE_FORM_ACTION;
+        form.target = 'gformIframe';
+
+        const emailInput = document.createElement('input');
+        emailInput.name = EMAIL_FIELD_ID;
+        emailInput.value = email;
+        form.appendChild(emailInput);
+
+        if (name) {
+          const nameInput = document.createElement('input');
+          nameInput.name = NAME_FIELD_ID;
+          nameInput.value = name;
+          form.appendChild(nameInput);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+      } catch (err) {
+        // Silently fail — localStorage still grants access
+      }
+
+      // Grant access
+      localStorage.setItem('wolfgrey_access', email);
+      checkAccess();
+
+      // Re-init scroll animations for newly visible content
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+      return false;
+    }
+
+    // ── Scroll reveal ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -410,11 +614,15 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+    // ── Mobile nav ──
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         document.querySelector('.nav-links').classList.remove('open');
       });
     });
+
+    // ── Init ──
+    checkAccess();
   </script>
 </body>
 </html>
