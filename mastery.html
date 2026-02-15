@@ -1132,6 +1132,169 @@
       stroke-width: 1.5;
     }
 
+    /* ── Cheat Sheet Styling ── */
+    .cheat-sheet {
+      background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .cheat-sheet-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .cheat-sheet-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cheat-sheet-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 2;
+    }
+    .cheat-sheet-title {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .cheat-sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .cheat-item {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .cheat-item-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .cheat-item-content {
+      font-size: 0.9rem;
+      color: var(--gray-200);
+      line-height: 1.4;
+    }
+    .cheat-item code {
+      background: var(--gray-900);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--accent2);
+    }
+
+    /* Best Practices Box */
+    .best-practices {
+      background: linear-gradient(135deg, rgba(0,209,178,0.1) 0%, transparent 100%);
+      border: 1px solid var(--accent2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .best-practices-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--accent2);
+      font-weight: 600;
+    }
+    .best-practices-header svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent2);
+      fill: none;
+      stroke-width: 2;
+    }
+    .best-practices ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .best-practices li {
+      margin-bottom: 8px;
+      color: var(--gray-200);
+    }
+
+    /* Advanced Techniques Box */
+    .advanced-box {
+      background: linear-gradient(135deg, rgba(255,77,77,0.1) 0%, transparent 100%);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .advanced-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .advanced-header svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+    }
+    .advanced-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .advanced-box li {
+      margin-bottom: 8px;
+      color: var(--gray-200);
+    }
+
+    /* Pro Tips */
+    .pro-tip {
+      display: flex;
+      gap: 12px;
+      background: var(--gray-800);
+      border-left: 3px solid var(--accent2);
+      padding: 14px 16px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .pro-tip-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--accent2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .pro-tip-text {
+      font-size: 0.9rem;
+      color: var(--gray-200);
+      line-height: 1.5;
+    }
+
     /* ── Responsive Visual Fixes ── */
     @media (max-width: 768px) {
       .hero-stats {
@@ -1146,6 +1309,9 @@
       }
       .insight-text {
         font-size: 1.1rem;
+      }
+      .cheat-sheet-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1166,15 +1332,15 @@
             <div class="hero-stat-label">Volumes</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">85+</div>
+            <div class="hero-stat-num">115+</div>
             <div class="hero-stat-label">Lessons</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">40+</div>
+            <div class="hero-stat-num">60+</div>
             <div class="hero-stat-label">Templates</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">3hr</div>
+            <div class="hero-stat-num">4hr</div>
             <div class="hero-stat-label">Content</div>
           </div>
         </div>
@@ -1238,7 +1404,7 @@
         id: 1,
         title: "Getting Started with Claude",
         subtitle: "Your First Steps to AI-Powered Productivity",
-        time: "15 min",
+        time: "20 min",
         slides: [
           {
             type: "title",
@@ -1250,7 +1416,7 @@
                 <span class="vol-badge">Volume 1</span>
                 <h2>Getting Started with Claude</h2>
                 <p class="subtitle">Your First Steps to AI-Powered Productivity</p>
-                <p class="meta">8 slides | 15 min read</p>
+                <p class="meta">11 slides | 20 min read</p>
               </div>
             `
           },
@@ -1365,6 +1531,89 @@
             `
           },
           {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Do This Every Time</span>
+                </div>
+                <ul>
+                  <li><strong>Start fresh for new topics</strong> — click "New Chat" when switching tasks to avoid confusion</li>
+                  <li><strong>Be specific about format</strong> — want bullet points? A table? A paragraph? Say so</li>
+                  <li><strong>Provide examples</strong> — show Claude what "good" looks like for your use case</li>
+                  <li><strong>Iterate, don't restart</strong> — if the output is close, ask for adjustments instead of starting over</li>
+                  <li><strong>Save your best prompts</strong> — when something works well, copy it to a notes file</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Claude remembers everything in a conversation. Reference earlier content with "that email you wrote" or "the list from before."</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Power User Moves</span>
+                </div>
+                <ul>
+                  <li><strong>Chain conversations</strong> — "Now take that and turn it into..." keeps momentum</li>
+                  <li><strong>Ask for alternatives</strong> — "Give me 3 different versions" reveals options</li>
+                  <li><strong>Use Claude as a critic</strong> — "What's wrong with this approach?" catches blind spots</li>
+                  <li><strong>Request reasoning</strong> — "Explain your thinking" helps you learn and verify</li>
+                  <li><strong>Set constraints</strong> — "In under 100 words" or "Using only free tools" focuses output</li>
+                </ul>
+              </div>
+              <div class="insight-box">
+                <p class="insight-text">The best Claude users treat it as a thinking partner, not just an answer machine.</p>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 1 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Start New Task</div>
+                    <div class="cheat-item-content">Click <code>New Chat</code> to begin fresh without prior context</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Get Better Output</div>
+                    <div class="cheat-item-content">Add context: who, what, why, and desired format</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Fix Bad Response</div>
+                    <div class="cheat-item-content">Say "That's not quite right. I need..." and clarify</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Upload Files</div>
+                    <div class="cheat-item-content">Click attachment icon for PDFs, images, docs, code</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Quick Keyboard</div>
+                    <div class="cheat-item-content"><code>Enter</code> to send, <code>Shift+Enter</code> for new line</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Save Good Output</div>
+                    <div class="cheat-item-content">Copy button appears on hover over any Claude response</div>
+                  </div>
+                </div>
+              </div>
+            `
+          },
+          {
             type: "action",
             content: `
               <h3>Your Action Items</h3>
@@ -1409,7 +1658,7 @@
                 <span class="vol-badge">Volume 2</span>
                 <h2>The Art of Asking</h2>
                 <p class="subtitle">Prompt Fundamentals That Get Real Results</p>
-                <p class="meta">10 slides | 20 min read</p>
+                <p class="meta">13 slides | 25 min read</p>
               </div>
             `
           },
@@ -1542,6 +1791,87 @@
             `
           },
           {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Prompting Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Lead with context</strong> — who you are, what you're working on, why it matters</li>
+                  <li><strong>Be explicit about format</strong> — "3 bullet points" beats "keep it short"</li>
+                  <li><strong>Show, don't just tell</strong> — include examples of what you want</li>
+                  <li><strong>One task per prompt</strong> — complex requests get muddled; break them down</li>
+                  <li><strong>Specify what to avoid</strong> — "Don't use jargon" or "Avoid clichés"</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> When Claude misses the mark, don't restart. Say "That's close, but adjust X and Y" — it learns from corrections within the conversation.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert-Level Prompting</span>
+                </div>
+                <ul>
+                  <li><strong>Role assignment</strong> — "Act as a skeptical investor reviewing this pitch"</li>
+                  <li><strong>Constraint stacking</strong> — combine format + tone + length + audience in one prompt</li>
+                  <li><strong>Prompt chaining</strong> — "First outline, then I'll pick sections to expand"</li>
+                  <li><strong>Meta-prompting</strong> — "What questions should I answer before you can help me?"</li>
+                  <li><strong>Negative examples</strong> — "Here's what I don't want: [bad example]"</li>
+                  <li><strong>Iterative refinement</strong> — treat first output as draft zero, refine in 2-3 passes</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 2 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">CTF Framework Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">C = Context</div>
+                    <div class="cheat-item-content">Who you are, your situation, relevant background</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">T = Task</div>
+                    <div class="cheat-item-content">What you want Claude to do, specifically</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">F = Format</div>
+                    <div class="cheat-item-content">How you want the output structured</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Power Phrases</div>
+                    <div class="cheat-item-content">"Act as..." "In the style of..." "Avoid..." "Include..."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Fix Vague Output</div>
+                    <div class="cheat-item-content">"Be more specific about..." or "Give concrete examples"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Get Alternatives</div>
+                    <div class="cheat-item-content">"Give me 3 different approaches to this"</div>
+                  </div>
+                </div>
+              </div>
+            `
+          },
+          {
             type: "action",
             content: `
               <h3>Your Action Items</h3>
@@ -1587,7 +1917,7 @@
                 <span class="vol-badge">Volume 3</span>
                 <h2>Claude for Writing & Communication</h2>
                 <p class="subtitle">From Quick Emails to Polished Proposals</p>
-                <p class="meta">9 slides | 20 min read</p>
+                <p class="meta">12 slides | 25 min read</p>
               </div>
             `
           },
@@ -1700,6 +2030,87 @@
                   <li>Leverage, elevate, delve, utilize, synergy</li>
                   <li>Game-changer, cutting-edge, unlock, empower, seamlessly</li>
                 </ul>
+              </div>
+            `
+          },
+          {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Writing Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Always provide your voice sample</strong> — 2-3 paragraphs of your actual writing helps Claude match your style</li>
+                  <li><strong>Specify word counts</strong> — "Under 100 words" is better than "keep it short"</li>
+                  <li><strong>Name your audience</strong> — "busy executives" vs "curious beginners" changes everything</li>
+                  <li><strong>Request multiple versions</strong> — "Give me 3 options for this subject line"</li>
+                  <li><strong>Edit in conversation</strong> — "Make paragraph 2 punchier" is faster than rewriting</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Create a "voice document" with your writing samples and tell Claude to reference it. Store it in a Project for instant access.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Power Writing Techniques</span>
+                </div>
+                <ul>
+                  <li><strong>The A/B test</strong> — "Write version A as bold/confident, version B as warm/approachable"</li>
+                  <li><strong>Perspective shift</strong> — "Rewrite this from the customer's point of view"</li>
+                  <li><strong>Format transformation</strong> — "Turn this email into a LinkedIn post and a tweet thread"</li>
+                  <li><strong>Objection handling</strong> — "What pushback might I get, and add preemptive responses"</li>
+                  <li><strong>Emotional arc</strong> — "Start with the problem pain, build to the solution, end with hope"</li>
+                  <li><strong>The 10x test</strong> — "Make this 10x more compelling without making it longer"</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 3 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Writing Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Quick Email</div>
+                    <div class="cheat-item-content">"Reply to this email: [paste]. Tone: [X]. Under 50 words."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Improve Draft</div>
+                    <div class="cheat-item-content">"Make this clearer and more concise: [paste]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Match Voice</div>
+                    <div class="cheat-item-content">"Write in my style based on this sample: [paste]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Social Batch</div>
+                    <div class="cheat-item-content">"Create 5 LinkedIn posts about [topic] for [audience]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Tone Shift</div>
+                    <div class="cheat-item-content">Professional, conversational, direct, empathetic, authoritative</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Deep Edit</div>
+                    <div class="cheat-item-content">"Review for clarity, cut filler, strengthen the opening"</div>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -1850,6 +2261,87 @@
             `
           },
           {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Research Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Always verify critical facts</strong> — Claude can be wrong; cross-reference important claims</li>
+                  <li><strong>Use web search for current data</strong> — Claude's training has a cutoff; enable search for recent info</li>
+                  <li><strong>Ask for sources</strong> — "What sources would I check to verify this?"</li>
+                  <li><strong>Request multiple perspectives</strong> — "What would critics of this approach say?"</li>
+                  <li><strong>Save research sessions</strong> — name your chats clearly for future reference</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Start research with "What questions should I be asking about [topic]?" to uncover angles you hadn't considered.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Research Methods</span>
+                </div>
+                <ul>
+                  <li><strong>The meta-analysis</strong> — "Synthesize the research on [topic]. What do experts agree on? Where do they disagree?"</li>
+                  <li><strong>Steelmanning</strong> — "Give me the strongest possible argument for [opposing view]"</li>
+                  <li><strong>Gap analysis</strong> — "What's missing from this research? What questions remain unanswered?"</li>
+                  <li><strong>Historical context</strong> — "How has thinking on [topic] evolved over the past 10 years?"</li>
+                  <li><strong>Practical extraction</strong> — "From all this research, what are the 3 most actionable takeaways?"</li>
+                  <li><strong>Expert simulation</strong> — "If I could interview an expert in [field], what would they say about this?"</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 4 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Research Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Quick Summary</div>
+                    <div class="cheat-item-content">"Summarize [paste] in 5 bullet points for [audience]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Explain Simply</div>
+                    <div class="cheat-item-content">"Explain [concept] like I'm new to this field"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Compare Options</div>
+                    <div class="cheat-item-content">"Compare A vs B for my use case: [details]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Find Holes</div>
+                    <div class="cheat-item-content">"What am I missing? Play devil's advocate."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Current Data</div>
+                    <div class="cheat-item-content">Enable <code>Web Search</code> for real-time information</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Learn Fast</div>
+                    <div class="cheat-item-content">"Create a learning plan for [skill] at [level]"</div>
+                  </div>
+                </div>
+              </div>
+            `
+          },
+          {
             type: "action",
             content: `
               <h3>Your Action Items</h3>
@@ -1978,6 +2470,87 @@
                   <li>Planning for average outcomes instead of worst cases</li>
                   <li>Conflating being busy with making progress</li>
                 </ul>
+              </div>
+            `
+          },
+          {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Decision Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Define success criteria first</strong> — know what "good" looks like before evaluating options</li>
+                  <li><strong>Make Claude argue both sides</strong> — avoid confirmation bias by exploring opposing views</li>
+                  <li><strong>Quantify when possible</strong> — "What's the financial impact?" grounds abstract decisions</li>
+                  <li><strong>Set decision deadlines</strong> — analysis paralysis is real; commit to a decision date</li>
+                  <li><strong>Document your reasoning</strong> — future you will thank present you</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> After any major decision, ask Claude: "What would make me regret this choice in 6 months?" Surface hidden risks early.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Analysis Methods</span>
+                </div>
+                <ul>
+                  <li><strong>Second-order thinking</strong> — "And then what? What happens after that?"</li>
+                  <li><strong>Inversion</strong> — "How could I guarantee this fails?" then avoid those things</li>
+                  <li><strong>Scenario planning</strong> — "Give me best case, worst case, and most likely outcomes"</li>
+                  <li><strong>Opportunity cost analysis</strong> — "What am I giving up by choosing this?"</li>
+                  <li><strong>Regret minimization</strong> — "Which choice will I regret least in 10 years?"</li>
+                  <li><strong>Stakeholder mapping</strong> — "Who cares about this decision and why?"</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 5 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Analysis Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Quick Decision</div>
+                    <div class="cheat-item-content">"I'm deciding between A and B. Help me think through it."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Risk Check</div>
+                    <div class="cheat-item-content">"What could go wrong with this plan? Be thorough."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Data Analysis</div>
+                    <div class="cheat-item-content">"Here's my data: [paste]. What patterns do you see?"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Pre-Mortem</div>
+                    <div class="cheat-item-content">"It's 6 months later and this failed. Why?"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Weighted Matrix</div>
+                    <div class="cheat-item-content">"Create a decision matrix with these criteria: [list]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Devil's Advocate</div>
+                    <div class="cheat-item-content">"Argue against my plan. Don't hold back."</div>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -2121,6 +2694,87 @@
             `
           },
           {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Document Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Use clear file names</strong> — "Q4_Sales_Report.pdf" helps Claude understand context</li>
+                  <li><strong>Upload one document at a time</strong> — for complex analysis, focus beats volume</li>
+                  <li><strong>Specify what to look for</strong> — "Focus on pricing terms" narrows the search</li>
+                  <li><strong>Ask for specific formats</strong> — "Table format" or "bullet points" structures output</li>
+                  <li><strong>Verify extracted numbers</strong> — always double-check critical figures</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> For long documents, start with "Give me a 1-paragraph summary" before diving into details. Confirms you uploaded the right file.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Document Methods</span>
+                </div>
+                <ul>
+                  <li><strong>Cross-document analysis</strong> — upload multiple docs and ask "What's inconsistent across these?"</li>
+                  <li><strong>Template extraction</strong> — "Create a reusable template from this document's structure"</li>
+                  <li><strong>Key terms glossary</strong> — "Extract and define all technical terms in this contract"</li>
+                  <li><strong>Action item extraction</strong> — "List every commitment, deadline, and deliverable"</li>
+                  <li><strong>Gap identification</strong> — "What's missing from this proposal that should be included?"</li>
+                  <li><strong>Version comparison</strong> — "Here are two versions. What changed?"</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 6 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Document Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Quick Summary</div>
+                    <div class="cheat-item-content">"Summarize this document. Focus on [key area]."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Contract Review</div>
+                    <div class="cheat-item-content">"Flag anything concerning in this contract."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Data Extraction</div>
+                    <div class="cheat-item-content">"Extract all [dates/names/numbers] into a table."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Comparison</div>
+                    <div class="cheat-item-content">"Compare these two proposals side by side."</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Supported Formats</div>
+                    <div class="cheat-item-content">PDF, Word, Excel, CSV, images, code files</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Image Analysis</div>
+                    <div class="cheat-item-content">"Transcribe this whiteboard" or "What's in this chart?"</div>
+                  </div>
+                </div>
+              </div>
+            `
+          },
+          {
             type: "action",
             content: `
               <h3>Your Action Items</h3>
@@ -2260,6 +2914,87 @@
                   <li><strong>Sales & Business Development</strong> - outreach, pitch materials, competitive analysis</li>
                   <li><strong>Personal Development</strong> - learning, research, decision-making, reflection</li>
                 </ul>
+              </div>
+            `
+          },
+          {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Project Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>One Project per major work area</strong> — keep contexts separate (clients, marketing, ops)</li>
+                  <li><strong>Update instructions monthly</strong> — your business evolves; so should your Projects</li>
+                  <li><strong>Keep knowledge docs current</strong> — outdated info creates outdated outputs</li>
+                  <li><strong>Review Memory weekly</strong> — correct misunderstandings before they compound</li>
+                  <li><strong>Be explicit about preferences</strong> — "Always use Oxford comma" is better than hoping</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Start your Project instructions with "You are helping [your role] at [company type] with [primary tasks]." Establishes context immediately.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Project Methods</span>
+                </div>
+                <ul>
+                  <li><strong>Layered instructions</strong> — core rules first, then situation-specific guidance</li>
+                  <li><strong>Include anti-patterns</strong> — "Never use these phrases: [list]"</li>
+                  <li><strong>Add decision trees</strong> — "If user asks X, do Y. If Z, do W."</li>
+                  <li><strong>Reference templates</strong> — upload your best examples as "write like this"</li>
+                  <li><strong>Build a knowledge base</strong> — FAQ docs, product specs, competitor info</li>
+                  <li><strong>Cross-Project awareness</strong> — mention related Projects in instructions</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 7 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Projects Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Create Project</div>
+                    <div class="cheat-item-content">Click <code>+</code> next to "Projects" in sidebar</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Instructions Start</div>
+                    <div class="cheat-item-content">"You are helping [role] at [company] with [tasks]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Add Knowledge</div>
+                    <div class="cheat-item-content">Upload docs, paste text, or add URLs to Project</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Memory Location</div>
+                    <div class="cheat-item-content">Settings → Claude Memory → View/Edit</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Good Projects</div>
+                    <div class="cheat-item-content">Client work, content creation, analysis, operations</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Memory Tip</div>
+                    <div class="cheat-item-content">"Remember that I prefer [X]" to save preferences</div>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -2420,6 +3155,87 @@
                   <li>"The chart is hard to read. Use a bar chart instead of a line graph"</li>
                   <li>"This is too complex. Simplify it - show only the 3 most important metrics"</li>
                 </ul>
+              </div>
+            `
+          },
+          {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Artifact Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Start simple</strong> — get the basic version working, then add complexity</li>
+                  <li><strong>Describe outcomes, not code</strong> — "a calculator that shows monthly savings" not "use JavaScript"</li>
+                  <li><strong>Iterate in small steps</strong> — "change the button color" beats "redesign everything"</li>
+                  <li><strong>Test with real data</strong> — use actual numbers from your business</li>
+                  <li><strong>Download and share</strong> — artifacts work offline; share them with your team</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Say "Make it look professional and modern" to instantly upgrade the visual design of any artifact.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Artifact Methods</span>
+                </div>
+                <ul>
+                  <li><strong>Multi-step tools</strong> — "First they enter X, then see Y, then can export Z"</li>
+                  <li><strong>Data visualization combos</strong> — "Show bar chart AND summary stats below"</li>
+                  <li><strong>Interactive dashboards</strong> — "Add filters for date range and category"</li>
+                  <li><strong>Branded assets</strong> — "Use my brand colors: [hex codes]"</li>
+                  <li><strong>Mobile-responsive</strong> — "Make sure it works on phone screens"</li>
+                  <li><strong>Export-ready</strong> — "Add a print/download button"</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 8 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Artifacts Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Calculator</div>
+                    <div class="cheat-item-content">"Build a calculator for [use case] with inputs [X, Y, Z]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Chart</div>
+                    <div class="cheat-item-content">"Create a [type] chart from this data: [paste]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Flowchart</div>
+                    <div class="cheat-item-content">"Diagram my process: [steps with decisions]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Landing Page</div>
+                    <div class="cheat-item-content">"Design a page for [offer] targeting [audience]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Quick Edit</div>
+                    <div class="cheat-item-content">"Change [specific element] to [new value]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Style Upgrade</div>
+                    <div class="cheat-item-content">"Make it more professional" or "Match my brand: [colors]"</div>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -2601,6 +3417,87 @@
                   <li>You can stop at any time - press Ctrl+C to cancel any operation</li>
                   <li>If something goes wrong, describe what happened and Claude will help fix it</li>
                 </ul>
+              </div>
+            `
+          },
+          {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Claude Code Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Start with safe tasks</strong> — file organization, not file deletion</li>
+                  <li><strong>Describe outcomes, not code</strong> — "organize by date" not "write a Python script"</li>
+                  <li><strong>Test on copies first</strong> — work on a test folder before production data</li>
+                  <li><strong>Review before confirming</strong> — Claude shows you the plan; read it</li>
+                  <li><strong>Keep backups</strong> — especially before large batch operations</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Press <code>Ctrl+C</code> at any time to stop Claude Code. You're always in control.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Automation Methods</span>
+                </div>
+                <ul>
+                  <li><strong>Multi-step workflows</strong> — "First extract data from PDFs, then compile into spreadsheet"</li>
+                  <li><strong>Conditional logic</strong> — "If file is older than 30 days, move to archive"</li>
+                  <li><strong>Format conversions</strong> — "Convert all .docx files in this folder to PDF"</li>
+                  <li><strong>Data cleaning</strong> — "Standardize phone numbers and remove duplicates"</li>
+                  <li><strong>Report generation</strong> — "Create weekly summary from these data files"</li>
+                  <li><strong>Scheduled preparation</strong> — create scripts for recurring tasks</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 9 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Claude Code Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Install</div>
+                    <div class="cheat-item-content"><code>npm install -g @anthropic-ai/claude-code</code></div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Launch</div>
+                    <div class="cheat-item-content">Type <code>claude</code> in terminal and press Enter</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Organize Files</div>
+                    <div class="cheat-item-content">"Sort files in [folder] by [type/date/name]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Batch Rename</div>
+                    <div class="cheat-item-content">"Rename files to follow [convention]"</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Stop Anytime</div>
+                    <div class="cheat-item-content"><code>Ctrl+C</code> cancels current operation</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Safe Mode</div>
+                    <div class="cheat-item-content">"Don't delete anything - just organize"</div>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -2823,6 +3720,87 @@
                   <div class="icon-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
                   <strong>Vol 10</strong>
                   <span>Cowork & Advanced Workflows</span>
+                </div>
+              </div>
+            `
+          },
+          {
+            type: "best-practices",
+            content: `
+              <h3>Best Practices</h3>
+              <div class="best-practices">
+                <div class="best-practices-header">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Workflow Excellence</span>
+                </div>
+                <ul>
+                  <li><strong>Document everything</strong> — write down prompts that work; you'll forget otherwise</li>
+                  <li><strong>Build incrementally</strong> — start simple, add complexity as you verify each step works</li>
+                  <li><strong>Create checkpoints</strong> — for long workflows, have Claude pause for your review</li>
+                  <li><strong>Version your workflows</strong> — keep old versions when you update; you might need them</li>
+                  <li><strong>Share with your team</strong> — the best workflows become organizational assets</li>
+                </ul>
+              </div>
+              <div class="pro-tip">
+                <div class="pro-tip-icon">!</div>
+                <div class="pro-tip-text"><strong>Pro Tip:</strong> Create a "Workflow Library" document with your 10 most-used prompts. Reference it daily until they become automatic.</div>
+              </div>
+            `
+          },
+          {
+            type: "advanced",
+            content: `
+              <h3>Advanced Techniques</h3>
+              <div class="advanced-box">
+                <div class="advanced-header">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Expert Workflow Methods</span>
+                </div>
+                <ul>
+                  <li><strong>Parallel processing</strong> — Cowork can run multiple workstreams simultaneously</li>
+                  <li><strong>Briefing documents</strong> — for complex tasks, write a full brief instead of a prompt</li>
+                  <li><strong>Quality gates</strong> — "Stop and show me after step 3 for approval"</li>
+                  <li><strong>Error recovery</strong> — "If X fails, try Y. If both fail, stop and explain."</li>
+                  <li><strong>Output templates</strong> — "Use exactly this structure for all reports"</li>
+                  <li><strong>Workflow chaining</strong> — output of workflow A becomes input for workflow B</li>
+                </ul>
+              </div>
+            `
+          },
+          {
+            type: "cheatsheet",
+            content: `
+              <h3>Volume 10 Cheat Sheet</h3>
+              <div class="cheat-sheet">
+                <div class="cheat-sheet-header">
+                  <div class="cheat-sheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <span class="cheat-sheet-title">Workflows Quick Reference</span>
+                </div>
+                <div class="cheat-sheet-grid">
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Cowork Access</div>
+                    <div class="cheat-item-content">Claude Desktop app → Max plan required ($100+/mo)</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Good Cowork Tasks</div>
+                    <div class="cheat-item-content">Multi-file projects, reports, research compilations</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Briefing Format</div>
+                    <div class="cheat-item-content">Objective → Context → Inputs → Constraints → Deliverables</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Weekly Routine</div>
+                    <div class="cheat-item-content">Mon: Plan | Wed: Content | Fri: Reports</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Workflow Library</div>
+                    <div class="cheat-item-content">Document your top 10 prompts in one reference file</div>
+                  </div>
+                  <div class="cheat-item">
+                    <div class="cheat-item-label">Scale Tip</div>
+                    <div class="cheat-item-content">Once it works once, automate it to run weekly</div>
+                  </div>
                 </div>
               </div>
             `
