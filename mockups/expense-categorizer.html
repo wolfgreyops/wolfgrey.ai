@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0f1a;
+      color: #f0f4ff;
+      padding: 20px;
+      width: 400px;
+    }
+    .app {
+      background: #111827;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1e2940;
+    }
+    .header {
+      background: #1e2940;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h3 { font-size: 14px; font-weight: 500; }
+    .badge {
+      background: #3b82f6;
+      color: #fff;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+    .content { padding: 16px; }
+    .expense-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #0a0f1a;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .expense-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+    .expense-icon.travel { background: rgba(59, 130, 246, 0.2); }
+    .expense-icon.meals { background: rgba(249, 115, 22, 0.2); }
+    .expense-icon.office { background: rgba(16, 185, 129, 0.2); }
+    .expense-icon.software { background: rgba(139, 92, 246, 0.2); }
+    .expense-info { flex: 1; }
+    .expense-vendor { font-size: 12px; font-weight: 500; }
+    .expense-meta { font-size: 10px; color: #8892b0; display: flex; gap: 8px; }
+    .category-tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #1e2940;
+    }
+    .expense-amount { font-size: 13px; font-weight: 600; }
+    .gl-code {
+      font-size: 9px;
+      color: #10b981;
+      text-align: right;
+    }
+    .summary {
+      margin-top: 12px;
+      padding: 12px;
+      background: #0a0f1a;
+      border-radius: 8px;
+    }
+    .summary-title {
+      font-size: 10px;
+      color: #8892b0;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .category-bars { }
+    .cat-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 10px;
+    }
+    .cat-label { width: 60px; color: #8892b0; }
+    .cat-bar-wrap { flex: 1; height: 6px; background: #1e2940; border-radius: 3px; margin: 0 8px; }
+    .cat-bar { height: 100%; border-radius: 3px; }
+    .cat-bar.travel { background: #3b82f6; width: 70%; }
+    .cat-bar.meals { background: #f97316; width: 45%; }
+    .cat-bar.office { background: #10b981; width: 30%; }
+    .cat-bar.software { background: #8b5cf6; width: 55%; }
+    .cat-amount { width: 50px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h3>Expense Categorizer</h3>
+      <span class="badge">Auto-coded</span>
+    </div>
+    <div class="content">
+      <div class="expense-item">
+        <div class="expense-icon travel">✈️</div>
+        <div class="expense-info">
+          <div class="expense-vendor">Delta Airlines</div>
+          <div class="expense-meta">
+            <span>Feb 3</span>
+            <span class="category-tag">Travel</span>
+          </div>
+        </div>
+        <div>
+          <div class="expense-amount">$428.00</div>
+          <div class="gl-code">GL: 6200</div>
+        </div>
+      </div>
+      <div class="expense-item">
+        <div class="expense-icon meals">🍽️</div>
+        <div class="expense-info">
+          <div class="expense-vendor">Olive Garden</div>
+          <div class="expense-meta">
+            <span>Feb 4</span>
+            <span class="category-tag">Meals</span>
+          </div>
+        </div>
+        <div>
+          <div class="expense-amount">$86.50</div>
+          <div class="gl-code">GL: 6250</div>
+        </div>
+      </div>
+      <div class="expense-item">
+        <div class="expense-icon software">💻</div>
+        <div class="expense-info">
+          <div class="expense-vendor">Adobe Creative</div>
+          <div class="expense-meta">
+            <span>Feb 5</span>
+            <span class="category-tag">Software</span>
+          </div>
+        </div>
+        <div>
+          <div class="expense-amount">$54.99</div>
+          <div class="gl-code">GL: 6100</div>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-title">This Month by Category</div>
+        <div class="category-bars">
+          <div class="cat-row">
+            <span class="cat-label">Travel</span>
+            <div class="cat-bar-wrap"><div class="cat-bar travel"></div></div>
+            <span class="cat-amount">$2,840</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-label">Software</span>
+            <div class="cat-bar-wrap"><div class="cat-bar software"></div></div>
+            <span class="cat-amount">$1,650</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-label">Meals</span>
+            <div class="cat-bar-wrap"><div class="cat-bar meals"></div></div>
+            <span class="cat-amount">$920</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

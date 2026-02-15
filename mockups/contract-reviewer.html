@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0f1a;
+      color: #f0f4ff;
+      padding: 20px;
+      width: 400px;
+    }
+    .app {
+      background: #111827;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1e2940;
+    }
+    .header {
+      background: #1e2940;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h3 { font-size: 14px; font-weight: 500; }
+    .risk-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+    .risk-badge.medium { background: #fbbf24; color: #000; }
+    .content { padding: 16px; }
+    .doc-info {
+      display: flex;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e2940;
+      margin-bottom: 12px;
+    }
+    .doc-icon {
+      width: 40px;
+      height: 48px;
+      background: #1e2940;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+    .doc-details { }
+    .doc-name { font-size: 13px; font-weight: 500; }
+    .doc-meta { font-size: 10px; color: #8892b0; }
+    .findings { }
+    .finding-section {
+      margin-bottom: 12px;
+    }
+    .finding-title {
+      font-size: 10px;
+      color: #8892b0;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .finding-title .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ef4444; }
+    .dot.yellow { background: #fbbf24; }
+    .dot.green { background: #10b981; }
+    .finding-items { }
+    .finding-item {
+      background: #0a0f1a;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .finding-item .icon { font-size: 12px; }
+    .key-terms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .term {
+      background: #1e2940;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .term .val { color: #10b981; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h3>Contract Review</h3>
+      <span class="risk-badge medium">2 Flags</span>
+    </div>
+    <div class="content">
+      <div class="doc-info">
+        <div class="doc-icon">📄</div>
+        <div class="doc-details">
+          <div class="doc-name">Vendor_Agreement_2024.pdf</div>
+          <div class="doc-meta">24 pages • Analyzed in 8 sec</div>
+        </div>
+      </div>
+      <div class="findings">
+        <div class="finding-section">
+          <div class="finding-title"><span class="dot red"></span> Risks Identified</div>
+          <div class="finding-items">
+            <div class="finding-item">
+              <span class="icon">⚠️</span>
+              Auto-renewal clause (90-day notice required)
+            </div>
+            <div class="finding-item">
+              <span class="icon">⚠️</span>
+              Liability cap below industry standard
+            </div>
+          </div>
+        </div>
+        <div class="finding-section">
+          <div class="finding-title"><span class="dot green"></span> Obligations</div>
+          <div class="finding-items">
+            <div class="finding-item">
+              <span class="icon">✓</span>
+              Payment terms: Net 30
+            </div>
+            <div class="finding-item">
+              <span class="icon">✓</span>
+              Quarterly business reviews required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="key-terms">
+        <div class="term">Term: <span class="val">24 mo</span></div>
+        <div class="term">Value: <span class="val">$48,000</span></div>
+        <div class="term">Renewal: <span class="val">Jan 2026</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0f1a;
+      color: #f0f4ff;
+      padding: 20px;
+      width: 400px;
+    }
+    .app {
+      background: #111827;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1e2940;
+    }
+    .header {
+      background: #1e2940;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h3 { font-size: 14px; font-weight: 500; }
+    .scan-badge {
+      background: #10b981;
+      color: #fff;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .content { padding: 16px; }
+    .invoice-preview {
+      display: flex;
+      gap: 12px;
+    }
+    .doc-thumb {
+      width: 80px;
+      height: 100px;
+      background: #f0f4ff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e2940;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+    .extracted {
+      flex: 1;
+    }
+    .field {
+      margin-bottom: 8px;
+    }
+    .field-label {
+      font-size: 9px;
+      color: #8892b0;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .field-value {
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .check {
+      color: #10b981;
+      font-size: 10px;
+    }
+    .line-items {
+      margin-top: 12px;
+      background: #0a0f1a;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .line-header {
+      display: flex;
+      font-size: 9px;
+      color: #8892b0;
+      text-transform: uppercase;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #1e2940;
+      margin-bottom: 6px;
+    }
+    .line-row {
+      display: flex;
+      font-size: 11px;
+      padding: 4px 0;
+    }
+    .col-desc { flex: 2; }
+    .col-qty { flex: 0.5; text-align: center; }
+    .col-price { flex: 1; text-align: right; }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #1e2940;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h3>Invoice Extractor</h3>
+      <span class="scan-badge">Extracted</span>
+    </div>
+    <div class="content">
+      <div class="invoice-preview">
+        <div class="doc-thumb">INV-4821.pdf</div>
+        <div class="extracted">
+          <div class="field">
+            <div class="field-label">Vendor</div>
+            <div class="field-value">Acme Supplies <span class="check">✓</span></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Invoice Date</div>
+            <div class="field-value">Feb 5, 2024 <span class="check">✓</span></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Due Date</div>
+            <div class="field-value">Mar 5, 2024 <span class="check">✓</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="line-items">
+        <div class="line-header">
+          <span class="col-desc">Item</span>
+          <span class="col-qty">Qty</span>
+          <span class="col-price">Amount</span>
+        </div>
+        <div class="line-row">
+          <span class="col-desc">Widget A-100</span>
+          <span class="col-qty">50</span>
+          <span class="col-price">$1,250.00</span>
+        </div>
+        <div class="line-row">
+          <span class="col-desc">Widget B-200</span>
+          <span class="col-qty">25</span>
+          <span class="col-price">$875.00</span>
+        </div>
+        <div class="line-row">
+          <span class="col-desc">Shipping</span>
+          <span class="col-qty">1</span>
+          <span class="col-price">$45.00</span>
+        </div>
+        <div class="total-row">
+          <span>Total</span>
+          <span>$2,170.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
