@@ -180,7 +180,8 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .product-card.featured:hover {
-      box-shadow: 0 0 20px rgba(255,77,77,0.4), 0 12px 40px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(255,77,77,0.6), 0 0 60px rgba(255,77,77,0.3), 0 12px 40px rgba(0,0,0,0.3);
     }
     .product-card.featured::before {
       content: 'Most Popular';
@@ -221,7 +222,7 @@
     }
     .product-card.best-value:hover {
       transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(0,209,178,0.4), 0 12px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 0 30px rgba(0,209,178,0.6), 0 0 60px rgba(0,209,178,0.3), 0 12px 40px rgba(0,0,0,0.3);
     }
 
     .product-tag {
