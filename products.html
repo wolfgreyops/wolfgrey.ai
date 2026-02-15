@@ -198,7 +198,7 @@
     .product-card.best-value {
       border: 2px solid var(--accent2);
       position: relative;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .product-card.best-value::before {
       content: 'Best Value';
@@ -215,24 +215,9 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .product-card.best-value::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(0,209,178,0.3) 0%, rgba(0,209,178,0) 50%, rgba(0,209,178,0.3) 100%);
-      z-index: -1;
-      opacity: 0;
-      filter: blur(20px);
-      transition: opacity 0.3s ease;
-    }
     .product-card.best-value:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,209,178,0.25), 0 0 40px rgba(0,209,178,0.15);
-      border-color: var(--accent2);
-    }
-    .product-card.best-value:hover::after {
-      opacity: 1;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     }
 
     .product-tag {
