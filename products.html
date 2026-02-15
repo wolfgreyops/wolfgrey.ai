@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — wolfgrey</title>
+  <meta name="description" content="AI resources for small businesses. Get our free AI Quick-Start Guide or the full AI Playbook with 40+ templates and frameworks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent: #ff4d4d;
+      --accent2: #00e5cc;
+      --btn: #ff4d4d;
+      --btn-hover: #e63946;
+      --dark: #050810;
+      --gray-900: #0a0f1a;
+      --gray-800: #111827;
+      --gray-700: #1e2940;
+      --gray-600: #5a6480;
+      --gray-400: #8892b0;
+      --gray-300: #a8b2d1;
+      --white: #f0f4ff;
+      --white-bright: #f0f4ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Satoshi', 'Inter', -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5 { font-family: 'Clash Display', 'Inter', sans-serif; line-height: 1.15; font-weight: 500; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(5,8,16,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-300);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--accent2); }
+    .nav-cta {
+      background: var(--btn) !important;
+      color: var(--white-bright) !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--btn-hover) !important; }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 160px 24px 80px;
+      text-align: center;
+    }
+    .page-header .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 24px; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+    .btn-primary {
+      background: var(--btn);
+      color: var(--white-bright);
+    }
+    .btn-primary:hover { background: var(--btn-hover); transform: translateY(-1px); }
+    .btn-accent2 {
+      background: var(--accent2);
+      color: var(--dark);
+    }
+    .btn-accent2:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── PRODUCT CARDS ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .product-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .product-card.featured {
+      border-color: var(--accent);
+    }
+    .product-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--white);
+      padding: 4px 16px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .product-tag {
+      display: inline-block;
+      width: fit-content;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .product-tag.free {
+      background: rgba(0,229,204,0.1);
+      border: 1px solid rgba(0,229,204,0.2);
+      color: var(--accent2);
+    }
+    .product-tag.paid {
+      background: rgba(255,77,77,0.1);
+      border: 1px solid rgba(255,77,77,0.2);
+      color: var(--accent);
+    }
+    .product-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .product-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-family: 'Clash Display', 'Inter', sans-serif;
+    }
+    .product-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+    .product-card > p {
+      color: var(--gray-400);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .product-features {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 32px;
+    }
+    .product-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--gray-300);
+      margin-bottom: 12px;
+    }
+    .product-features li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--accent2);
+    }
+
+    /* ── EMAIL GATE MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5,8,16,0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-card h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .modal-card > p {
+      color: var(--gray-400);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .modal-form { text-align: left; }
+    .modal-form label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray-300);
+      margin-bottom: 6px;
+    }
+    .modal-form input {
+      width: 100%;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      color: var(--white);
+      padding: 14px 16px;
+      font-family: 'Satoshi', 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+    .modal-form input:focus {
+      outline: none;
+      border-color: var(--accent2);
+    }
+    .modal-form input::placeholder { color: var(--gray-600); }
+    .modal-error {
+      color: var(--accent);
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .modal-fine-print {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      text-align: center;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .download-success {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .download-success svg {
+      width: 64px;
+      height: 64px;
+      color: var(--accent2);
+      margin-bottom: 20px;
+    }
+    .download-success h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .download-success p {
+      color: var(--gray-400);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    .download-success .btn {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--gray-800);
+      padding: 48px 24px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-inner p { font-size: 0.85rem; color: var(--gray-600); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: #050810;
+        border-bottom: 1px solid var(--gray-700);
+        padding: 24px;
+        gap: 20px;
+      }
+      .mobile-toggle { display: block; }
+      .products-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 24px; }
+      .page-header { padding: 120px 24px 60px; }
+      .product-card { padding: 36px 28px; }
+      .modal-card { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo"><img src="logo.png" alt="wolfgrey" style="height: 38px; vertical-align: middle;"></a>
+      <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+      <div class="nav-links">
+        <a href="/#services">Services</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="resources.html">Resources</a>
+        <a href="/#uses">Uses</a>
+        <a href="/#ladder">Pricing</a>
+        <a href="/#course">Course</a>
+        <a href="products.html" class="nav-cta">Shop &rarr;</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="section-label">Products</div>
+    <h1>AI resources built<br>for small business</h1>
+    <p>From free quick-start guides to comprehensive playbooks — everything you need to implement AI in your operations.</p>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section>
+    <div class="container">
+      <div class="products-grid">
+
+        <!-- FREE PRODUCT -->
+        <div class="product-card fade-up">
+          <div class="product-tag free">Free</div>
+          <h3>AI Quick-Start Guide</h3>
+          <div class="product-price">$0 <span>forever</span></div>
+          <p>A focused introduction to AI for small business owners. Get started in under 30 minutes.</p>
+          <ul class="product-features">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              5 ready-to-use AI prompts
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              Quick-win automation ideas
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              Tool recommendations
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              PDF download
+            </li>
+          </ul>
+          <button class="btn btn-accent2" onclick="openFreeModal()">Get Free Guide &rarr;</button>
+        </div>
+
+        <!-- PAID PRODUCT -->
+        <div class="product-card featured fade-up">
+          <div class="product-tag paid">Full System</div>
+          <h3>Small Business AI Playbook</h3>
+          <div class="product-price">$49 <span>one-time</span></div>
+          <p>The complete AI implementation system. 40+ templates, frameworks, and a 90-day roadmap.</p>
+          <ul class="product-features">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              40+ plug-and-play AI prompts
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              CRAFT prompting framework
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              90-day implementation roadmap
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              ROI tracking templates
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+              Lifetime updates
+            </li>
+          </ul>
+          <a href="STRIPE_PAYMENT_LINK_HERE" class="btn btn-primary">Buy Now — $49 &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE PRODUCT EMAIL GATE MODAL -->
+  <div class="modal-overlay" id="freeModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeFreeModal()">&times;</button>
+
+      <!-- Form State -->
+      <div id="modalFormState">
+        <h2>Get Your Free Guide</h2>
+        <p>Enter your email and we'll send the AI Quick-Start Guide straight to your inbox.</p>
+        <form class="modal-form" id="freeProductForm" onsubmit="return handleFreeSubmit(event)">
+          <label for="freeEmail">Email</label>
+          <input type="email" id="freeEmail" name="email" placeholder="you@company.com" required autocomplete="email">
+          <div class="modal-error" id="freeError">Please enter a valid email address.</div>
+          <button type="submit" class="btn btn-accent2">Send Me the Guide &rarr;</button>
+        </form>
+        <p class="modal-fine-print">No spam. Instant delivery. Unsubscribe anytime.</p>
+      </div>
+
+      <!-- Success State -->
+      <div id="modalSuccessState" class="download-success" style="display: none;">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="32" cy="32" r="28"/>
+          <path d="M20 32l8 8 16-16"/>
+        </svg>
+        <h3>Check your inbox!</h3>
+        <p>We've sent the AI Quick-Start Guide to your email. It should arrive in the next few minutes.</p>
+        <button class="btn btn-accent2" onclick="closeFreeModal()">Got It</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Hidden iframe for Google Form submission -->
+  <iframe name="productFormIframe" id="productFormIframe" style="display:none;"></iframe>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 wolfgrey. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="products.html">Products</a>
+        <a href="resources.html">Resources</a>
+        <a href="https://twitter.com/__wolfgrey__" target="_blank" rel="noopener">Twitter</a>
+        <a href="/#services">Services</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Google Form config (update these after creating your form) ──
+    // You can use the same form as resources.html or create a separate one
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+    const EMAIL_FIELD_ID = 'entry.XXXXXXXXXX';
+
+    // ── Stripe Payment Link ──
+    // Create a Payment Link in your Stripe Dashboard:
+    // 1. Go to stripe.com/dashboard → Products → Create Product ($49 AI Playbook)
+    // 2. Go to Payment Links → Create → Select your product
+    // 3. Copy the link and replace STRIPE_PAYMENT_LINK_HERE in the HTML above
+    // Example: https://buy.stripe.com/xxxxxxxxxxxx
+
+    // ── Modal functions ──
+    function openFreeModal() {
+      document.getElementById('freeModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // Reset to form state
+      document.getElementById('modalFormState').style.display = 'block';
+      document.getElementById('modalSuccessState').style.display = 'none';
+    }
+
+    function closeFreeModal() {
+      document.getElementById('freeModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on overlay click
+    document.getElementById('freeModal').addEventListener('click', function(e) {
+      if (e.target === this) closeFreeModal();
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeFreeModal();
+    });
+
+    // ── Form submission ──
+    function handleFreeSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('freeEmail').value.trim();
+      const errorEl = document.getElementById('freeError');
+
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errorEl.style.display = 'block';
+        return false;
+      }
+      errorEl.style.display = 'none';
+
+      // Submit to Google Form via hidden iframe
+      try {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = GOOGLE_FORM_ACTION;
+        form.target = 'productFormIframe';
+
+        const emailInput = document.createElement('input');
+        emailInput.name = EMAIL_FIELD_ID;
+        emailInput.value = email;
+        form.appendChild(emailInput);
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+      } catch (err) {
+        // Silently fail — still show success
+      }
+
+      // Store in localStorage (grants access to free resources too)
+      localStorage.setItem('wolfgrey_access', email);
+
+      // Show success state
+      document.getElementById('modalFormState').style.display = 'none';
+      document.getElementById('modalSuccessState').style.display = 'block';
+
+      return false;
+    }
+
+    // ── Scroll reveal ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Mobile nav ──
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
