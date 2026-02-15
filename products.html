@@ -691,9 +691,8 @@
       // Store in localStorage (grants access to free resources too)
       localStorage.setItem('wolfgrey_access', email);
 
-      // Show success state
-      document.getElementById('modalFormState').style.display = 'none';
-      document.getElementById('modalSuccessState').style.display = 'block';
+      // Redirect to free guide
+      window.location.href = 'https://the-ai-quick-start-guide-1ltviaw.gamma.site';
 
       return false;
     }
