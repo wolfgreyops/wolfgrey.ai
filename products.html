@@ -193,6 +193,48 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
+    /* Best Value Card (Mastery Series) */
+    .product-card.best-value {
+      border: 2px solid var(--accent2);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .product-card.best-value::before {
+      content: 'Best Value';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent2);
+      color: var(--dark);
+      padding: 4px 16px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .product-card.best-value::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(0,209,178,0.3) 0%, rgba(0,209,178,0) 50%, rgba(0,209,178,0.3) 100%);
+      z-index: -1;
+      opacity: 0;
+      filter: blur(20px);
+      transition: opacity 0.3s ease;
+    }
+    .product-card.best-value:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,209,178,0.25), 0 0 40px rgba(0,209,178,0.15);
+      border-color: var(--accent2);
+    }
+    .product-card.best-value:hover::after {
+      opacity: 1;
+    }
+
     .product-tag {
       display: inline-block;
       width: fit-content;
@@ -516,7 +558,7 @@
         </div>
 
         <!-- MASTERY SERIES -->
-        <div class="product-card fade-up" style="grid-column: 1 / -1; max-width: 100%;">
+        <div class="product-card best-value fade-up" style="grid-column: 1 / -1; max-width: 100%;">
           <div class="product-tag paid">Mastery Course</div>
           <h3>Claude Mastery Series</h3>
           <div class="product-price">$199 <span>one-time</span></div>
