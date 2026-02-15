@@ -500,6 +500,32 @@
       width: 100%;
       justify-content: center;
     }
+    .product-price-inline {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin: 16px 0 8px;
+      letter-spacing: -0.5px;
+    }
+    .product-card.featured {
+      border-color: var(--accent2);
+      position: relative;
+    }
+    .product-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent2);
+      color: var(--dark);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
 
     /* ── FREE RESOURCES TEASER ── */
     #free-resources { background: var(--gray-900); }
@@ -1320,26 +1346,29 @@
   <section id="products">
     <div class="container">
       <div class="section-label">Products</div>
-      <h2 class="section-title">Tools & templates built<br>for operators</h2>
-      <p class="section-subtitle">Pre-built systems, templates, and playbooks you can deploy immediately — no development experience needed.</p>
+      <h2 class="section-title">Your path to AI mastery</h2>
+      <p class="section-subtitle">Start free, go deep when you're ready. Each tier builds on the last.</p>
       <div class="products-grid">
         <div class="product-card fade-up">
           <div class="product-tag">Free</div>
           <h3>AI Quick-Start Guide</h3>
-          <p>7 copy-paste prompts for sales and marketing tasks. Email subjects, buyer personas, social content, objection handling, and more. Start getting results in minutes.</p>
-          <a href="products.html" class="btn btn-secondary">Download Free →</a>
+          <p>5 ready-to-use prompts, quick-win automation ideas, and tool recommendations. Get started with AI in under 30 minutes.</p>
+          <div class="product-price-inline">$0</div>
+          <a href="products.html" class="btn btn-secondary">Get Free Guide →</a>
         </div>
         <div class="product-card fade-up">
           <div class="product-tag">Playbook</div>
           <h3>Small Business AI Playbook</h3>
-          <p>The CRAFT prompting framework, 40+ templates, complete sales and marketing workflows, and a 90-day implementation roadmap. Everything you need to operationalize AI.</p>
-          <a href="products.html" class="btn btn-primary">Get the Playbook — $49 →</a>
+          <p>The CRAFT prompting framework, 40+ templates, and a 90-day implementation roadmap. Everything you need to operationalize AI.</p>
+          <div class="product-price-inline">$49</div>
+          <a href="https://buy.stripe.com/3cI4gybndgH2elh0rD5c400" class="btn btn-primary">Get the Playbook →</a>
         </div>
-        <div class="product-card fade-up">
-          <div class="product-tag">Templates</div>
-          <h3>Automation Template Packs</h3>
-          <p>Pre-built scripts and workflow templates for specific use cases — sales automation, content pipelines, data analysis. Plug into your setup and run.</p>
-          <a href="#" class="btn btn-secondary">Coming Soon</a>
+        <div class="product-card fade-up featured">
+          <div class="product-tag">Mastery</div>
+          <h3>Claude Mastery Series</h3>
+          <p>The complete 10-volume course for non-technical users. From first conversation to advanced workflows — master Claude in depth.</p>
+          <div class="product-price-inline">$199</div>
+          <a href="https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401" class="btn btn-primary">Get Full Access →</a>
         </div>
       </div>
     </div>
@@ -1494,30 +1523,32 @@
           <div class="step-number">Step 01</div>
           <div class="step-price">$0</div>
           <h3>Quick-Start Guide</h3>
-          <p>7 copy-paste AI prompts for immediate sales and marketing wins.</p>
-          <a href="products.html" class="btn btn-secondary">Download Free →</a>
+          <p>5 ready-to-use prompts and quick-win automation ideas to get started immediately.</p>
+          <a href="products.html" class="btn btn-secondary">Get Free Guide →</a>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
           <div class="step-number">Step 02</div>
           <div class="step-price">$49</div>
           <h3>AI Playbook</h3>
-          <p>Complete framework, 40+ templates, and 90-day roadmap.</p>
-          <a href="products.html" class="btn btn-primary">Get the Playbook →</a>
+          <p>CRAFT framework, 40+ templates, and 90-day roadmap to operationalize AI.</p>
+          <a href="https://buy.stripe.com/3cI4gybndgH2elh0rD5c400" class="btn btn-primary">Get the Playbook →</a>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
           <div class="step-number">Step 03</div>
-          <div class="step-price">$997+</div>
-          <h3>Custom Playbook</h3>
-          <p>Your playbook, tailored to your business — custom workflows, prompts, and automations built around your specific operations.</p>
+          <div class="step-price">$199</div>
+          <h3>Claude Mastery Series</h3>
+          <p>10-volume deep dive for non-technical users. Master Claude from basics to advanced workflows.</p>
+          <a href="https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401" class="btn btn-primary">Get Full Access →</a>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
           <div class="step-number">Step 04</div>
-          <div class="step-price">$2,000+</div>
-          <h3>Done-For-You Build</h3>
-          <p>Custom AI-powered workflows built, deployed, and maintained for your business.</p>
+          <div class="step-price">$500+</div>
+          <h3>Done-For-You Services</h3>
+          <p>Custom AI workflows, automation builds, and hands-on implementation for your business.</p>
+          <a href="#services" class="btn btn-secondary">View Services →</a>
         </div>
       </div>
     </div>
