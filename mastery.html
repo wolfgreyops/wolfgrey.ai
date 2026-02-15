@@ -626,6 +626,528 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .slide-content { animation: fadeIn 0.4s ease; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VISUAL ENHANCEMENTS - World Class Upgrade
+    ═══════════════════════════════════════════════════════════════ */
+
+    /* Enhanced Hero */
+    .hero {
+      min-height: 50vh;
+      padding: 80px 24px 60px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-700);
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--accent2);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Volume Card Icons */
+    .volume-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .volume-card::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, rgba(255,77,77,0.1) 0%, transparent 60%);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+    .volume-card:hover::after {
+      transform: scale(1.5);
+      background: linear-gradient(135deg, rgba(255,77,77,0.15) 0%, transparent 60%);
+    }
+    .vol-icon {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--gray-700) 0%, var(--gray-800) 100%);
+      border: 1px solid var(--gray-600);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .vol-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+      transition: all 0.3s;
+    }
+    .volume-card:hover .vol-icon {
+      background: linear-gradient(135deg, var(--accent) 0%, #ff6b6b 100%);
+      border-color: var(--accent);
+    }
+    .volume-card:hover .vol-icon svg {
+      stroke: var(--white);
+    }
+
+    /* ── NEW SLIDE TYPE: Diagram ── */
+    .diagram-container {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 24px 0;
+      text-align: center;
+    }
+    .diagram-svg {
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+    .diagram-svg text {
+      font-family: 'Satoshi', sans-serif;
+      fill: var(--gray-300);
+    }
+    .diagram-svg .node {
+      fill: var(--gray-700);
+      stroke: var(--gray-600);
+      stroke-width: 1;
+    }
+    .diagram-svg .node-accent {
+      fill: var(--accent);
+      stroke: none;
+    }
+    .diagram-svg .node-accent2 {
+      fill: var(--accent2);
+      stroke: none;
+    }
+    .diagram-svg .connector {
+      stroke: var(--gray-600);
+      stroke-width: 2;
+      fill: none;
+    }
+    .diagram-svg .connector-accent {
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
+    }
+    .diagram-caption {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* ── NEW SLIDE TYPE: Stats/Metrics ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .stat-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 24px 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .stat-value {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.accent2 { color: var(--accent2); }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ── NEW SLIDE TYPE: Process Flow ── */
+    .process-flow {
+      margin: 24px 0;
+    }
+    .process-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .process-step:last-child {
+      border-bottom: none;
+    }
+    .process-num {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent) 0%, #ff6b6b 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+    }
+    .process-step:not(:last-child) .process-num::after {
+      content: '';
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--gray-600);
+    }
+    .process-content h4 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--white);
+      margin: 0 0 8px;
+    }
+    .process-content p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── NEW SLIDE TYPE: Quote/Insight ── */
+    .insight-box {
+      background: linear-gradient(135deg, rgba(255,77,77,0.08) 0%, rgba(0,229,204,0.08) 100%);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 40px 32px;
+      margin: 32px 0;
+      text-align: center;
+      position: relative;
+    }
+    .insight-box::before {
+      content: '"';
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      font-family: 'Clash Display', sans-serif;
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+    }
+    .insight-text {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.5;
+      font-family: 'Clash Display', sans-serif;
+      letter-spacing: -0.5px;
+    }
+    .insight-source {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin-top: 20px;
+    }
+
+    /* ── NEW SLIDE TYPE: Framework Visual ── */
+    .framework-visual {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 24px 0;
+    }
+    .framework-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .framework-title span {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent);
+      border-radius: 8px;
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 4px;
+    }
+    .framework-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .framework-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--gray-900);
+      border-radius: 10px;
+      padding: 16px 20px;
+      transition: all 0.2s;
+    }
+    .framework-item:hover {
+      transform: translateX(8px);
+    }
+    .framework-letter {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent) 0%, #ff6b6b 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .framework-text {
+      flex: 1;
+    }
+    .framework-text strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .framework-text span {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+
+    /* ── NEW: Icon Grid ── */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .icon-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+    .icon-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .icon-card svg {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 12px;
+      stroke: var(--accent2);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .icon-card h4 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+      margin: 0 0 6px;
+    }
+    .icon-card p {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── NEW: Visual Comparison ── */
+    .visual-comparison {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      margin: 24px 0;
+    }
+    @media (max-width: 600px) {
+      .visual-comparison {
+        grid-template-columns: 1fr;
+      }
+      .comparison-arrow {
+        transform: rotate(90deg);
+      }
+    }
+    .comparison-side {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .comparison-side.before {
+      border-color: rgba(255, 77, 77, 0.3);
+    }
+    .comparison-side.after {
+      border-color: rgba(0, 229, 204, 0.3);
+    }
+    .comparison-side svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+    .comparison-side.before svg { stroke: var(--accent); fill: none; stroke-width: 1.5; }
+    .comparison-side.after svg { stroke: var(--accent2); fill: none; stroke-width: 1.5; }
+    .comparison-side h4 {
+      font-size: 1rem;
+      color: var(--white);
+      margin: 0 0 8px;
+    }
+    .comparison-side p {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin: 0;
+    }
+    .comparison-arrow {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .comparison-arrow svg {
+      stroke: var(--gray-600);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ── NEW: Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin: 24px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent) 0%, var(--accent2) 100%);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 16px 0;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 22px;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 3px solid var(--dark);
+    }
+    .timeline-item:nth-child(even)::before {
+      background: var(--accent2);
+    }
+    .timeline-item h4 {
+      font-size: 1rem;
+      color: var(--white);
+      margin: 0 0 4px;
+    }
+    .timeline-item p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin: 0;
+    }
+
+    /* ── Enhanced Animations ── */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate-pulse { animation: pulse 2s ease-in-out infinite; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+
+    /* ── Title Slide Enhancement ── */
+    .slide-title .vol-illustration {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 32px;
+      background: linear-gradient(135deg, rgba(255,77,77,0.1) 0%, rgba(0,229,204,0.1) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 4s ease-in-out infinite;
+    }
+    .slide-title .vol-illustration svg {
+      width: 56px;
+      height: 56px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    /* ── Responsive Visual Fixes ── */
+    @media (max-width: 768px) {
+      .hero-stats {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .framework-item {
+        padding: 12px 16px;
+      }
+      .insight-text {
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -637,7 +1159,25 @@
       <div class="hero-content">
         <div class="hero-badge">Premium Course</div>
         <h1>Claude <span class="accent">Mastery</span> Series</h1>
-        <p>The complete 10-volume guide to AI-powered productivity. Practical techniques for non-technical users.</p>
+        <p>The complete 10-volume guide to AI-powered productivity. Master Claude from first conversation to advanced workflows.</p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">10</div>
+            <div class="hero-stat-label">Volumes</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">85+</div>
+            <div class="hero-stat-label">Lessons</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">40+</div>
+            <div class="hero-stat-label">Templates</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">3hr</div>
+            <div class="hero-stat-label">Content</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -704,6 +1244,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
                 <span class="vol-badge">Volume 1</span>
                 <h2>Getting Started with Claude</h2>
                 <p class="subtitle">Your First Steps to AI-Powered Productivity</p>
@@ -721,29 +1264,56 @@
             `
           },
           {
-            type: "list",
+            type: "visual",
             content: `
               <h3>What You'll Learn</h3>
-              <div class="info-box highlight">
-                <div class="info-box-title">By the End of This Volume</div>
-                <ul>
-                  <li>Navigate Claude's interface with confidence</li>
-                  <li>Have productive conversations that save you time</li>
-                  <li>Understand what Claude can (and can't) help with</li>
-                  <li>Avoid the common mistakes that frustrate new users</li>
-                  <li>Complete 5 quick wins that prove the value immediately</li>
-                </ul>
+              <div class="icon-grid">
+                <div class="icon-card">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                  <h4>Navigate Claude</h4>
+                  <p>Master the interface and key features with confidence</p>
+                </div>
+                <div class="icon-card">
+                  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                  <h4>Productive Conversations</h4>
+                  <p>Structure requests that get useful responses</p>
+                </div>
+                <div class="icon-card">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                  <h4>Know the Limits</h4>
+                  <p>Understand what Claude can and can't help with</p>
+                </div>
+                <div class="icon-card">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <h4>5 Quick Wins</h4>
+                  <p>Prove the value immediately with real tasks</p>
+                </div>
               </div>
             `
           },
           {
-            type: "concept",
+            type: "visual",
             content: `
               <h3>What Claude Is (And Isn't)</h3>
-              <h4>What Claude Is</h4>
-              <p>Claude is a large language model. Think of it as an extremely well-read assistant who can write, analyze, explain, brainstorm, edit, and organize information. It excels at understanding context - the more relevant information you provide, the better help you'll get.</p>
-              <h4>What Claude Isn't</h4>
-              <p>Claude is not a search engine - it doesn't browse the internet in real-time unless you enable web search. It's not infallible - it can make mistakes with complex math or niche topics. And it's not a replacement for human judgment - you remain in charge of decisions that matter.</p>
+              <p>Understanding Claude's nature helps you use it effectively.</p>
+              <div class="visual-comparison">
+                <div class="comparison-side before">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  <h4>Claude Is NOT</h4>
+                  <p>A search engine, infallible oracle, or replacement for human judgment</p>
+                </div>
+                <div class="comparison-arrow">
+                  <svg viewBox="0 0 24 24" width="24" height="24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <div class="comparison-side after">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <h4>Claude IS</h4>
+                  <p>A brilliant assistant who writes, analyzes, explains, and organizes</p>
+                </div>
+              </div>
+              <div class="insight-box">
+                <p class="insight-text">The more context you provide, the better help you'll get.</p>
+              </div>
             `
           },
           {
@@ -833,6 +1403,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+                </div>
                 <span class="vol-badge">Volume 2</span>
                 <h2>The Art of Asking</h2>
                 <p class="subtitle">Prompt Fundamentals That Get Real Results</p>
@@ -850,16 +1423,35 @@
             `
           },
           {
-            type: "concept",
+            type: "visual",
             content: `
               <h3>The Three Elements of Every Good Prompt</h3>
-              <p>Every effective prompt contains three elements. Miss one, and the output suffers. Nail all three, and Claude gives you something you can work with immediately.</p>
-              <div class="info-box highlight">
-                <ul>
-                  <li><strong>Context:</strong> Background information that helps Claude understand your situation</li>
-                  <li><strong>Task:</strong> What you want Claude to actually do - be direct, use action verbs</li>
-                  <li><strong>Format:</strong> How you want the output structured - bullet list, paragraph, table, etc.</li>
-                </ul>
+              <p>Every effective prompt contains three elements. Miss one, and the output suffers.</p>
+              <div class="framework-visual">
+                <div class="framework-title"><span>C T F</span></div>
+                <div class="framework-grid">
+                  <div class="framework-item">
+                    <div class="framework-letter">C</div>
+                    <div class="framework-text">
+                      <strong>Context</strong>
+                      <span>Background information that helps Claude understand your situation</span>
+                    </div>
+                  </div>
+                  <div class="framework-item">
+                    <div class="framework-letter">T</div>
+                    <div class="framework-text">
+                      <strong>Task</strong>
+                      <span>What you want Claude to do - be direct, use action verbs</span>
+                    </div>
+                  </div>
+                  <div class="framework-item">
+                    <div class="framework-letter">F</div>
+                    <div class="framework-text">
+                      <strong>Format</strong>
+                      <span>How you want the output structured - bullets, paragraphs, tables</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -989,6 +1581,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </div>
                 <span class="vol-badge">Volume 3</span>
                 <h2>Claude for Writing & Communication</h2>
                 <p class="subtitle">From Quick Emails to Polished Proposals</p>
@@ -997,12 +1592,27 @@
             `
           },
           {
-            type: "concept",
+            type: "visual",
             content: `
               <h3>Your Writing, Amplified</h3>
-              <p>Writing consumes more of your workday than you probably realize. Emails, proposals, follow-ups, social media posts, client updates - the list never ends.</p>
-              <p>Every piece of writing represents a choice: spend 30 minutes crafting it yourself, or spend 3 minutes with Claude and get something better.</p>
-              <p>The biggest fear people have is losing their voice. That fear is valid - but avoidable. When you give Claude the right direction, it amplifies your voice rather than replacing it.</p>
+              <p>Writing consumes more of your workday than you probably realize. Every piece represents a choice.</p>
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-value accent">2+</div>
+                  <div class="stat-label">Hours per day on email alone</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-value accent2">90%</div>
+                  <div class="stat-label">Time reduction with Claude</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-value">3+</div>
+                  <div class="stat-label">Hours saved per week</div>
+                </div>
+              </div>
+              <div class="insight-box">
+                <p class="insight-text">When you give Claude the right direction, it amplifies your voice rather than replacing it.</p>
+              </div>
             `
           },
           {
@@ -1133,6 +1743,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                </div>
                 <span class="vol-badge">Volume 4</span>
                 <h2>Claude for Research & Learning</h2>
                 <p class="subtitle">Turn Claude Into Your Smartest Research Assistant</p>
@@ -1276,6 +1889,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
                 <span class="vol-badge">Volume 5</span>
                 <h2>Claude for Analysis & Decision-Making</h2>
                 <p class="subtitle">Think Clearer, Decide Faster, Act with Confidence</p>
@@ -1405,6 +2021,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
                 <span class="vol-badge">Volume 6</span>
                 <h2>Working with Files & Documents</h2>
                 <p class="subtitle">Upload, Analyze, Extract, and Create</p>
@@ -1541,6 +2160,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                </div>
                 <span class="vol-badge">Volume 7</span>
                 <h2>Projects & Memory</h2>
                 <p class="subtitle">Build a Claude That Knows Your Business</p>
@@ -1681,6 +2303,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
                 <span class="vol-badge">Volume 8</span>
                 <h2>Artifacts & Visual Outputs</h2>
                 <p class="subtitle">Interactive Tools, Charts, and Pages You Can Use</p>
@@ -1700,18 +2325,29 @@
             type: "list",
             content: `
               <h3>What Claude Can Build</h3>
-              <div class="info-box highlight">
-                <div class="info-box-title">Types of Artifacts</div>
-                <ul>
-                  <li><strong>Interactive tools</strong> - calculators, quizzes, forms, trackers</li>
-                  <li><strong>Data visualizations</strong> - bar charts, line graphs, pie charts, dashboards</li>
-                  <li><strong>Diagrams</strong> - flowcharts, org charts, process maps, mind maps</li>
-                  <li><strong>Web content</strong> - landing pages, email templates, simple web pages</li>
-                  <li><strong>Formatted documents</strong> - reports, guides, formatted text</li>
-                  <li><strong>SVG graphics</strong> - simple illustrations, icons, diagrams</li>
-                </ul>
+              <div class="icon-grid">
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+                  <strong>Interactive Tools</strong>
+                  <span>Calculators, quizzes, forms</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+                  <strong>Charts</strong>
+                  <span>Bar, line, pie, dashboards</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="16"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="19" r="3"/><path d="M12 16l-6 3M12 16l6 3"/></svg></div>
+                  <strong>Diagrams</strong>
+                  <span>Flowcharts, org charts, maps</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+                  <strong>Web Pages</strong>
+                  <span>Landing pages, templates</span>
+                </div>
               </div>
-              <div class="info-box tip">
+              <div class="info-box tip" style="margin-top: 16px;">
                 <ul>
                   <li>You don't need to know what type of Artifact to ask for. Just describe what you want, and Claude will choose the right format.</li>
                 </ul>
@@ -1827,6 +2463,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
                 <span class="vol-badge">Volume 9</span>
                 <h2>Claude Code for Non-Developers</h2>
                 <p class="subtitle">Automate the Tedious Stuff Without Writing Code</p>
@@ -1846,16 +2485,25 @@
             type: "list",
             content: `
               <h3>Claude Code vs. Claude Chat</h3>
-              <div class="info-box highlight">
-                <div class="info-box-title">Key Differences</div>
-                <ul>
-                  <li><strong>Chat:</strong> Runs in your browser. Great for conversation, writing, analysis, and Artifacts.</li>
-                  <li><strong>Code:</strong> Runs on your computer. Great for file manipulation, automation, and batch processing.</li>
-                  <li><strong>Chat:</strong> Outputs text and Artifacts you can view and download.</li>
-                  <li><strong>Code:</strong> Actually executes code on your machine and works with your files directly.</li>
-                  <li><strong>Chat:</strong> Available on all plans.</li>
-                  <li><strong>Code:</strong> Available on Pro and Max plans.</li>
-                </ul>
+              <div class="visual-comparison">
+                <div class="comparison-side">
+                  <div class="comparison-label">Claude Chat</div>
+                  <ul>
+                    <li>Runs in your browser</li>
+                    <li>Conversation, writing, analysis</li>
+                    <li>Outputs text & Artifacts</li>
+                    <li>Available on all plans</li>
+                  </ul>
+                </div>
+                <div class="comparison-side">
+                  <div class="comparison-label">Claude Code</div>
+                  <ul>
+                    <li>Runs on your computer</li>
+                    <li>File manipulation, automation</li>
+                    <li>Executes code directly</li>
+                    <li>Pro and Max plans</li>
+                  </ul>
+                </div>
               </div>
             `
           },
@@ -1863,15 +2511,42 @@
             type: "list",
             content: `
               <h3>Getting Started</h3>
-              <div class="info-box highlight">
-                <div class="info-box-title">Setup Steps</div>
-                <ul>
-                  <li><strong>1.</strong> Install Node.js: Go to nodejs.org, download the LTS version, and install it.</li>
-                  <li><strong>2.</strong> Open your terminal: On Mac, search for "Terminal." On Windows, search for "PowerShell."</li>
-                  <li><strong>3.</strong> Install Claude Code: Type: npm install -g @anthropic-ai/claude-code</li>
-                  <li><strong>4.</strong> Launch Claude Code: Type "claude" and press Enter.</li>
-                  <li><strong>5.</strong> Authenticate: Follow the prompts to log in with your Anthropic account.</li>
-                </ul>
+              <div class="process-flow">
+                <div class="process-step">
+                  <div class="step-num">1</div>
+                  <div class="step-content">
+                    <strong>Install Node.js</strong>
+                    <span>Go to nodejs.org and download the LTS version</span>
+                  </div>
+                </div>
+                <div class="process-step">
+                  <div class="step-num">2</div>
+                  <div class="step-content">
+                    <strong>Open Terminal</strong>
+                    <span>Mac: search "Terminal" | Windows: search "PowerShell"</span>
+                  </div>
+                </div>
+                <div class="process-step">
+                  <div class="step-num">3</div>
+                  <div class="step-content">
+                    <strong>Install Claude Code</strong>
+                    <span>npm install -g @anthropic-ai/claude-code</span>
+                  </div>
+                </div>
+                <div class="process-step">
+                  <div class="step-num">4</div>
+                  <div class="step-content">
+                    <strong>Launch</strong>
+                    <span>Type "claude" and press Enter</span>
+                  </div>
+                </div>
+                <div class="process-step">
+                  <div class="step-num">5</div>
+                  <div class="step-content">
+                    <strong>Authenticate</strong>
+                    <span>Log in with your Anthropic account</span>
+                  </div>
+                </div>
               </div>
             `
           },
@@ -1969,6 +2644,9 @@
             type: "title",
             content: `
               <div class="slide-title">
+                <div class="vol-illustration">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                </div>
                 <span class="vol-badge">Volume 10</span>
                 <h2>Cowork & Advanced Workflows</h2>
                 <p class="subtitle">Hand Off Complex Tasks and Build Systems That Scale</p>
@@ -1988,17 +2666,25 @@
             type: "list",
             content: `
               <h3>How Cowork Differs from Chat</h3>
-              <div class="info-box highlight">
-                <div class="info-box-title">Key Differences</div>
-                <ul>
-                  <li><strong>Chat:</strong> You manage the conversation, reviewing and directing each step.</li>
-                  <li><strong>Cowork:</strong> You describe the goal. Claude plans and executes autonomously.</li>
-                  <li><strong>Chat:</strong> Works with content you paste or upload.</li>
-                  <li><strong>Cowork:</strong> Can access files on your computer directly (with your permission).</li>
-                  <li><strong>Chat:</strong> One response at a time.</li>
-                  <li><strong>Cowork:</strong> Coordinates multiple workstreams in parallel.</li>
-                  <li><strong>Cowork:</strong> Available on Max plans ($100 or $200/month) via Claude Desktop.</li>
-                </ul>
+              <div class="visual-comparison">
+                <div class="comparison-side">
+                  <div class="comparison-label">Chat</div>
+                  <ul>
+                    <li>You manage each step</li>
+                    <li>Works with uploaded content</li>
+                    <li>One response at a time</li>
+                    <li>All plans</li>
+                  </ul>
+                </div>
+                <div class="comparison-side">
+                  <div class="comparison-label">Cowork</div>
+                  <ul>
+                    <li>Claude executes autonomously</li>
+                    <li>Accesses your files directly</li>
+                    <li>Multiple workstreams</li>
+                    <li>Max plans only</li>
+                  </ul>
+                </div>
               </div>
             `
           },
@@ -2045,16 +2731,45 @@
             content: `
               <h3>Building Repeatable Systems</h3>
               <p>The ultimate goal isn't to use Claude for one-off tasks - it's to build systems that run reliably every time.</p>
-              <div class="info-box highlight">
-                <div class="info-box-title">Sample Weekly Claude Routine</div>
-                <ul>
-                  <li><strong>Monday:</strong> Run weekly planning prompt - priorities, goals, key tasks</li>
-                  <li><strong>Tuesday-Thursday:</strong> Use Claude for daily writing, analysis, and communications</li>
-                  <li><strong>Wednesday:</strong> Batch-create social media content for the following week</li>
-                  <li><strong>Thursday:</strong> Run data analysis on weekly metrics</li>
-                  <li><strong>Friday:</strong> Generate weekly report and send client updates</li>
-                  <li><strong>Monthly:</strong> Review and update Project instructions, refine workflows</li>
-                </ul>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-marker">M</div>
+                  <div class="timeline-content">
+                    <strong>Monday</strong>
+                    <span>Weekly planning - priorities, goals, key tasks</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker">T-R</div>
+                  <div class="timeline-content">
+                    <strong>Tue-Thu</strong>
+                    <span>Daily writing, analysis, and communications</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker">W</div>
+                  <div class="timeline-content">
+                    <strong>Wednesday</strong>
+                    <span>Batch-create social media content</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker">R</div>
+                  <div class="timeline-content">
+                    <strong>Thursday</strong>
+                    <span>Data analysis on weekly metrics</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker">F</div>
+                  <div class="timeline-content">
+                    <strong>Friday</strong>
+                    <span>Weekly report and client updates</span>
+                  </div>
+                </div>
+              </div>
+              <div class="info-box tip" style="margin-top: 16px;">
+                <ul><li><strong>Monthly:</strong> Review and update Project instructions, refine workflows</li></ul>
               </div>
             `
           },
@@ -2063,19 +2778,52 @@
             content: `
               <h3>Your Complete Claude Toolkit</h3>
               <p>You've now covered every major Claude capability across ten volumes. Here's how it all fits together:</p>
-              <div class="info-box highlight">
-                <ul>
-                  <li><strong>Volume 1:</strong> Your foundation - how to navigate and communicate</li>
-                  <li><strong>Volume 2:</strong> The prompting skills that make everything else work</li>
-                  <li><strong>Volume 3:</strong> Emails, content, proposals - your daily writing accelerator</li>
-                  <li><strong>Volume 4:</strong> Web search, learning, fact-checking - your knowledge engine</li>
-                  <li><strong>Volume 5:</strong> Decision frameworks, scenario planning - your thinking partner</li>
-                  <li><strong>Volume 6:</strong> Document analysis, extraction, creation - your file processor</li>
-                  <li><strong>Volume 7:</strong> Persistent context - your personalized assistant</li>
-                  <li><strong>Volume 8:</strong> Visual tools, charts, prototypes - your builder</li>
-                  <li><strong>Volume 9:</strong> File automation, batch processing - your automation layer</li>
-                  <li><strong>Volume 10:</strong> Multi-step task delegation - your autonomous operator</li>
-                </ul>
+              <div class="icon-grid" style="grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                  <strong>Vol 1-2</strong>
+                  <span>Foundation & Prompting</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                  <strong>Vol 3</strong>
+                  <span>Writing & Content</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+                  <strong>Vol 4</strong>
+                  <span>Research & Learning</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                  <strong>Vol 5</strong>
+                  <span>Analysis & Decisions</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <strong>Vol 6</strong>
+                  <span>Documents & Files</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+                  <strong>Vol 7</strong>
+                  <span>Projects & Memory</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+                  <strong>Vol 8</strong>
+                  <span>Artifacts & Visuals</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                  <strong>Vol 9</strong>
+                  <span>Claude Code</span>
+                </div>
+                <div class="icon-card" style="grid-column: span 2;">
+                  <div class="icon-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+                  <strong>Vol 10</strong>
+                  <span>Cowork & Advanced Workflows</span>
+                </div>
               </div>
             `
           },
@@ -2139,15 +2887,30 @@
       localStorage.setItem('mastery-progress', JSON.stringify(progress));
     }
 
+    // Volume Icons (SVG paths for each volume)
+    const volumeIcons = {
+      1: `<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`, // Getting Started - layers
+      2: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>`, // Art of Asking - help
+      3: `<svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`, // Writing - edit
+      4: `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>`, // Research - search
+      5: `<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`, // Analysis - monitor
+      6: `<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>`, // Sales - file-text
+      7: `<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>`, // Projects - box
+      8: `<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, // Artifacts - star
+      9: `<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`, // Claude Code - code
+      10: `<svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>` // Advanced - bar-chart
+    };
+
     // Render volume grid
     function renderVolumeGrid() {
       const grid = document.getElementById('volume-grid');
       grid.innerHTML = volumes.map(vol => {
         const volProgress = progress[vol.id] || { currentSlide: 0 };
         const percentComplete = Math.round((volProgress.currentSlide / (vol.slides.length - 1)) * 100);
+        const icon = volumeIcons[vol.id] || volumeIcons[1];
         return `
           <div class="volume-card" onclick="openVolume(${vol.id})">
-            <div class="vol-num">${vol.id}</div>
+            <div class="vol-icon">${icon}</div>
             <div class="vol-info">
               <h3>${vol.title}</h3>
               <p>${vol.subtitle}</p>
