@@ -1512,11 +1512,7 @@
             <div class="terminal-dot green"></div>
             <div class="terminal-title">claude — AI Assistant</div>
           </div>
-          <div class="terminal-body" id="skillsTerminal">
-            <div class="terminal-prompt">You:</div>
-            <div class="terminal-text" id="skillsPrompt"></div>
-            <div class="terminal-response" id="skillsResponse"></div>
-          </div>
+          <div class="terminal-body" id="skillsTerminal"></div>
         </div>
       </div>
     </div>
@@ -1928,47 +1924,51 @@
     (function() {
       const skillsData = {
         prompts: {
-          prompt: "Using the CRAFT framework, write a prompt that helps me generate weekly social media content for my landscaping business.",
-          response: "Here's your CRAFT prompt:\n\n<span style='color:#ff4d4d'>C</span>ontext: I run a residential landscaping company in Austin, TX\n<span style='color:#ff4d4d'>R</span>ole: Act as a social media strategist for local service businesses\n<span style='color:#ff4d4d'>A</span>ction: Generate 5 social posts for this week\n<span style='color:#ff4d4d'>F</span>ormat: Include hook, body, CTA, and 3 hashtags each\n<span style='color:#ff4d4d'>T</span>one: Friendly, professional, locally-focused"
+          type: 'prompt',
+          command: "Write 5 social media posts for my landscaping business using the CRAFT framework",
+          response: "Here's your CRAFT prompt structure:\n\n<span style='color:#ff4d4d'>C</span>ontext: Residential landscaping in Austin, TX\n<span style='color:#ff4d4d'>R</span>ole: Social media strategist\n<span style='color:#ff4d4d'>A</span>ction: Generate 5 weekly posts\n<span style='color:#ff4d4d'>F</span>ormat: Hook + body + CTA + hashtags\n<span style='color:#ff4d4d'>T</span>one: Friendly, local, professional"
         },
         automation: {
-          prompt: "Create a workflow that automatically processes new customer inquiries from my website contact form.",
-          response: "Workflow: New Lead Processor\n\n<span style='color:#00e5cc'>Trigger:</span> New form submission\n<span style='color:#00e5cc'>Step 1:</span> Extract name, email, service requested\n<span style='color:#00e5cc'>Step 2:</span> Add to CRM with 'New Lead' status\n<span style='color:#00e5cc'>Step 3:</span> Generate personalized response email\n<span style='color:#00e5cc'>Step 4:</span> Create follow-up task for Day 3\n<span style='color:#00e5cc'>Step 5:</span> Notify sales team via Slack"
+          type: 'command',
+          command: "run workflow new-lead-processor --trigger=form_submit",
+          response: "<span style='color:#888'>$</span> Initializing workflow...\n<span style='color:#27ca40'>✓</span> Trigger connected: contact_form\n<span style='color:#27ca40'>✓</span> Step 1: Parse form data\n<span style='color:#27ca40'>✓</span> Step 2: Create CRM record\n<span style='color:#27ca40'>✓</span> Step 3: Generate welcome email\n<span style='color:#27ca40'>✓</span> Step 4: Schedule follow-up (Day 3)\n<span style='color:#27ca40'>✓</span> Step 5: Send Slack notification\n\n<span style='color:#00e5cc'>Workflow deployed.</span> Listening for new submissions..."
         },
         content: {
-          prompt: "Write a blog post outline about the benefits of spring lawn aeration for homeowners.",
-          response: "Blog Outline: Spring Lawn Aeration Guide\n\n<span style='color:#00e5cc'>H1:</span> Why Your Lawn Needs Spring Aeration\n<span style='color:#00e5cc'>Hook:</span> That brown patch problem? It's not water.\n<span style='color:#00e5cc'>Section 1:</span> What is aeration (simple explanation)\n<span style='color:#00e5cc'>Section 2:</span> 5 signs your lawn needs it\n<span style='color:#00e5cc'>Section 3:</span> DIY vs professional (cost comparison)\n<span style='color:#00e5cc'>CTA:</span> Book your spring aeration now"
+          type: 'generate',
+          command: "generate blog-outline --topic=\"spring lawn aeration\"",
+          response: "<span style='color:#888'>$</span> Generating outline...\n\n<span style='color:#00e5cc'>Title:</span> Why Your Lawn Needs Spring Aeration\n<span style='color:#00e5cc'>Hook:</span> That brown patch? It's not a water problem.\n\n<span style='color:#888'>Sections:</span>\n  1. What aeration actually does\n  2. 5 signs your lawn needs it now\n  3. DIY vs professional (cost breakdown)\n  4. Best timing for your region\n\n<span style='color:#00e5cc'>CTA:</span> Book spring aeration service\n<span style='color:#27ca40'>✓</span> Outline saved to /content/drafts/"
         },
         analysis: {
-          prompt: "Analyze my last 6 months of sales data and identify patterns in my best-performing services.",
-          response: "Sales Analysis Summary:\n\n<span style='color:#00e5cc'>Top Service:</span> Weekly maintenance (42% of revenue)\n<span style='color:#00e5cc'>Growth Leader:</span> Irrigation repair (+67% YoY)\n<span style='color:#00e5cc'>Seasonal Peak:</span> March-May (53% of annual)\n<span style='color:#00e5cc'>Insight:</span> Maintenance clients spend 3.2x more\n<span style='color:#00e5cc'>Recommendation:</span> Bundle irrigation checks with maintenance packages to capture Q2 demand"
+          type: 'report',
+          command: "analyze sales --period=6mo --format=summary",
+          response: "<span style='color:#888'>$</span> Loading sales data... <span style='color:#27ca40'>done</span>\n<span style='color:#888'>$</span> Running analysis...\n\n<span style='color:#fff'>═══ Q3-Q4 SALES REPORT ═══</span>\n\n<span style='color:#00e5cc'>Revenue by Service</span>\n  Maintenance    ████████░░ 42%\n  Installation   █████░░░░░ 28%\n  Irrigation     ████░░░░░░ 19%\n  Other          ██░░░░░░░░ 11%\n\n<span style='color:#00e5cc'>Key Insight:</span> Maintenance clients\nspend <span style='color:#27ca40'>3.2x more</span> over 12 months\n\n<span style='color:#27ca40'>✓</span> Report exported to /reports/"
         },
         operations: {
-          prompt: "Create a standard operating procedure for onboarding new lawn maintenance clients.",
-          response: "SOP: New Client Onboarding\n\n<span style='color:#00e5cc'>Step 1:</span> Send welcome email + service agreement\n<span style='color:#00e5cc'>Step 2:</span> Schedule property walkthrough (30 min)\n<span style='color:#00e5cc'>Step 3:</span> Document property details + photos\n<span style='color:#00e5cc'>Step 4:</span> Create service schedule in system\n<span style='color:#00e5cc'>Step 5:</span> Assign crew + add to route\n<span style='color:#00e5cc'>Step 6:</span> First-visit quality check + follow-up call"
+          type: 'document',
+          command: "create sop --name=\"client-onboarding\" --steps=6",
+          response: "<span style='color:#888'>$</span> Generating SOP document...\n\n<span style='color:#fff'>═══ SOP: CLIENT ONBOARDING ═══</span>\n\n<span style='color:#00e5cc'>□ Step 1:</span> Send welcome email + agreement\n<span style='color:#00e5cc'>□ Step 2:</span> Schedule property walkthrough\n<span style='color:#00e5cc'>□ Step 3:</span> Document property + photos\n<span style='color:#00e5cc'>□ Step 4:</span> Create service schedule\n<span style='color:#00e5cc'>□ Step 5:</span> Assign crew + route\n<span style='color:#00e5cc'>□ Step 6:</span> First-visit quality check\n\n<span style='color:#27ca40'>✓</span> SOP created\n<span style='color:#27ca40'>✓</span> Checklist template generated\n<span style='color:#27ca40'>✓</span> Added to team workspace"
         },
         customer: {
-          prompt: "Draft a follow-up email for a client who requested a quote 3 days ago but hasn't responded.",
-          response: "Subject: Quick question about your lawn project\n\nHi [Name],\n\nI sent over the estimate for your backyard renovation on Tuesday — just wanted to make sure it landed in your inbox.\n\nIf you have any questions about the scope or pricing, I'm happy to jump on a quick call.\n\nAlso, we have two spots opening up in April if you'd like to get on the schedule.\n\nBest,\n[Your name]"
+          type: 'send',
+          command: "draft email --template=follow-up --days=3 --recipient=\"pending_quotes\"",
+          response: "<span style='color:#888'>$</span> Loading template: quote_followup_3day\n<span style='color:#888'>$</span> Found 4 pending quotes...\n\n<span style='color:#fff'>═══ EMAIL PREVIEW ═══</span>\n\n<span style='color:#00e5cc'>To:</span> sarah.m@email.com\n<span style='color:#00e5cc'>Subject:</span> Quick question about your project\n\nHi Sarah,\n\nJust checking if you had any questions\nabout the estimate I sent Tuesday.\n\nWe have 2 spots opening in April.\n\n— Mike\n\n<span style='color:#ffbd2e'>⏸ Ready to send (4 emails)</span>\n<span style='color:#888'>$</span> send --confirm to proceed"
         }
       };
 
       let currentTyping = null;
-      const promptEl = document.getElementById('skillsPrompt');
-      const responseEl = document.getElementById('skillsResponse');
+      const terminalBody = document.getElementById('skillsTerminal');
 
       function typeText(element, text, speed = 20) {
         return new Promise(resolve => {
-          element.innerHTML = '';
           let i = 0;
           const cursor = document.createElement('span');
           cursor.className = 'terminal-cursor';
+          element.appendChild(cursor);
 
           function type() {
-            if (currentTyping !== type) { resolve(); return; }
+            if (currentTyping !== type) { cursor.remove(); resolve(); return; }
             if (i < text.length) {
-              element.innerHTML = text.substring(0, i + 1);
-              element.appendChild(cursor);
+              cursor.insertAdjacentText('beforebegin', text[i]);
               i++;
               setTimeout(type, speed);
             } else {
@@ -1985,15 +1985,27 @@
         const skill = skillsData[skillKey];
         if (!skill) return;
 
-        responseEl.innerHTML = '';
-        responseEl.style.display = 'none';
+        currentTyping = null;
+        terminalBody.innerHTML = '';
 
-        await typeText(promptEl, skill.prompt, 15);
+        const promptLine = document.createElement('div');
+        promptLine.style.marginBottom = '12px';
 
-        await new Promise(r => setTimeout(r, 400));
+        if (skill.type === 'prompt') {
+          promptLine.innerHTML = '<span class="terminal-prompt">You: </span>';
+        } else {
+          promptLine.innerHTML = '<span style="color:#27ca40">~</span> <span style="color:#888">$</span> ';
+        }
+        terminalBody.appendChild(promptLine);
 
-        responseEl.style.display = 'block';
-        responseEl.innerHTML = '<span style="color: var(--accent)">Claude:</span><br><br>' + skill.response;
+        await typeText(promptLine, skill.command, 25);
+        await new Promise(r => setTimeout(r, 500));
+
+        const responseDiv = document.createElement('div');
+        responseDiv.className = 'terminal-response';
+        responseDiv.style.whiteSpace = 'pre-wrap';
+        responseDiv.innerHTML = skill.response;
+        terminalBody.appendChild(responseDiv);
       }
 
       document.querySelectorAll('.skill-tab').forEach(tab => {
@@ -2004,7 +2016,6 @@
         });
       });
 
-      // Initialize with first skill
       showSkill('prompts');
     })();
 
