@@ -190,8 +190,96 @@
       line-height: 1.7;
     }
 
+    /* ── WHAT WE DO ── */
+    #what-we-do { background: var(--gray-900); }
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .offering-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .offering-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-4px);
+    }
+    .offering-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(0,229,204,0.1);
+      border: 1px solid rgba(0,229,204,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--accent2);
+    }
+    .offering-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .offering-card p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .offerings-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .offerings-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── BENEFITS ── */
-    #benefits { background: var(--gray-900); }
+    #benefits { background: var(--dark); }
+
+    /* ── WHY WOLFGREY ── */
+    #why-wolfgrey { background: var(--gray-900); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .why-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 36px 28px;
+      transition: all 0.3s;
+    }
+    .why-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .why-card h4 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .why-card h4 span {
+      color: var(--accent);
+    }
+    .why-card p {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .why-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── SKILLS TABS ── */
     #skills { background: var(--dark); }
@@ -1427,6 +1515,47 @@
     </div>
   </section>
 
+  <!-- WHAT WE DO -->
+  <section id="what-we-do">
+    <div class="container">
+      <div class="services-header" style="text-align: center;">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Everything you need to implement AI</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">We create guides, courses, and tools that help non-technical business owners put AI to work — without hiring developers or learning to code.</p>
+      </div>
+      <div class="offerings-grid">
+        <div class="offering-card fade-up">
+          <div class="offering-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M2 10h20"/><path d="M6 16h4"/></svg>
+          </div>
+          <h4>Guides & Playbooks</h4>
+          <p>Step-by-step instructions with real prompts and templates you can use immediately.</p>
+        </div>
+        <div class="offering-card fade-up">
+          <div class="offering-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/><rect x="19" y="5" width="4" height="14" rx="1"/></svg>
+          </div>
+          <h4>Video Courses</h4>
+          <p>In-depth training that takes you from beginner to confident AI user at your own pace.</p>
+        </div>
+        <div class="offering-card fade-up">
+          <div class="offering-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>
+          </div>
+          <h4>Templates & Tools</h4>
+          <p>Pre-built prompts, calculators, and generators so you're not starting from scratch.</p>
+        </div>
+        <div class="offering-card fade-up">
+          <div class="offering-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>1:1 Consulting</h4>
+          <p>Personalized guidance when you want hands-on help implementing AI in your business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- WHY AI -->
   <section id="benefits">
     <div class="container">
@@ -1465,6 +1594,43 @@
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg></div>
           <h3>Stay Ahead of Competitors</h3>
           <p>Your competitors are already exploring AI. The businesses that adopt now will have a compounding advantage over those that wait.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY WOLFGREY -->
+  <section id="why-wolfgrey">
+    <div class="container">
+      <div class="services-header" style="text-align: center;">
+        <div class="section-label">Why wolfgrey</div>
+        <h2 class="section-title">Built for business owners, not developers</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Most AI resources assume you're technical. We don't. Everything we create is designed for people who want results — not a computer science degree.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card fade-up">
+          <h4><span>01</span> No Code Required</h4>
+          <p>You won't write a single line of code. Our guides use plain English prompts and point-and-click tools that anyone can master.</p>
+        </div>
+        <div class="why-card fade-up">
+          <h4><span>02</span> Practical, Not Theoretical</h4>
+          <p>Every lesson includes real prompts, real templates, and real examples you can copy and use in your business today.</p>
+        </div>
+        <div class="why-card fade-up">
+          <h4><span>03</span> Learn at Your Own Pace</h4>
+          <p>Self-paced courses mean you can fit AI learning around your schedule — no live sessions, no deadlines, no pressure.</p>
+        </div>
+        <div class="why-card fade-up">
+          <h4><span>04</span> Start Free, Go Deep</h4>
+          <p>Our free Quick-Start Guide gives you immediate wins. Paid products take you further when you're ready to level up.</p>
+        </div>
+        <div class="why-card fade-up">
+          <h4><span>05</span> Battle-Tested Frameworks</h4>
+          <p>The CRAFT framework and our templates come from real implementations — not academic theory or hype cycles.</p>
+        </div>
+        <div class="why-card fade-up">
+          <h4><span>06</span> Support When You Need It</h4>
+          <p>Stuck? Our consulting options give you direct access to hands-on help implementing AI in your specific business.</p>
         </div>
       </div>
     </div>
