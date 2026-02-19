@@ -133,6 +133,20 @@
       margin-bottom: 24px;
     }
     .hero h1 .accent { color: var(--accent); }
+    .hero h1 .typewriter-word {
+      color: var(--accent);
+      position: relative;
+    }
+    .hero h1 .typewriter-word::after {
+      content: '|';
+      position: absolute;
+      right: -4px;
+      animation: cursor-blink 0.7s infinite;
+    }
+    @keyframes cursor-blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
     .hero p {
       font-size: 1.2rem;
       color: var(--gray-300);
@@ -1506,7 +1520,7 @@
     <canvas class="hero-canvas" id="galaxy"></canvas>
     <div class="hero-content">
       <div class="hero-badge">AI Tools & Training</div>
-      <h1>Build <span class="accent">AI systems</span> that run your business</h1>
+      <h1><span class="accent">AI systems</span> for your <span class="typewriter-word" id="typewriter"></span> business</h1>
       <p>Everything you need to implement AI in your operations — guides, courses, templates, and tools.</p>
       <div class="hero-buttons">
         <a href="#products" class="btn btn-primary">Explore Products →</a>
@@ -2025,6 +2039,55 @@
         document.querySelector('.nav-links').classList.remove('open');
       });
     });
+
+    // Hero Typewriter Effect
+    (function() {
+      const businesses = [
+        'accounting', 'marketing', 'real estate', 'landscaping', 'laundry',
+        'consulting', 'security', 'cleaning', 'plumbing', 'electrical',
+        'HVAC', 'roofing', 'photography', 'catering', 'fitness',
+        'dental', 'legal', 'insurance', 'mortgage', 'recruiting',
+        'staffing', 'tutoring', 'coaching', 'therapy', 'veterinary',
+        'automotive', 'logistics', 'shipping', 'construction', 'painting',
+        'flooring', 'remodeling', 'interior design', 'architecture', 'engineering',
+        'manufacturing', 'wholesale', 'retail', 'e-commerce', 'restaurant',
+        'bakery', 'salon', 'spa', 'barbershop', 'pet grooming',
+        'daycare', 'event planning', 'travel', 'property management', 'bookkeeping'
+      ];
+
+      const el = document.getElementById('typewriter');
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let currentWord = '';
+
+      function type() {
+        currentWord = businesses[wordIndex];
+
+        if (isDeleting) {
+          el.textContent = currentWord.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          el.textContent = currentWord.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let delay = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIndex === currentWord.length) {
+          delay = 2000; // Pause at end
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % businesses.length;
+          delay = 300;
+        }
+
+        setTimeout(type, delay);
+      }
+
+      type();
+    })();
 
     // Skills Terminal
     (function() {
