@@ -132,7 +132,12 @@
       letter-spacing: -2px;
       margin-bottom: 24px;
     }
-    .hero h1 .accent { color: var(--accent); }
+    .hero h1 .accent {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero p {
       font-size: 1.2rem;
       color: var(--gray-300);
