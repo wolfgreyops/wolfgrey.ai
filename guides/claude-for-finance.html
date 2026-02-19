@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude for Finance — AI-Powered Financial Management — wolfgrey</title>
+  <meta name="description" content="Free guide: Use Claude AI for budgeting, cash flow analysis, financial reports, and bookkeeping tasks. 12 prompts for small business finance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --accent: #ff4d4d;
+      --accent2: #00e5cc;
+      --dark: #050810;
+      --gray-900: #0a0f1a;
+      --gray-800: #111827;
+      --gray-700: #1e2940;
+      --gray-600: #5a6480;
+      --gray-400: #8892b0;
+      --gray-300: #a8b2d1;
+      --white: #f0f4ff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Satoshi', -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 { font-family: 'Clash Display', sans-serif; line-height: 1.2; font-weight: 500; }
+    a { color: inherit; text-decoration: none; }
+
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 8, 16, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-800);
+      z-index: 100;
+    }
+    .logo { font-family: 'Clash Display', sans-serif; font-size: 1.1rem; font-weight: 600; }
+    .header-cta {
+      padding: 8px 16px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .header-cta:hover { background: #e63946; }
+
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--gray-900) 0%, var(--dark) 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); }
+    .hero-stat-label { font-size: 0.85rem; color: var(--gray-400); margin-top: 4px; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 24px; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--gray-400);
+      margin-bottom: 48px;
+    }
+
+    .prompt-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background: var(--gray-700);
+    }
+    .prompt-num {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .prompt-num span:first-child {
+      width: 32px; height: 32px;
+      background: var(--accent2);
+      color: var(--dark);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .prompt-num h3 { font-size: 1rem; font-weight: 500; }
+    .prompt-tag {
+      padding: 4px 10px;
+      background: var(--gray-800);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .prompt-body { padding: 24px; }
+    .prompt-context {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .prompt-text {
+      background: var(--dark);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--gray-300);
+      position: relative;
+    }
+    .prompt-text::before {
+      content: 'PROMPT';
+      position: absolute;
+      top: -10px; left: 16px;
+      background: var(--dark);
+      padding: 0 8px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      letter-spacing: 1px;
+    }
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: transparent;
+      border: 1px solid var(--gray-600);
+      border-radius: 6px;
+      color: var(--gray-300);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover {
+      background: var(--gray-700);
+      border-color: var(--accent2);
+      color: var(--accent2);
+    }
+    .copy-btn.copied {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      color: var(--dark);
+    }
+
+    .tip-box {
+      background: rgba(0,229,204,0.08);
+      border: 1px solid rgba(0,229,204,0.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 48px 0;
+    }
+    .tip-box h4 {
+      color: var(--accent2);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tip-box p {
+      color: var(--gray-300);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .warning-box {
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 48px 0;
+    }
+    .warning-box h4 {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .warning-box p {
+      color: var(--gray-300);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 80px 24px;
+      background: var(--gray-900);
+    }
+    .cta-section h2 {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: var(--gray-400);
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #e63946; transform: translateY(-2px); }
+
+    footer {
+      padding: 48px 24px;
+      text-align: center;
+      border-top: 1px solid var(--gray-800);
+    }
+    footer p { font-size: 0.85rem; color: var(--gray-600); }
+    footer a { color: var(--gray-400); }
+    footer a:hover { color: var(--white); }
+
+    @media (max-width: 600px) {
+      .hero-stats { flex-direction: column; gap: 24px; }
+      .prompt-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="../index.html" class="logo">wolfgrey</a>
+    <a href="../products.html" class="header-cta">Get Full Playbook</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">Free Finance Guide</div>
+    <h1>Claude for <span>Finance</span></h1>
+    <p>AI-powered budgeting, cash flow analysis, and financial reporting. 12 prompts to manage your money smarter.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">12</div>
+        <div class="hero-stat-label">Prompts</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4hr</div>
+        <div class="hero-stat-label">Saved Monthly</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">$0</div>
+        <div class="hero-stat-label">Forever Free</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">Bookkeeping</div>
+      <h2 class="section-title">Daily Financial Tasks</h2>
+      <p class="section-subtitle">Automate the tedious parts of managing your books.</p>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>1</span>
+            <h3>Expense Categorizer</h3>
+          </div>
+          <span class="prompt-tag">Bookkeeping</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Categorize a batch of transactions quickly.</p>
+          <div class="prompt-text">Here are my recent business transactions: [PASTE LIST - date, description, amount]. Categorize each into standard accounting categories: Office Supplies, Software/Subscriptions, Travel, Meals & Entertainment, Professional Services, Marketing, Utilities, Equipment, Inventory, or Other. Flag any that might be personal expenses. Format as a table I can paste into my spreadsheet.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>2</span>
+            <h3>Invoice Generator</h3>
+          </div>
+          <span class="prompt-tag">Bookkeeping</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Create professional invoices quickly.</p>
+          <div class="prompt-text">Create an invoice for [CLIENT NAME]. My business: [YOUR BUSINESS NAME, ADDRESS]. Services provided: [LIST ITEMS WITH DESCRIPTIONS]. Amounts: [PRICES FOR EACH]. Payment terms: [NET 30/DUE ON RECEIPT/etc]. Include: Invoice number placeholder, date, due date, total with any applicable tax, and payment instructions. Format it cleanly so I can copy into a document.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>3</span>
+            <h3>Receipt Organizer</h3>
+          </div>
+          <span class="prompt-tag">Bookkeeping</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Extract key info from receipt text.</p>
+          <div class="prompt-text">Extract the following from this receipt: [PASTE RECEIPT TEXT OR DESCRIBE]. I need: Vendor name, Date, Total amount, Tax amount (if shown), Payment method, Items purchased (brief), and suggested expense category for my [TYPE OF BUSINESS]. Format as a single line I can paste into my expense tracker.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--gray-900);">
+    <div class="container">
+      <div class="section-label">Cash Flow</div>
+      <h2 class="section-title">Cash Flow Management</h2>
+      <p class="section-subtitle">Never be surprised by your bank balance again.</p>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>4</span>
+            <h3>Cash Flow Forecast</h3>
+          </div>
+          <span class="prompt-tag">Planning</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Project your cash position for the next 90 days.</p>
+          <div class="prompt-text">Help me create a 90-day cash flow forecast. Current bank balance: $[AMOUNT]. Expected monthly revenue: $[AMOUNT] (timing: [WHEN CLIENTS PAY]). Fixed monthly expenses: [LIST WITH AMOUNTS]. Variable expenses: [ESTIMATES]. Upcoming one-time costs: [ANY KNOWN]. Create a week-by-week projection showing expected balance. Flag any weeks where I might dip below $[MINIMUM COMFORT LEVEL].</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>5</span>
+            <h3>Late Payment Follow-Up</h3>
+          </div>
+          <span class="prompt-tag">Collections</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Professional payment reminders that preserve relationships.</p>
+          <div class="prompt-text">Write 3 payment reminder emails for an invoice that's [X DAYS] overdue. Client: [NAME] at [COMPANY]. Amount: $[AMOUNT]. Invoice #[NUMBER]. Email 1: Friendly first reminder (maybe they forgot). Email 2: Firmer follow-up (7 days later). Email 3: Final notice with consequences (14 days later). Keep them professional - I want to get paid AND keep the relationship.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>6</span>
+            <h3>Expense Reduction Analysis</h3>
+          </div>
+          <span class="prompt-tag">Planning</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Find opportunities to cut costs.</p>
+          <div class="prompt-text">Analyze my monthly business expenses and suggest cost reduction opportunities: [PASTE EXPENSE LIST WITH CATEGORIES AND AMOUNTS]. I run a [TYPE OF BUSINESS] with [X EMPLOYEES]. For each suggestion: explain the potential savings, the trade-off or risk, and rate difficulty to implement (Easy/Medium/Hard). Prioritize by impact.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Important Disclaimer
+        </h4>
+        <p>Claude is not a financial advisor, accountant, or tax professional. Always verify financial calculations and consult with a qualified professional for tax advice, major financial decisions, and compliance matters. Use these prompts as a starting point, not final authority.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">Reporting</div>
+      <h2 class="section-title">Financial Reports & Analysis</h2>
+      <p class="section-subtitle">Turn numbers into insights you can act on.</p>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>7</span>
+            <h3>Monthly Financial Summary</h3>
+          </div>
+          <span class="prompt-tag">Reports</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Create an executive summary of your month.</p>
+          <div class="prompt-text">Create a monthly financial summary for [MONTH]. Revenue: $[AMOUNT]. Expenses: $[AMOUNT] (breakdown: [CATEGORIES]). Net profit: $[AMOUNT]. Compare to last month: Revenue [UP/DOWN X%], Expenses [UP/DOWN X%]. Include: Key highlights, concerns to watch, and 3 recommended actions for next month. Write it like a brief I'd send to a business partner.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>8</span>
+            <h3>Profit Margin Calculator</h3>
+          </div>
+          <span class="prompt-tag">Analysis</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Understand your real profitability by product or service.</p>
+          <div class="prompt-text">Calculate profit margins for my products/services: [LIST EACH WITH: Name, Price, Direct costs]. For each, show: Gross margin (%), Contribution margin, Break-even volume. Then analyze: Which are most profitable? Which might need price increases? Which have the best margin-to-effort ratio? I spend roughly [X HOURS] on each [UNIT].</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>9</span>
+            <h3>Year-End Review</h3>
+          </div>
+          <span class="prompt-tag">Reports</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Comprehensive annual financial review.</p>
+          <div class="prompt-text">Create a year-end financial review for my business. Annual revenue: $[AMOUNT]. Annual expenses: $[AMOUNT]. Net profit: $[AMOUNT]. Compare to previous year if available: [DATA]. Include: Revenue trends by quarter, biggest expense categories, profit margin analysis, cash flow highlights, and 5 financial goals to consider for next year. Format as a report I could share with my accountant.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--gray-900);">
+    <div class="container">
+      <div class="section-label">Planning</div>
+      <h2 class="section-title">Budgeting & Forecasting</h2>
+      <p class="section-subtitle">Plan your financial future with confidence.</p>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>10</span>
+            <h3>Annual Budget Builder</h3>
+          </div>
+          <span class="prompt-tag">Planning</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Create a realistic budget for the year ahead.</p>
+          <div class="prompt-text">Help me create an annual budget for my [TYPE OF BUSINESS]. Last year's numbers: Revenue $[X], Expenses $[Y]. Goals for this year: [GROWTH TARGET]. Known changes: [NEW HIRES, INVESTMENTS, etc]. Create a month-by-month budget with: Revenue projections (accounting for seasonality if relevant), Fixed costs, Variable costs (as % of revenue), and planned investments. Include a buffer for unexpected expenses.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>11</span>
+            <h3>Pricing Calculator</h3>
+          </div>
+          <span class="prompt-tag">Planning</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Figure out what to charge for a new offering.</p>
+          <div class="prompt-text">Help me price a new [PRODUCT/SERVICE]. My costs: [TIME REQUIRED, MATERIALS, OVERHEAD]. Market rate: [WHAT COMPETITORS CHARGE IF KNOWN]. My target profit margin: [X%]. My positioning: [PREMIUM/MID-MARKET/BUDGET]. Calculate: Cost-plus price, Market-based price, Value-based price (if I can articulate the value delivered: [VALUE]). Recommend a price with reasoning.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-num">
+            <span>12</span>
+            <h3>Scenario Planner</h3>
+          </div>
+          <span class="prompt-tag">Planning</span>
+        </div>
+        <div class="prompt-body">
+          <p class="prompt-context">Model best-case, worst-case, and realistic scenarios.</p>
+          <div class="prompt-text">Create three financial scenarios for my business over the next [6/12] months. Current monthly revenue: $[X]. Current monthly expenses: $[Y]. BEST CASE: [DESCRIBE - e.g., land 2 big clients]. WORST CASE: [DESCRIBE - e.g., lose main client]. REALISTIC: [DESCRIBE]. For each scenario show: Monthly cash flow, Ending cash position, Key risks, and Actions I should take now to prepare.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Pro Tip: Weekly Money Check-In
+        </h4>
+        <p>Every Monday, paste your bank balance and upcoming bills into Claude. Ask: "What should I be aware of this week financially?" It takes 2 minutes and prevents cash flow surprises.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Want the Complete Finance System?</h2>
+    <p>The AI Playbook includes 40+ templates across finance, operations, sales, and more - plus frameworks to create your own.</p>
+    <a href="../products.html" class="btn btn-primary">Get the AI Playbook - $49</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 <a href="../index.html">wolfgrey</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function copyPrompt(btn) {
+      const promptText = btn.parentElement.querySelector('.prompt-text').innerText;
+      navigator.clipboard.writeText(promptText).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Prompt`;
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
