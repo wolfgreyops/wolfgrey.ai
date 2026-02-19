@@ -1370,6 +1370,134 @@
       }
     }
 
+    /* ── BIG CELEBRATION (Volume 10) ── */
+    .celebration-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(5, 8, 16, 0.95), rgba(5, 8, 16, 0.98));
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: celebration-fade-in 0.5s ease-out forwards;
+    }
+    @keyframes celebration-fade-in {
+      to { opacity: 1; }
+    }
+    .celebration-content {
+      text-align: center;
+      transform: scale(0.8);
+      opacity: 0;
+      animation: celebration-pop 0.6s ease-out 0.3s forwards;
+    }
+    @keyframes celebration-pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .celebration-badge {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--accent), #ff6b9d);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(255, 77, 77, 0.5), 0 0 120px rgba(255, 77, 77, 0.3);
+      animation: badge-pulse 2s ease-in-out infinite;
+    }
+    @keyframes badge-pulse {
+      0%, 100% { box-shadow: 0 0 60px rgba(255, 77, 77, 0.5), 0 0 120px rgba(255, 77, 77, 0.3); }
+      50% { box-shadow: 0 0 80px rgba(255, 77, 77, 0.7), 0 0 160px rgba(255, 77, 77, 0.4); }
+    }
+    .celebration-badge svg {
+      width: 60px;
+      height: 60px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
+    .celebration-title {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--white), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .celebration-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray-300);
+      margin-bottom: 32px;
+    }
+    .celebration-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .celebration-stat {
+      text-align: center;
+    }
+    .celebration-stat-number {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+    .celebration-stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .celebration-close {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .celebration-close:hover {
+      background: #e63946;
+      transform: translateY(-2px);
+    }
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: firework-burst 1s ease-out forwards;
+    }
+    @keyframes firework-burst {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle-float 2s ease-out forwards;
+    }
+    @keyframes sparkle-float {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-100px) scale(0); }
+    }
+
     /* ── CONSULTING CTA ── */
     .consulting-cta {
       background: linear-gradient(135deg, rgba(255, 77, 77, 0.15), rgba(0, 229, 204, 0.1));
@@ -4062,9 +4190,13 @@
       document.getElementById('prev-btn').disabled = currentSlide === 0;
       document.getElementById('next-btn').disabled = currentSlide === currentVolume.slides.length - 1;
 
-      // Trigger confetti on last slide
+      // Trigger celebration on last slide
       if (currentSlide === currentVolume.slides.length - 1) {
-        triggerConfetti();
+        if (currentVolume.id === 10) {
+          triggerBigCelebration();
+        } else {
+          triggerConfetti();
+        }
       }
 
       // Save progress
@@ -4072,7 +4204,7 @@
       saveProgress();
     }
 
-    // Confetti celebration
+    // Regular confetti celebration
     function triggerConfetti() {
       const container = document.createElement('div');
       container.className = 'confetti-container';
@@ -4095,6 +4227,81 @@
       }
 
       setTimeout(() => container.remove(), 4000);
+    }
+
+    // BIG celebration for completing entire course
+    function triggerBigCelebration() {
+      // Epic confetti burst
+      const confettiContainer = document.createElement('div');
+      confettiContainer.className = 'confetti-container';
+      document.body.appendChild(confettiContainer);
+
+      const colors = ['#ff4d4d', '#00e5cc', '#ffbd2e', '#27ca40', '#ff6b9d', '#4d9fff', '#fff', '#ffd700'];
+
+      // 300 confetti pieces for the big one!
+      for (let i = 0; i < 300; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        confetti.style.width = (Math.random() * 12 + 6) + 'px';
+        confetti.style.height = (Math.random() * 12 + 6) + 'px';
+        confetti.style.animationDelay = Math.random() * 1.5 + 's';
+        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        confettiContainer.appendChild(confetti);
+      }
+
+      // Show celebration overlay after a brief moment
+      setTimeout(() => {
+        const overlay = document.createElement('div');
+        overlay.className = 'celebration-overlay';
+        overlay.innerHTML = `
+          <div class="celebration-content">
+            <div class="celebration-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <h2 class="celebration-title">Course Complete!</h2>
+            <p class="celebration-subtitle">You've mastered all 10 volumes of the Claude Mastery Series</p>
+            <div class="celebration-stats">
+              <div class="celebration-stat">
+                <div class="celebration-stat-number">10</div>
+                <div class="celebration-stat-label">Volumes</div>
+              </div>
+              <div class="celebration-stat">
+                <div class="celebration-stat-number">90+</div>
+                <div class="celebration-stat-label">Slides</div>
+              </div>
+              <div class="celebration-stat">
+                <div class="celebration-stat-number">∞</div>
+                <div class="celebration-stat-label">Potential</div>
+              </div>
+            </div>
+            <button class="celebration-close" onclick="this.closest('.celebration-overlay').remove()">Continue →</button>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Add sparkles continuously
+        const sparkleInterval = setInterval(() => {
+          if (!document.querySelector('.celebration-overlay')) {
+            clearInterval(sparkleInterval);
+            return;
+          }
+          for (let i = 0; i < 5; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+            overlay.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+          }
+        }, 200);
+
+      }, 500);
+
+      setTimeout(() => confettiContainer.remove(), 6000);
     }
 
     // Navigation functions
