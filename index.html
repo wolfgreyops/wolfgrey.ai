@@ -133,19 +133,32 @@
       margin-bottom: 24px;
     }
     .hero h1 .accent { color: var(--accent); }
-    .hero h1 .typewriter-word {
+    .hero h1 .rotating-words {
+      display: inline-block;
+      position: relative;
+      vertical-align: top;
+      overflow: hidden;
+      height: 1.1em;
+    }
+    .hero h1 .rotating-words span {
+      display: block;
       color: var(--accent);
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      white-space: nowrap;
+    }
+    .hero h1 .rotating-words span.active {
+      opacity: 1;
+      transform: translateY(0);
       position: relative;
     }
-    .hero h1 .typewriter-word::after {
-      content: '|';
-      position: absolute;
-      right: -4px;
-      animation: cursor-blink 0.7s infinite;
-    }
-    @keyframes cursor-blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
+    .hero h1 .rotating-words span.exit {
+      opacity: 0;
+      transform: translateY(-100%);
     }
     .hero p {
       font-size: 1.2rem;
@@ -1520,7 +1533,7 @@
     <canvas class="hero-canvas" id="galaxy"></canvas>
     <div class="hero-content">
       <div class="hero-badge">AI Tools & Training</div>
-      <h1><span class="accent">AI systems</span> for your <span class="typewriter-word" id="typewriter"></span> business</h1>
+      <h1><span class="accent">AI systems</span> for your <span class="rotating-words" id="rotating-words"></span> business</h1>
       <p>Everything you need to implement AI in your operations — guides, courses, templates, and tools.</p>
       <div class="hero-buttons">
         <a href="#products" class="btn btn-primary">Explore Products →</a>
@@ -2040,7 +2053,7 @@
       });
     });
 
-    // Hero Typewriter Effect
+    // Hero Rotating Words Effect
     (function() {
       const businesses = [
         'accounting', 'marketing', 'real estate', 'landscaping', 'laundry',
@@ -2055,38 +2068,37 @@
         'daycare', 'event planning', 'travel', 'property management', 'bookkeeping'
       ];
 
-      const el = document.getElementById('typewriter');
-      let wordIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      let currentWord = '';
+      const container = document.getElementById('rotating-words');
+      let currentIndex = 0;
 
-      function type() {
-        currentWord = businesses[wordIndex];
+      // Create span elements for each word
+      businesses.forEach((word, i) => {
+        const span = document.createElement('span');
+        span.textContent = word;
+        if (i === 0) span.classList.add('active');
+        container.appendChild(span);
+      });
 
-        if (isDeleting) {
-          el.textContent = currentWord.substring(0, charIndex - 1);
-          charIndex--;
-        } else {
-          el.textContent = currentWord.substring(0, charIndex + 1);
-          charIndex++;
-        }
+      const spans = container.querySelectorAll('span');
 
-        let delay = isDeleting ? 40 : 80;
+      function rotate() {
+        const current = spans[currentIndex];
+        const nextIndex = (currentIndex + 1) % businesses.length;
+        const next = spans[nextIndex];
 
-        if (!isDeleting && charIndex === currentWord.length) {
-          delay = 2000; // Pause at end
-          isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % businesses.length;
-          delay = 300;
-        }
+        current.classList.remove('active');
+        current.classList.add('exit');
 
-        setTimeout(type, delay);
+        next.classList.add('active');
+
+        setTimeout(() => {
+          current.classList.remove('exit');
+        }, 500);
+
+        currentIndex = nextIndex;
       }
 
-      type();
+      setInterval(rotate, 2500);
     })();
 
     // Skills Terminal
