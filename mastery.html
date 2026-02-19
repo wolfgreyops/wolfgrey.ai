@@ -996,10 +996,13 @@
     /* ── NEW: Visual Comparison ── */
     .visual-comparison {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 16px;
-      align-items: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
       margin: 24px 0;
+    }
+    .visual-comparison.with-arrow {
+      grid-template-columns: 1fr auto 1fr;
     }
     @media (max-width: 600px) {
       .visual-comparison {
@@ -1038,6 +1041,29 @@
       font-size: 0.85rem;
       color: var(--gray-400);
       margin: 0;
+    }
+    .comparison-side ul {
+      text-align: left;
+      list-style: disc;
+      padding-left: 20px;
+      margin: 12px 0 0 0;
+    }
+    .comparison-side ul li {
+      font-size: 0.85rem;
+      color: var(--gray-300);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .comparison-side ul li:last-child {
+      margin-bottom: 0;
+    }
+    .comparison-side .comparison-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 8px;
     }
     .comparison-arrow {
       width: 40px;
