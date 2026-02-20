@@ -1633,6 +1633,106 @@
     </div>
   </section>
 
+  <!-- AGENT HIERARCHY -->
+  <section id="how-it-works" style="padding: 100px 24px; background: var(--gray-900);">
+    <div class="container">
+      <div class="services-header" style="text-align: center;">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">AI agents that run your operations</h2>
+        <p class="section-subtitle" style="margin: 0 auto 60px;">A central AI orchestrator coordinates specialized agents across your business — all reporting to you.</p>
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <svg viewBox="0 0 800 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; width: 100%; height: auto;">
+          <!-- Connection lines -->
+          <path d="M400 95 L400 155" stroke="var(--gray-600)" stroke-width="2" stroke-dasharray="6 4"/>
+          <path d="M400 255 L400 315" stroke="var(--accent2)" stroke-width="2"/>
+          <path d="M400 315 L100 395" stroke="var(--accent2)" stroke-width="2"/>
+          <path d="M400 315 L250 395" stroke="var(--accent2)" stroke-width="2"/>
+          <path d="M400 315 L400 395" stroke="var(--accent2)" stroke-width="2"/>
+          <path d="M400 315 L550 395" stroke="var(--accent2)" stroke-width="2"/>
+          <path d="M400 315 L700 395" stroke="var(--accent2)" stroke-width="2"/>
+
+          <!-- Operator (You) -->
+          <g>
+            <rect x="320" y="20" width="160" height="75" rx="12" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="2"/>
+            <circle cx="400" cy="48" r="14" fill="none" stroke="var(--gray-400)" stroke-width="2"/>
+            <circle cx="400" cy="44" r="5" fill="var(--gray-400)"/>
+            <path d="M388 60 L400 68 L412 60" stroke="var(--gray-400)" stroke-width="2" fill="none"/>
+            <text x="400" y="82" text-anchor="middle" fill="var(--white)" font-family="Clash Display, sans-serif" font-size="14" font-weight="500">You (Operator)</text>
+          </g>
+
+          <!-- Main Claude (Orchestrator) -->
+          <g>
+            <rect x="300" y="155" width="200" height="100" rx="16" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2"/>
+            <rect x="300" y="155" width="200" height="100" rx="16" fill="url(#orchestratorGlow)" style="mix-blend-mode: screen;"/>
+            <!-- Claude logo simplified -->
+            <circle cx="400" cy="190" r="18" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+            <text x="400" y="196" text-anchor="middle" fill="var(--accent2)" font-family="Clash Display, sans-serif" font-size="18" font-weight="600">AI</text>
+            <text x="400" y="235" text-anchor="middle" fill="var(--white)" font-family="Clash Display, sans-serif" font-size="15" font-weight="500">Claude Orchestrator</text>
+          </g>
+
+          <!-- Dispatch hub -->
+          <circle cx="400" cy="315" r="12" fill="var(--accent2)" opacity="0.2"/>
+          <circle cx="400" cy="315" r="6" fill="var(--accent2)"/>
+
+          <!-- Agent: Sales -->
+          <g>
+            <rect x="40" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
+            <circle cx="100" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <path d="M92 425 L100 433 L108 425 M100 417 L100 433" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="100" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Sales</text>
+            <text x="100" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Outreach & Leads</text>
+          </g>
+
+          <!-- Agent: Marketing -->
+          <g>
+            <rect x="190" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
+            <circle cx="250" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <path d="M242 420 L258 420 M242 425 L255 425 M242 430 L250 430" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="250" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Marketing</text>
+            <text x="250" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Content & Social</text>
+          </g>
+
+          <!-- Agent: Operations -->
+          <g>
+            <rect x="340" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
+            <circle cx="400" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="400" cy="425" r="6" fill="none" stroke="var(--accent2)" stroke-width="1.5"/>
+            <path d="M400 415 L400 419 M400 431 L400 435 M410 425 L406 425 M394 425 L390 425" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <text x="400" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Operations</text>
+            <text x="400" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">SOPs & Workflows</text>
+          </g>
+
+          <!-- Agent: Finance -->
+          <g>
+            <rect x="490" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
+            <circle cx="550" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <text x="550" y="430" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi, sans-serif" font-size="14" font-weight="600">$</text>
+            <text x="550" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Finance</text>
+            <text x="550" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Reports & Books</text>
+          </g>
+
+          <!-- Agent: Support -->
+          <g>
+            <rect x="640" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
+            <circle cx="700" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <path d="M693 420 L707 420 L707 430 L700 434 L693 430 Z" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="700" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Support</text>
+            <text x="700" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Customer Service</text>
+          </g>
+
+          <!-- Gradient definitions -->
+          <defs>
+            <radialGradient id="orchestratorGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--accent2)" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </section>
+
   <!-- WHY AI -->
   <section id="benefits">
     <div class="container">
