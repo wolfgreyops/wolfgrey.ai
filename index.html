@@ -1709,14 +1709,14 @@
           <h3>Small Business AI Playbook</h3>
           <p>The CRAFT prompting framework, 40+ templates, and a 90-day implementation roadmap. Everything you need to operationalize AI.</p>
           <div class="product-price-inline">$49</div>
-          <a href="https://buy.stripe.com/3cI4gybndgH2elh0rD5c400" class="btn btn-primary">Get the Playbook →</a>
+          <button class="btn btn-primary" onclick="openCheckout('https://buy.stripe.com/3cI4gybndgH2elh0rD5c400')">Get the Playbook →</button>
         </div>
         <div class="product-card fade-up featured">
           <div class="product-tag">Mastery</div>
           <h3>Claude Mastery Series</h3>
           <p>The complete 10-volume course for non-technical users. From first conversation to advanced workflows — master Claude in depth.</p>
           <div class="product-price-inline">$199</div>
-          <a href="https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401" class="btn btn-primary">Get Full Access →</a>
+          <button class="btn btn-primary" onclick="openCheckout('https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401')">Get Full Access →</button>
         </div>
       </div>
     </div>
@@ -1845,7 +1845,7 @@
           <div class="step-price">$49</div>
           <h3>AI Playbook</h3>
           <p>CRAFT framework, 40+ templates, and 90-day roadmap to operationalize AI.</p>
-          <a href="https://buy.stripe.com/3cI4gybndgH2elh0rD5c400" class="btn btn-primary">Get the Playbook →</a>
+          <button class="btn btn-primary" onclick="openCheckout('https://buy.stripe.com/3cI4gybndgH2elh0rD5c400')">Get the Playbook →</button>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
@@ -1853,7 +1853,7 @@
           <div class="step-price">$199</div>
           <h3>Claude Mastery Series</h3>
           <p>10-volume deep dive for non-technical users. Master Claude from basics to advanced workflows.</p>
-          <a href="https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401" class="btn btn-primary">Get Full Access →</a>
+          <button class="btn btn-primary" onclick="openCheckout('https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401')">Get Full Access →</button>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
@@ -2014,6 +2014,15 @@
   </footer>
 
   <script>
+    // Stripe Checkout Popup
+    function openCheckout(url) {
+      const width = 500;
+      const height = 700;
+      const left = (screen.width - width) / 2;
+      const top = (screen.height - height) / 2;
+      window.open(url, 'stripe-checkout', `width=${width},height=${height},left=${left},top=${top},scrollbars=yes`);
+    }
+
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

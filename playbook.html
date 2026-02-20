@@ -1512,10 +1512,10 @@ Tone: Thoughtful and rigorous. Help me think, don't just give me an answer.</div
     <div class="cta-content">
       <h2>Ready to Go Even Deeper?</h2>
       <p>The Claude Mastery Series is 10 volumes of in-depth AI training. From first conversation to advanced workflows—master Claude completely.</p>
-      <a href="https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401" class="btn btn-primary">
+      <button class="btn btn-primary" onclick="openCheckout('https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401')">
         Get Claude Mastery Series — $199
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      </button>
     </div>
   </section>
 
@@ -1526,6 +1526,15 @@ Tone: Thoughtful and rigorous. Help me think, don't just give me an answer.</div
   </footer>
 
   <script>
+    // Stripe Checkout Popup
+    function openCheckout(url) {
+      const width = 500;
+      const height = 700;
+      const left = (screen.width - width) / 2;
+      const top = (screen.height - height) / 2;
+      window.open(url, 'stripe-checkout', `width=${width},height=${height},left=${left},top=${top},scrollbars=yes`);
+    }
+
     // Access check - verify purchase
     (function() {
       const params = new URLSearchParams(window.location.search);

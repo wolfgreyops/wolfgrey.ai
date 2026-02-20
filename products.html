@@ -542,7 +542,7 @@
               Lifetime updates
             </li>
           </ul>
-          <a href="https://buy.stripe.com/3cI4gybndgH2elh0rD5c400" class="btn btn-primary">Buy Now — $49 &rarr;</a>
+          <button class="btn btn-primary" onclick="openCheckout('https://buy.stripe.com/3cI4gybndgH2elh0rD5c400')">Buy Now — $49 &rarr;</button>
         </div>
 
         <!-- MASTERY SERIES -->
@@ -593,7 +593,7 @@
               Vol 10: Cowork & Advanced
             </li>
           </ul>
-          <a href="https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401" class="btn btn-primary" style="max-width: 400px;">Get Full Access — $199 &rarr;</a>
+          <button class="btn btn-primary" style="max-width: 400px;" onclick="openCheckout('https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401')">Get Full Access — $199 &rarr;</button>
         </div>
 
       </div>
@@ -811,6 +811,15 @@
     // 2. Go to Payment Links → Create → Select your product
     // 3. Copy the link and replace STRIPE_PAYMENT_LINK_HERE in the HTML above
     // Example: https://buy.stripe.com/xxxxxxxxxxxx
+
+    // ── Stripe Checkout Popup ──
+    function openCheckout(url) {
+      const width = 500;
+      const height = 700;
+      const left = (screen.width - width) / 2;
+      const top = (screen.height - height) / 2;
+      window.open(url, 'stripe-checkout', `width=${width},height=${height},left=${left},top=${top},scrollbars=yes`);
+    }
 
     // ── Modal functions ──
     function openFreeModal() {
