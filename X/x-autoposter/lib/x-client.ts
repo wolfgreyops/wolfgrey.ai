@@ -1,41 +1,64 @@
-import { TwitterApi } from 'twitter-api-v2';
+const TYPEFULLY_API = 'https://api.typefully.com/v1';
 
-// Lazy initialization to avoid build-time errors
-function getClient() {
-  if (!process.env.X_API_KEY || !process.env.X_API_SECRET ||
-      !process.env.X_ACCESS_TOKEN || !process.env.X_ACCESS_SECRET) {
-    throw new Error('X API credentials not configured');
+function getApiKey(): string {
+  const key = process.env.TYPEFULLY_API_KEY;
+  if (!key) {
+    throw new Error('TYPEFULLY_API_KEY not configured');
   }
-
-  return new TwitterApi({
-    appKey: process.env.X_API_KEY,
-    appSecret: process.env.X_API_SECRET,
-    accessToken: process.env.X_ACCESS_TOKEN,
-    accessSecret: process.env.X_ACCESS_SECRET,
-  }).readWrite;
+  return key;
 }
 
 export async function postTweet(text: string): Promise<{ id: string; text: string }> {
-  const client = getClient();
-  const result = await client.v2.tweet(text);
+  const response = await fetch(`${TYPEFULLY_API}/drafts/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-API-KEY': getApiKey(),
+    },
+    body: JSON.stringify({
+      content: text,
+      schedule_date: 'next-free-slot',
+      auto_schedule: true,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Typefully API error: ${response.status} ${error}`);
+  }
+
+  const data = await response.json();
   return {
-    id: result.data.id,
-    text: result.data.text,
+    id: data.id?.toString() || 'pending',
+    text: text,
   };
 }
 
 export async function postThread(tweets: string[]): Promise<{ ids: string[] }> {
-  const client = getClient();
-  const ids: string[] = [];
-  let lastTweetId: string | undefined;
+  // Typefully expects threads as content separated by 4 newlines
+  const threadContent = tweets.join('\n\n\n\n');
 
-  for (const text of tweets) {
-    const result = await client.v2.tweet(text, {
-      reply: lastTweetId ? { in_reply_to_tweet_id: lastTweetId } : undefined,
-    });
-    ids.push(result.data.id);
-    lastTweetId = result.data.id;
+  const response = await fetch(`${TYPEFULLY_API}/drafts/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-API-KEY': getApiKey(),
+    },
+    body: JSON.stringify({
+      content: threadContent,
+      threadify: true,
+      schedule_date: 'next-free-slot',
+      auto_schedule: true,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Typefully API error: ${response.status} ${error}`);
   }
 
-  return { ids };
+  const data = await response.json();
+  return {
+    ids: [data.id?.toString() || 'pending'],
+  };
 }

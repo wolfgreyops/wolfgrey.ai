@@ -26,6 +26,20 @@
       --gray-300: #a8b2d1;
       --white: #f0f4ff;
       --white-bright: #f0f4ff;
+      --nav-bg: rgba(5,8,16,0.85);
+    }
+
+    [data-theme="light"] {
+      --dark: #ffffff;
+      --gray-900: #f8f9fa;
+      --gray-800: #f1f3f4;
+      --gray-700: #e0e3e7;
+      --gray-600: #9aa0a6;
+      --gray-400: #5f6368;
+      --gray-300: #3c4043;
+      --white: #1a1a1a;
+      --white-bright: #1a1a1a;
+      --nav-bg: rgba(255,255,255,0.9);
     }
 
     html { scroll-behavior: smooth; }
@@ -47,7 +61,7 @@
       top: 0;
       width: 100%;
       z-index: 100;
-      background: rgba(5,8,16,0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--gray-700);
     }
@@ -87,6 +101,26 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
+    .theme-toggle {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--gray-300);
+    }
+    .theme-toggle:hover {
+      background: var(--gray-700);
+      color: var(--white);
+    }
+    .theme-toggle .sun { display: none; }
+    .theme-toggle .moon { display: block; }
+    [data-theme="light"] .theme-toggle .sun { display: block; }
+    [data-theme="light"] .theme-toggle .moon { display: none; }
 
     /* ── PAGE HEADER ── */
     .page-header {
@@ -470,6 +504,10 @@
         <a href="consulting.html">Consulting</a>
         <a href="products.html" class="active">Products</a>
         <a href="resources.html">Resources</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
         <a href="products.html" class="nav-cta">Shop &rarr;</a>
       </div>
     </div>
@@ -811,6 +849,19 @@
     // 2. Go to Payment Links → Create → Select your product
     // 3. Copy the link and replace STRIPE_PAYMENT_LINK_HERE in the HTML above
     // Example: https://buy.stripe.com/xxxxxxxxxxxx
+
+    // ── Theme Toggle ──
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('wolfgrey-theme', next);
+    }
+    (function() {
+      const saved = localStorage.getItem('wolfgrey-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
 
     // ── Stripe Checkout Popup ──
     function openCheckout(url) {

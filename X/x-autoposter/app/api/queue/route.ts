@@ -9,8 +9,9 @@ import {
 
 function verifyAuth(request: NextRequest): boolean {
   const authHeader = request.headers.get('authorization');
-  if (process.env.API_SECRET) {
-    return authHeader === `Bearer ${process.env.API_SECRET}`;
+  const secret = process.env.CRON_SECRET || process.env.API_SECRET;
+  if (secret) {
+    return authHeader === `Bearer ${secret}`;
   }
   return process.env.NODE_ENV === 'development';
 }
