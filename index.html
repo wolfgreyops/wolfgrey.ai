@@ -1635,6 +1635,49 @@
 
   <!-- AGENT HIERARCHY -->
   <section id="how-it-works" style="padding: 100px 24px; background: var(--gray-900);">
+    <style>
+      @keyframes flowDown {
+        0% { offset-distance: 0%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { offset-distance: 100%; opacity: 0; }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.15; transform: scale(1); }
+        50% { opacity: 0.3; transform: scale(1.05); }
+      }
+      @keyframes hubPulse {
+        0%, 100% { r: 12; opacity: 0.2; }
+        50% { r: 18; opacity: 0.4; }
+      }
+      @keyframes dotPulse {
+        0%, 100% { r: 6; }
+        50% { r: 8; }
+      }
+      .flow-dot {
+        offset-rotate: 0deg;
+        animation: flowDown 2.5s ease-in-out infinite;
+      }
+      .flow-dot-1 { offset-path: path('M400 95 L400 155'); animation-delay: 0s; }
+      .flow-dot-2 { offset-path: path('M400 255 L400 315'); animation-delay: 0.8s; }
+      .flow-dot-sales { offset-path: path('M400 315 L100 395'); animation-delay: 1.6s; }
+      .flow-dot-marketing { offset-path: path('M400 315 L250 395'); animation-delay: 1.8s; }
+      .flow-dot-ops { offset-path: path('M400 315 L400 395'); animation-delay: 2.0s; }
+      .flow-dot-finance { offset-path: path('M400 315 L550 395'); animation-delay: 2.2s; }
+      .flow-dot-support { offset-path: path('M400 315 L700 395'); animation-delay: 2.4s; }
+      .orchestrator-glow {
+        transform-origin: 400px 205px;
+        animation: pulseGlow 3s ease-in-out infinite;
+      }
+      .hub-outer {
+        animation: hubPulse 2s ease-in-out infinite;
+        animation-delay: 1.5s;
+      }
+      .hub-inner {
+        animation: dotPulse 2s ease-in-out infinite;
+        animation-delay: 1.5s;
+      }
+    </style>
     <div class="container">
       <div class="services-header" style="text-align: center;">
         <div class="section-label">How It Works</div>
@@ -1645,12 +1688,21 @@
         <svg viewBox="0 0 800 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; width: 100%; height: auto;">
           <!-- Connection lines -->
           <path d="M400 95 L400 155" stroke="var(--gray-600)" stroke-width="2" stroke-dasharray="6 4"/>
-          <path d="M400 255 L400 315" stroke="var(--accent2)" stroke-width="2"/>
-          <path d="M400 315 L100 395" stroke="var(--accent2)" stroke-width="2"/>
-          <path d="M400 315 L250 395" stroke="var(--accent2)" stroke-width="2"/>
-          <path d="M400 315 L400 395" stroke="var(--accent2)" stroke-width="2"/>
-          <path d="M400 315 L550 395" stroke="var(--accent2)" stroke-width="2"/>
-          <path d="M400 315 L700 395" stroke="var(--accent2)" stroke-width="2"/>
+          <path d="M400 255 L400 315" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
+          <path d="M400 315 L100 395" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
+          <path d="M400 315 L250 395" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
+          <path d="M400 315 L400 395" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
+          <path d="M400 315 L550 395" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
+          <path d="M400 315 L700 395" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
+
+          <!-- Animated flow dots -->
+          <circle class="flow-dot flow-dot-1" r="4" fill="var(--gray-400)"/>
+          <circle class="flow-dot flow-dot-2" r="5" fill="var(--accent2)"/>
+          <circle class="flow-dot flow-dot-sales" r="4" fill="var(--accent2)"/>
+          <circle class="flow-dot flow-dot-marketing" r="4" fill="var(--accent2)"/>
+          <circle class="flow-dot flow-dot-ops" r="4" fill="var(--accent2)"/>
+          <circle class="flow-dot flow-dot-finance" r="4" fill="var(--accent2)"/>
+          <circle class="flow-dot flow-dot-support" r="4" fill="var(--accent2)"/>
 
           <!-- Operator (You) -->
           <g>
@@ -1664,7 +1716,7 @@
           <!-- Main Claude (Orchestrator) -->
           <g>
             <rect x="300" y="155" width="200" height="100" rx="16" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2"/>
-            <rect x="300" y="155" width="200" height="100" rx="16" fill="url(#orchestratorGlow)" style="mix-blend-mode: screen;"/>
+            <rect class="orchestrator-glow" x="300" y="155" width="200" height="100" rx="16" fill="url(#orchestratorGlow)" style="mix-blend-mode: screen;"/>
             <!-- Claude logo simplified -->
             <circle cx="400" cy="190" r="18" fill="none" stroke="var(--accent2)" stroke-width="2"/>
             <text x="400" y="196" text-anchor="middle" fill="var(--accent2)" font-family="Clash Display, sans-serif" font-size="18" font-weight="600">AI</text>
@@ -1672,8 +1724,8 @@
           </g>
 
           <!-- Dispatch hub -->
-          <circle cx="400" cy="315" r="12" fill="var(--accent2)" opacity="0.2"/>
-          <circle cx="400" cy="315" r="6" fill="var(--accent2)"/>
+          <circle class="hub-outer" cx="400" cy="315" r="12" fill="var(--accent2)" opacity="0.2"/>
+          <circle class="hub-inner" cx="400" cy="315" r="6" fill="var(--accent2)"/>
 
           <!-- Agent: Sales -->
           <g>
