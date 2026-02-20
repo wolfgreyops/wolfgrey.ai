@@ -57,18 +57,18 @@
       content: '';
       position: fixed;
       top: 0;
-      left: calc(50% - 600px);
-      width: 1200px;
+      left: calc(50% - 660px);
+      width: 1320px;
       height: 100%;
       border-left: 1px solid var(--line-color);
       border-right: 1px solid var(--line-color);
       pointer-events: none;
-      z-index: 9999;
+      z-index: 1;
     }
-    @media (max-width: 1248px) {
+    @media (max-width: 1368px) {
       body::before {
-        left: 24px;
-        right: 24px;
+        left: 12px;
+        right: 12px;
         width: auto;
       }
     }
@@ -1465,6 +1465,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      background: var(--dark);
+      z-index: 2;
     }
     .ship-section .container {
       position: relative;
