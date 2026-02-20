@@ -118,7 +118,11 @@
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--white);
+      display: flex;
+      align-items: center;
     }
+    .wolf-icon { filter: invert(1) brightness(1.2); }
+    [data-theme="light"] .wolf-icon { filter: none; }
     .nav-links {
       display: flex;
       gap: 8px;
@@ -722,7 +726,10 @@
 
   <!-- Header -->
   <header class="header">
-    <a href="index.html" class="logo">wolfgrey</a>
+    <a href="index.html" class="logo">
+      <img src="wolf-icon.png" alt="" class="wolf-icon" style="height: 28px; margin-right: 8px;">
+      <img src="logo.png" alt="wolfgrey" style="height: 32px;">
+    </a>
     <nav class="nav-links">
       <a href="#craft" class="nav-link">CRAFT Framework</a>
       <a href="#templates" class="nav-link">Templates</a>

@@ -96,6 +96,8 @@
       justify-content: space-between;
     }
     .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
+    .wolf-icon { filter: invert(1) brightness(1.2); }
+    [data-theme="light"] .wolf-icon { filter: none; }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
       font-size: 0.875rem;
@@ -401,7 +403,10 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a href="/" class="logo"><img src="logo.png" alt="wolfgrey" style="height: 38px; vertical-align: middle;"></a>
+      <a href="/" class="logo">
+        <img src="wolf-icon.png" alt="" class="wolf-icon" style="height: 32px; vertical-align: middle; margin-right: 8px;">
+        <img src="logo.png" alt="wolfgrey" style="height: 38px; vertical-align: middle;">
+      </a>
       <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
       <div class="nav-links">
         <a href="/">Home</a>
