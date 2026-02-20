@@ -23,6 +23,7 @@
       --gray-400: #8892b0;
       --gray-300: #a8b2d1;
       --white: #f0f4ff;
+      --line-color: rgba(255,255,255,0.06);
     }
 
     [data-theme="light"] {
@@ -34,6 +35,7 @@
       --gray-400: #5f6368;
       --gray-300: #3c4043;
       --white: #1a1a1a;
+      --line-color: rgba(0,0,0,0.06);
     }
 
     .theme-toggle-float {
@@ -70,6 +72,25 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: calc(50% - 660px);
+      width: 1320px;
+      height: 100%;
+      border-left: 1px solid var(--line-color);
+      border-right: 1px solid var(--line-color);
+      pointer-events: none;
+      z-index: 1;
+    }
+    @media (max-width: 1368px) {
+      body::before {
+        left: 12px;
+        right: 12px;
+        width: auto;
+      }
     }
 
     h1, h2, h3, h4 {
