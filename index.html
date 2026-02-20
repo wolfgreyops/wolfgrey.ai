@@ -27,6 +27,7 @@
       --white: #f0f4ff;
       --white-bright: #f0f4ff;
       --nav-bg: rgba(5,8,16,0.85);
+      --grid-color: rgba(255,255,255,0.03);
     }
 
     [data-theme="light"] {
@@ -40,13 +41,17 @@
       --white: #1a1a1a;
       --white-bright: #1a1a1a;
       --nav-bg: rgba(255,255,255,0.9);
+      --grid-color: rgba(0,0,0,0.04);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Satoshi', 'Inter', -apple-system, sans-serif;
-      background: var(--dark);
+      background:
+        radial-gradient(circle, var(--grid-color) 1px, transparent 1px),
+        var(--dark);
+      background-size: 24px 24px;
       color: var(--white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
