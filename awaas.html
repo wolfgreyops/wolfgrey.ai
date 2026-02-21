@@ -253,6 +253,194 @@
       color: var(--accent2);
     }
 
+    /* ── ORCHESTRATOR DIAGRAM ── */
+    .orchestrator-diagram {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      margin: 0 auto;
+    }
+
+    /* Central Hub */
+    .hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+    .hub-glow {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,229,204,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: hubGlow 3s ease-in-out infinite;
+    }
+    .hub-ring {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid var(--accent2);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: hubRing 4s ease-in-out infinite;
+    }
+    .hub-core {
+      width: 100px;
+      height: 100px;
+      background: var(--gray-800);
+      border: 2px solid var(--accent2);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,229,204,0.2);
+    }
+    .hub-label {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.5px;
+    }
+    .hub-sub {
+      font-size: 9px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    /* Orbit Ring */
+    .orbit-ring {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px dashed var(--gray-700);
+      border-radius: 50%;
+      animation: orbitSpin 20s linear infinite;
+    }
+    .orbit-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent2);
+    }
+    .orbit-particle.p1 { top: -3px; left: 50%; }
+    .orbit-particle.p2 { bottom: 20%; right: -3px; }
+    .orbit-particle.p3 { bottom: -3px; left: 30%; }
+
+    /* Agent Nodes */
+    .agent-node {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 5;
+    }
+    .agent-node .agent-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gray-800);
+      border: 2px solid var(--gray-600);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .agent-node .agent-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--gray-300);
+    }
+    .agent-node span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .agent-node .agent-status {
+      width: 8px;
+      height: 8px;
+      background: var(--gray-600);
+      border-radius: 50%;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+    }
+    .agent-node .agent-status.active {
+      background: var(--accent2);
+      box-shadow: 0 0 8px var(--accent2);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+    .agent-node .agent-pulse {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--accent2);
+      border-radius: 14px;
+      opacity: 0;
+      animation: agentPulse 3s ease-out infinite;
+    }
+
+    /* Agent Positions */
+    .a-sales { top: 20px; left: 50%; transform: translateX(-50%); }
+    .a-marketing { top: 50%; right: 20px; transform: translateY(-50%); }
+    .a-support { bottom: 30px; right: 60px; }
+    .a-ops { bottom: 30px; left: 60px; }
+    .a-finance { top: 50%; left: 20px; transform: translateY(-50%); }
+
+    /* Data Streams SVG */
+    .data-streams {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes hubGlow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+    @keyframes hubRing {
+      0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.15); }
+    }
+    @keyframes orbitSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes agentPulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.5); }
+    }
+    .a-sales .agent-pulse { animation-delay: 0s; }
+    .a-marketing .agent-pulse { animation-delay: 0.6s; }
+    .a-support .agent-pulse { animation-delay: 1.2s; }
+    .a-ops .agent-pulse { animation-delay: 1.8s; }
+    .a-finance .agent-pulse { animation-delay: 2.4s; }
+
     /* ── WORKFLOW DIAGRAMS ── */
     .workflow-section { text-align: center; }
     .workflow-tabs {
@@ -653,59 +841,122 @@
           </ul>
         </div>
         <div class="what-visual">
-          <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 400px;">
-            <!-- Central orchestrator -->
-            <circle cx="200" cy="200" r="50" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2" class="agent-node"/>
-            <circle cx="200" cy="200" r="60" fill="none" stroke="var(--accent2)" stroke-width="1" opacity="0.3" class="pulse-ring"/>
-            <text x="200" y="195" text-anchor="middle" fill="var(--accent2)" font-family="Clash Display" font-size="12" font-weight="600">ORCHESTRATOR</text>
-            <text x="200" y="212" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Coordinates all agents</text>
+          <div class="orchestrator-diagram">
+            <!-- Central Hub -->
+            <div class="hub">
+              <div class="hub-glow"></div>
+              <div class="hub-ring"></div>
+              <div class="hub-core">
+                <span class="hub-label">ORCHESTRATOR</span>
+                <span class="hub-sub">AI Brain</span>
+              </div>
+            </div>
 
-            <!-- Surrounding agents -->
-            <g transform="translate(200, 80)">
-              <circle cx="0" cy="0" r="30" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="0" y="4" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Sales</text>
-            </g>
-            <g transform="translate(320, 200)">
-              <circle cx="0" cy="0" r="30" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="0" y="4" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Marketing</text>
-            </g>
-            <g transform="translate(280, 320)">
-              <circle cx="0" cy="0" r="30" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="0" y="4" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Support</text>
-            </g>
-            <g transform="translate(120, 320)">
-              <circle cx="0" cy="0" r="30" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="0" y="4" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Ops</text>
-            </g>
-            <g transform="translate(80, 200)">
-              <circle cx="0" cy="0" r="30" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="0" y="4" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Finance</text>
-            </g>
+            <!-- Orbiting Ring -->
+            <div class="orbit-ring">
+              <div class="orbit-particle p1"></div>
+              <div class="orbit-particle p2"></div>
+              <div class="orbit-particle p3"></div>
+            </div>
 
-            <!-- Connection lines -->
-            <line x1="200" y1="150" x2="200" y2="110" stroke="var(--accent2)" stroke-width="1.5" opacity="0.5"/>
-            <line x1="250" y1="200" x2="290" y2="200" stroke="var(--accent2)" stroke-width="1.5" opacity="0.5"/>
-            <line x1="235" y1="235" x2="260" y2="295" stroke="var(--accent2)" stroke-width="1.5" opacity="0.5"/>
-            <line x1="165" y1="235" x2="140" y2="295" stroke="var(--accent2)" stroke-width="1.5" opacity="0.5"/>
-            <line x1="150" y1="200" x2="110" y2="200" stroke="var(--accent2)" stroke-width="1.5" opacity="0.5"/>
+            <!-- Agent Nodes -->
+            <div class="agent-node a-sales">
+              <div class="agent-pulse"></div>
+              <div class="agent-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <span>Sales</span>
+              <div class="agent-status active"></div>
+            </div>
 
-            <!-- Animated dots -->
-            <circle r="4" fill="var(--accent2)">
-              <animateMotion dur="2s" repeatCount="indefinite" path="M200,150 L200,110"/>
-            </circle>
-            <circle r="4" fill="var(--accent2)">
-              <animateMotion dur="2s" repeatCount="indefinite" begin="0.4s" path="M250,200 L290,200"/>
-            </circle>
-            <circle r="4" fill="var(--accent2)">
-              <animateMotion dur="2s" repeatCount="indefinite" begin="0.8s" path="M235,235 L260,295"/>
-            </circle>
-            <circle r="4" fill="var(--accent2)">
-              <animateMotion dur="2s" repeatCount="indefinite" begin="1.2s" path="M165,235 L140,295"/>
-            </circle>
-            <circle r="4" fill="var(--accent2)">
-              <animateMotion dur="2s" repeatCount="indefinite" begin="1.6s" path="M150,200 L110,200"/>
-            </circle>
-          </svg>
+            <div class="agent-node a-marketing">
+              <div class="agent-pulse"></div>
+              <div class="agent-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <span>Marketing</span>
+              <div class="agent-status active"></div>
+            </div>
+
+            <div class="agent-node a-support">
+              <div class="agent-pulse"></div>
+              <div class="agent-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <span>Support</span>
+              <div class="agent-status"></div>
+            </div>
+
+            <div class="agent-node a-ops">
+              <div class="agent-pulse"></div>
+              <div class="agent-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+              <span>Ops</span>
+              <div class="agent-status active"></div>
+            </div>
+
+            <div class="agent-node a-finance">
+              <div class="agent-pulse"></div>
+              <div class="agent-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <span>Finance</span>
+              <div class="agent-status"></div>
+            </div>
+
+            <!-- Data Streams -->
+            <svg class="data-streams" viewBox="0 0 400 400">
+              <defs>
+                <linearGradient id="streamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:var(--accent2);stop-opacity:0"/>
+                  <stop offset="50%" style="stop-color:var(--accent2);stop-opacity:1"/>
+                  <stop offset="100%" style="stop-color:var(--accent2);stop-opacity:0"/>
+                </linearGradient>
+              </defs>
+              <!-- Animated data packets -->
+              <g class="stream stream-1">
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="1.5s" repeatCount="indefinite" path="M200,200 Q200,120 200,70"/>
+                </circle>
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.75s" path="M200,70 Q200,120 200,200"/>
+                </circle>
+              </g>
+              <g class="stream stream-2">
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.2s" path="M200,200 Q280,200 330,200"/>
+                </circle>
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.1s" path="M330,200 Q280,200 200,200"/>
+                </circle>
+              </g>
+              <g class="stream stream-3">
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="2s" repeatCount="indefinite" begin="0.4s" path="M200,200 Q240,280 280,330"/>
+                </circle>
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="2s" repeatCount="indefinite" begin="1.4s" path="M280,330 Q240,280 200,200"/>
+                </circle>
+              </g>
+              <g class="stream stream-4">
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="2s" repeatCount="indefinite" begin="0.6s" path="M200,200 Q160,280 120,330"/>
+                </circle>
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="2s" repeatCount="indefinite" begin="1.6s" path="M120,330 Q160,280 200,200"/>
+                </circle>
+              </g>
+              <g class="stream stream-5">
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.3s" path="M200,200 Q120,200 70,200"/>
+                </circle>
+                <circle r="3" fill="var(--accent2)">
+                  <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.2s" path="M70,200 Q120,200 200,200"/>
+                </circle>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
