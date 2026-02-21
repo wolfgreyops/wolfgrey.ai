@@ -171,7 +171,12 @@
       line-height: 1.1;
       margin-bottom: 24px;
     }
-    .hero h1 span { color: #ff4d4d; }
+    .hero h1 span {
+      background: linear-gradient(90deg, #00e5cc, #ff4d4d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero p {
       font-size: 1.2rem;
       color: var(--gray-400);
