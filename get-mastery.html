@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Mastery Series — wolfgrey</title>
+  <meta name="description" content="The complete 10-volume guide to mastering Claude AI. From first conversation to advanced workflows — for non-technical users.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent: #ff4d4d;
+      --accent2: #00e5cc;
+      --btn: #ff4d4d;
+      --btn-hover: #e63946;
+      --dark: #050810;
+      --gray-900: #0a0f1a;
+      --gray-800: #111827;
+      --gray-700: #1e2940;
+      --gray-600: #5a6480;
+      --gray-400: #8892b0;
+      --gray-300: #a8b2d1;
+      --white: #f0f4ff;
+      --white-bright: #f0f4ff;
+      --nav-bg: rgba(5,8,16,0.85);
+      --line-color: rgba(255,255,255,0.06);
+    }
+
+    [data-theme="light"] {
+      --dark: #ffffff;
+      --gray-900: #f8f9fa;
+      --gray-800: #f1f3f4;
+      --gray-700: #e0e3e7;
+      --gray-600: #9aa0a6;
+      --gray-400: #5f6368;
+      --gray-300: #3c4043;
+      --white: #1a1a1a;
+      --white-bright: #1a1a1a;
+      --nav-bg: rgba(255,255,255,0.9);
+      --line-color: rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Satoshi', 'Inter', -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: calc(50% - 660px);
+      width: 1320px;
+      height: 100%;
+      border-left: 1px solid var(--line-color);
+      border-right: 1px solid var(--line-color);
+      pointer-events: none;
+      z-index: 1;
+    }
+    @media (max-width: 1368px) {
+      body::before { left: 12px; right: 12px; width: auto; }
+    }
+
+    h1, h2, h3, h4, h5 { font-family: 'Clash Display', 'Inter', sans-serif; line-height: 1.15; font-weight: 500; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
+    .wolf-icon { filter: invert(1) brightness(1.2); }
+    [data-theme="light"] .wolf-icon { filter: none; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--gray-300); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--btn) !important;
+      color: var(--white-bright) !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--btn-hover) !important; }
+    .theme-toggle {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-300);
+    }
+    .theme-toggle:hover { background: var(--gray-700); color: var(--white); }
+    .theme-toggle .sun { display: none; }
+    .theme-toggle .moon { display: block; }
+    [data-theme="light"] .theme-toggle .sun { display: block; }
+    [data-theme="light"] .theme-toggle .moon { display: none; }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 100px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent 0%, var(--gray-900) 100%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 800px; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0,229,204,0.1);
+      border: 1px solid rgba(0,229,204,0.3);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--gray-300);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-price {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .hero-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gray-400);
+      margin-left: 8px;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--btn); color: var(--white-bright); }
+    .btn-primary:hover { background: var(--btn-hover); transform: translateY(-2px); }
+    .btn-secondary { background: var(--gray-800); color: var(--white); border: 1px solid var(--gray-700); }
+    .btn-secondary:hover { border-color: var(--gray-400); }
+
+    /* SECTIONS */
+    section { padding: 100px 24px; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 1.15rem;
+      color: var(--gray-400);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+    .centered { text-align: center; }
+    .centered .section-subtitle { margin: 0 auto; }
+
+    /* PROBLEM */
+    .problem-section { background: var(--gray-900); }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    .problem-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .problem-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,77,77,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    .problem-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+    .problem-card p { color: var(--gray-400); font-size: 0.95rem; line-height: 1.6; }
+
+    /* VOLUMES */
+    .volumes-section { background: var(--dark); }
+    .volumes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .volumes-grid { grid-template-columns: 1fr; }
+    }
+    .volume-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .volume-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--gray-700), var(--gray-800));
+      border: 1px solid var(--gray-600);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent2);
+      flex-shrink: 0;
+    }
+    .volume-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .volume-card p { color: var(--gray-400); font-size: 0.9rem; line-height: 1.5; }
+
+    /* WHAT YOU'LL LEARN */
+    .learn-section { background: var(--gray-900); }
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .learn-grid { grid-template-columns: 1fr; }
+    }
+    .learn-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+    }
+    .learn-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(0,229,204,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--accent2);
+    }
+    .learn-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .learn-card p { color: var(--gray-400); font-size: 0.9rem; line-height: 1.6; }
+
+    /* WHO IT'S FOR */
+    .for-section { background: var(--dark); }
+    .for-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .for-grid { grid-template-columns: 1fr; }
+    }
+    .for-card {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      gap: 16px;
+    }
+    .for-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(0,229,204,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent2);
+    }
+    .for-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .for-card p { color: var(--gray-400); font-size: 0.95rem; }
+
+    /* FAQ */
+    .faq-section { background: var(--gray-900); }
+    .faq-grid { margin-top: 48px; max-width: 700px; }
+    .faq-item { border-bottom: 1px solid var(--gray-700); padding: 28px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--gray-700); }
+    .faq-item h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--white); }
+    .faq-item p { color: var(--gray-400); line-height: 1.7; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(180deg, var(--dark) 0%, var(--gray-900) 100%);
+      text-align: center;
+      padding: 120px 24px;
+    }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
+    .cta-section > .container > p { color: var(--gray-400); max-width: 500px; margin: 0 auto 40px; font-size: 1.15rem; }
+    .cta-price { font-size: 4.5rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .cta-price span { font-size: 1.1rem; font-weight: 400; color: var(--gray-400); }
+    .cta-guarantee { margin-top: 24px; color: var(--gray-500); font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--gray-800); padding: 48px 24px; background: var(--gray-900); }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-inner p { font-size: 0.85rem; color: var(--gray-600); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.85rem; color: var(--gray-400); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links > a:not(.nav-cta) { display: none; }
+      .nav-links { gap: 16px; }
+      .hero { padding: 120px 20px 80px; min-height: auto; }
+      .hero h1 { font-size: 2.25rem; letter-spacing: -1px; }
+      .hero-price { font-size: 2.5rem; }
+      section { padding: 70px 20px; }
+      .cta-price { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="images/wolf-icon.svg" alt="wolfgrey" width="28" height="28" class="wolf-icon" style="vertical-align: middle; margin-right: 6px;">
+        wolfgrey
+      </a>
+      <div class="nav-links">
+        <a href="products.html">Products</a>
+        <a href="awaas.html">Agents</a>
+        <a href="resources.html">Resources</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="#buy" class="nav-cta">Get Full Access</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">10 Volumes &bull; Non-Technical</div>
+      <h1>Master Claude.<br><span class="accent">No code required.</span></h1>
+      <p>The complete guide to Claude AI for non-technical users. From your first conversation to building advanced workflows that run your business.</p>
+      <div class="hero-price">$199 <span>one-time payment</span></div>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="openCheckout()">Get Full Access &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem-section">
+    <div class="container centered">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title">Claude is powerful. Most people barely scratch the surface.</h2>
+      <p class="section-subtitle">You know Claude can do more. You just don't know how to unlock it.</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </div>
+          <h3>Basic prompts, basic results</h3>
+          <p>You ask simple questions and get generic answers. You know there's more depth available but don't know how to access it.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+          <h3>Features you've never touched</h3>
+          <p>Projects, artifacts, file uploads, Claude Code — you've seen the buttons but never figured out how to use them effectively.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4m-8-10H2m20 0h-2m-2.93-6.07l-1.41 1.41m-9.32 9.32l-1.41 1.41m12.14 0l1.41 1.41M6.34 6.34L4.93 4.93"/></svg>
+          </div>
+          <h3>No systematic approach</h3>
+          <p>Every conversation starts from scratch. You don't have a framework for getting consistent, high-quality outputs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUMES -->
+  <section class="volumes-section">
+    <div class="container">
+      <div class="section-label">The Curriculum</div>
+      <h2 class="section-title">10 volumes. Zero to advanced.</h2>
+      <p class="section-subtitle">Each volume builds on the last. By the end, you'll use Claude like a power user.</p>
+      <div class="volumes-grid">
+        <div class="volume-card">
+          <div class="volume-number">01</div>
+          <div>
+            <h3>Getting Started</h3>
+            <p>Interface basics, your first conversations, understanding how Claude thinks and responds.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">02</div>
+          <div>
+            <h3>The Art of Asking</h3>
+            <p>Prompting fundamentals. How to structure requests for clear, useful, actionable outputs.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">03</div>
+          <div>
+            <h3>Writing & Communication</h3>
+            <p>Emails, documents, proposals, social posts. Using Claude as your writing partner.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">04</div>
+          <div>
+            <h3>Research & Learning</h3>
+            <p>Deep dives, summaries, explanations. Claude as your research assistant and tutor.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">05</div>
+          <div>
+            <h3>Analysis & Decisions</h3>
+            <p>Data analysis, pros/cons, frameworks. Using Claude to think through complex decisions.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">06</div>
+          <div>
+            <h3>Files & Documents</h3>
+            <p>Uploading, analyzing, and transforming documents. PDFs, spreadsheets, images.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">07</div>
+          <div>
+            <h3>Projects & Memory</h3>
+            <p>Organizing work across sessions. Building context that persists and compounds.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">08</div>
+          <div>
+            <h3>Artifacts & Visuals</h3>
+            <p>Creating documents, code, diagrams, and interactive content with Artifacts.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">09</div>
+          <div>
+            <h3>Claude Code</h3>
+            <p>Terminal-based Claude for power users. Automation, scripting, and advanced workflows.</p>
+          </div>
+        </div>
+        <div class="volume-card">
+          <div class="volume-number">10</div>
+          <div>
+            <h3>Cowork & Advanced</h3>
+            <p>Real-time collaboration, advanced techniques, and building Claude into your daily workflow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU'LL LEARN -->
+  <section class="learn-section">
+    <div class="container centered">
+      <div class="section-label">Outcomes</div>
+      <h2 class="section-title">What you'll be able to do</h2>
+      <div class="learn-grid">
+        <div class="learn-card">
+          <div class="learn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </div>
+          <h3>Write faster, better</h3>
+          <p>Emails, proposals, content — drafted in minutes, not hours. With your voice, not generic AI-speak.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Research anything</h3>
+          <p>Competitive analysis, market research, learning new topics — Claude as your always-available analyst.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          </div>
+          <h3>Build workflows</h3>
+          <p>Automate repetitive tasks. Create systems that run without you typing every prompt.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3>Analyze documents</h3>
+          <p>Upload contracts, reports, spreadsheets. Get summaries, insights, and action items in seconds.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4m-8-10H2m20 0h-2"/><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <h3>Make better decisions</h3>
+          <p>Think through problems systematically. Get frameworks, pros/cons, and perspectives you'd miss alone.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Collaborate smarter</h3>
+          <p>Use Projects to maintain context. Work with Claude like a team member, not a search bar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="for-section">
+    <div class="container">
+      <div class="section-label">Who It's For</div>
+      <h2 class="section-title">Built for professionals, not programmers</h2>
+      <div class="for-grid">
+        <div class="for-card">
+          <div class="for-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <h3>Business Owners</h3>
+            <p>Running a company and want to leverage AI without becoming a technical expert.</p>
+          </div>
+        </div>
+        <div class="for-card">
+          <div class="for-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </div>
+          <div>
+            <h3>Knowledge Workers</h3>
+            <p>Marketers, consultants, analysts, writers — anyone whose job is thinking and creating.</p>
+          </div>
+        </div>
+        <div class="for-card">
+          <div class="for-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <h3>Team Leaders</h3>
+            <p>Want to upskill your team on AI without sending them to coding bootcamp.</p>
+          </div>
+        </div>
+        <div class="for-card">
+          <div class="for-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <h3>Productivity-Focused</h3>
+            <p>You value your time and want to work smarter, not harder. AI is the lever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Common questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What format is the course?</h3>
+          <p>Written guides in PDF format. Each volume is a standalone document you can read, reference, and share with your team.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I need a Claude subscription?</h3>
+          <p>A free Claude account works for most content. Some advanced features (Projects, Claude Code) require Claude Pro ($20/month).</p>
+        </div>
+        <div class="faq-item">
+          <h3>How long does it take to complete?</h3>
+          <p>Each volume is designed to be completed in 1-2 hours. Go at your own pace — this is reference material you'll return to.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is this different from Claude's documentation?</h3>
+          <p>Claude's docs explain features. This course teaches application — how to actually use those features to get work done.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What if I'm already an advanced user?</h3>
+          <p>Volumes 7-10 cover Projects, Artifacts, Claude Code, and advanced workflows that most users haven't explored.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="buy">
+    <div class="container">
+      <h2>Ready to master Claude?</h2>
+      <p>Get all 10 volumes. Lifetime access. Start learning today.</p>
+      <div class="cta-price">$199 <span>one-time</span></div>
+      <button class="btn btn-primary" onclick="openCheckout()">Get Full Access &rarr;</button>
+      <p class="cta-guarantee">Instant access to all volumes. Lifetime updates included.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 wolfgrey. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="products.html">Products</a>
+        <a href="awaas.html">Agents</a>
+        <a href="resources.html">Resources</a>
+        <a href="https://twitter.com/__wolfgrey__" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openCheckout() {
+      const url = 'https://buy.stripe.com/4gM6oGgHxbmIelh7U55c401';
+      const width = 500, height = 700;
+      const left = (screen.width - width) / 2;
+      const top = (screen.height - height) / 2;
+      window.open(url, 'stripe-checkout', 'width='+width+',height='+height+',left='+left+',top='+top+',scrollbars=yes');
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+
+</body>
+</html>
