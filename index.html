@@ -180,33 +180,6 @@
       pointer-events: none;
       z-index: 0;
     }
-    .hero-glow {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 77, 77, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 229, 204, 0.06) 0%, transparent 50%);
-      animation: glow-drift 12s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    @keyframes glow-drift {
-      0%, 100% {
-        opacity: 0.6;
-        transform: scale(1) translateX(0);
-      }
-      33% {
-        opacity: 1;
-        transform: scale(1.1) translateX(3%);
-      }
-      66% {
-        opacity: 0.8;
-        transform: scale(1.05) translateX(-2%);
-      }
-    }
     .hero-canvas {
       position: absolute;
       top: 0;
@@ -242,7 +215,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradient-shift 6s ease-in-out infinite;
+      animation: gradient-shift 15s ease-in-out infinite;
     }
     @keyframes gradient-shift {
       0%, 100% { background-position: 0% 50%; }
@@ -1627,7 +1600,6 @@
   <!-- HERO -->
   <section class="hero">
     <canvas class="hero-canvas" id="galaxy"></canvas>
-    <div class="hero-glow"></div>
     <div class="hero-content">
       <div class="hero-badge">AI Tools & Training</div>
       <h1><span class="accent">AI systems</span> for your small business</h1>
