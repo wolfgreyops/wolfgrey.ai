@@ -1050,42 +1050,102 @@
         <div class="workflow-diagram active" id="workflow-linear">
           <h3 class="workflow-title">Linear Workflow</h3>
           <p class="workflow-desc">Tasks flow sequentially from one agent to the next. Each agent completes its work before passing to the next stage.</p>
-          <svg viewBox="0 0 700 200" fill="none" style="width: 100%; max-width: 900px;">
-            <!-- Connection lines -->
-            <line x1="120" y1="100" x2="220" y2="100" stroke="var(--gray-600)" stroke-width="2"/>
-            <line x1="280" y1="100" x2="380" y2="100" stroke="var(--gray-600)" stroke-width="2"/>
-            <line x1="440" y1="100" x2="540" y2="100" stroke="var(--gray-600)" stroke-width="2"/>
+          <svg viewBox="0 0 800 280" fill="none" style="width: 100%; max-width: 900px;">
+            <defs>
+              <linearGradient id="iso-top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#1e2940"/>
+                <stop offset="100%" style="stop-color:#111827"/>
+              </linearGradient>
+              <linearGradient id="iso-right" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#111827"/>
+                <stop offset="100%" style="stop-color:#0a0f1a"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Isometric Grid Floor -->
+            <g opacity="0.1">
+              <line x1="0" y1="220" x2="800" y2="220" stroke="var(--accent2)" stroke-width="1"/>
+              <line x1="100" y1="180" x2="100" y2="260" stroke="var(--accent2)" stroke-width="0.5"/>
+              <line x1="250" y1="180" x2="250" y2="260" stroke="var(--accent2)" stroke-width="0.5"/>
+              <line x1="400" y1="180" x2="400" y2="260" stroke="var(--accent2)" stroke-width="0.5"/>
+              <line x1="550" y1="180" x2="550" y2="260" stroke="var(--accent2)" stroke-width="0.5"/>
+              <line x1="700" y1="180" x2="700" y2="260" stroke="var(--accent2)" stroke-width="0.5"/>
+            </g>
+
+            <!-- Connection Lines (3D style) -->
+            <g filter="url(#glow)">
+              <line x1="165" y1="140" x2="210" y2="140" stroke="var(--accent2)" stroke-width="3" opacity="0.6"/>
+              <line x1="315" y1="140" x2="360" y2="140" stroke="var(--accent2)" stroke-width="3" opacity="0.6"/>
+              <line x1="465" y1="140" x2="510" y2="140" stroke="var(--accent2)" stroke-width="3" opacity="0.6"/>
+              <line x1="615" y1="140" x2="660" y2="140" stroke="var(--accent2)" stroke-width="3" opacity="0.6"/>
+            </g>
 
             <!-- Arrows -->
-            <polygon points="215,95 225,100 215,105" fill="var(--gray-600)"/>
-            <polygon points="375,95 385,100 375,105" fill="var(--gray-600)"/>
-            <polygon points="535,95 545,100 535,105" fill="var(--gray-600)"/>
+            <polygon points="205,133 220,140 205,147" fill="var(--accent2)" opacity="0.8"/>
+            <polygon points="355,133 370,140 355,147" fill="var(--accent2)" opacity="0.8"/>
+            <polygon points="505,133 520,140 505,147" fill="var(--accent2)" opacity="0.8"/>
+            <polygon points="655,133 670,140 655,147" fill="var(--accent2)" opacity="0.8"/>
 
-            <!-- Nodes -->
+            <!-- Isometric Box 1 - Lead Capture -->
             <g>
-              <rect x="20" y="60" width="100" height="80" rx="12" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2"/>
-              <text x="70" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="12" font-weight="600">Lead Capture</text>
-              <text x="70" y="115" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Intake agent</text>
+              <!-- Shadow -->
+              <ellipse cx="100" cy="215" rx="55" ry="15" fill="rgba(0,229,204,0.15)"/>
+              <!-- Right face -->
+              <path d="M130,100 L130,180 L100,200 L100,120 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <!-- Top face -->
+              <path d="M40,100 L100,60 L160,100 L100,140 Z" fill="url(#iso-top)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <!-- Left face -->
+              <path d="M40,100 L40,180 L100,200 L100,120 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="100" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Lead Capture</text>
+              <text x="100" y="112" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="9">Intake</text>
             </g>
+
+            <!-- Isometric Box 2 - Qualification -->
             <g>
-              <rect x="220" y="60" width="100" height="80" rx="12" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="2"/>
-              <text x="270" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="12" font-weight="600">Qualification</text>
-              <text x="270" y="115" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Research agent</text>
+              <ellipse cx="250" cy="215" rx="55" ry="15" fill="rgba(0,229,204,0.1)"/>
+              <path d="M280,100 L280,180 L250,200 L250,120 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M190,100 L250,60 L310,100 L250,140 Z" fill="url(#iso-top)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M190,100 L190,180 L250,200 L250,120 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="250" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Qualification</text>
+              <text x="250" y="112" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Research</text>
             </g>
+
+            <!-- Isometric Box 3 - Outreach -->
             <g>
-              <rect x="380" y="60" width="100" height="80" rx="12" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="2"/>
-              <text x="430" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="12" font-weight="600">Outreach</text>
-              <text x="430" y="115" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Sales agent</text>
+              <ellipse cx="400" cy="215" rx="55" ry="15" fill="rgba(0,229,204,0.1)"/>
+              <path d="M430,100 L430,180 L400,200 L400,120 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M340,100 L400,60 L460,100 L400,140 Z" fill="url(#iso-top)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M340,100 L340,180 L400,200 L400,120 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="400" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Outreach</text>
+              <text x="400" y="112" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Sales</text>
             </g>
+
+            <!-- Isometric Box 4 - Follow-up -->
             <g>
-              <rect x="540" y="60" width="100" height="80" rx="12" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="2"/>
-              <text x="590" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="12" font-weight="600">Follow-up</text>
-              <text x="590" y="115" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Nurture agent</text>
+              <ellipse cx="550" cy="215" rx="55" ry="15" fill="rgba(0,229,204,0.1)"/>
+              <path d="M580,100 L580,180 L550,200 L550,120 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M490,100 L550,60 L610,100 L550,140 Z" fill="url(#iso-top)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M490,100 L490,180 L550,200 L550,120 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="550" y="95" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Follow-up</text>
+              <text x="550" y="112" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Nurture</text>
+            </g>
+
+            <!-- Output indicator -->
+            <g>
+              <ellipse cx="700" cy="215" rx="40" ry="12" fill="rgba(0,229,204,0.2)"/>
+              <path d="M720,120 L720,170 L700,185 L700,135 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M660,120 L700,95 L740,120 L700,145 Z" fill="rgba(0,229,204,0.2)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M660,120 L660,170 L700,185 L700,135 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="700" y="125" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="10" font-weight="600">Output</text>
             </g>
 
             <!-- Animated dot -->
-            <circle r="6" fill="var(--accent2)">
-              <animateMotion dur="4s" repeatCount="indefinite" path="M70,100 L270,100 L430,100 L590,100"/>
+            <circle r="8" fill="var(--accent2)" filter="url(#glow)">
+              <animateMotion dur="4s" repeatCount="indefinite" path="M100,100 L250,100 L400,100 L550,100 L700,120"/>
             </circle>
           </svg>
           <p style="color: var(--gray-600); font-size: 0.85rem; margin-top: 24px;"><strong>Best for:</strong> Lead nurturing, content pipelines, onboarding sequences</p>
@@ -1095,55 +1155,100 @@
         <div class="workflow-diagram" id="workflow-parallel">
           <h3 class="workflow-title">Parallel Processing</h3>
           <p class="workflow-desc">Multiple agents work simultaneously on different aspects of a task, then results are combined.</p>
-          <svg viewBox="0 0 700 280" fill="none" style="width: 100%; max-width: 900px;">
-            <!-- Fan out lines -->
-            <line x1="140" y1="140" x2="240" y2="60" stroke="var(--gray-600)" stroke-width="2"/>
-            <line x1="140" y1="140" x2="240" y2="140" stroke="var(--gray-600)" stroke-width="2"/>
-            <line x1="140" y1="140" x2="240" y2="220" stroke="var(--gray-600)" stroke-width="2"/>
-            <!-- Fan in lines -->
-            <line x1="360" y1="60" x2="460" y2="140" stroke="var(--gray-600)" stroke-width="2"/>
-            <line x1="360" y1="140" x2="460" y2="140" stroke="var(--gray-600)" stroke-width="2"/>
-            <line x1="360" y1="220" x2="460" y2="140" stroke="var(--gray-600)" stroke-width="2"/>
-            <!-- Final line -->
-            <line x1="540" y1="140" x2="620" y2="140" stroke="var(--gray-600)" stroke-width="2"/>
-            <polygon points="615,135 625,140 615,145" fill="var(--gray-600)"/>
+          <svg viewBox="0 0 800 350" fill="none" style="width: 100%; max-width: 900px;">
+            <defs>
+              <linearGradient id="iso-top-p" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#1e2940"/>
+                <stop offset="100%" style="stop-color:#111827"/>
+              </linearGradient>
+              <filter id="glow-p">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
 
-            <!-- Input node -->
-            <g>
-              <rect x="40" y="100" width="100" height="80" rx="12" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2"/>
-              <text x="90" y="135" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="12" font-weight="600">Task Input</text>
-              <text x="90" y="155" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Dispatcher</text>
-            </g>
-
-            <!-- Parallel agents -->
-            <g>
-              <rect x="240" y="20" width="120" height="70" rx="10" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="300" y="50" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Research Agent</text>
-              <text x="300" y="68" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Market data</text>
-            </g>
-            <g>
-              <rect x="240" y="105" width="120" height="70" rx="10" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="300" y="135" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Writing Agent</text>
-              <text x="300" y="153" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Draft content</text>
-            </g>
-            <g>
-              <rect x="240" y="190" width="120" height="70" rx="10" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="300" y="220" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Design Agent</text>
-              <text x="300" y="238" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Visual assets</text>
+            <!-- Fan out connection lines -->
+            <g filter="url(#glow-p)" opacity="0.6">
+              <line x1="170" y1="175" x2="280" y2="70" stroke="var(--accent2)" stroke-width="2"/>
+              <line x1="170" y1="175" x2="280" y2="175" stroke="var(--accent2)" stroke-width="2"/>
+              <line x1="170" y1="175" x2="280" y2="280" stroke="var(--accent2)" stroke-width="2"/>
+              <!-- Fan in lines -->
+              <line x1="420" y1="70" x2="530" y2="175" stroke="var(--accent2)" stroke-width="2"/>
+              <line x1="420" y1="175" x2="530" y2="175" stroke="var(--accent2)" stroke-width="2"/>
+              <line x1="420" y1="280" x2="530" y2="175" stroke="var(--accent2)" stroke-width="2"/>
+              <!-- Final line -->
+              <line x1="620" y1="175" x2="680" y2="175" stroke="var(--accent2)" stroke-width="2"/>
             </g>
 
-            <!-- Aggregator -->
+            <!-- Dispatcher - Isometric -->
             <g>
-              <rect x="460" y="100" width="100" height="80" rx="12" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2"/>
-              <text x="510" y="135" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="12" font-weight="600">Aggregator</text>
-              <text x="510" y="155" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">Combines results</text>
+              <ellipse cx="120" cy="255" rx="50" ry="14" fill="rgba(0,229,204,0.15)"/>
+              <path d="M150,135 L150,220 L120,240 L120,155 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M60,135 L120,95 L180,135 L120,175 Z" fill="url(#iso-top-p)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M60,135 L60,220 L120,240 L120,155 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="120" y="130" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Dispatcher</text>
+              <text x="120" y="147" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="9">Task Input</text>
             </g>
 
-            <!-- Output -->
+            <!-- Parallel Agent 1 - Research (top) -->
             <g>
-              <rect x="620" y="115" width="60" height="50" rx="8" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
-              <text x="650" y="145" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="10" font-weight="600">Output</text>
+              <ellipse cx="350" cy="130" rx="45" ry="12" fill="rgba(0,229,204,0.08)"/>
+              <path d="M375,30 L375,100 L350,115 L350,45 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M300,30 L350,0 L400,30 L350,60 Z" fill="url(#iso-top-p)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M300,30 L300,100 L350,115 L350,45 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="350" y="28" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Research</text>
+              <text x="350" y="42" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">Market data</text>
             </g>
+
+            <!-- Parallel Agent 2 - Writing (middle) -->
+            <g>
+              <ellipse cx="350" cy="235" rx="45" ry="12" fill="rgba(0,229,204,0.08)"/>
+              <path d="M375,135 L375,205 L350,220 L350,150 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M300,135 L350,105 L400,135 L350,165 Z" fill="url(#iso-top-p)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M300,135 L300,205 L350,220 L350,150 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="350" y="133" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Writing</text>
+              <text x="350" y="147" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">Draft content</text>
+            </g>
+
+            <!-- Parallel Agent 3 - Design (bottom) -->
+            <g>
+              <ellipse cx="350" cy="340" rx="45" ry="12" fill="rgba(0,229,204,0.08)"/>
+              <path d="M375,240 L375,310 L350,325 L350,255 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M300,240 L350,210 L400,240 L350,270 Z" fill="url(#iso-top-p)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M300,240 L300,310 L350,325 L350,255 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="350" y="238" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Design</text>
+              <text x="350" y="252" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">Visual assets</text>
+            </g>
+
+            <!-- Aggregator - Isometric -->
+            <g>
+              <ellipse cx="575" cy="255" rx="50" ry="14" fill="rgba(0,229,204,0.15)"/>
+              <path d="M605,135 L605,220 L575,240 L575,155 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M515,135 L575,95 L635,135 L575,175 Z" fill="url(#iso-top-p)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M515,135 L515,220 L575,240 L575,155 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="575" y="130" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Aggregator</text>
+              <text x="575" y="147" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="9">Combine</text>
+            </g>
+
+            <!-- Output - small isometric -->
+            <g>
+              <ellipse cx="730" cy="225" rx="35" ry="10" fill="rgba(0,229,204,0.2)"/>
+              <path d="M755,145 L755,195 L730,210 L730,160 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M685,145 L730,120 L775,145 L730,170 Z" fill="rgba(0,229,204,0.2)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M685,145 L685,195 L730,210 L730,160 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="730" y="150" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="10" font-weight="600">Output</text>
+            </g>
+
+            <!-- Animated dots going to parallel agents -->
+            <circle r="6" fill="var(--accent2)" filter="url(#glow-p)">
+              <animateMotion dur="3s" repeatCount="indefinite" path="M120,135 Q200,50 350,30"/>
+            </circle>
+            <circle r="6" fill="var(--accent2)" filter="url(#glow-p)">
+              <animateMotion dur="3s" repeatCount="indefinite" begin="0.3s" path="M120,135 L350,135"/>
+            </circle>
+            <circle r="6" fill="var(--accent2)" filter="url(#glow-p)">
+              <animateMotion dur="3s" repeatCount="indefinite" begin="0.6s" path="M120,135 Q200,240 350,240"/>
+            </circle>
           </svg>
           <p style="color: var(--gray-600); font-size: 0.85rem; margin-top: 24px;"><strong>Best for:</strong> Content creation, proposal generation, competitive analysis</p>
         </div>
@@ -1152,52 +1257,107 @@
         <div class="workflow-diagram" id="workflow-hierarchical">
           <h3 class="workflow-title">Hierarchical Workflow</h3>
           <p class="workflow-desc">Manager agents delegate to specialist agents, who may delegate further. Results roll up through the hierarchy.</p>
-          <svg viewBox="0 0 600 320" fill="none" style="width: 100%; max-width: 600px;">
-            <!-- Lines from CEO to managers -->
-            <line x1="300" y1="70" x2="150" y2="140" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
-            <line x1="300" y1="70" x2="450" y2="140" stroke="var(--accent2)" stroke-width="2" opacity="0.5"/>
-            <!-- Lines from managers to workers -->
-            <line x1="150" y1="190" x2="80" y2="250" stroke="var(--gray-600)" stroke-width="1.5"/>
-            <line x1="150" y1="190" x2="220" y2="250" stroke="var(--gray-600)" stroke-width="1.5"/>
-            <line x1="450" y1="190" x2="380" y2="250" stroke="var(--gray-600)" stroke-width="1.5"/>
-            <line x1="450" y1="190" x2="520" y2="250" stroke="var(--gray-600)" stroke-width="1.5"/>
+          <svg viewBox="0 0 700 380" fill="none" style="width: 100%; max-width: 900px;">
+            <defs>
+              <linearGradient id="iso-top-h" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#1e2940"/>
+                <stop offset="100%" style="stop-color:#111827"/>
+              </linearGradient>
+              <filter id="glow-h">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
 
-            <!-- CEO node -->
-            <g>
-              <rect x="240" y="20" width="120" height="60" rx="12" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="2"/>
-              <text x="300" y="45" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="11" font-weight="700">ORCHESTRATOR</text>
-              <text x="300" y="62" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Strategic decisions</text>
-            </g>
-
-            <!-- Manager nodes -->
-            <g>
-              <rect x="90" y="140" width="120" height="55" rx="10" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="1.5"/>
-              <text x="150" y="162" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Sales Manager</text>
-              <text x="150" y="178" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Coordinates sales</text>
-            </g>
-            <g>
-              <rect x="390" y="140" width="120" height="55" rx="10" fill="var(--gray-800)" stroke="var(--accent2)" stroke-width="1.5"/>
-              <text x="450" y="162" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="11" font-weight="600">Ops Manager</text>
-              <text x="450" y="178" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Coordinates ops</text>
+            <!-- Connection Lines -->
+            <g filter="url(#glow-h)" opacity="0.5">
+              <line x1="350" y1="95" x2="200" y2="155" stroke="var(--accent2)" stroke-width="2"/>
+              <line x1="350" y1="95" x2="500" y2="155" stroke="var(--accent2)" stroke-width="2"/>
+              <line x1="200" y1="220" x2="120" y2="280" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <line x1="200" y1="220" x2="280" y2="280" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <line x1="500" y1="220" x2="420" y2="280" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <line x1="500" y1="220" x2="580" y2="280" stroke="var(--gray-600)" stroke-width="1.5"/>
             </g>
 
-            <!-- Worker nodes -->
+            <!-- Orchestrator - Top (largest) -->
             <g>
-              <rect x="30" y="250" width="100" height="45" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="80" y="277" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="10">Prospector</text>
+              <ellipse cx="350" cy="130" rx="60" ry="16" fill="rgba(0,229,204,0.2)"/>
+              <path d="M385,40 L385,100 L350,120 L350,60 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="2"/>
+              <path d="M280,40 L350,5 L420,40 L350,75 Z" fill="url(#iso-top-h)" stroke="var(--accent2)" stroke-width="2"/>
+              <path d="M280,40 L280,100 L350,120 L350,60 Z" fill="#111827" stroke="var(--accent2)" stroke-width="2"/>
+              <text x="350" y="35" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="11" font-weight="700">ORCHESTRATOR</text>
+              <text x="350" y="52" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="9">Strategic</text>
             </g>
+
+            <!-- Sales Manager - Mid Left -->
             <g>
-              <rect x="170" y="250" width="100" height="45" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="220" y="277" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="10">Outreach</text>
+              <ellipse cx="200" cy="255" rx="50" ry="14" fill="rgba(0,229,204,0.12)"/>
+              <path d="M230,155 L230,220 L200,240 L200,175 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M145,155 L200,125 L255,155 L200,185 Z" fill="url(#iso-top-h)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M145,155 L145,220 L200,240 L200,175 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="200" y="152" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Sales Mgr</text>
+              <text x="200" y="167" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">Coordinates</text>
             </g>
+
+            <!-- Ops Manager - Mid Right -->
             <g>
-              <rect x="330" y="250" width="100" height="45" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="380" y="277" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="10">Scheduler</text>
+              <ellipse cx="500" cy="255" rx="50" ry="14" fill="rgba(0,229,204,0.12)"/>
+              <path d="M530,155 L530,220 L500,240 L500,175 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M445,155 L500,125 L555,155 L500,185 Z" fill="url(#iso-top-h)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M445,155 L445,220 L500,240 L500,175 Z" fill="#111827" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="500" y="152" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Ops Mgr</text>
+              <text x="500" y="167" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">Coordinates</text>
             </g>
+
+            <!-- Worker 1 - Prospector -->
             <g>
-              <rect x="470" y="250" width="100" height="45" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="520" y="277" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="10">Reporting</text>
+              <ellipse cx="120" cy="355" rx="40" ry="11" fill="rgba(0,229,204,0.06)"/>
+              <path d="M145,280 L145,330 L120,345 L120,295 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M75,280 L120,255 L165,280 L120,305 Z" fill="url(#iso-top-h)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M75,280 L75,330 L120,345 L120,295 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="120" y="283" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="9">Prospector</text>
             </g>
+
+            <!-- Worker 2 - Outreach -->
+            <g>
+              <ellipse cx="280" cy="355" rx="40" ry="11" fill="rgba(0,229,204,0.06)"/>
+              <path d="M305,280 L305,330 L280,345 L280,295 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M235,280 L280,255 L325,280 L280,305 Z" fill="url(#iso-top-h)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M235,280 L235,330 L280,345 L280,295 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="280" y="283" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="9">Outreach</text>
+            </g>
+
+            <!-- Worker 3 - Scheduler -->
+            <g>
+              <ellipse cx="420" cy="355" rx="40" ry="11" fill="rgba(0,229,204,0.06)"/>
+              <path d="M445,280 L445,330 L420,345 L420,295 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M375,280 L420,255 L465,280 L420,305 Z" fill="url(#iso-top-h)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M375,280 L375,330 L420,345 L420,295 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="420" y="283" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="9">Scheduler</text>
+            </g>
+
+            <!-- Worker 4 - Reporting -->
+            <g>
+              <ellipse cx="580" cy="355" rx="40" ry="11" fill="rgba(0,229,204,0.06)"/>
+              <path d="M605,280 L605,330 L580,345 L580,295 Z" fill="#0a0f1a" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M535,280 L580,255 L625,280 L580,305 Z" fill="url(#iso-top-h)" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <path d="M535,280 L535,330 L580,345 L580,295 Z" fill="#111827" stroke="var(--gray-600)" stroke-width="1.5"/>
+              <text x="580" y="283" text-anchor="middle" fill="var(--gray-300)" font-family="Satoshi" font-size="9">Reporting</text>
+            </g>
+
+            <!-- Animated pulses down hierarchy -->
+            <circle r="5" fill="var(--accent2)" filter="url(#glow-h)">
+              <animateMotion dur="2.5s" repeatCount="indefinite" path="M350,40 L200,155 L120,280"/>
+            </circle>
+            <circle r="5" fill="var(--accent2)" filter="url(#glow-h)">
+              <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.4s" path="M350,40 L200,155 L280,280"/>
+            </circle>
+            <circle r="5" fill="var(--accent2)" filter="url(#glow-h)">
+              <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.8s" path="M350,40 L500,155 L420,280"/>
+            </circle>
+            <circle r="5" fill="var(--accent2)" filter="url(#glow-h)">
+              <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.2s" path="M350,40 L500,155 L580,280"/>
+            </circle>
           </svg>
           <p style="color: var(--gray-600); font-size: 0.85rem; margin-top: 24px;"><strong>Best for:</strong> Complex operations, multi-department coordination, enterprise workflows</p>
         </div>
@@ -1206,70 +1366,136 @@
         <div class="workflow-diagram" id="workflow-reactive">
           <h3 class="workflow-title">Event-Driven Workflow</h3>
           <p class="workflow-desc">Agents react to events in real-time. When something happens, the appropriate agent is triggered automatically.</p>
-          <svg viewBox="0 0 700 260" fill="none" style="width: 100%; max-width: 900px;">
-            <!-- Event bus -->
-            <rect x="50" y="115" width="600" height="30" rx="4" fill="var(--gray-700)" opacity="0.5"/>
-            <text x="350" y="135" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="11">EVENT BUS</text>
+          <svg viewBox="0 0 700 320" fill="none" style="width: 100%; max-width: 900px;">
+            <defs>
+              <linearGradient id="event-bus-top" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--gray-600)"/>
+                <stop offset="100%" stop-color="var(--gray-700)"/>
+              </linearGradient>
+              <linearGradient id="event-red-top" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(255,77,77,0.3)"/>
+                <stop offset="100%" stop-color="rgba(255,77,77,0.15)"/>
+              </linearGradient>
+              <linearGradient id="event-teal-top" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(0,229,204,0.3)"/>
+                <stop offset="100%" stop-color="rgba(0,229,204,0.15)"/>
+              </linearGradient>
+              <linearGradient id="agent-box-top" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--gray-700)"/>
+                <stop offset="100%" stop-color="var(--gray-800)"/>
+              </linearGradient>
+              <filter id="event-glow-red">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feFlood flood-color="rgba(255,77,77,0.4)"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="event-glow-teal">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feFlood flood-color="rgba(0,229,204,0.4)"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
 
-            <!-- Events coming in -->
+            <!-- Isometric Event Bus (3D bar) -->
             <g>
-              <rect x="80" y="30" width="80" height="50" rx="6" fill="rgba(255,77,77,0.1)" stroke="var(--accent)" stroke-width="1.5"/>
-              <text x="120" y="55" text-anchor="middle" fill="var(--accent)" font-family="Satoshi" font-size="9" font-weight="600">New Lead</text>
-              <text x="120" y="68" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">form submit</text>
+              <!-- Bus shadow -->
+              <ellipse cx="350" cy="165" rx="280" ry="15" fill="rgba(0,0,0,0.3)"/>
+              <!-- Bus top face -->
+              <path d="M70,140 L350,120 L630,140 L350,160 Z" fill="url(#event-bus-top)" stroke="var(--gray-500)" stroke-width="1"/>
+              <!-- Bus front face -->
+              <path d="M70,140 L350,160 L350,175 L70,155 Z" fill="var(--gray-700)" stroke="var(--gray-500)" stroke-width="1"/>
+              <path d="M350,160 L630,140 L630,155 L350,175 Z" fill="var(--gray-800)" stroke="var(--gray-500)" stroke-width="1"/>
+              <text x="350" y="148" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="10">EVENT BUS</text>
             </g>
-            <line x1="120" y1="80" x2="120" y2="115" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 2"/>
 
-            <g>
-              <rect x="220" y="30" width="80" height="50" rx="6" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
-              <text x="260" y="55" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="9" font-weight="600">Email Rcvd</text>
-              <text x="260" y="68" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">inbox trigger</text>
+            <!-- Event 1: New Lead (isometric cube) -->
+            <g filter="url(#event-glow-red)">
+              <ellipse cx="120" cy="95" rx="35" ry="10" fill="rgba(255,77,77,0.15)"/>
+              <path d="M155,40 L155,75 L120,90 L120,55 Z" fill="#0a0f1a" stroke="var(--accent)" stroke-width="1.5"/>
+              <path d="M85,20 L120,5 L155,20 L120,35 Z" fill="url(#event-red-top)" stroke="var(--accent)" stroke-width="1.5"/>
+              <path d="M85,20 L85,55 L120,70 L120,35 Z" fill="rgba(255,77,77,0.1)" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="120" y="25" text-anchor="middle" fill="var(--accent)" font-family="Satoshi" font-size="8" font-weight="600">New Lead</text>
             </g>
-            <line x1="260" y1="80" x2="260" y2="115" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="120" y1="90" x2="120" y2="125" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 2"/>
 
-            <g>
-              <rect x="360" y="30" width="80" height="50" rx="6" fill="rgba(255,77,77,0.1)" stroke="var(--accent)" stroke-width="1.5"/>
-              <text x="400" y="55" text-anchor="middle" fill="var(--accent)" font-family="Satoshi" font-size="9" font-weight="600">Payment</text>
-              <text x="400" y="68" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">stripe webhook</text>
+            <!-- Event 2: Email Rcvd (isometric cube) -->
+            <g filter="url(#event-glow-teal)">
+              <ellipse cx="260" cy="95" rx="35" ry="10" fill="rgba(0,229,204,0.15)"/>
+              <path d="M295,40 L295,75 L260,90 L260,55 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M225,20 L260,5 L295,20 L260,35 Z" fill="url(#event-teal-top)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M225,20 L225,55 L260,70 L260,35 Z" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="260" y="25" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="8" font-weight="600">Email Rcvd</text>
             </g>
-            <line x1="400" y1="80" x2="400" y2="115" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="260" y1="90" x2="260" y2="125" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="4 2"/>
 
-            <g>
-              <rect x="500" y="30" width="80" height="50" rx="6" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
-              <text x="540" y="55" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="9" font-weight="600">Scheduled</text>
-              <text x="540" y="68" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">cron job</text>
+            <!-- Event 3: Payment (isometric cube) -->
+            <g filter="url(#event-glow-red)">
+              <ellipse cx="400" cy="95" rx="35" ry="10" fill="rgba(255,77,77,0.15)"/>
+              <path d="M435,40 L435,75 L400,90 L400,55 Z" fill="#0a0f1a" stroke="var(--accent)" stroke-width="1.5"/>
+              <path d="M365,20 L400,5 L435,20 L400,35 Z" fill="url(#event-red-top)" stroke="var(--accent)" stroke-width="1.5"/>
+              <path d="M365,20 L365,55 L400,70 L400,35 Z" fill="rgba(255,77,77,0.1)" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="400" y="25" text-anchor="middle" fill="var(--accent)" font-family="Satoshi" font-size="8" font-weight="600">Payment</text>
             </g>
-            <line x1="540" y1="80" x2="540" y2="115" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <line x1="400" y1="90" x2="400" y2="125" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 2"/>
 
-            <!-- Agents below -->
-            <line x1="120" y1="145" x2="120" y2="175" stroke="var(--gray-600)" stroke-width="1.5"/>
-            <line x1="260" y1="145" x2="260" y2="175" stroke="var(--gray-600)" stroke-width="1.5"/>
-            <line x1="400" y1="145" x2="400" y2="175" stroke="var(--gray-600)" stroke-width="1.5"/>
-            <line x1="540" y1="145" x2="540" y2="175" stroke="var(--gray-600)" stroke-width="1.5"/>
+            <!-- Event 4: Scheduled (isometric cube) -->
+            <g filter="url(#event-glow-teal)">
+              <ellipse cx="540" cy="95" rx="35" ry="10" fill="rgba(0,229,204,0.15)"/>
+              <path d="M575,40 L575,75 L540,90 L540,55 Z" fill="#0a0f1a" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M505,20 L540,5 L575,20 L540,35 Z" fill="url(#event-teal-top)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <path d="M505,20 L505,55 L540,70 L540,35 Z" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
+              <text x="540" y="25" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi" font-size="8" font-weight="600">Scheduled</text>
+            </g>
+            <line x1="540" y1="90" x2="540" y2="125" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="4 2"/>
 
+            <!-- Connecting lines from bus to agents -->
+            <line x1="120" y1="175" x2="120" y2="200" stroke="var(--gray-500)" stroke-width="1.5"/>
+            <line x1="260" y1="175" x2="260" y2="200" stroke="var(--gray-500)" stroke-width="1.5"/>
+            <line x1="400" y1="175" x2="400" y2="200" stroke="var(--gray-500)" stroke-width="1.5"/>
+            <line x1="540" y1="175" x2="540" y2="200" stroke="var(--gray-500)" stroke-width="1.5"/>
+
+            <!-- Agent 1: Lead Agent (isometric cube) -->
             <g>
-              <rect x="70" y="175" width="100" height="55" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="120" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Lead Agent</text>
-              <text x="120" y="215" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">qualify & route</text>
+              <ellipse cx="120" cy="285" rx="45" ry="12" fill="rgba(0,0,0,0.3)"/>
+              <path d="M165,215 L165,265 L120,285 L120,235 Z" fill="#0a0f1a" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M75,195 L120,175 L165,195 L120,215 Z" fill="url(#agent-box-top)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M75,195 L75,245 L120,265 L120,215 Z" fill="var(--gray-800)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <text x="120" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="9" font-weight="600">Lead Agent</text>
             </g>
+
+            <!-- Agent 2: Email Agent (isometric cube) -->
             <g>
-              <rect x="210" y="175" width="100" height="55" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="260" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Email Agent</text>
-              <text x="260" y="215" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">parse & respond</text>
+              <ellipse cx="260" cy="285" rx="45" ry="12" fill="rgba(0,0,0,0.3)"/>
+              <path d="M305,215 L305,265 L260,285 L260,235 Z" fill="#0a0f1a" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M215,195 L260,175 L305,195 L260,215 Z" fill="url(#agent-box-top)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M215,195 L215,245 L260,265 L260,215 Z" fill="var(--gray-800)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <text x="260" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="9" font-weight="600">Email Agent</text>
             </g>
+
+            <!-- Agent 3: Billing Agent (isometric cube) -->
             <g>
-              <rect x="350" y="175" width="100" height="55" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="400" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Billing Agent</text>
-              <text x="400" y="215" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">invoice & notify</text>
+              <ellipse cx="400" cy="285" rx="45" ry="12" fill="rgba(0,0,0,0.3)"/>
+              <path d="M445,215 L445,265 L400,285 L400,235 Z" fill="#0a0f1a" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M355,195 L400,175 L445,195 L400,215 Z" fill="url(#agent-box-top)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M355,195 L355,245 L400,265 L400,215 Z" fill="var(--gray-800)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <text x="400" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="9" font-weight="600">Billing Agent</text>
             </g>
+
+            <!-- Agent 4: Report Agent (isometric cube) -->
             <g>
-              <rect x="490" y="175" width="100" height="55" rx="8" fill="var(--gray-800)" stroke="var(--gray-600)" stroke-width="1.5"/>
-              <text x="540" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="10" font-weight="600">Report Agent</text>
-              <text x="540" y="215" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="8">generate & send</text>
+              <ellipse cx="540" cy="285" rx="45" ry="12" fill="rgba(0,0,0,0.3)"/>
+              <path d="M585,215 L585,265 L540,285 L540,235 Z" fill="#0a0f1a" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M495,195 L540,175 L585,195 L540,215 Z" fill="url(#agent-box-top)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <path d="M495,195 L495,245 L540,265 L540,215 Z" fill="var(--gray-800)" stroke="var(--gray-500)" stroke-width="1.5"/>
+              <text x="540" y="200" text-anchor="middle" fill="var(--white)" font-family="Satoshi" font-size="9" font-weight="600">Report Agent</text>
             </g>
 
             <!-- Animated pulse on event bus -->
-            <circle r="4" fill="var(--accent2)">
-              <animateMotion dur="3s" repeatCount="indefinite" path="M100,130 L600,130"/>
+            <circle r="5" fill="var(--accent2)">
+              <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+              <animateMotion dur="3s" repeatCount="indefinite" path="M100,150 L600,150"/>
             </circle>
           </svg>
           <p style="color: var(--gray-600); font-size: 0.85rem; margin-top: 24px;"><strong>Best for:</strong> Customer support, notifications, real-time integrations</p>
