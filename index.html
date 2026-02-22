@@ -332,12 +332,15 @@
       display: grid;
       grid-template-columns: 320px 1fr;
       gap: 48px;
-      align-items: start;
+      align-items: stretch;
     }
     .skills-tabs {
       display: flex;
       flex-direction: column;
       gap: 8px;
+    }
+    .skills-tabs .skill-tab:last-child {
+      flex: 1;
     }
     .skill-tab {
       background: var(--gray-800);
@@ -373,7 +376,7 @@
       border: 1px solid var(--gray-700);
       border-radius: 12px;
       overflow: hidden;
-      height: 420px;
+      min-height: 420px;
       display: flex;
       flex-direction: column;
     }
@@ -438,7 +441,7 @@
         grid-template-columns: 1fr;
       }
       .skills-terminal {
-        height: 350px;
+        min-height: 350px;
       }
     }
 
