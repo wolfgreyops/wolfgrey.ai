@@ -25,7 +25,7 @@
       --line-color: rgba(255,255,255,0.06);
     }
     [data-theme="light"] {
-      --accent2: #0d7377;
+      --accent2: #c2410c;
       --btn: #1d4ed8;
       --btn-hover: #1e40af;
       --dark: #ffffff;
@@ -38,6 +38,11 @@
       --white: #0f0f0f;
       --nav-bg: rgba(255,255,255,0.95);
       --line-color: rgba(0,0,0,0.12);
+    }
+    [data-theme="light"] .hero h1 span {
+      background: none;
+      -webkit-text-fill-color: var(--accent2);
+      color: var(--accent2);
     }
     html { scroll-behavior: smooth; }
     body {
