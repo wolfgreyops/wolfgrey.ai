@@ -30,23 +30,6 @@
       --line-color: rgba(255,255,255,0.06);
     }
 
-    [data-theme="light"] {
-      --accent2: #c2410c;
-      --btn: #1d4ed8;
-      --btn-hover: #1e40af;
-      --dark: #ffffff;
-      --gray-900: #f5f5f5;
-      --gray-800: #e8e8e8;
-      --gray-700: #d1d1d1;
-      --gray-600: #525252;
-      --gray-400: #363636;
-      --gray-300: #1a1a1a;
-      --white: #0f0f0f;
-      --white-bright: #ffffff;
-      --nav-bg: rgba(255,255,255,0.95);
-      --line-color: rgba(0,0,0,0.12);
-    }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -100,7 +83,6 @@
     }
     .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
     .wolf-icon { filter: invert(1) brightness(1.2); }
-    [data-theme="light"] .wolf-icon { filter: none; }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
       font-size: 0.875rem;
@@ -127,26 +109,6 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
-    .theme-toggle {
-      background: var(--gray-800);
-      border: 1px solid var(--gray-700);
-      border-radius: 8px;
-      padding: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      color: var(--gray-300);
-    }
-    .theme-toggle:hover {
-      background: var(--gray-700);
-      color: var(--white);
-    }
-    .theme-toggle .sun { display: none; }
-    .theme-toggle .moon { display: block; }
-    [data-theme="light"] .theme-toggle .sun { display: block; }
-    [data-theme="light"] .theme-toggle .moon { display: none; }
 
     /* ── PAGE HEADER ── */
     .page-header {
@@ -533,10 +495,6 @@
         <a href="products.html" class="active">Products</a>
         <a href="awaas.html">Agents</a>
         <a href="resources.html">Resources</a>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-          <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
         <a href="products.html" class="nav-cta">Shop &rarr;</a>
       </div>
     </div>
@@ -901,22 +859,7 @@
     // 1. Go to stripe.com/dashboard → Products → Create Product ($49 AI Playbook)
     // 2. Go to Payment Links → Create → Select your product
     // 3. Copy the link and replace STRIPE_PAYMENT_LINK_HERE in the HTML above
-    // Example: https://buy.stripe.com/xxxxxxxxxxxx
-
-    // ── Theme Toggle ──
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('wolfgrey-theme', next);
-    }
-    (function() {
-      const saved = localStorage.getItem('wolfgrey-theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
-    })();
-
-    // ── Stripe Checkout Popup ──
+    // Example: https://buy.stripe.com/xxxxxxxxxxxx// ── Stripe Checkout Popup ──
     function openCheckout(url) {
       const width = 500;
       const height = 700;
