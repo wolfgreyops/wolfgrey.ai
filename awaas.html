@@ -261,8 +261,8 @@
     /* ── ORCHESTRATOR DIAGRAM ── */
     .orchestrator-diagram {
       position: relative;
-      width: 400px;
-      height: 400px;
+      width: 500px;
+      height: 500px;
       margin: 0 auto;
     }
 
@@ -447,7 +447,7 @@
     .a-finance .agent-pulse { animation-delay: 2.4s; }
 
     /* ── WORKFLOW DIAGRAMS ── */
-    .workflow-section { text-align: center; }
+    .workflow-section { text-align: center; padding: 100px 24px; }
     .workflow-tabs {
       display: flex;
       justify-content: center;
@@ -477,8 +477,8 @@
       background: var(--gray-800);
       border: 1px solid var(--gray-700);
       border-radius: 16px;
-      padding: 48px;
-      min-height: 500px;
+      padding: 60px;
+      min-height: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -487,13 +487,14 @@
     .workflow-diagram { display: none; }
     .workflow-diagram.active { display: block; }
     .workflow-title {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
+      font-size: 1.75rem;
+      margin-bottom: 12px;
     }
     .workflow-desc {
       color: var(--gray-400);
-      margin-bottom: 32px;
-      max-width: 500px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      font-size: 1.1rem;
     }
 
     /* ── ANIMATIONS ── */
@@ -1049,7 +1050,7 @@
         <div class="workflow-diagram active" id="workflow-linear">
           <h3 class="workflow-title">Linear Workflow</h3>
           <p class="workflow-desc">Tasks flow sequentially from one agent to the next. Each agent completes its work before passing to the next stage.</p>
-          <svg viewBox="0 0 700 200" fill="none" style="width: 100%; max-width: 700px;">
+          <svg viewBox="0 0 700 200" fill="none" style="width: 100%; max-width: 900px;">
             <!-- Connection lines -->
             <line x1="120" y1="100" x2="220" y2="100" stroke="var(--gray-600)" stroke-width="2"/>
             <line x1="280" y1="100" x2="380" y2="100" stroke="var(--gray-600)" stroke-width="2"/>
@@ -1094,7 +1095,7 @@
         <div class="workflow-diagram" id="workflow-parallel">
           <h3 class="workflow-title">Parallel Processing</h3>
           <p class="workflow-desc">Multiple agents work simultaneously on different aspects of a task, then results are combined.</p>
-          <svg viewBox="0 0 700 280" fill="none" style="width: 100%; max-width: 700px;">
+          <svg viewBox="0 0 700 280" fill="none" style="width: 100%; max-width: 900px;">
             <!-- Fan out lines -->
             <line x1="140" y1="140" x2="240" y2="60" stroke="var(--gray-600)" stroke-width="2"/>
             <line x1="140" y1="140" x2="240" y2="140" stroke="var(--gray-600)" stroke-width="2"/>
@@ -1205,7 +1206,7 @@
         <div class="workflow-diagram" id="workflow-reactive">
           <h3 class="workflow-title">Event-Driven Workflow</h3>
           <p class="workflow-desc">Agents react to events in real-time. When something happens, the appropriate agent is triggered automatically.</p>
-          <svg viewBox="0 0 700 260" fill="none" style="width: 100%; max-width: 700px;">
+          <svg viewBox="0 0 700 260" fill="none" style="width: 100%; max-width: 900px;">
             <!-- Event bus -->
             <rect x="50" y="115" width="600" height="30" rx="4" fill="var(--gray-700)" opacity="0.5"/>
             <text x="350" y="135" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi" font-size="11">EVENT BUS</text>
