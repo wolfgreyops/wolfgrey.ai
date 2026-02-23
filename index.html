@@ -469,18 +469,6 @@
       border-color: var(--accent);
       transform: translateY(-4px);
     }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .service-card:hover::before { opacity: 1; }
     @keyframes iconFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-3px); }
