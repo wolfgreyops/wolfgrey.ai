@@ -1,42 +1,62 @@
 /**
  * Generate a week of content using Claude API
+ * Integrates wolfgrey-x-content and wolfgrey-brand skills
  * Usage: npm run generate
  */
 
 import Anthropic from '@anthropic-ai/sdk';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const anthropic = new Anthropic();
 
+// Load skill content
+function loadSkill(skillName: string): string {
+  const skillPath = path.join(__dirname, `../../../skills/${skillName}/SKILL.md`);
+  try {
+    return fs.readFileSync(skillPath, 'utf-8');
+  } catch {
+    console.warn(`Warning: Could not load skill ${skillName}`);
+    return '';
+  }
+}
+
+const BRAND_SKILL = loadSkill('wolfgrey-brand');
+const X_CONTENT_SKILL = loadSkill('wolfgrey-x-content');
+
 const CONTENT_PILLARS = [
-  { day: 'Monday', theme: 'ROI/Results', description: 'Case study with specific numbers' },
-  { day: 'Tuesday', theme: 'Tactical Tip', description: 'CRAFT prompt trick, Claude technique' },
-  { day: 'Wednesday', theme: 'Mindset Shift', description: 'Hot take, industry observation' },
-  { day: 'Thursday', theme: 'Tool/Workflow', description: 'Specific workflow walkthrough' },
-  { day: 'Friday', theme: 'Thread', description: 'Deep-dive educational (5-7 tweets)' },
-  { day: 'Saturday', theme: 'Community', description: 'Engagement question, poll' },
-  { day: 'Sunday', theme: 'Soft Sell', description: 'Direct CTA to free guide/tools' },
+  { day: 'Monday', theme: 'ROI/Results', description: 'Case study with specific numbers showing real time/money saved' },
+  { day: 'Tuesday', theme: 'Tactical Tip', description: 'CRAFT prompt trick or Claude technique, specific and actionable' },
+  { day: 'Wednesday', theme: 'Mindset Shift', description: 'Hot take or industry observation, contrarian view on AI adoption' },
+  { day: 'Thursday', theme: 'Tool/Workflow', description: 'Step-by-step workflow walkthrough with clear before/after' },
+  { day: 'Friday', theme: 'Thread', description: 'Deep-dive educational thread (5-7 tweets) on a single topic' },
+  { day: 'Saturday', theme: 'Community', description: 'Engagement question or poll that sparks conversation' },
+  { day: 'Sunday', theme: 'Soft Sell', description: 'Direct CTA to free guide with clear value proposition' },
 ];
 
 const SYSTEM_PROMPT = `You are the content engine for wolfgrey.ai, creating X (Twitter) posts.
 
-BRAND VOICE:
-- Direct, operator-to-operator tone
-- Results-first, no fluff
-- Specific numbers over vague claims
-- Never use: "revolutionary", "game-changing", "unlock the power"
+${BRAND_SKILL}
 
-PRODUCTS:
-- Free Guide: wolfgrey.ai/guide?src=twitter
-- Free Tools: wolfgrey.ai/tools?src=twitter
-- $49 Playbook: wolfgrey.ai/playbook?src=twitter
-- $199 Mastery: wolfgrey.ai/mastery?src=twitter
+${X_CONTENT_SKILL}
 
-RULES:
-- Single tweets under 280 characters
-- Provide real value, not hype`;
+CRITICAL RULES:
+1. Single tweets MUST be under 280 characters
+2. Threads should have 5-7 tweets, each under 280 characters
+3. Hook in the first line - stop the scroll
+4. One idea per tweet - don't cram
+5. Use line breaks liberally for readability
+6. End with clear CTA
+7. NO hashtags
+8. Minimal emojis (one max per tweet, if any)
+9. Be specific - use real numbers, not vague claims
+10. Write like you're talking to a smart business owner`;
 
 async function generateWeek() {
-  console.log('Generating 7 days of content...\n');
+  console.log('Loading wolfgrey skills...');
+  console.log(`  - Brand skill: ${BRAND_SKILL ? 'loaded' : 'not found'}`);
+  console.log(`  - X Content skill: ${X_CONTENT_SKILL ? 'loaded' : 'not found'}`);
+  console.log('\nGenerating 7 days of content...\n');
 
   const posts: Array<{
     day: string;
@@ -49,17 +69,28 @@ async function generateWeek() {
     const isThread = pillar.theme === 'Thread';
 
     const prompt = isThread
-      ? `Generate a Twitter thread (5-6 tweets) for ${pillar.day}.
+      ? `Generate a Twitter thread for ${pillar.day}.
 Theme: ${pillar.theme}
 Description: ${pillar.description}
 
-Return ONLY a JSON array of tweet strings.
-Last tweet should have CTA to wolfgrey.ai/guide?src=twitter`
+Follow the thread format from the skill:
+- Tweet 1: Hook + promise
+- Tweets 2-5: One valuable insight per tweet, specific and actionable
+- Tweet 6: Summary or key takeaway
+- Tweet 7: CTA to wolfgrey.ai/guide?src=twitter and follow @__wolfgrey__
+
+Return ONLY a JSON array of tweet strings. Each tweet under 280 characters.
+Example format: ["Tweet 1 text", "Tweet 2 text", ...]`
       : `Generate a single tweet for ${pillar.day}.
 Theme: ${pillar.theme}
 Description: ${pillar.description}
 
-Return ONLY the tweet text. Under 280 characters.`;
+Follow the single tweet format:
+- Hook in first line
+- Insight or solution
+- CTA or takeaway
+
+Return ONLY the tweet text. MUST be under 280 characters.`;
 
     process.stdout.write(`${pillar.day} (${pillar.theme})... `);
 
@@ -94,10 +125,14 @@ Return ONLY the tweet text. Under 280 characters.`;
     console.log(`## ${post.day} - ${post.theme}\n`);
     if (post.type === 'thread' && Array.isArray(post.content)) {
       post.content.forEach((tweet, i) => {
-        console.log(`${i + 1}/${post.content.length}: ${tweet}\n`);
+        const charCount = tweet.length;
+        const status = charCount > 280 ? ' ⚠️ OVER LIMIT' : '';
+        console.log(`${i + 1}/${post.content.length} (${charCount} chars${status}): ${tweet}\n`);
       });
     } else {
-      console.log(post.content);
+      const charCount = typeof post.content === 'string' ? post.content.length : 0;
+      const status = charCount > 280 ? ' ⚠️ OVER LIMIT' : '';
+      console.log(`(${charCount} chars${status}): ${post.content}`);
     }
     console.log('\n---\n');
   }

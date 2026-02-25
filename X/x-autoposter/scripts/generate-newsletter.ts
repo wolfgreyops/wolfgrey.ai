@@ -1,5 +1,6 @@
 /**
  * Generate weekly newsletter from published X posts
+ * Integrates wolfgrey-newsletter and wolfgrey-brand skills
  * Usage: npm run newsletter
  */
 
@@ -18,30 +19,40 @@ interface PublishedPost {
   x_published_url: string | null;
 }
 
+// Load skill content
+function loadSkill(skillName: string): string {
+  const skillPath = path.join(__dirname, `../../../skills/${skillName}/SKILL.md`);
+  try {
+    return fs.readFileSync(skillPath, 'utf-8');
+  } catch {
+    console.warn(`Warning: Could not load skill ${skillName}`);
+    return '';
+  }
+}
+
+const BRAND_SKILL = loadSkill('wolfgrey-brand');
+const NEWSLETTER_SKILL = loadSkill('wolfgrey-newsletter');
+
 const NEWSLETTER_SYSTEM_PROMPT = `You are the newsletter editor for wolfgrey.ai.
 
-Your job is to compile X posts from the past week into a cohesive newsletter.
+${BRAND_SKILL}
 
-BRAND VOICE:
-- Direct, operator-to-operator tone
-- Results-first, no fluff
-- Conversational but professional
-- Write like you're emailing a smart friend
+${NEWSLETTER_SKILL}
 
-NEWSLETTER STRUCTURE:
-1. **Opening hook** - 1-2 sentences, what's the theme this week
-2. **Main sections** (2-4) - Expand on the best posts, add context
-3. **Quick hits** - Bullet points of other insights
-4. **CTA** - Link to guides, tools, or consulting
+Your job is to compile X posts from the past week into a cohesive Substack newsletter.
 
-RULES:
-- Keep it under 600 words
-- Add context/expansion to tweets (don't just copy them)
-- Include links where relevant
-- End with clear next step
+CRITICAL RULES:
+1. Follow the newsletter template structure exactly
+2. Expand tweets into full sections - don't just copy them
+3. Add context, examples, and the "why" behind each insight
+4. Keep total length 500-800 words
+5. Use the exact formatting (headers, bold, horizontal rules)
+6. Always end with CTA to wolfgrey.ai/resources
+7. Sign off with: *Built with Claude. Shipped by wolfgrey.*
 
 OUTPUT FORMAT:
-Return the newsletter in markdown format, ready to paste into Substack.`;
+Return the newsletter in markdown format, ready to paste into Substack.
+Start with the title: # The Weekly Build | [Date]`;
 
 async function fetchRecentPosts(): Promise<PublishedPost[]> {
   const apiKey = process.env.TYPEFULLY_API_KEY;
@@ -81,11 +92,25 @@ async function generateNewsletter(posts: PublishedPost[]): Promise<string> {
     return `Post ${i + 1} (${new Date(post.published_at).toLocaleDateString()}):\n${post.preview}`;
   }).join('\n\n---\n\n');
 
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
   const prompt = `Here are the X posts from wolfgrey.ai this week:
 
 ${postsContent}
 
-Compile these into a newsletter. Expand on the ideas, add context, and make it feel like a cohesive weekly update. Include a CTA to wolfgrey.ai/resources at the end.`;
+Compile these into a newsletter for ${dateStr}.
+
+Follow the newsletter skill template:
+1. Title: # The Weekly Build | ${dateStr}
+2. Teaser line with 2-3 topics
+3. 2-4 main sections (expand the best posts with context)
+4. Quick Hits section (bullet points of remaining insights)
+5. "One Thing to Try This Week" section
+6. CTA to wolfgrey.ai/resources
+7. Sign-off: *Built with Claude. Shipped by wolfgrey.*
+
+Remember to EXPAND on the tweets - add the "why", the "how", and concrete examples. Don't just copy the tweet text.`;
 
   const response = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
@@ -116,29 +141,16 @@ async function saveNewsletter(content: string): Promise<string> {
 
   const filepath = path.join(newsletterDir, filename);
 
-  const fullContent = `# Weekly Newsletter - ${date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric'
-  })}
-
-*Generated from this week's X posts*
-
----
-
-${content}
-
----
-
-*Copy this into Substack and publish!*
-`;
-
-  fs.writeFileSync(filepath, fullContent);
+  // Save the raw newsletter content (already formatted)
+  fs.writeFileSync(filepath, content);
   return filepath;
 }
 
 async function main() {
-  console.log('Fetching recent posts from Typefully...\n');
+  console.log('Loading wolfgrey skills...');
+  console.log(`  - Brand skill: ${BRAND_SKILL ? 'loaded' : 'not found'}`);
+  console.log(`  - Newsletter skill: ${NEWSLETTER_SKILL ? 'loaded' : 'not found'}`);
+  console.log('\nFetching recent posts from Typefully...\n');
 
   try {
     const posts = await fetchRecentPosts();
@@ -157,7 +169,7 @@ async function main() {
     console.log('\n--- END PREVIEW ---\n');
 
     const filepath = await saveNewsletter(newsletter);
-    console.log(`\nNewsletter saved to: ${filepath}`);
+    console.log(`Newsletter saved to: ${filepath}`);
     console.log('\nCopy the content into Substack and publish!');
 
   } catch (error) {
