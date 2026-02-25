@@ -723,11 +723,25 @@
     }
     .footer-links a:hover { color: var(--white); }
 
+    /* ── COMPARE & STEPS GRIDS ── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 968px) {
       .what-grid { grid-template-columns: 1fr; gap: 40px; }
       .tiers-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       .usecases-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -964,7 +978,7 @@
       <h2 class="section-title" style="text-align: center;">From tools you use to teams that work</h2>
       <p class="section-subtitle" style="text-align: center; margin: 0 auto 48px;">The shift from chatbots to agents is the shift from asking to delegating.</p>
 
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;">
+      <div class="compare-grid">
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 32px;">
           <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 12px;">Chatbots wait</h3>
           <p style="color: var(--gray-400); line-height: 1.6;">You prompt, they respond, you act. Every step requires your input. You're still doing the work — just with a smarter search bar.</p>
@@ -992,7 +1006,7 @@
       <h2 class="section-title" style="text-align: center;">Three things agents need from you</h2>
       <p class="section-subtitle" style="text-align: center; margin: 0 auto 48px;">Deploying agents isn't technical. It's about clarity.</p>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div class="steps-grid">
         <div style="text-align: center; padding: 32px 24px;">
           <div style="width: 64px; height: 64px; background: rgba(0,229,204,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
