@@ -59,7 +59,11 @@
       }
     }
     @media (max-width: 768px) {
-      body::before { display: none !important; }
+      body::before {
+        display: none !important;
+        content: none !important;
+        border: none !important;
+      }
     }
 
     h1, h2, h3, h4, h5 { font-family: 'Clash Display', 'Inter', sans-serif; line-height: 1.15; font-weight: 500; }
@@ -762,7 +766,7 @@
       }
       .mobile-toggle { display: block; }
       .hero { padding: 120px 24px 60px; }
-      .hero h1 { font-size: 3rem; }
+      .hero h1 { font-size: 3rem; font-weight: 500; }
       .hero p { font-size: 1rem; }
       section { padding: 60px 24px; }
       .workflow-display { padding: 24px; min-height: 400px; }
@@ -782,7 +786,7 @@
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2.75rem; }
+      .hero h1 { font-size: 3rem; font-weight: 500; }
       .hero p { font-size: 0.9rem; }
       .orchestrator-diagram { width: 260px; height: 260px; }
       .hub-glow { width: 80px; height: 80px; }
