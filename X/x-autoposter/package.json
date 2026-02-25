@@ -8,7 +8,8 @@
     "start": "next start",
     "post": "npx tsx scripts/post-now.ts",
     "generate": "npx tsx scripts/generate-content.ts",
-    "queue": "npx tsx scripts/view-queue.ts"
+    "queue": "npx tsx scripts/view-queue.ts",
+    "newsletter": "npx tsx scripts/generate-newsletter.ts"
   },
   "dependencies": {
     "next": "^14.0.0",
