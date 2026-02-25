@@ -382,6 +382,31 @@
       margin: 0;
     }
     .skill-tab.active h4 { color: var(--accent); }
+    .skills-dropdown {
+      display: none;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .skills-dropdown select {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238892b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+    .skills-dropdown select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
     .skills-terminal {
       background: var(--gray-900);
       border: 1px solid var(--gray-700);
@@ -1451,8 +1476,8 @@
       .demo-terminal { font-size: 0.75rem; padding: 16px; }
       .ai-stat-number { font-size: 1.75rem; }
       .skills-layout { grid-template-columns: 1fr; }
-      .skills-tabs { flex-direction: row; overflow-x: auto; }
-      .skill-tab { flex: 1 0 0; min-width: 140px; }
+      .skills-tabs { display: none; }
+      .skills-dropdown { display: block; }
       .skills-terminal { min-height: 350px; }
     }
 
@@ -1888,6 +1913,16 @@
             <h4>Customer Communication</h4>
             <p>Draft responses, follow-ups, and proposals</p>
           </div>
+        </div>
+        <div class="skills-dropdown">
+          <select id="skillsSelect">
+            <option value="prompts">Prompt Engineering</option>
+            <option value="automation">Workflow Automation</option>
+            <option value="content">Content Creation</option>
+            <option value="analysis">Data Analysis</option>
+            <option value="operations">Operations & SOPs</option>
+            <option value="customer">Customer Communication</option>
+          </select>
         </div>
         <div class="skills-terminal">
           <div class="terminal-header">
@@ -2346,8 +2381,16 @@
         tab.addEventListener('click', () => {
           document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
+          document.getElementById('skillsSelect').value = tab.dataset.skill;
           showSkill(tab.dataset.skill);
         });
+      });
+
+      document.getElementById('skillsSelect').addEventListener('change', (e) => {
+        document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
+        const tab = document.querySelector(`.skill-tab[data-skill="${e.target.value}"]`);
+        if (tab) tab.classList.add('active');
+        showSkill(e.target.value);
       });
 
       showSkill('prompts');
