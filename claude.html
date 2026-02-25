@@ -408,10 +408,23 @@
       }
       .mobile-toggle { display: block; }
       .page-header { padding: 120px 24px 40px; }
+      .page-header h1 { font-size: 2rem; }
       .page-header .partnership { flex-direction: column; gap: 12px; }
       .tool-card { padding: 28px; }
       .tool-header { flex-direction: column; }
       section { padding: 60px 24px; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 48px 16px; }
+      .page-header { padding: 100px 16px 32px; }
+      .page-header h1 { font-size: 1.5rem; }
+      .page-header p { font-size: 0.9rem; }
+      .section-title { font-size: 1.25rem; }
+      .why-card { padding: 24px 20px; }
+      .tool-card { padding: 24px 20px; }
+      .tool-card h3 { font-size: 1.25rem; }
+      .quote-section blockquote { font-size: 1.1rem; padding: 0 16px; }
     }
   </style>
 </head>
