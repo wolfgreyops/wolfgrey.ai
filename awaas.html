@@ -1089,7 +1089,7 @@
       });
     });
 
-    // 3D Isometric Platforms Animation
+    // Hexagonal Hive Animation
     (function() {
       const canvas = document.getElementById('particleCanvas');
       if (!canvas) return;
@@ -1097,17 +1097,10 @@
       const ctx = canvas.getContext('2d');
       let width, height, centerX, centerY;
 
-      const agents = [
-        { label: 'Sales', color: '#00e5cc' },
-        { label: 'Marketing', color: '#00e5cc' },
-        { label: 'Support', color: '#ff4d4d' },
-        { label: 'Ops', color: '#00e5cc' },
-        { label: 'Finance', color: '#ff4d4d' }
-      ];
-
-      const platforms = [];
-      const particles = [];
-      const connections = [];
+      const hexagons = [];
+      const waves = [];
+      const miniAgents = [];
+      let hexSize = 30;
 
       function resize() {
         const container = canvas.parentElement;
@@ -1122,275 +1115,223 @@
         ctx.scale(dpr, dpr);
         centerX = width / 2;
         centerY = height / 2;
-        initPlatforms();
+        hexSize = Math.min(width, height) * 0.06;
+        initHexagons();
       }
 
-      function toIso(x, y, z) {
-        // Isometric projection
-        const isoX = (x - y) * 0.866;
-        const isoY = (x + y) * 0.5 - z;
-        return {
-          x: centerX + isoX,
-          y: centerY + isoY
-        };
+      function initHexagons() {
+        hexagons.length = 0;
+        const horizSpacing = hexSize * 1.8;
+        const vertSpacing = hexSize * 1.55;
+        const cols = Math.ceil(width / horizSpacing) + 2;
+        const rows = Math.ceil(height / vertSpacing) + 2;
+
+        for (let row = -2; row < rows; row++) {
+          for (let col = -2; col < cols; col++) {
+            const offset = row % 2 === 0 ? 0 : horizSpacing / 2;
+            const x = col * horizSpacing + offset;
+            const y = row * vertSpacing;
+            const distFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+            // Only include hexagons within a circular region
+            if (distFromCenter < Math.min(width, height) * 0.45) {
+              hexagons.push({
+                x, y,
+                baseOpacity: 0.1 + Math.random() * 0.1,
+                activation: 0,
+                activationDecay: 0.985 + Math.random() * 0.01,
+                pulsePhase: Math.random() * Math.PI * 2,
+                distFromCenter
+              });
+            }
+          }
+        }
       }
 
-      function initPlatforms() {
-        platforms.length = 0;
-        const baseSize = Math.min(width, height) * 0.12;
-
-        // Central orchestrator platform (larger, bottom)
-        platforms.push({
-          x: 0, y: 0, z: 0,
-          width: baseSize * 1.4,
-          depth: baseSize * 1.4,
-          height: 8,
-          color: '#00e5cc',
-          label: 'Orchestrator',
-          isCenter: true,
-          floatOffset: 0,
-          floatSpeed: 0.001
+      function spawnWave() {
+        waves.push({
+          radius: 0,
+          speed: 0.8 + Math.random() * 0.4,
+          maxRadius: Math.min(width, height) * 0.5,
+          intensity: 0.6 + Math.random() * 0.4
         });
+      }
 
-        // Agent platforms orbiting around
-        const radius = baseSize * 2.2;
-        agents.forEach((agent, i) => {
-          const angle = (i / agents.length) * Math.PI * 2 - Math.PI / 2;
-          const zLevel = 30 + (i % 2) * 25;
-          platforms.push({
-            x: Math.cos(angle) * radius,
-            y: Math.sin(angle) * radius,
-            z: zLevel,
-            width: baseSize * 0.9,
-            depth: baseSize * 0.9,
-            height: 6,
-            color: agent.color,
-            label: agent.label,
-            isCenter: false,
-            floatOffset: Math.random() * Math.PI * 2,
-            floatSpeed: 0.0015 + Math.random() * 0.001,
-            baseZ: zLevel
-          });
-        });
-
-        // Initialize connections
-        connections.length = 0;
-        for (let i = 1; i < platforms.length; i++) {
-          connections.push({
-            from: 0,
-            to: i,
-            pulsePos: Math.random(),
-            pulseSpeed: 0.002 + Math.random() * 0.002
+      function spawnMiniAgent(hex) {
+        if (miniAgents.length < 8 && Math.random() < 0.02) {
+          const angle = Math.random() * Math.PI * 2;
+          const targetHex = hexagons[Math.floor(Math.random() * hexagons.length)];
+          miniAgents.push({
+            x: hex.x,
+            y: hex.y,
+            targetX: targetHex.x,
+            targetY: targetHex.y,
+            progress: 0,
+            speed: 0.008 + Math.random() * 0.008,
+            size: 3 + Math.random() * 2,
+            color: Math.random() > 0.3 ? '#00e5cc' : '#ff4d4d'
           });
         }
       }
 
-      function initParticles() {
-        particles.length = 0;
-        for (let i = 0; i < 30; i++) {
-          particles.push({
-            x: (Math.random() - 0.5) * 300,
-            y: (Math.random() - 0.5) * 300,
-            z: Math.random() * 100,
-            size: Math.random() * 2 + 1,
-            speed: 0.1 + Math.random() * 0.2,
-            opacity: Math.random() * 0.4 + 0.1
-          });
+      function drawHexagon(x, y, size, opacity, activation) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (Math.PI / 3) * i - Math.PI / 6;
+          const hx = x + size * Math.cos(angle);
+          const hy = y + size * Math.sin(angle);
+          if (i === 0) ctx.moveTo(hx, hy);
+          else ctx.lineTo(hx, hy);
         }
-      }
-
-      function drawPlatform(p, time) {
-        // Floating animation
-        const float = Math.sin(time * p.floatSpeed + p.floatOffset) * 5;
-        const z = (p.baseZ || p.z) + float;
-
-        const w = p.width / 2;
-        const d = p.depth / 2;
-        const h = p.height;
-
-        // Get corners in isometric
-        const top = [
-          toIso(-w, -d, z + h),
-          toIso(w, -d, z + h),
-          toIso(w, d, z + h),
-          toIso(-w, d, z + h)
-        ].map(pt => ({ x: pt.x + p.x * 0.866, y: pt.y + p.x * 0.5 + p.y * 0.5 }));
-
-        const bottom = [
-          toIso(-w, -d, z),
-          toIso(w, -d, z),
-          toIso(w, d, z),
-          toIso(-w, d, z)
-        ].map(pt => ({ x: pt.x + p.x * 0.866, y: pt.y + p.x * 0.5 + p.y * 0.5 }));
-
-        // Parse color
-        const rgb = p.color === '#00e5cc' ? '0, 229, 204' : '255, 77, 77';
-
-        // Draw shadow
-        ctx.beginPath();
-        ctx.moveTo(bottom[0].x + 10, bottom[0].y + 15);
-        ctx.lineTo(bottom[1].x + 10, bottom[1].y + 15);
-        ctx.lineTo(bottom[2].x + 10, bottom[2].y + 15);
-        ctx.lineTo(bottom[3].x + 10, bottom[3].y + 15);
-        ctx.closePath();
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-        ctx.fill();
-
-        // Right face
-        ctx.beginPath();
-        ctx.moveTo(top[1].x, top[1].y);
-        ctx.lineTo(top[2].x, top[2].y);
-        ctx.lineTo(bottom[2].x, bottom[2].y);
-        ctx.lineTo(bottom[1].x, bottom[1].y);
-        ctx.closePath();
-        ctx.fillStyle = `rgba(${rgb}, 0.3)`;
-        ctx.fill();
-
-        // Left face
-        ctx.beginPath();
-        ctx.moveTo(top[2].x, top[2].y);
-        ctx.lineTo(top[3].x, top[3].y);
-        ctx.lineTo(bottom[3].x, bottom[3].y);
-        ctx.lineTo(bottom[2].x, bottom[2].y);
-        ctx.closePath();
-        ctx.fillStyle = `rgba(${rgb}, 0.2)`;
-        ctx.fill();
-
-        // Top face
-        ctx.beginPath();
-        ctx.moveTo(top[0].x, top[0].y);
-        ctx.lineTo(top[1].x, top[1].y);
-        ctx.lineTo(top[2].x, top[2].y);
-        ctx.lineTo(top[3].x, top[3].y);
         ctx.closePath();
 
-        // Gradient for top
-        const topGrad = ctx.createLinearGradient(top[0].x, top[0].y, top[2].x, top[2].y);
-        topGrad.addColorStop(0, `rgba(${rgb}, 0.6)`);
-        topGrad.addColorStop(1, `rgba(${rgb}, 0.4)`);
-        ctx.fillStyle = topGrad;
+        // Fill with activation glow
+        const fillOpacity = opacity + activation * 0.5;
+        const r = Math.round(activation * 255);
+        const g = Math.round(229 - activation * 30);
+        const b = Math.round(204 - activation * 50);
+        ctx.fillStyle = `rgba(${r > 0 ? 0 : 0}, ${229}, ${204}, ${fillOpacity * 0.3})`;
         ctx.fill();
 
-        // Top border glow
-        ctx.strokeStyle = `rgba(${rgb}, 0.8)`;
-        ctx.lineWidth = 2;
+        // Stroke
+        ctx.strokeStyle = `rgba(0, 229, 204, ${opacity + activation * 0.6})`;
+        ctx.lineWidth = 1 + activation;
         ctx.stroke();
 
-        // Label
-        const labelPos = toIso(p.x, p.y, z + h + 20);
-        ctx.font = `600 ${p.isCenter ? 11 : 10}px Satoshi, sans-serif`;
-        ctx.fillStyle = `rgba(240, 244, 255, 0.9)`;
-        ctx.textAlign = 'center';
-        ctx.fillText(p.label, labelPos.x, labelPos.y);
-
-        // Status indicator
-        const dotPos = toIso(p.x, p.y, z + h + 5);
-        ctx.beginPath();
-        ctx.arc(dotPos.x, dotPos.y - 5, 4, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-
-        // Glow
-        ctx.beginPath();
-        ctx.arc(dotPos.x, dotPos.y - 5, 8, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${rgb}, 0.3)`;
-        ctx.fill();
-
-        return { center: toIso(p.x, p.y, z + h), z: z };
+        // Inner glow when activated
+        if (activation > 0.3) {
+          const glowGrad = ctx.createRadialGradient(x, y, 0, x, y, size);
+          glowGrad.addColorStop(0, `rgba(0, 229, 204, ${activation * 0.4})`);
+          glowGrad.addColorStop(1, 'rgba(0, 229, 204, 0)');
+          ctx.fillStyle = glowGrad;
+          ctx.fill();
+        }
       }
 
-      function drawConnection(conn, time, platformData) {
-        const from = platformData[conn.from];
-        const to = platformData[conn.to];
+      function drawMiniAgent(agent) {
+        const x = agent.x + (agent.targetX - agent.x) * agent.progress;
+        const y = agent.y + (agent.targetY - agent.y) * agent.progress;
 
-        // Draw line
+        // Trail
         ctx.beginPath();
-        ctx.moveTo(from.center.x, from.center.y);
-        ctx.lineTo(to.center.x, to.center.y);
-        ctx.strokeStyle = 'rgba(0, 229, 204, 0.15)';
+        ctx.moveTo(agent.x, agent.y);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = agent.color.replace(')', ', 0.3)').replace('rgb', 'rgba').replace('#00e5cc', 'rgba(0, 229, 204, 0.3)').replace('#ff4d4d', 'rgba(255, 77, 77, 0.3)');
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Animate pulse
-        conn.pulsePos = (conn.pulsePos + conn.pulseSpeed) % 1;
-        const px = from.center.x + (to.center.x - from.center.x) * conn.pulsePos;
-        const py = from.center.y + (to.center.y - from.center.y) * conn.pulsePos;
-
-        // Pulse glow
-        const pulseGrad = ctx.createRadialGradient(px, py, 0, px, py, 12);
-        pulseGrad.addColorStop(0, 'rgba(0, 229, 204, 0.8)');
-        pulseGrad.addColorStop(0.5, 'rgba(0, 229, 204, 0.2)');
-        pulseGrad.addColorStop(1, 'rgba(0, 229, 204, 0)');
+        // Glow
+        const glowGrad = ctx.createRadialGradient(x, y, 0, x, y, agent.size * 3);
+        const rgb = agent.color === '#00e5cc' ? '0, 229, 204' : '255, 77, 77';
+        glowGrad.addColorStop(0, `rgba(${rgb}, 0.6)`);
+        glowGrad.addColorStop(1, `rgba(${rgb}, 0)`);
         ctx.beginPath();
-        ctx.arc(px, py, 12, 0, Math.PI * 2);
-        ctx.fillStyle = pulseGrad;
+        ctx.arc(x, y, agent.size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = glowGrad;
         ctx.fill();
 
-        // Pulse core
+        // Core
         ctx.beginPath();
-        ctx.arc(px, py, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#fff';
+        ctx.arc(x, y, agent.size, 0, Math.PI * 2);
+        ctx.fillStyle = agent.color;
         ctx.fill();
       }
 
-      function drawParticles(time) {
-        particles.forEach(p => {
-          p.z += p.speed;
-          if (p.z > 120) {
-            p.z = 0;
-            p.x = (Math.random() - 0.5) * 300;
-            p.y = (Math.random() - 0.5) * 300;
-          }
-
-          const pos = toIso(p.x, p.y, p.z);
-          ctx.beginPath();
-          ctx.arc(pos.x, pos.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0, 229, 204, ${p.opacity * (1 - p.z / 120)})`;
-          ctx.fill();
-        });
-      }
-
+      let lastWaveTime = 0;
       function animate(time) {
         ctx.clearRect(0, 0, width, height);
 
-        // Background
-        const bgGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.6);
-        bgGrad.addColorStop(0, 'rgba(0, 229, 204, 0.03)');
+        // Background gradient
+        const bgGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.5);
+        bgGrad.addColorStop(0, 'rgba(0, 229, 204, 0.04)');
         bgGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // Draw particles (behind)
-        drawParticles(time);
+        // Spawn waves periodically
+        if (time - lastWaveTime > 2000) {
+          spawnWave();
+          lastWaveTime = time;
+        }
 
-        // Sort platforms by depth for proper drawing order
-        const sorted = [...platforms].sort((a, b) => {
-          const zA = (a.baseZ || a.z) + Math.sin(time * a.floatSpeed + a.floatOffset) * 5;
-          const zB = (b.baseZ || b.z) + Math.sin(time * b.floatSpeed + b.floatOffset) * 5;
-          return zA - zB;
+        // Update waves
+        waves.forEach((wave, i) => {
+          wave.radius += wave.speed;
+          if (wave.radius > wave.maxRadius) {
+            waves.splice(i, 1);
+          }
         });
 
-        // Draw platforms and collect positions
-        const platformData = [];
-        platforms.forEach((p, i) => {
-          platformData[i] = drawPlatform(p, time);
+        // Draw and update hexagons
+        hexagons.forEach(hex => {
+          // Check wave activation
+          waves.forEach(wave => {
+            const dist = Math.abs(hex.distFromCenter - wave.radius);
+            if (dist < hexSize * 2) {
+              const waveActivation = (1 - dist / (hexSize * 2)) * wave.intensity;
+              hex.activation = Math.max(hex.activation, waveActivation);
+            }
+          });
+
+          // Subtle ambient pulse
+          const pulse = Math.sin(time * 0.001 + hex.pulsePhase) * 0.05 + 0.05;
+
+          // Decay activation
+          hex.activation *= hex.activationDecay;
+
+          // Draw
+          drawHexagon(hex.x, hex.y, hexSize, hex.baseOpacity + pulse, hex.activation);
+
+          // Maybe spawn mini agent
+          if (hex.activation > 0.5) {
+            spawnMiniAgent(hex);
+          }
         });
 
-        // Draw connections
-        connections.forEach(c => drawConnection(c, time, platformData));
+        // Update and draw mini agents
+        miniAgents.forEach((agent, i) => {
+          agent.progress += agent.speed;
+          if (agent.progress >= 1) {
+            // Activate target hex
+            hexagons.forEach(hex => {
+              const dist = Math.sqrt(Math.pow(hex.x - agent.targetX, 2) + Math.pow(hex.y - agent.targetY, 2));
+              if (dist < hexSize) {
+                hex.activation = 0.8;
+              }
+            });
+            miniAgents.splice(i, 1);
+          } else {
+            drawMiniAgent(agent);
+          }
+        });
+
+        // Center hub
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, hexSize * 0.8, 0, Math.PI * 2);
+        const hubGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, hexSize * 0.8);
+        hubGrad.addColorStop(0, 'rgba(0, 229, 204, 0.8)');
+        hubGrad.addColorStop(0.7, 'rgba(0, 229, 204, 0.3)');
+        hubGrad.addColorStop(1, 'rgba(0, 229, 204, 0.1)');
+        ctx.fillStyle = hubGrad;
+        ctx.fill();
+
+        // Hub pulse ring
+        const hubPulse = (Math.sin(time * 0.002) + 1) / 2;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, hexSize * (1 + hubPulse * 0.5), 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(0, 229, 204, ${0.3 - hubPulse * 0.2})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
 
         requestAnimationFrame(animate);
       }
 
       // Initialize
       resize();
-      initParticles();
+      spawnWave();
       animate(0);
 
-      window.addEventListener('resize', () => {
-        resize();
-        initParticles();
-      });
+      window.addEventListener('resize', resize);
     })();
   </script>
 </body>
