@@ -239,7 +239,7 @@
       color: var(--accent2);
     }
 
-    /* ── PARTICLE SYSTEM ── */
+    /* ── DNA HELIX ANIMATION ── */
     .particle-container {
       position: relative;
       width: 500px;
@@ -250,30 +250,6 @@
       width: 100%;
       height: 100%;
       border-radius: 20px;
-    }
-    .particle-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      pointer-events: none;
-      z-index: 10;
-    }
-    .particle-overlay .label {
-      font-family: 'Clash Display', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent2);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.9;
-    }
-    .particle-overlay .sublabel {
-      font-size: 10px;
-      color: var(--gray-400);
-      margin-top: 4px;
-      letter-spacing: 1px;
     }
 
     /* ── WORKFLOW DIAGRAMS ── */
@@ -696,10 +672,6 @@
         <div class="what-visual">
           <div class="particle-container">
             <canvas id="particleCanvas" class="particle-canvas"></canvas>
-            <div class="particle-overlay">
-              <div class="label">Orchestrator</div>
-              <div class="sublabel">AI Agent Network</div>
-            </div>
           </div>
         </div>
       </div>
@@ -1117,21 +1089,20 @@
       });
     });
 
-    // Particle System Animation
+    // DNA Helix Animation
     (function() {
       const canvas = document.getElementById('particleCanvas');
       if (!canvas) return;
 
       const ctx = canvas.getContext('2d');
       let width, height, centerX, centerY;
+      let rotation = 0;
       let particles = [];
-      let nodes = [];
-      let mouse = { x: null, y: null, radius: 100 };
 
+      const agentLabels = ['Sales', 'Marketing', 'Support', 'Ops', 'Finance', 'Research', 'Analytics', 'Comms'];
       const colors = {
         teal: { r: 0, g: 229, b: 204 },
-        red: { r: 255, g: 77, b: 77 },
-        white: { r: 240, g: 244, b: 255 }
+        red: { r: 255, g: 77, b: 77 }
       };
 
       function resize() {
@@ -1147,237 +1118,253 @@
         ctx.scale(dpr, dpr);
         centerX = width / 2;
         centerY = height / 2;
-        initNodes();
       }
 
-      function initNodes() {
-        nodes = [];
-        const nodeCount = 5;
-        const radius = Math.min(width, height) * 0.32;
-
-        for (let i = 0; i < nodeCount; i++) {
-          const angle = (i / nodeCount) * Math.PI * 2 - Math.PI / 2;
-          nodes.push({
-            x: centerX + Math.cos(angle) * radius,
-            y: centerY + Math.sin(angle) * radius,
-            baseX: centerX + Math.cos(angle) * radius,
-            baseY: centerY + Math.sin(angle) * radius,
-            radius: 8,
-            pulsePhase: Math.random() * Math.PI * 2,
-            angle: angle
-          });
-        }
-      }
-
-      class Particle {
+      class FloatingParticle {
         constructor() {
           this.reset();
         }
 
         reset() {
-          // Start from center or random node
-          if (Math.random() > 0.3) {
-            this.x = centerX + (Math.random() - 0.5) * 20;
-            this.y = centerY + (Math.random() - 0.5) * 20;
-          } else {
-            const node = nodes[Math.floor(Math.random() * nodes.length)];
-            if (node) {
-              this.x = node.x + (Math.random() - 0.5) * 20;
-              this.y = node.y + (Math.random() - 0.5) * 20;
-            }
-          }
-
-          this.targetNode = nodes[Math.floor(Math.random() * nodes.length)];
-          this.speed = 0.5 + Math.random() * 1.5;
-          this.size = 1 + Math.random() * 2;
-          this.life = 1;
-          this.decay = 0.003 + Math.random() * 0.005;
-
-          // Color - mostly teal, sometimes red
-          if (Math.random() > 0.85) {
-            this.color = colors.red;
-          } else {
-            this.color = colors.teal;
-          }
-
-          // Orbital motion
-          this.orbitAngle = Math.random() * Math.PI * 2;
-          this.orbitSpeed = (Math.random() - 0.5) * 0.02;
-          this.orbitRadius = 30 + Math.random() * 80;
-          this.mode = Math.random() > 0.5 ? 'orbit' : 'flow';
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.speedY = (Math.random() - 0.5) * 0.3;
+          this.opacity = Math.random() * 0.5 + 0.1;
         }
 
         update() {
-          if (this.mode === 'orbit') {
-            // Orbital motion around center
-            this.orbitAngle += this.orbitSpeed;
-            const targetX = centerX + Math.cos(this.orbitAngle) * this.orbitRadius;
-            const targetY = centerY + Math.sin(this.orbitAngle) * this.orbitRadius;
-            this.x += (targetX - this.x) * 0.05;
-            this.y += (targetY - this.y) * 0.05;
-          } else {
-            // Flow toward target node
-            if (this.targetNode) {
-              const dx = this.targetNode.x - this.x;
-              const dy = this.targetNode.y - this.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
+          this.x += this.speedX;
+          this.y += this.speedY;
 
-              if (dist > 10) {
-                this.x += (dx / dist) * this.speed;
-                this.y += (dy / dist) * this.speed;
-              } else {
-                // Reached node, pick new target
-                if (Math.random() > 0.5) {
-                  this.targetNode = nodes[Math.floor(Math.random() * nodes.length)];
-                } else {
-                  // Return to center
-                  this.targetNode = { x: centerX, y: centerY };
-                }
-              }
-            }
-          }
-
-          this.life -= this.decay;
-
-          if (this.life <= 0) {
-            this.reset();
-          }
+          if (this.x < 0 || this.x > width) this.speedX *= -1;
+          if (this.y < 0 || this.y > height) this.speedY *= -1;
         }
 
         draw() {
-          const alpha = this.life * 0.8;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`;
+          ctx.fillStyle = `rgba(0, 229, 204, ${this.opacity})`;
           ctx.fill();
-
-          // Glow effect
-          if (this.size > 1.5) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.2})`;
-            ctx.fill();
-          }
         }
       }
 
       function initParticles() {
         particles = [];
-        const count = Math.min(150, Math.floor((width * height) / 2000));
+        const count = 40;
         for (let i = 0; i < count; i++) {
-          particles.push(new Particle());
+          particles.push(new FloatingParticle());
         }
       }
 
-      function drawConnections() {
-        // Draw connections between nodes
-        ctx.strokeStyle = 'rgba(0, 229, 204, 0.1)';
-        ctx.lineWidth = 1;
-
-        for (let i = 0; i < nodes.length; i++) {
-          // Connect to center
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(centerX, centerY);
-          ctx.stroke();
-
-          // Connect to adjacent nodes
-          const next = nodes[(i + 1) % nodes.length];
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(next.x, next.y);
-          ctx.stroke();
-        }
+      function project3D(x, y, z) {
+        // Simple perspective projection
+        const fov = 300;
+        const scale = fov / (fov + z);
+        return {
+          x: centerX + x * scale,
+          y: centerY + y * scale,
+          scale: scale
+        };
       }
 
-      function drawNodes(time) {
-        nodes.forEach((node, i) => {
-          // Subtle floating motion
-          const float = Math.sin(time * 0.001 + node.pulsePhase) * 3;
-          node.x = node.baseX + Math.cos(node.angle) * float;
-          node.y = node.baseY + Math.sin(node.angle) * float;
+      function drawHelix(time) {
+        const helixRadius = Math.min(width, height) * 0.25;
+        const helixHeight = height * 0.7;
+        const turns = 2.5;
+        const nodesPerStrand = 10;
+        const nodeRadius = 10;
 
-          // Pulse effect
-          const pulse = 1 + Math.sin(time * 0.003 + node.pulsePhase) * 0.2;
-          const radius = node.radius * pulse;
+        // Collect all elements with z-depth for sorting
+        let elements = [];
 
-          // Outer glow
-          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 3);
-          gradient.addColorStop(0, 'rgba(0, 229, 204, 0.3)');
-          gradient.addColorStop(1, 'rgba(0, 229, 204, 0)');
+        // Generate helix nodes
+        for (let i = 0; i < nodesPerStrand; i++) {
+          const t = i / (nodesPerStrand - 1);
+          const angle = t * Math.PI * 2 * turns + rotation;
+          const y3d = (t - 0.5) * helixHeight;
+
+          // Strand 1 (teal)
+          const x1 = Math.cos(angle) * helixRadius;
+          const z1 = Math.sin(angle) * helixRadius;
+
+          // Strand 2 (red) - opposite side
+          const x2 = Math.cos(angle + Math.PI) * helixRadius;
+          const z2 = Math.sin(angle + Math.PI) * helixRadius;
+
+          elements.push({
+            type: 'node',
+            x: x1, y: y3d, z: z1,
+            color: colors.teal,
+            label: agentLabels[i % agentLabels.length],
+            index: i
+          });
+
+          elements.push({
+            type: 'node',
+            x: x2, y: y3d, z: z2,
+            color: colors.red,
+            label: agentLabels[(i + 4) % agentLabels.length],
+            index: i
+          });
+
+          // Connection between strands (rungs)
+          elements.push({
+            type: 'rung',
+            x1: x1, y1: y3d, z1: z1,
+            x2: x2, y2: y3d, z2: z2,
+            z: (z1 + z2) / 2
+          });
+        }
+
+        // Draw backbone curves
+        for (let strand = 0; strand < 2; strand++) {
+          const offset = strand * Math.PI;
+          const color = strand === 0 ? colors.teal : colors.red;
+
           ctx.beginPath();
-          ctx.arc(node.x, node.y, radius * 3, 0, Math.PI * 2);
-          ctx.fillStyle = gradient;
-          ctx.fill();
+          for (let i = 0; i <= 100; i++) {
+            const t = i / 100;
+            const angle = t * Math.PI * 2 * turns + rotation + offset;
+            const y3d = (t - 0.5) * helixHeight;
+            const x3d = Math.cos(angle) * helixRadius;
+            const z3d = Math.sin(angle) * helixRadius;
 
-          // Node core
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(0, 229, 204, 0.8)';
-          ctx.fill();
+            const proj = project3D(x3d, y3d, z3d);
+            const alpha = 0.15 + proj.scale * 0.25;
 
-          // Inner highlight
-          ctx.beginPath();
-          ctx.arc(node.x - radius * 0.3, node.y - radius * 0.3, radius * 0.4, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-          ctx.fill();
+            if (i === 0) {
+              ctx.moveTo(proj.x, proj.y);
+            } else {
+              ctx.lineTo(proj.x, proj.y);
+            }
+          }
+          ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.3)`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        // Sort elements by z-depth (back to front)
+        elements.sort((a, b) => {
+          const zA = a.z !== undefined ? a.z : a.z1;
+          const zB = b.z !== undefined ? b.z : b.z1;
+          return zA - zB;
         });
-      }
 
-      function drawCenter(time) {
-        const pulse = 1 + Math.sin(time * 0.002) * 0.1;
-        const radius = 25 * pulse;
+        // Draw elements
+        elements.forEach(el => {
+          if (el.type === 'rung') {
+            const p1 = project3D(el.x1, el.y1, el.z1);
+            const p2 = project3D(el.x2, el.y2, el.z2);
+            const alpha = 0.1 + ((p1.scale + p2.scale) / 2) * 0.15;
 
-        // Outer rings
-        for (let i = 3; i > 0; i--) {
-          const ringRadius = radius + i * 15;
-          const alpha = 0.1 - i * 0.02;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(100, 120, 150, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Center connector dot
+            const midX = (p1.x + p2.x) / 2;
+            const midY = (p1.y + p2.y) / 2;
+            ctx.beginPath();
+            ctx.arc(midX, midY, 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(150, 160, 180, ${alpha})`;
+            ctx.fill();
+          }
+
+          if (el.type === 'node') {
+            const proj = project3D(el.x, el.y, el.z);
+            const radius = nodeRadius * proj.scale;
+            const alpha = 0.4 + proj.scale * 0.6;
+
+            // Glow
+            const glow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, radius * 3);
+            glow.addColorStop(0, `rgba(${el.color.r}, ${el.color.g}, ${el.color.b}, ${alpha * 0.4})`);
+            glow.addColorStop(1, `rgba(${el.color.r}, ${el.color.g}, ${el.color.b}, 0)`);
+            ctx.beginPath();
+            ctx.arc(proj.x, proj.y, radius * 3, 0, Math.PI * 2);
+            ctx.fillStyle = glow;
+            ctx.fill();
+
+            // Node
+            ctx.beginPath();
+            ctx.arc(proj.x, proj.y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${el.color.r}, ${el.color.g}, ${el.color.b}, ${alpha})`;
+            ctx.fill();
+
+            // Highlight
+            ctx.beginPath();
+            ctx.arc(proj.x - radius * 0.3, proj.y - radius * 0.3, radius * 0.35, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
+            ctx.fill();
+
+            // Label (only for front-facing nodes)
+            if (proj.scale > 0.7) {
+              ctx.font = `${Math.round(9 * proj.scale)}px Satoshi, sans-serif`;
+              ctx.fillStyle = `rgba(240, 244, 255, ${alpha * 0.9})`;
+              ctx.textAlign = 'center';
+              ctx.fillText(el.label, proj.x, proj.y + radius + 14 * proj.scale);
+            }
+          }
+        });
+
+        // Draw data pulses traveling along helix
+        const pulseCount = 4;
+        for (let p = 0; p < pulseCount; p++) {
+          const pulseT = ((time * 0.0003 + p / pulseCount) % 1);
+          const strand = p % 2;
+          const offset = strand * Math.PI;
+          const color = strand === 0 ? colors.teal : colors.red;
+
+          const angle = pulseT * Math.PI * 2 * turns + rotation + offset;
+          const y3d = (pulseT - 0.5) * helixHeight;
+          const x3d = Math.cos(angle) * helixRadius;
+          const z3d = Math.sin(angle) * helixRadius;
+
+          const proj = project3D(x3d, y3d, z3d);
+
+          // Pulse glow
+          const pulseGlow = ctx.createRadialGradient(proj.x, proj.y, 0, proj.x, proj.y, 20 * proj.scale);
+          pulseGlow.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`);
+          pulseGlow.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, 0.2)`);
+          pulseGlow.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
           ctx.beginPath();
-          ctx.arc(centerX, centerY, ringRadius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(0, 229, 204, ${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
+          ctx.arc(proj.x, proj.y, 20 * proj.scale, 0, Math.PI * 2);
+          ctx.fillStyle = pulseGlow;
+          ctx.fill();
+
+          // Pulse core
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, 4 * proj.scale, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, 0.9)`;
+          ctx.fill();
         }
-
-        // Main glow
-        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius * 2.5);
-        gradient.addColorStop(0, 'rgba(0, 229, 204, 0.4)');
-        gradient.addColorStop(0.5, 'rgba(0, 229, 204, 0.1)');
-        gradient.addColorStop(1, 'rgba(0, 229, 204, 0)');
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        // Core
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(10, 15, 26, 0.9)';
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(0, 229, 204, 0.8)';
-        ctx.lineWidth = 2;
-        ctx.stroke();
       }
 
       function animate(time) {
         ctx.clearRect(0, 0, width, height);
 
-        // Background gradient
-        const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.6);
-        bgGradient.addColorStop(0, 'rgba(0, 229, 204, 0.03)');
+        // Subtle background gradient
+        const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.7);
+        bgGradient.addColorStop(0, 'rgba(0, 229, 204, 0.02)');
+        bgGradient.addColorStop(0.5, 'rgba(255, 77, 77, 0.01)');
         bgGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = bgGradient;
         ctx.fillRect(0, 0, width, height);
 
-        drawConnections();
-
+        // Update floating particles
         particles.forEach(p => {
           p.update();
           p.draw();
         });
 
-        drawNodes(time);
-        drawCenter(time);
+        // Rotate helix
+        rotation += 0.008;
+
+        drawHelix(time);
 
         requestAnimationFrame(animate);
       }
@@ -1387,22 +1374,7 @@
       initParticles();
       animate(0);
 
-      window.addEventListener('resize', () => {
-        resize();
-        initParticles();
-      });
-
-      // Mouse interaction (subtle attraction)
-      canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-      });
-
-      canvas.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-      });
+      window.addEventListener('resize', resize);
     })();
   </script>
 </body>
