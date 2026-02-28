@@ -1063,25 +1063,14 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      gap: clamp(20px, 4vw, 40px);
       margin-bottom: 32px;
     }
-    .cta-mascot {
-      width: clamp(100px, 15vw, 150px);
-      filter: drop-shadow(0 0 30px rgba(218,165,32,0.2));
-      animation: mascotHover 3s ease-in-out infinite;
+    .cta-crew {
+      width: clamp(280px, 50vw, 600px);
+      filter: drop-shadow(0 0 40px rgba(0,229,204,0.15));
+      animation: crewHover 4s ease-in-out infinite;
     }
-    .cta-wolf {
-      width: clamp(120px, 18vw, 180px);
-      filter: drop-shadow(0 0 30px rgba(100,150,180,0.3));
-      animation: wolfHover 3s ease-in-out infinite;
-      animation-delay: 0.5s;
-    }
-    @keyframes mascotHover {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    @keyframes wolfHover {
+    @keyframes crewHover {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
@@ -2172,8 +2161,7 @@
   <section class="cta-section">
     <div class="container">
       <div class="mascot-container">
-        <img src="mascot.png" alt="" class="cta-mascot">
-        <img src="wolf.png" alt="" class="cta-wolf">
+        <img src="crew.png" alt="wolfgrey crew" class="cta-crew">
       </div>
       <div class="section-label">Get Started</div>
       <h2 class="section-title">Stop reading about AI.<br>Start building with it.</h2>

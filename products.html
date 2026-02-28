@@ -859,9 +859,6 @@
     </div>
   </div>
 
-  <!-- Hidden iframe for Google Form submission -->
-  <iframe name="productFormIframe" id="productFormIframe" style="display:none;"></iframe>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
@@ -878,10 +875,8 @@
   </footer>
 
   <script>
-    // ── Google Form config (update these after creating your form) ──
-    // You can use the same form as resources.html or create a separate one
-    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
-    const EMAIL_FIELD_ID = 'entry.XXXXXXXXXX';
+    // ── Google Sheet config ──
+    const SHEET_URL = 'APPS_SCRIPT_URL';
 
     // ── Stripe Payment Link ──
     // Create a Payment Link in your Stripe Dashboard:
@@ -935,24 +930,13 @@
       }
       errorEl.style.display = 'none';
 
-      // Submit to Google Form via hidden iframe
-      try {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = GOOGLE_FORM_ACTION;
-        form.target = 'productFormIframe';
-
-        const emailInput = document.createElement('input');
-        emailInput.name = EMAIL_FIELD_ID;
-        emailInput.value = email;
-        form.appendChild(emailInput);
-
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-      } catch (err) {
-        // Silently fail — still show success
-      }
+      // Submit to Google Sheet via Apps Script
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'products', page: document.title })
+      }).catch(() => {});
 
       // Store in localStorage (grants access to free resources too)
       localStorage.setItem('wolfgrey_access', email);

@@ -746,9 +746,6 @@
 
   </div><!-- /unlockedView -->
 
-  <!-- Hidden iframe for Google Form submission -->
-  <iframe name="gformIframe" id="gformIframe" style="display:none;"></iframe>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
@@ -762,10 +759,8 @@
     </div>
   </footer>
 
-  <script>// ── Google Form config (update these after creating your form) ──
-    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
-    const EMAIL_FIELD_ID = 'entry.XXXXXXXXXX';
-    const NAME_FIELD_ID = 'entry.XXXXXXXXXX';
+  <script>// ── Google Sheet config ──
+    const SHEET_URL = 'APPS_SCRIPT_URL';
 
     // ── Gate logic ──
     function checkAccess() {
@@ -792,31 +787,13 @@
       }
       errorEl.style.display = 'none';
 
-      // Submit to Google Form via hidden iframe
-      try {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = GOOGLE_FORM_ACTION;
-        form.target = 'gformIframe';
-
-        const emailInput = document.createElement('input');
-        emailInput.name = EMAIL_FIELD_ID;
-        emailInput.value = email;
-        form.appendChild(emailInput);
-
-        if (name) {
-          const nameInput = document.createElement('input');
-          nameInput.name = NAME_FIELD_ID;
-          nameInput.value = name;
-          form.appendChild(nameInput);
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-      } catch (err) {
-        // Silently fail — localStorage still grants access
-      }
+      // Submit to Google Sheet via Apps Script
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name, source: 'resources', page: document.title })
+      }).catch(() => {});
 
       // Grant access
       localStorage.setItem('wolfgrey_access', email);
