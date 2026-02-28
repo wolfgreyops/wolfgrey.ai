@@ -205,17 +205,7 @@
       position: relative;
       overflow-x: auto;
     }
-    .code-block::before {
-      content: 'TERMINAL';
-      position: absolute;
-      top: -10px; left: 16px;
-      background: var(--dark);
-      padding: 0 8px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: var(--gray-600);
-      letter-spacing: 1px;
-    }
+    .code-block::before { display: none; }
     .code-block .comment { color: var(--gray-600); }
     .code-block .bad { color: var(--accent); }
 
