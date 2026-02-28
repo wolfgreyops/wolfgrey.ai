@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://tally.so/widgets/embed.js"></script>
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -836,24 +837,8 @@
       <div id="modalFormState">
         <h2>Get Your Free Guide</h2>
         <p>Enter your email and we'll send the AI Quick-Start Guide straight to your inbox.</p>
-        <form class="modal-form" id="freeProductForm" onsubmit="return handleFreeSubmit(event)">
-          <label for="freeEmail">Email</label>
-          <input type="email" id="freeEmail" name="email" placeholder="you@company.com" required autocomplete="email">
-          <div class="modal-error" id="freeError">Please enter a valid email address.</div>
-          <button type="submit" class="btn btn-accent2">Send Me the Guide &rarr;</button>
-        </form>
+        <iframe data-tally-src="https://tally.so/embed/eqBxol?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="282" frameborder="0" marginheight="0" marginwidth="0" title="wolfgrey"></iframe>
         <p class="modal-fine-print">No spam. Instant delivery. Unsubscribe anytime.</p>
-      </div>
-
-      <!-- Success State -->
-      <div id="modalSuccessState" class="download-success" style="display: none;">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <circle cx="32" cy="32" r="28"/>
-          <path d="M20 32l8 8 16-16"/>
-        </svg>
-        <h3>Check your inbox!</h3>
-        <p>We've sent the AI Quick-Start Guide to your email. It should arrive in the next few minutes.</p>
-        <button class="btn btn-accent2" onclick="closeFreeModal()">Got It</button>
       </div>
 
     </div>
@@ -875,15 +860,7 @@
   </footer>
 
   <script>
-    // ── Google Sheet config ──
-    const SHEET_URL = 'https://script.google.com/a/macros/striot.co/s/AKfycbzzQat_yqEm_bL1xOSh4F68h2sZs8btbYx4uNaNNjgEh7mjjzHenITCig83bVVbPCfo/exec';
-
-    // ── Stripe Payment Link ──
-    // Create a Payment Link in your Stripe Dashboard:
-    // 1. Go to stripe.com/dashboard → Products → Create Product ($49 AI Playbook)
-    // 2. Go to Payment Links → Create → Select your product
-    // 3. Copy the link and replace STRIPE_PAYMENT_LINK_HERE in the HTML above
-    // Example: https://buy.stripe.com/xxxxxxxxxxxx// ── Stripe Checkout Popup ──
+    // ── Stripe Checkout Popup ──
     function openCheckout(url) {
       const width = 500;
       const height = 700;
@@ -916,32 +893,16 @@
       if (e.key === 'Escape') closeFreeModal();
     });
 
-    // ── Form submission ──
-    function handleFreeSubmit(e) {
-      e.preventDefault();
-      const email = document.getElementById('freeEmail').value.trim();
-      const errorEl = document.getElementById('freeError');
-
-      // Basic email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        errorEl.style.display = 'block';
-        return false;
+    // Listen for Tally form submission
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.event === 'Tally.FormSubmitted') {
+        localStorage.setItem('wolfgrey_access', 'tally');
+        closeFreeModal();
+        window.location.href = 'guide.html';
       }
-      errorEl.style.display = 'none';
+    });
 
-      // Submit to Google Sheet via Apps Script
-      const params = new URLSearchParams({ email, source: 'products', page: document.title });
-      fetch(`${SHEET_URL}?${params}`, { mode: 'no-cors' }).catch(() => {});
-
-      // Store in localStorage (grants access to free resources too)
-      localStorage.setItem('wolfgrey_access', email);
-
-      // Redirect to free guide (hosted on-site)
-      window.location.href = 'guide.html';
-
-      return false;
-    }
+    Tally.loadEmbeds();
 
     // ── Scroll reveal ──
     const observer = new IntersectionObserver((entries) => {
