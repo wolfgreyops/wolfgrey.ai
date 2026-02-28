@@ -934,8 +934,7 @@
       fetch(SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ email, source: 'products', page: document.title })
+        body: new URLSearchParams({ email, source: 'products', page: document.title })
       }).catch(() => {});
 
       // Store in localStorage (grants access to free resources too)
