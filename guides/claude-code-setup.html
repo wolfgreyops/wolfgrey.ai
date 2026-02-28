@@ -208,11 +208,14 @@
     .code-block::before { display: none; }
     .code-block .comment { color: var(--gray-600); }
     .code-block .bad { color: var(--accent); }
+    .code-block { white-space: pre; }
     .copy-cmd {
-      position: absolute;
-      top: 12px; right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 12px;
       padding: 6px 12px;
-      background: var(--gray-800);
+      background: transparent;
       border: 1px solid var(--gray-700);
       border-radius: 6px;
       color: var(--gray-400);
@@ -220,9 +223,8 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      margin-left: auto;
+      width: fit-content;
     }
     .copy-cmd:hover { border-color: var(--accent2); color: var(--accent2); }
     .copy-cmd.copied { background: var(--accent2); border-color: var(--accent2); color: var(--dark); }
@@ -802,7 +804,7 @@ claude</div>
       btn.className = 'copy-cmd';
       setBtn(btn, makeCopyIcon(), 'Copy');
       btn.addEventListener('click', function() {
-        var text = block.textContent.replace(/Copy(Copied!)?/g, '').trim();
+        var text = block.textContent.trim();
         navigator.clipboard.writeText(text).then(function() {
           setBtn(btn, makeCheckIcon(), 'Copied!');
           btn.classList.add('copied');
@@ -812,7 +814,7 @@ claude</div>
           }, 2000);
         });
       });
-      block.appendChild(btn);
+      block.parentNode.insertBefore(btn, block.nextSibling);
     });
   </script>
 </body>
