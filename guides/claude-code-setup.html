@@ -208,6 +208,24 @@
     .code-block::before { display: none; }
     .code-block .comment { color: var(--gray-600); }
     .code-block .bad { color: var(--accent); }
+    .copy-cmd {
+      position: absolute;
+      top: 12px; right: 12px;
+      padding: 6px 12px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 6px;
+      color: var(--gray-400);
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .copy-cmd:hover { border-color: var(--accent2); color: var(--accent2); }
+    .copy-cmd.copied { background: var(--accent2); border-color: var(--accent2); color: var(--dark); }
 
     .tip-box {
       background: rgba(0,229,204,0.08);
@@ -752,5 +770,50 @@ claude</div>
   <footer>
     <p>&copy; 2026 <a href="../index.html">wolfgrey</a>. All rights reserved.</p>
   </footer>
+
+  <script>
+    function makeCopyIcon() {
+      var s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      s.setAttribute('width','12'); s.setAttribute('height','12'); s.setAttribute('viewBox','0 0 24 24');
+      s.setAttribute('fill','none'); s.setAttribute('stroke','currentColor'); s.setAttribute('stroke-width','2');
+      var r = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      r.setAttribute('x','9'); r.setAttribute('y','9'); r.setAttribute('width','13'); r.setAttribute('height','13'); r.setAttribute('rx','2');
+      var p = document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d','M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1');
+      s.appendChild(r); s.appendChild(p);
+      return s;
+    }
+    function makeCheckIcon() {
+      var s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      s.setAttribute('width','12'); s.setAttribute('height','12'); s.setAttribute('viewBox','0 0 24 24');
+      s.setAttribute('fill','none'); s.setAttribute('stroke','currentColor'); s.setAttribute('stroke-width','2');
+      var p = document.createElementNS('http://www.w3.org/2000/svg','polyline');
+      p.setAttribute('points','20 6 9 17 4 12');
+      s.appendChild(p);
+      return s;
+    }
+    function setBtn(btn, icon, text) {
+      while (btn.firstChild) btn.removeChild(btn.firstChild);
+      btn.appendChild(icon);
+      btn.appendChild(document.createTextNode(text));
+    }
+    document.querySelectorAll('.code-block').forEach(function(block) {
+      var btn = document.createElement('button');
+      btn.className = 'copy-cmd';
+      setBtn(btn, makeCopyIcon(), 'Copy');
+      btn.addEventListener('click', function() {
+        var text = block.textContent.replace(/Copy(Copied!)?/g, '').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          setBtn(btn, makeCheckIcon(), 'Copied!');
+          btn.classList.add('copied');
+          setTimeout(function() {
+            setBtn(btn, makeCopyIcon(), 'Copy');
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      block.appendChild(btn);
+    });
+  </script>
 </body>
 </html>
