@@ -788,11 +788,8 @@
       errorEl.style.display = 'none';
 
       // Submit to Google Sheet via Apps Script
-      fetch(SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: new URLSearchParams({ email, name, source: 'resources', page: document.title })
-      }).catch(() => {});
+      const params = new URLSearchParams({ email, name, source: 'resources', page: document.title });
+      fetch(`${SHEET_URL}?${params}`, { mode: 'no-cors' }).catch(() => {});
 
       // Grant access
       localStorage.setItem('wolfgrey_access', email);

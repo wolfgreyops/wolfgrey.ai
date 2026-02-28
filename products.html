@@ -931,11 +931,8 @@
       errorEl.style.display = 'none';
 
       // Submit to Google Sheet via Apps Script
-      fetch(SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: new URLSearchParams({ email, source: 'products', page: document.title })
-      }).catch(() => {});
+      const params = new URLSearchParams({ email, source: 'products', page: document.title });
+      fetch(`${SHEET_URL}?${params}`, { mode: 'no-cors' }).catch(() => {});
 
       // Store in localStorage (grants access to free resources too)
       localStorage.setItem('wolfgrey_access', email);
