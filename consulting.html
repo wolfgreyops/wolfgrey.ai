@@ -107,6 +107,36 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--white); }
+    .nav-dropdown {
+      position: relative;
+    }
+    .nav-dropdown > a::after {
+      content: ''; display: inline-block;
+      width: 4px; height: 4px;
+      border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg); margin-left: 5px; vertical-align: 1px;
+    }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      margin-top: 12px; padding: 8px 0;
+      background: var(--gray-800); border: 1px solid var(--gray-700);
+      border-radius: 10px; min-width: 180px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      z-index: 200;
+    }
+    .nav-dropdown-menu::before {
+      content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px;
+    }
+    .nav-dropdown-menu a {
+      display: block; padding: 10px 20px;
+      font-size: 0.85rem !important; color: var(--gray-300) !important;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-dropdown-menu a:hover {
+      background: rgba(0,229,204,0.08); color: var(--white) !important;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
     .nav-links a.active { color: var(--accent); }
     .nav-cta {
       background: var(--btn) !important;
@@ -355,6 +385,28 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-toggle { display: block; }
+      .nav-dropdown > a::after { display: none; }
+      .nav-dropdown-menu {
+        display: flex !important;
+        position: static !important;
+        transform: none !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        min-width: 0 !important;
+        gap: 16px;
+        flex-direction: row;
+      }
+      .nav-dropdown-menu a {
+        padding: 0 !important;
+        font-size: 0.8rem !important;
+        color: var(--gray-400) !important;
+      }
+      .nav-dropdown-menu a:hover {
+        background: none !important;
+      }
       .nav-links.open {
         display: flex;
         flex-direction: column;
@@ -405,7 +457,13 @@
         <a href="consulting.html" class="active">Consulting</a>
         <a href="products.html">Products</a>
         <a href="awaas.html">Agents</a>
-        <a href="resources.html">Resources</a>
+        <div class="nav-dropdown">
+          <a href="resources.html">Resources</a>
+          <div class="nav-dropdown-menu">
+            <a href="resources.html">Guides</a>
+            <a href="checklist.html">Checklist</a>
+          </div>
+        </div>
         <a href="claude.html">Claude</a>
         <a href="products.html" class="nav-cta">Shop &rarr;</a>
       </div>
