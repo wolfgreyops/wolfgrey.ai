@@ -768,6 +768,11 @@
   </footer>
 
   <script>// ── Gate logic ──
+    // Check URL parameter (from Tally redirect) or localStorage
+    if (new URLSearchParams(window.location.search).get('access') === 'granted') {
+      localStorage.setItem('wolfgrey_access', 'tally');
+    }
+
     function checkAccess() {
       if (localStorage.getItem('wolfgrey_access')) {
         document.getElementById('gateView').style.display = 'none';
@@ -778,7 +783,7 @@
       }
     }
 
-    // Listen for Tally form submission
+    // Listen for Tally form submission (postMessage backup)
     window.addEventListener('message', function(e) {
       if (e.data && e.data.event === 'Tally.FormSubmitted') {
         localStorage.setItem('wolfgrey_access', 'tally');
