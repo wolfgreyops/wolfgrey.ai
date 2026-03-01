@@ -778,39 +778,24 @@
       }
     }
 
-    // Listen for Tally form submission (postMessage)
-    function unlockResources() {
-      localStorage.setItem('wolfgrey_access', 'tally');
-      checkAccess();
-      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-      window.scrollTo(0, 0);
-    }
-
+    // Listen for Tally form submission
     window.addEventListener('message', function(e) {
       if (e.data && e.data.event === 'Tally.FormSubmitted') {
-        unlockResources();
+        localStorage.setItem('wolfgrey_access', 'tally');
+        checkAccess();
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       }
     });
-
-    // Fallback: detect iframe navigation after form submit
-    var tallyFrame = document.querySelector('iframe[data-tally-src]');
-    if (tallyFrame) {
-      var frameLoads = 0;
-      tallyFrame.addEventListener('load', function() {
-        frameLoads++;
-        if (frameLoads > 1) unlockResources();
-      });
-    }
 
     Tally.loadEmbeds();
 
     // ── Scroll reveal ──
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     // ── Mobile nav ──
     document.querySelectorAll('.nav-links a').forEach(link => {
