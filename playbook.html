@@ -685,7 +685,14 @@
       }
       .nav-links { display: none; }
       .roi-calculator { padding: 24px; }
+      #industries .container > div { grid-template-columns: 1fr !important; }
     }
+
+    #industries details summary::-webkit-details-marker { display: none; }
+    #industries details[open] summary span:last-child { transform: rotate(180deg); }
+    #industries details summary span:last-child { transition: transform 0.2s ease; display: inline-block; }
+    #industries details[open] { border-color: #2a3550; }
+    #industries details summary:hover { background: #0d1320; border-radius: 8px; }
   </style>
 </head>
 <body>
@@ -725,12 +732,16 @@
           <span class="toc-num">2</span>
           <span>40+ Templates</span>
         </a>
-        <a href="#roadmap" class="toc-item">
+        <a href="#industries" class="toc-item">
           <span class="toc-num">3</span>
+          <span>Industry Prompt Packs</span>
+        </a>
+        <a href="#roadmap" class="toc-item">
+          <span class="toc-num">4</span>
           <span>90-Day Roadmap</span>
         </a>
         <a href="#roi" class="toc-item">
-          <span class="toc-num">4</span>
+          <span class="toc-num">5</span>
           <span>ROI Tracker</span>
         </a>
         <a href="#bonus" class="toc-item">
@@ -804,6 +815,147 @@
           </div>
         </div>
       </div>
+
+      <div style="margin-top: 64px;">
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.75rem; color: #f0f4ff; margin-bottom: 12px;">Common Prompting Mistakes</h3>
+        <p style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #8892b0; max-width: 700px; margin-bottom: 40px; line-height: 1.6;">Most prompts fail before the AI even starts. Here are three patterns we see constantly — and how applying the CRAFT framework fixes each one.</p>
+
+        <!-- Example 1: Vague → CRAFT-enhanced -->
+        <div style="display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px; background: #111827; border: 1px solid rgba(255, 77, 77, 0.3); border-top: 3px solid #ff4d4d; border-radius: 12px; padding: 28px 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #ff4d4d; background: rgba(255, 77, 77, 0.1); padding: 4px 10px; border-radius: 6px;">Before</span>
+              <span style="font-family: 'Satoshi', sans-serif; font-size: 0.8rem; color: #5a6480;">Vague Request</span>
+            </div>
+            <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: #a8b2d1; line-height: 1.7; margin: 0;">Write me a marketing email for my product.</p>
+          </div>
+          <div style="flex: 1; min-width: 280px; background: #111827; border: 1px solid rgba(0, 229, 204, 0.3); border-top: 3px solid #00e5cc; border-radius: 12px; padding: 28px 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #00e5cc; background: rgba(0, 229, 204, 0.1); padding: 4px 10px; border-radius: 6px;">After</span>
+              <span style="font-family: 'Satoshi', sans-serif; font-size: 0.8rem; color: #5a6480;">CRAFT-Enhanced</span>
+            </div>
+            <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: #a8b2d1; line-height: 1.7; margin: 0;">You are a senior email copywriter for DTC brands. Write a 150-word product launch email for our new organic dog treats targeting millennial pet owners. Use a friendly, casual tone. Include a subject line, 3 benefit bullets, and a single CTA button. Format as plain text with clear section breaks.</p>
+          </div>
+        </div>
+
+        <!-- Example 2: Missing Context → Context-Rich -->
+        <div style="display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px; background: #111827; border: 1px solid rgba(255, 77, 77, 0.3); border-top: 3px solid #ff4d4d; border-radius: 12px; padding: 28px 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #ff4d4d; background: rgba(255, 77, 77, 0.1); padding: 4px 10px; border-radius: 6px;">Before</span>
+              <span style="font-family: 'Satoshi', sans-serif; font-size: 0.8rem; color: #5a6480;">Missing Context</span>
+            </div>
+            <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: #a8b2d1; line-height: 1.7; margin: 0;">Help me respond to this customer complaint.</p>
+          </div>
+          <div style="flex: 1; min-width: 280px; background: #111827; border: 1px solid rgba(0, 229, 204, 0.3); border-top: 3px solid #00e5cc; border-radius: 12px; padding: 28px 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #00e5cc; background: rgba(0, 229, 204, 0.1); padding: 4px 10px; border-radius: 6px;">After</span>
+              <span style="font-family: 'Satoshi', sans-serif; font-size: 0.8rem; color: #5a6480;">Context-Rich</span>
+            </div>
+            <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: #a8b2d1; line-height: 1.7; margin: 0;">You are a customer success manager at a 12-person SaaS company. A long-term client (2+ years, $400/mo plan) emailed saying our latest update broke their team's workflow and they're considering canceling. Draft a response that acknowledges the issue, offers a concrete fix timeline, and includes a retention incentive. Keep it under 200 words, empathetic but professional.</p>
+          </div>
+        </div>
+
+        <!-- Example 3: No Format → Format-Specified -->
+        <div style="display: flex; gap: 20px; margin-bottom: 0; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px; background: #111827; border: 1px solid rgba(255, 77, 77, 0.3); border-top: 3px solid #ff4d4d; border-radius: 12px; padding: 28px 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #ff4d4d; background: rgba(255, 77, 77, 0.1); padding: 4px 10px; border-radius: 6px;">Before</span>
+              <span style="font-family: 'Satoshi', sans-serif; font-size: 0.8rem; color: #5a6480;">No Format Spec</span>
+            </div>
+            <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: #a8b2d1; line-height: 1.7; margin: 0;">Analyze our Q4 sales data and give me insights.</p>
+          </div>
+          <div style="flex: 1; min-width: 280px; background: #111827; border: 1px solid rgba(0, 229, 204, 0.3); border-top: 3px solid #00e5cc; border-radius: 12px; padding: 28px 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #00e5cc; background: rgba(0, 229, 204, 0.1); padding: 4px 10px; border-radius: 6px;">After</span>
+              <span style="font-family: 'Satoshi', sans-serif; font-size: 0.8rem; color: #5a6480;">Format-Specified</span>
+            </div>
+            <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9rem; color: #a8b2d1; line-height: 1.7; margin: 0;">You are a revenue analyst. Review the attached Q4 sales CSV for a B2B cleaning supply company. Produce a report with: (1) Executive summary — 3 sentences max, (2) Top 5 trends as a numbered list with percentage changes, (3) Three risks formatted as a table with columns: Risk, Likelihood, Impact, (4) Recommended next steps as a bullet list. Use plain language — this goes to the owner, not the finance team.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 64px;">
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.75rem; color: #f0f4ff; margin-bottom: 12px;">Prompt Chaining</h3>
+        <p style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #8892b0; max-width: 700px; margin-bottom: 40px; line-height: 1.6;">The real power of prompting isn't a single shot — it's building a chain. Each prompt feeds its output into the next, turning raw information into a finished deliverable in steps. Think of it like an assembly line for thinking.</p>
+
+        <div style="max-width: 680px; margin: 0 auto;">
+          <!-- Step 1 -->
+          <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 28px 24px; position: relative;">
+            <div style="display: flex; align-items: flex-start; gap: 16px;">
+              <div style="flex-shrink: 0; width: 40px; height: 40px; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span style="font-family: 'Clash Display', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">1</span>
+              </div>
+              <div style="flex: 1;">
+                <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Analyze Raw Feedback</h4>
+                <div style="background: #0a0f1a; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                  <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; color: #a8b2d1; line-height: 1.7; margin: 0;"><span style="color: #5a6480;">Prompt:</span> Here are 47 customer support tickets from the last 30 days. Categorize each into themes (e.g., billing, onboarding, feature request, bug). For each category, note the frequency and average sentiment. Output as a structured table.</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #00e5cc; background: rgba(0, 229, 204, 0.1); padding: 4px 10px; border-radius: 6px;">Output</span>
+                  <span style="font-family: 'Satoshi', sans-serif; font-size: 0.85rem; color: #5a6480;">Categorized insights with frequency + sentiment scores</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 1→2 -->
+          <div style="display: flex; flex-direction: column; align-items: center; padding: 4px 0;">
+            <div style="width: 2px; height: 28px; background: linear-gradient(to bottom, #1e2940, #00e5cc, #1e2940);"></div>
+            <svg width="12" height="10" viewBox="0 0 12 10" style="margin-top: -1px;"><polygon points="6,10 0,0 12,0" fill="#00e5cc" opacity="0.6"/></svg>
+          </div>
+
+          <!-- Step 2 -->
+          <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 28px 24px; position: relative;">
+            <div style="display: flex; align-items: flex-start; gap: 16px;">
+              <div style="flex-shrink: 0; width: 40px; height: 40px; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span style="font-family: 'Clash Display', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">2</span>
+              </div>
+              <div style="flex: 1;">
+                <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Prioritize Action Items</h4>
+                <div style="background: #0a0f1a; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                  <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; color: #a8b2d1; line-height: 1.7; margin: 0;"><span style="color: #5a6480;">Prompt:</span> Using the categorized feedback below, identify the top 5 issues by business impact. For each, suggest a concrete fix. Score each on effort (1-5) vs. impact (1-5) and rank by best ROI. Format as a prioritized action list with owner suggestions for a 10-person team.</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #00e5cc; background: rgba(0, 229, 204, 0.1); padding: 4px 10px; border-radius: 6px;">Output</span>
+                  <span style="font-family: 'Satoshi', sans-serif; font-size: 0.85rem; color: #5a6480;">Ranked action items with effort/impact scores</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 2→3 -->
+          <div style="display: flex; flex-direction: column; align-items: center; padding: 4px 0;">
+            <div style="width: 2px; height: 28px; background: linear-gradient(to bottom, #1e2940, #00e5cc, #1e2940);"></div>
+            <svg width="12" height="10" viewBox="0 0 12 10" style="margin-top: -1px;"><polygon points="6,10 0,0 12,0" fill="#00e5cc" opacity="0.6"/></svg>
+          </div>
+
+          <!-- Step 3 -->
+          <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 28px 24px; position: relative;">
+            <div style="display: flex; align-items: flex-start; gap: 16px;">
+              <div style="flex-shrink: 0; width: 40px; height: 40px; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <span style="font-family: 'Clash Display', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">3</span>
+              </div>
+              <div style="flex: 1;">
+                <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Build Implementation Timeline</h4>
+                <div style="background: #0a0f1a; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                  <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; color: #a8b2d1; line-height: 1.7; margin: 0;"><span style="color: #5a6480;">Prompt:</span> Take the prioritized action items below and create a 6-week implementation plan. Week 1-2: quick wins (effort ≤ 2). Week 3-4: medium projects. Week 5-6: larger initiatives. Include milestones, dependencies, and a "done" definition for each item. Format as a week-by-week table I can paste into a project tracker.</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #00e5cc; background: rgba(0, 229, 204, 0.1); padding: 4px 10px; border-radius: 6px;">Output</span>
+                  <span style="font-family: 'Satoshi', sans-serif; font-size: 0.85rem; color: #5a6480;">Ready-to-use 6-week project plan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chain summary callout -->
+        <div style="max-width: 680px; margin: 32px auto 0; background: rgba(0, 229, 204, 0.05); border: 1px solid rgba(0, 229, 204, 0.2); border-radius: 12px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 14px;">
+          <span style="flex-shrink: 0; font-size: 1.1rem; color: #00e5cc; margin-top: 2px;">&#9889;</span>
+          <p style="font-family: 'Satoshi', sans-serif; font-size: 0.95rem; color: #a8b2d1; line-height: 1.6; margin: 0;"><strong style="color: #f0f4ff;">47 raw tickets became a 6-week action plan in 3 prompts.</strong> Each step produces clean, structured output that the next step can build on. That's the multiplier effect of chaining — you're not just asking questions, you're building a pipeline.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -820,6 +972,10 @@
         <button class="template-cat" data-cat="marketing">Marketing</button>
         <button class="template-cat" data-cat="operations">Operations</button>
         <button class="template-cat" data-cat="strategy">Strategy</button>
+        <button class="template-cat" data-cat="service">Service</button>
+        <button class="template-cat" data-cat="hr">HR</button>
+        <button class="template-cat" data-cat="finance">Finance</button>
+        <button class="template-cat" data-cat="social">Social</button>
       </div>
 
       <div class="templates-grid" id="templatesGrid">
@@ -941,6 +1097,72 @@ Tone: Empathetic but confident. Never defensive.</div>
           </div>
         </div>
 
+        <!-- New Sales Templates -->
+
+        <div class="template-card" data-category="sales" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Follow-Up Sequence</h3>
+            <span class="template-tag">Sales</span>
+          </div>
+          <p>Build a systematic 5-touch follow-up sequence after meetings or demos to keep deals moving.</p>
+          <div class="template-prompt">Generate a 5-touch follow-up sequence to send after a sales meeting or demo, spaced over 2 weeks.
+
+Context: My company is [COMPANY NAME] and we sell [PRODUCT/SERVICE] to [TARGET AUDIENCE]. I just had a [MEETING TYPE, e.g., discovery call, product demo, proposal review] with [PROSPECT NAME] at [PROSPECT COMPANY]. Their main pain points are [KEY PAIN POINTS DISCUSSED]. The next step we discussed was [AGREED NEXT STEP, if any]. The deal size is approximately [DEAL VALUE].
+
+Role: Act as a senior sales strategist who specializes in consultative B2B follow-up sequences that keep momentum without being pushy.
+
+Action:
+1. Write Touch 1 (same day): A brief thank-you email that recaps key discussion points and restates the value proposition tied to their specific pain points.
+2. Write Touch 2 (day 3): A value-add email sharing a relevant resource that reinforces your solution.
+3. Write Touch 3 (day 6): A short check-in that introduces a mild urgency element.
+4. Write Touch 4 (day 10): A different-channel touchpoint — write a LinkedIn message or brief voicemail script.
+5. Write Touch 5 (day 14): A "break-up" email that gives them an easy out while leaving the door open.
+6. For each touch, include the subject line, full body text, and a clear single call-to-action.
+
+Format: Present each touch with a header showing the day number, channel, and subject line. End with a summary timeline table showing all 5 touches at a glance.
+
+Tone: Professional but warm. Confident without being aggressive. Each message should sound like it was written by a human who genuinely wants to help.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="sales" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Sales Pipeline Review</h3>
+            <span class="template-tag">Sales</span>
+          </div>
+          <p>Run a weekly pipeline analysis that identifies stuck deals, risk factors, and the highest-leverage next actions.</p>
+          <div class="template-prompt">Analyze my current sales pipeline and generate a weekly review with prioritized next actions for every open deal.
+
+Context: My company sells [PRODUCT/SERVICE] with an average deal size of [AVG DEAL SIZE] and a typical sales cycle of [SALES CYCLE LENGTH]. Here are my current open deals:
+
+Deal 1: [COMPANY] - Stage: [STAGE] - Value: [VALUE] - Days in stage: [DAYS] - Last contact: [DATE] - Notes: [KEY NOTES]
+Deal 2: [COMPANY] - Stage: [STAGE] - Value: [VALUE] - Days in stage: [DAYS] - Last contact: [DATE] - Notes: [KEY NOTES]
+[ADD MORE DEALS AS NEEDED]
+
+My pipeline stages are: [LIST YOUR STAGES, e.g., Lead, Discovery, Demo, Proposal, Negotiation, Closed].
+
+Role: Act as a VP of Sales conducting a weekly pipeline review. You are data-driven, direct, and focused on revenue impact.
+
+Action:
+1. Calculate total pipeline value, weighted pipeline value, and expected close value for this month and next.
+2. Flag "at risk" deals — any deal in its current stage longer than average, with 7+ days since last contact, or unclear next steps.
+3. Flag "stalled" deals — no forward movement in 14+ days. Recommend whether to push, pivot, or disqualify.
+4. Identify top 3 deals by value and likelihood to close. Write a specific next action for each.
+5. Identify pipeline gaps — enough deals in early stages to hit future targets? Calculate coverage ratio.
+6. Write a 3-sentence executive summary.
+
+Format: Start with executive summary. Then pipeline health dashboard showing total deals, total value, weighted value, and coverage ratio. Then "At Risk," "Stalled," and "Top 3 Priority" sections. End with a weekly action checklist ordered by priority.
+
+Tone: Direct and analytical. Like a tough but fair sales coach — no sugarcoating, but every critique comes with a clear action step.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
         <!-- Marketing Templates -->
         <div class="template-card" data-category="marketing" onclick="toggleTemplate(this)">
           <div class="template-header">
@@ -1052,6 +1274,91 @@ Action: Write landing page copy with these sections:
 Format: Use headers for each section. Write actual copy, not placeholders.
 
 Tone: Confident, clear, conversational. No hype or false urgency.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <!-- New Marketing Templates -->
+
+        <div class="template-card" data-category="marketing" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Social Media Captions</h3>
+            <span class="template-tag">Marketing</span>
+          </div>
+          <p>Turn one core idea into a full week of platform-specific captions for Instagram, LinkedIn, and X.</p>
+          <div class="template-prompt">Generate a full week (7 days) of social media captions for Instagram, LinkedIn, and X from a single core content idea.
+
+Context: My business is [BUSINESS NAME] in the [INDUSTRY] space. My target audience is [TARGET AUDIENCE]. The core content idea is: [CORE IDEA/TOPIC/THEME]. My brand voice is [DESCRIBE YOUR VOICE]. My primary CTA this week is [WHAT YOU WANT PEOPLE TO DO].
+
+Role: Act as a social media strategist who has grown multiple small business accounts from zero to 10K+ followers. You understand algorithm differences between platforms and write for engagement, not vanity metrics.
+
+Action:
+1. Create 7 days of content, each with a different angle: Day 1 — bold opinion, Day 2 — educational tip, Day 3 — personal story, Day 4 — data point, Day 5 — common mistake, Day 6 — client result, Day 7 — engagement prompt.
+2. For EACH day, write three versions: Instagram (150-200 words, emoji-friendly), LinkedIn (100-150 words, professional), X (under 280 chars, punchy).
+3. Include relevant hashtags for each platform.
+4. Add a suggested image/visual concept for each day.
+
+Format: Organize by day with the angle/theme, then three platform versions. End with a weekly overview table showing day, theme, and posting time per platform.
+
+Tone: Match the brand voice described. Default to conversational, confident, and slightly irreverent if no voice specified.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="marketing" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>SEO Blog Post</h3>
+            <span class="template-tag">Marketing</span>
+          </div>
+          <p>Write a research-backed blog post optimized for a target keyword, with meta description and linking strategy.</p>
+          <div class="template-prompt">Write a full SEO-optimized blog post targeting a specific keyword, including meta description and heading structure.
+
+Context: My website is [WEBSITE URL] in the [INDUSTRY/NICHE] space. Target keyword: "[PRIMARY KEYWORD]" with secondary keywords: [LIST 2-3]. My target audience is searching because [SEARCH INTENT]. Existing blog posts that could be internally linked: [LIST OR "none yet"]. Post length: [WORD COUNT, e.g., 1500-2000 words].
+
+Role: Act as an SEO content strategist who has ranked dozens of blog posts on page 1 of Google for small business keywords. You understand E-E-A-T principles and write for humans first while satisfying search engines.
+
+Action:
+1. Write a meta title (under 60 chars) with primary keyword.
+2. Write a meta description (under 155 chars) with keyword and value proposition.
+3. Write the full blog post: opening hook (no generic "In today's world"), 3-5 actionable subsections with secondary keywords, real-world example, common mistakes section, and conclusion with CTA.
+4. Incorporate primary keyword 4-6 times and secondary keywords 1-2 times naturally.
+5. Suggest 3-5 internal and 2-3 external linking opportunities.
+
+Format: Meta title and description first, then full post with proper heading hierarchy. End with "SEO Notes" including internal linking map and keyword density check.
+
+Tone: Authoritative but accessible. Short paragraphs, direct "you" language. Avoid jargon unless immediately defined.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="marketing" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Ad Copy Generator</h3>
+            <span class="template-tag">Marketing</span>
+          </div>
+          <p>Generate ad copy variations across different psychological angles for Google and Meta campaigns.</p>
+          <div class="template-prompt">Write multiple variations of ad copy for Google Search and Meta ads, using different persuasion angles.
+
+Context: My business is [BUSINESS NAME] selling [PRODUCT/SERVICE] to [TARGET AUDIENCE]. Price point: [PRICE]. Main benefit: [PRIMARY BENEFIT]. Key differentiator: [WHAT MAKES YOU DIFFERENT]. Current offers: [OFFER DETAILS or "none"]. Competitors: [NAMES or "unknown"].
+
+Role: Act as a performance marketing copywriter who has managed direct-response ad campaigns. You think in terms of hooks, not headlines.
+
+Action:
+1. Write 4 Google Search ad variations (3 headlines of 30 chars max, 2 descriptions of 90 chars max each): pain point, benefit-first, social proof, and curiosity gap angles.
+2. Write 4 Meta ad variations (125 words primary text, 5-7 word headline, one-line description) using the same four angles.
+3. For each Meta ad, suggest creative format (static image, carousel, or video) with a one-sentence concept.
+4. Write 2 retargeting ad variations for non-converters.
+5. Note which audience segment each ad suits best (cold, warm, hot traffic).
+
+Format: Organize by platform, label each angle. Use exact character limits so ads are ready to paste. End with A/B testing recommendation.
+
+Tone: Direct and benefit-driven. Every word must earn its place. Match the target audience's sophistication level.</div>
           <div class="template-actions">
             <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
             <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
@@ -1179,6 +1486,104 @@ Tone: Direct and honest. Help me see blind spots.</div>
           </div>
         </div>
 
+        <!-- New Operations Templates -->
+
+        <div class="template-card" data-category="operations" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Project Status Update</h3>
+            <span class="template-tag">Operations</span>
+          </div>
+          <p>Transform messy project notes into a polished status report stakeholders can scan in 60 seconds.</p>
+          <div class="template-prompt">Turn my raw project notes into a clear, professional status update for stakeholders.
+
+Context: Project: [PROJECT NAME]. Deadline: [TARGET DATE]. Stakeholders: [WHO READS THIS]. Here are my raw notes:
+
+[PASTE RAW NOTES, BULLET POINTS, SLACK MESSAGES — don't worry about formatting]
+
+Key milestones: [LIST MILESTONES AND STATUS]
+
+Role: Act as a senior project manager known for writing status reports that executives actually read. You distill complexity into clarity.
+
+Action:
+1. Write a 2-3 sentence executive summary: Are we on track? What got done? What needs attention?
+2. Progress section by workstream/milestone with status (on track/at risk/blocked), accomplishments, and next steps.
+3. Flag risks or blockers with severity (low/medium/high) and recommended mitigation.
+4. List decisions needed from stakeholders — what, from whom, by when.
+5. Show milestone tracker with overall progress percentage.
+6. "Next week focus" — top 3 priorities.
+
+Format: TL;DR at top, then executive summary in bold, status legend (green/yellow/red), and detailed sections. Readable in under 2 minutes.
+
+Tone: Professional, confident, concise. No vague language like "making progress" — be specific. If behind, say so with the recovery plan.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="operations" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Hiring Scorecard</h3>
+            <span class="template-tag">Operations</span>
+          </div>
+          <p>Create a structured evaluation rubric with weighted criteria and interview questions for any role.</p>
+          <div class="template-prompt">Build a hiring scorecard and evaluation rubric for a specific role.
+
+Context: Hiring for [JOB TITLE] at [COMPANY NAME]. [FULL-TIME/PART-TIME/CONTRACT]. Team size: [NUMBER]. Reports to: [WHO]. Top 3 problems this hire solves: [LIST]. Must-have skills: [NON-NEGOTIABLES]. Nice-to-haves: [BONUS QUALIFICATIONS]. Budget: [SALARY RANGE].
+
+Role: Act as a talent acquisition specialist who builds structured hiring processes for growing small businesses. You believe in scorecards over gut feelings.
+
+Action:
+1. Define 5-7 core competencies (technical + behavioral) with weights totaling 100%.
+2. For each: definition of "excellent," 1-5 rating scale with behavioral anchors, two interview questions (one behavioral, one situational), and red flag / green flag answers.
+3. Create a fill-in-the-blank scorecard template for interviewers.
+4. Include 3 "culture fit" questions for small business environments.
+5. Suggest a take-home exercise appropriate for the role.
+6. Final decision matrix with weighted scores and hire/no-hire thresholds.
+
+Format: One-page role summary, then full scorecard with rating scales, interview question bank by competency, and decision matrix. Include recommended interview process flow.
+
+Tone: Practical and structured. A busy founder should be able to pick this up and use it immediately without HR background.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="operations" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Vendor Evaluation</h3>
+            <span class="template-tag">Operations</span>
+          </div>
+          <p>Compare vendors or tools systematically using weighted scoring so you stop second-guessing decisions.</p>
+          <div class="template-prompt">Create a structured vendor evaluation comparing multiple options using weighted criteria.
+
+Context: Need to choose a [TYPE OF VENDOR/TOOL] for [BUSINESS NAME] in [INDUSTRY]. Team size: [USERS]. Budget: [MONTHLY/ANNUAL]. Vendors comparing:
+Vendor 1: [NAME] - [WHAT I KNOW]
+Vendor 2: [NAME] - [WHAT I KNOW]
+Vendor 3: [NAME] - [WHAT I KNOW]
+Priorities: [e.g., ease of use, price, integrations]. Dealbreakers: [ABSOLUTE REQUIREMENTS]. Currently using: [CURRENT TOOL AND WHY SWITCHING].
+
+Role: Act as a procurement analyst who helps small businesses make smart vendor decisions. You focus on total cost of ownership, not just sticker price.
+
+Action:
+1. Define 8-10 evaluation criteria with weights totaling 100%.
+2. Provide a 1-5 scoring rubric for each criterion.
+3. Create a side-by-side comparison matrix. Note "needs verification" where info is missing.
+4. Calculate weighted total scores.
+5. List 10 critical questions to ask each vendor that most buyers forget.
+6. Flag red flags for each vendor.
+7. Final recommendation: "best overall," "best value," and "best if [scenario]."
+
+Format: Executive recommendation, then scoring matrix table, detailed breakdown, critical questions checklist, and 2-week decision timeline.
+
+Tone: Objective and analytical. Present pros and cons evenly. Be direct about tradeoffs.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
         <!-- Strategy Templates -->
         <div class="template-card" data-category="strategy" onclick="toggleTemplate(this)">
           <div class="template-header">
@@ -1298,14 +1703,1201 @@ Tone: Thoughtful and rigorous. Help me think, don't just give me an answer.</div
           </div>
         </div>
 
+        <!-- New Strategy Templates -->
+
+        <div class="template-card" data-category="strategy" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>SWOT Analysis</h3>
+            <span class="template-tag">Strategy</span>
+          </div>
+          <p>Run a comprehensive SWOT analysis for any business initiative or market entry decision.</p>
+          <div class="template-prompt">Conduct a detailed SWOT analysis for a specific business initiative and turn it into an actionable strategic plan.
+
+Context: My business is [BUSINESS NAME] in [INDUSTRY] serving [TARGET MARKET]. Annual revenue: [RANGE]. The initiative to analyze: [DESCRIBE — e.g., new product line, entering new market, shifting to SaaS]. Main competitors: [LIST 2-4]. Available resources: [TEAM SIZE, BUDGET, ASSETS]. Timeline: [TARGET].
+
+Role: Act as a strategic business consultant who combines classic SWOT with practical small-business reality — limited budgets, small teams, fast action over perfect analysis.
+
+Action:
+1. Identify 5-7 Strengths specific to our business (not generic).
+2. Identify 5-7 Weaknesses — be honest about resource constraints and skill gaps.
+3. Identify 5-7 Opportunities with evidence or reasoning.
+4. Identify 5-7 Threats rated as low/medium/high probability.
+5. Create a SWOT interaction matrix: Strengths + Opportunities = offensive strategies. Weaknesses + Threats = defensive strategies.
+6. Prioritize top 3 strategic actions for the next 90 days.
+7. Identify the single biggest risk with a specific mitigation plan.
+
+Format: Classic SWOT quadrant with concise bullets, then expanded analysis for each, interaction matrix, and "90-Day Action Plan" with owner, deadline, and success metric.
+
+Tone: Strategically rigorous but practical. Every point should be specific enough to act on.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="strategy" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Customer Persona Builder</h3>
+            <span class="template-tag">Strategy</span>
+          </div>
+          <p>Build detailed, data-informed buyer personas that drive real marketing and product decisions.</p>
+          <div class="template-prompt">Build detailed buyer personas for my business based on customer data and market research.
+
+Context: My business is [BUSINESS NAME] selling [PRODUCT/SERVICE] in [INDUSTRY]. Price point: [RANGE]. What I know about customers:
+- Demographics: [AGE, GENDER, LOCATION, INCOME, JOB TITLES]
+- How they find us: [CHANNELS]
+- Purchase triggers: [WHAT MAKES THEM BUY]
+- Common objections: [WHAT HOLDS THEM BACK]
+- Best customers (describe 2-3 without names): [SITUATION, WHY THEY BOUGHT, WHY THEY STAY]
+Number of personas to create: [2-4]
+
+Role: Act as a customer research strategist who builds personas that actually get used — not decorative posters.
+
+Action:
+1. Identify distinct segments and create a full persona for each.
+2. For each: name, age, title, bio, demographic snapshot, psychographic profile, goals, frustrations, buying journey, media habits, objections, 3 messaging hooks that resonate, and messaging that repels.
+3. Create a comparison table showing key differences at a glance.
+4. Recommend which persona to prioritize for marketing spend and why.
+5. Suggest one content piece, one ad angle, and one product improvement per persona.
+
+Format: Self-contained profiles with quick-reference cards. End with comparison table and prioritization recommendation.
+
+Tone: Insightful and specific. Personas should feel like real people, not demographic robots.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="strategy" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Revenue Forecast</h3>
+            <span class="template-tag">Strategy</span>
+          </div>
+          <p>Build a bottoms-up revenue forecast with clear assumptions, multiple scenarios, and key sensitivity drivers.</p>
+          <div class="template-prompt">Build a bottoms-up revenue forecast with three scenarios and sensitivity analysis.
+
+Context: My business is [BUSINESS NAME] in [INDUSTRY].
+- Revenue model: [HOW YOU MAKE MONEY]
+- Current monthly revenue: [AMOUNT]
+- Current customers: [NUMBER]
+- Avg revenue per customer: [AMOUNT/MONTH]
+- Customer lifetime/churn: [MONTHS or MONTHLY CHURN %]
+- Acquisition channels: [CHANNELS AND COST PER ACQUISITION]
+- Conversion rate: [LEAD TO CUSTOMER %]
+- Monthly leads: [NUMBER]
+- Planned changes: [NEW PRODUCT, PRICE INCREASE, NEW CHANNEL, etc.]
+- Forecast period: [6/12/24 MONTHS]
+
+Role: Act as a fractional CFO who builds useful financial models for small businesses — practical decision tools, not impressive spreadsheets.
+
+Action:
+1. Build a bottoms-up model: leads → conversion → customers → revenue. Show the math.
+2. Three scenarios: Conservative (slower growth, higher churn), Base (current trajectory, moderate improvement), Aggressive (improvements succeed, growth accelerates).
+3. Month-by-month projections: new customers, churned, total active, total revenue per scenario.
+4. Key metrics per scenario: MRR, annual run rate, CAC, LTV, LTV:CAC ratio.
+5. Sensitivity analysis on 3 most impactful variables — show how ±20% changes affect final revenue.
+6. Identify the single most impactful assumption and how to validate it.
+7. List 3-5 leading indicators to track weekly.
+
+Format: Executive summary with revenue range across scenarios. Month-by-month tables per scenario. Sensitivity analysis. Leading indicators dashboard. Key assumptions with confidence levels.
+
+Tone: Analytically rigorous but accessible. Honest projections — not hockey-stick fantasies.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <!-- Customer Service Templates -->
+
+        <div class="template-card" data-category="service" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>FAQ Bot Builder</h3>
+            <span class="template-tag">Service</span>
+          </div>
+          <p>Create a structured FAQ knowledge base from your most common customer questions.</p>
+          <div class="template-prompt">Build a comprehensive FAQ knowledge base for my small business.
+
+Context: My business is [BUSINESS TYPE] serving [TARGET CUSTOMERS]. We sell [PRODUCTS/SERVICES]. Most common questions are about [TOP 3-5 TOPICS]. Support volume: [NUMBER] inquiries per [WEEK/MONTH]. Customers reach us via [EMAIL/PHONE/CHAT/SOCIAL].
+
+Role: Act as a customer experience strategist specializing in self-service support systems for small businesses.
+
+Action:
+1. Organize FAQ into 5-7 topic categories.
+2. Write 5-8 questions per category using natural customer language.
+3. Craft answers in 2-4 sentences: acknowledge, answer directly, add a helpful next step.
+4. Flag questions indicating process gaps or upsell opportunities.
+5. Include "Still need help?" escalation path per category.
+6. Add 3-5 proactive FAQs that reduce support tickets.
+
+Format: Categorized document with headers, numbered Q&A, summary table. "Quick Wins" section at top listing the 5 highest-deflection FAQs.
+
+Tone: Friendly, clear, helpful — like a knowledgeable coworker, not a legal document.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="service" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Complaint Response</h3>
+            <span class="template-tag">Service</span>
+          </div>
+          <p>Turn angry customer messages into professional, empathetic responses that retain the relationship.</p>
+          <div class="template-prompt">Write a professional response to an upset customer that turns the situation around.
+
+Context: My business is [BUSINESS TYPE]. Customer's complaint: "[PASTE MESSAGE]". Issue: [ORDER DELAY/DEFECT/BILLING ERROR/OTHER]. Facts: [WHAT HAPPENED]. Resolution available: [REFUND/REPLACEMENT/DISCOUNT/CREDIT]. Return/refund policy: [SUMMARY].
+
+Role: Act as a senior customer retention specialist who de-escalates conflicts where every customer relationship matters.
+
+Action:
+1. Analyze core emotion and desired outcome.
+2. Open with genuine acknowledgment — not scripted "we apologize for the inconvenience."
+3. Take ownership without over-apologizing or making excuses.
+4. Present resolution with specific next steps and timelines.
+5. Add a goodwill gesture that goes slightly beyond expected.
+6. Close with a direct line of contact.
+7. Internal note: what process change could prevent this in the future.
+
+Format: Ready-to-send response (with subject line if email), plus internal debrief with root cause and prevention notes.
+
+Tone: Warm, direct, confident. Genuine empathy without groveling.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="service" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Review Response</h3>
+            <span class="template-tag">Service</span>
+          </div>
+          <p>Craft responses to online reviews that build trust and encourage future business.</p>
+          <div class="template-prompt">Write a response to an online customer review that strengthens our reputation.
+
+Context: My business is [BUSINESS TYPE] in [CITY/REGION]. Review platform: [GOOGLE/YELP/FACEBOOK]. Rating: [1-5 STARS]. Review text: "[PASTE]". We currently have [NUMBER] reviews with [X.X] average.
+
+Role: Act as a reputation management expert. You understand that review responses are read by hundreds of future customers, not just the reviewer.
+
+Action:
+1. Categorize: positive praise, constructive feedback, negative complaint, or fake/spam.
+2. For positive (4-5 stars): Thank specifically, reinforce what's great, nudge toward referral/return.
+3. For negative (1-2 stars): Acknowledge without being defensive, show what you're doing, take it offline.
+4. For mixed (3 stars): Appreciate honest feedback, address the concern, highlight improvements.
+5. Personalize — reference specific details from their review.
+6. Keep 3-6 sentences. Include a strategic keyword naturally for SEO.
+
+Format: Ready-to-post response, plus a strategy note explaining why it's structured that way.
+
+Tone: Genuine, professional, human. Positive = warm. Negative = calm confidence. Never sarcastic, never robotic.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="service" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Customer Win-Back</h3>
+            <span class="template-tag">Service</span>
+          </div>
+          <p>3-email re-engagement sequence for churned or inactive customers with escalating value.</p>
+          <div class="template-prompt">Build a 3-email win-back sequence to re-engage customers who have gone inactive or churned.
+
+Context: My business is [BUSINESS TYPE] selling [PRODUCTS/SERVICES]. Inactive after [30/60/90 DAYS] without purchase. Typical lifecycle: [BUYING PATTERN]. Common reasons for leaving: [2-3 REASONS]. Win-back incentive available: [DISCOUNT/TRIAL/BONUS/ACCESS]. Average customer lifetime value: [AMOUNT].
+
+Role: Act as a retention marketing strategist. Reactivating one customer is more cost-effective than acquiring a new one.
+
+Action:
+1. Email 1 — "Soft Check-In" (X days inactive): Genuine, no-pressure. Acknowledge absence, remind of value. No hard offer.
+2. Email 2 — "Value Play" (5-7 days later): Lead with something useful — new feature, tip, content. Soft incentive with clear CTA.
+3. Email 3 — "Final Offer" (7-10 days later): Best offer with real deadline. Graceful unsubscribe mention.
+4. Compelling subject lines for each — curiosity or personal relevance, not clickbait.
+5. Segmentation note on adjusting for high-value vs. one-time buyers.
+
+Format: Each email with: subject line, preview text, full copy, CTA button text, send timing. Campaign summary showing escalation strategy.
+
+Tone: Email 1 = warm/casual. Email 2 = helpful/generous. Email 3 = direct/honest. Throughout — conversational, never desperate.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <!-- HR / People Templates -->
+
+        <div class="template-card" data-category="hr" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Job Description Writer</h3>
+            <span class="template-tag">HR</span>
+          </div>
+          <p>Create compelling job posts that attract the right candidates and filter out poor fits.</p>
+          <div class="template-prompt">Write a job description that attracts top candidates and filters out poor fits.
+
+Context: Company: [COMPANY NAME], [BUSINESS TYPE], [NUMBER] employees, [LOCATION/REMOTE]. Hiring: [JOB TITLE] in [DEPARTMENT]. Reports to: [WHO]. [FULL-TIME/PART-TIME/CONTRACT], [ON-SITE/HYBRID/REMOTE]. Salary: [RANGE]. Key tools: [LIST]. Role exists because: [NEW/REPLACEMENT/GROWTH].
+
+Role: Act as a talent acquisition specialist who writes job descriptions that sell opportunities while being honest — for small businesses competing against larger employers.
+
+Action:
+1. 2-3 sentence opening hook selling the role's impact, not company history.
+2. 5-7 core responsibilities using action verbs and outcome language.
+3. Separate "Must-Have" (3-5) from "Nice-to-Have" (3-4) requirements.
+4. "What Success Looks Like" section with 2-3 outcomes for first 6 months.
+5. Honest, specific "About Us" section — not generic mission statements.
+6. Compensation, benefits, and perks with transparency.
+7. Clear application instructions and hiring process timeline.
+
+Format: Ready-to-post listing with section headers. Include "Posting Strategy" note recommending 3 best channels for this role.
+
+Tone: Confident and energetic without the cringe. Real person, real opportunity. No "rockstars" or "ninjas."</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="hr" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Interview Question Bank</h3>
+            <span class="template-tag">HR</span>
+          </div>
+          <p>Behavioral and situational interview questions tailored to any role with a scoring rubric.</p>
+          <div class="template-prompt">Create a structured interview question bank with scoring rubric for a specific role.
+
+Context: Hiring for [JOB TITLE] at [BUSINESS TYPE] with [NUMBER] employees. Top 3 skills: [SKILL 1, 2, 3]. Biggest challenges: [CHALLENGE 1, 2]. Culture values: [2-3 VALUES]. Interview format: [PHONE/VIDEO/IN-PERSON], [DURATION]. Previous hires who struggled lacked: [TRAIT/SKILL GAP].
+
+Role: Act as an industrial-organizational psychologist designing structured interviews for small businesses where every hire has outsized impact.
+
+Action:
+1. 3-4 behavioral questions ("Tell me about a time...") mapped to core skills.
+2. 3-4 situational questions simulating real role challenges.
+3. 2-3 culture-fit questions assessing values alignment without being leading.
+4. 1-2 "red flag detector" questions exposing ownership or communication issues.
+5. For each: the question, strong answer criteria, weak answer indicators, and 1-5 scoring rubric with anchors at 1, 3, and 5.
+6. 2-3 good candidate questions that signal strong fit when asked by the interviewee.
+
+Format: Printable scorecard with candidate name field, questions by category, scoring columns, and total calculation. "Hiring Decision Guide" with score thresholds.
+
+Tone: Practical for a non-HR small business owner to use immediately.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="hr" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Employee Onboarding Plan</h3>
+            <span class="template-tag">HR</span>
+          </div>
+          <p>Structured 30-60-90 day plan for new hires with training, milestones, and check-ins.</p>
+          <div class="template-prompt">Create a 30-60-90 day onboarding plan that accelerates new hire ramp-up.
+
+Context: New hire: [JOB TITLE] in [DEPARTMENT] at [BUSINESS TYPE]. Start date: [DATE]. Manager: [NAME/TITLE]. Systems/tools needed: [LIST]. Close collaborators: [NAMES/ROLES]. Biggest learning curve: [CHALLENGE]. Previous onboarding gaps: [WHAT WENT WRONG, if applicable].
+
+Role: Act as a people operations specialist designing onboarding for small businesses with no formal HR department.
+
+Action:
+1. Pre-Day-1 Checklist: equipment, accounts, access, welcome materials, first-day schedule.
+2. Week 1 "Foundation": daily schedule — company overview, expectations, tool setup, introductions, first small win.
+3. Days 8-30 "Learning": weekly focus areas, training, shadowing, a small real-value project. Day 14 check-in.
+4. Days 31-60 "Contributing": transition to ownership. Day 45 check-in to address gaps.
+5. Days 61-90 "Owning": full role ownership with metrics. Formal 90-day review with keep/stop/start.
+6. Three structured check-ins (Day 14, 45, 90) with specific questions.
+7. Culture integration: team lunches, company story, values in action.
+
+Format: Timeline with checkboxes per phase. One-page "Manager Quick Reference" and a "New Hire Welcome" version for Day 1.
+
+Tone: Organized, supportive, realistic. Efficient, not bureaucratic.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="hr" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Performance Review</h3>
+            <span class="template-tag">HR</span>
+          </div>
+          <p>Structured performance review with balanced feedback, goal-setting, and development plan.</p>
+          <div class="template-prompt">Write a performance review that drives growth and retains top talent.
+
+Context: Employee: [NAME], [JOB TITLE], at [COMPANY] for [DURATION]. Review period: [START-END DATE]. Key responsibilities: [LIST 3-5]. Major accomplishments: [LIST]. Areas fell short: [LIST]. Career goals: [GOALS]. Compensation change considered: [RAISE/BONUS/NONE/TBD].
+
+Role: Act as a leadership coach helping small business owners deliver reviews that motivate — not just check a box. In a small team, every person's growth directly impacts the business.
+
+Action:
+1. Open with a genuine, specific acknowledgment of their overall impact.
+2. Evaluate 4-5 key areas with ratings (Exceeds/Meets/Developing/Below) and specific evidence.
+3. Strengths: behavior, business impact, and how to leverage further.
+4. Development areas: use SBI framework (Situation-Behavior-Impact). Pair critique with concrete improvement action.
+5. Set 3-5 SMART goals for next period aligned with business objectives.
+6. Development plan: resources, training, stretch assignments.
+7. Section for employee self-assessment and stated goals.
+
+Format: Structured review document with section headers, rating summaries, goal-setting worksheet. "Conversation Guide" with delivery tips.
+
+Tone: Honest, respectful, forward-looking. Balance accountability with encouragement.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <!-- Finance Templates -->
+
+        <div class="template-card" data-category="finance" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Invoice Follow-Up</h3>
+            <span class="template-tag">Finance</span>
+          </div>
+          <p>Polite but firm follow-up sequence for overdue invoices that escalates professionally.</p>
+          <div class="template-prompt">Write a 4-step invoice follow-up sequence that gets payments collected without burning relationships.
+
+Context: My business is [BUSINESS TYPE]. Client: [NAME/COMPANY]. Invoice: [AMOUNT] for [SERVICE DELIVERED]. Due: [DATE], now [NUMBER] days overdue. Payment terms: [NET 15/30/60]. Relationship: [NEW/ONGOING/HIGH-VALUE]. Payment history: [ON TIME/OCCASIONALLY LATE/CHRONIC]. Late fee policy: [YES/NO].
+
+Role: Act as a small business financial operations advisor helping owners collect firmly and professionally.
+
+Action:
+1. Email 1 "Friendly Reminder" (1-3 days past due): Warm nudge, reattach invoice, include payment link.
+2. Email 2 "Firm Follow-Up" (7-10 days): Reference first reminder, ask if there's an issue, restate amount and due date.
+3. Email 3 "Escalation Notice" (21-30 days): Formal tone, mention late fees if applicable, offer payment plan if appropriate.
+4. Email 4 "Final Notice" (45-60 days): Last outreach before collections/service suspension/legal. Brief and factual.
+5. Include a phone script for the Email 2/3 stage.
+6. Write versions for valued ongoing clients AND one-time/difficult clients.
+
+Format: Each email with subject line, body, timing. Decision tree for when to skip steps or escalate. "Prevention Checklist" with 5 practices to reduce late payments.
+
+Tone: Email 1 = casual, assume best. Email 2 = professional, direct. Email 3 = formal, firm. Email 4 = factual, final. Never passive-aggressive.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="finance" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Expense Categorizer</h3>
+            <span class="template-tag">Finance</span>
+          </div>
+          <p>Categorize business expenses for tax prep and identify deductions you might be missing.</p>
+          <div class="template-prompt">Categorize my business expenses and identify tax deduction opportunities.
+
+Context: [BUSINESS TYPE] structured as [SOLE PROP/LLC/S-CORP]. State: [STATE]. Annual revenue: [RANGE]. Home office: [YES/NO]. Personal vehicle for business: [YES/NO]. Expenses: [PASTE LIST, CSV, OR DESCRIBE FORMAT]. Bookkeeping system: [QUICKBOOKS/WAVE/SPREADSHEET/NONE].
+
+Role: Act as a small business tax strategist ensuring you're not leaving money on the table — legitimate deductions, not aggressive avoidance.
+
+Action:
+1. Sort into IRS Schedule C categories: advertising, vehicle, contract labor, insurance, office, rent, repairs, supplies, travel, meals, utilities.
+2. Flag commonly missed deductions: home office, mileage, professional development, software, retirement contributions.
+3. Identify personal expenses that should be separated. Note mixed-use percentage allocation.
+4. Highlight items needing additional documentation (receipts over $75, meal purpose notes, mileage logs).
+5. Calculate category totals, compare against industry benchmarks.
+6. Recommend 3-5 deductions you might be missing.
+
+Format: Categorized expense table with totals, "Deductions You Might Be Missing" checklist, "Documentation Needed" action list. Include CPA review disclaimer.
+
+Tone: Clear, organized, educational. More in control of finances, not more confused.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="finance" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Cash Flow Forecast</h3>
+            <span class="template-tag">Finance</span>
+          </div>
+          <p>12-month cash flow projection with seasonality and three scenarios for planning ahead.</p>
+          <div class="template-prompt">Create a 12-month cash flow forecast with best-case, expected, and worst-case scenarios.
+
+Context: [BUSINESS TYPE] with [NUMBER] employees. Monthly revenue: [AMOUNT] with [SEASONALITY DESCRIPTION]. Fixed monthly expenses: [AMOUNT] including [MAJOR COSTS]. Variable expenses: [%] of revenue. Cash on hand: [AMOUNT]. Upcoming large expenses: [LIST]. Revenue trend (6 months): [GROWING/FLAT/DECLINING at X%]. Average days to collect payment: [DAYS].
+
+Role: Act as a fractional CFO building practical cash flow tools that drive decisions, not complex spreadsheets that collect dust.
+
+Action:
+1. Month-by-month 12-month projection from [CURRENT MONTH].
+2. Apply seasonality adjustments.
+3. Three scenarios: Best (grow X%, expenses hold), Expected (current trajectory), Worst (revenue drops X%, client loss).
+4. Identify "cash danger zones" — months below safe threshold. Recommend what that threshold should be.
+5. Calculate breakeven monthly revenue.
+6. Recommend cash reserve target.
+7. 3-5 "cash flow levers" — faster collections, expense timing, payment terms, line of credit.
+
+Format: Monthly table per scenario with revenue, fixed/variable expenses, net cash flow, running balance. Key metrics summary (runway, lowest month, annual free cash flow). Top 3 action items.
+
+Tone: Calm, strategic, empowering. Make cash flow feel manageable. No jargon without explanation.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="finance" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Vendor Negotiation</h3>
+            <span class="template-tag">Finance</span>
+          </div>
+          <p>Prepare a negotiation strategy for vendor contracts with BATNA analysis and talking points.</p>
+          <div class="template-prompt">Build a vendor negotiation strategy for better contract terms.
+
+Context: [BUSINESS TYPE] with [NUMBER] employees. Vendor: [NAME] providing [SERVICE/PRODUCT]. Current terms: [COST, LENGTH, KEY TERMS]. Renewal date: [DATE]. Strengths: [WHAT I LIKE]. Pain points: [WHAT I WANT TO CHANGE]. Alternatives: [1-3 WITH ROUGH PRICING]. My leverage: [LONG-TERM CUSTOMER/VOLUME/CASH/REFERRALS]. Annual spend: [AMOUNT].
+
+Role: Act as a procurement negotiation coach for small business owners who aren't professional negotiators.
+
+Action:
+1. Identify the 3 most negotiable elements (price, terms, length, SLA, features, cancellation).
+2. Benchmark what similar businesses typically pay.
+3. Build BATNA: walk-away point, best alternative, switching cost.
+4. Create opening, target, and floor positions for each element.
+5. Write talking point scripts: how to open, present competing offers diplomatically, handle pushback.
+6. Identify 3 creative value-adds beyond price reduction.
+7. Prepare a "walk-away" email template.
+8. Comparison scorecard: current vendor vs. alternatives.
+
+Format: One-page negotiation prep sheet, detailed scripts, comparison scorecard, walk-away email. "Negotiation Timeline" for when to start relative to renewal.
+
+Tone: Strategic, confident, collaborative. Better deal while maintaining good relationship. Assertive, not aggressive.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <!-- Social Media Templates -->
+
+        <div class="template-card" data-category="social" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Post Generator</h3>
+            <span class="template-tag">Social</span>
+          </div>
+          <p>Create a week of posts from one topic, optimized for each platform's engagement patterns.</p>
+          <div class="template-prompt">Generate a week of social media content from one topic, optimized for engagement.
+
+Context: [BUSINESS TYPE] targeting [AUDIENCE]. Topic/announcement: [DESCRIBE]. Active on [PLATFORMS]. Brand voice: [DESCRIBE]. Best-performing post type: [EDUCATIONAL/STORY/QUESTION/BTS/PROMO]. Post frequency: [X] per week per platform.
+
+Role: Act as a social media strategist for small businesses creating content that drives engagement and results — not vanity metrics.
+
+Action:
+1. 7 unique posts from the single topic, each with a different angle: bold opinion, tip, personal story, data point, myth-bust, client result, question.
+2. Platform-specific versions: LinkedIn (professional, 150-300 words), Instagram (visual-first, 100-200 words, hashtags), X (under 280 chars), Facebook (conversational, question-driven).
+3. For each: hook (first line), body copy, CTA, and visual/media suggestion.
+4. Optimal posting times per platform.
+5. 2 "engagement bait" posts designed to drive comments and boost reach.
+6. One "pillar post" — longer-form piece to anchor the week.
+
+Format: By day (Mon-Sun) with platform, type, full copy, visual, and posting time. "Week-at-a-Glance" calendar at top.
+
+Tone: Match brand voice. Authentic over polished — written by the owner, not an agency.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="social" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Content Repurposer</h3>
+            <span class="template-tag">Social</span>
+          </div>
+          <p>Transform one piece of long-form content into 10+ social posts across platforms.</p>
+          <div class="template-prompt">Turn one long-form content piece into 10+ social media posts across platforms.
+
+Context: [BUSINESS TYPE] serving [AUDIENCE]. Source content: [BLOG/PODCAST/VIDEO/WEBINAR] about [TOPIC]. Content or key points: [PASTE OR SUMMARIZE]. Active on [PLATFORMS]. Goals: [AWARENESS/LEADS/COMMUNITY/THOUGHT LEADERSHIP]. Key takeaways: [3-5 MAIN POINTS].
+
+Role: Act as a content repurposing specialist maximizing value from every piece of content — because most businesses use each piece only once.
+
+Action:
+1. Extract: 5 standalone insights, 3 quotable lines, 2 data points, 1 controversial take, 1 personal anecdote.
+2. Create 10-15 posts: 3 insight posts, 2 quote graphics with visual layout suggestions, 2 threads/carousels, 1 poll/question, 1 behind-the-scenes, 1 hot take, 1 listicle, 1 CTA driving to original.
+3. Adapt each for specified platforms with appropriate length, format, hashtags.
+4. Sequence across 2-3 weeks with publishing schedule.
+5. Note which source element each post derives from.
+
+Format: Numbered content library: platform, type, source element, full copy, visual suggestion, hashtags, publish date. Include "Content Multiplication Map."
+
+Tone: Varied per post type — educational = authoritative, story = personal, engagement = conversational, CTA = direct. Native to each platform.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="social" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Hashtag Strategy</h3>
+            <span class="template-tag">Social</span>
+          </div>
+          <p>Research and build strategic hashtag sets for your niche with the right volume mix.</p>
+          <div class="template-prompt">Build a strategic hashtag system for my business across platforms.
+
+Context: [BUSINESS TYPE] in [INDUSTRY/NICHE]. Target: [AUDIENCE] in [GEOGRAPHIC FOCUS]. Active on [PLATFORMS]. Content pillars: [3-5 TOPICS]. Accounts I admire: [2-3 ACCOUNTS]. Follower count: [NUMBER]. Currently [DO/DON'T] use hashtags strategically.
+
+Role: Act as a social media growth strategist specializing in organic reach through hashtag optimization for small businesses that can't outspend competitors.
+
+Action:
+1. Three tiers per content pillar: High volume (500K+, 3-5 tags), Medium (50K-500K, 5-8 tags), Low (under 50K, 3-5 micro-niche tags).
+2. 4-5 pre-built hashtag sets by content type: educational, promotional, behind-the-scenes, engagement, thought leadership.
+3. 5-10 branded/semi-branded hashtag opportunities to own over time.
+4. Flag banned, shadowbanned, or spammy tags to avoid.
+5. Location-based hashtags for local businesses.
+6. Rotation strategy — why same hashtags every post hurts reach.
+7. Platform-specific best practices: optimal count, placement, how hashtags function differently.
+
+Format: Hashtag library by pillar and tier, copy-paste sets by content type, rotation calendar, monthly audit checklist.
+
+Tone: Strategic and educational. Explain the "why" so they can adjust independently.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
+        <div class="template-card" data-category="social" onclick="toggleTemplate(this)">
+          <div class="template-header">
+            <h3>Comment & DM Responses</h3>
+            <span class="template-tag">Social</span>
+          </div>
+          <p>Response templates for common comments and DMs that save time while staying authentic.</p>
+          <div class="template-prompt">Create a library of response templates for common social media comments and DMs.
+
+Context: [BUSINESS TYPE] serving [AUDIENCE] on [PLATFORMS]. Common interactions: [LIST 5-8 TYPES — pricing questions, compliments, complaints, "how to start" questions, collab requests, spam]. Brand voice: [DESCRIBE]. Hours spent responding: [X/WEEK]. Response goals: [COMMUNITY/SALES/SUPPORT].
+
+Role: Act as a community management specialist maintaining the personal touch that's a small business advantage while reclaiming hours.
+
+Action:
+1. Templates for each type: pricing inquiries, positive comments, questions, complaints, "getting started," collabs, spam.
+2. 3 variations per template so responses don't look copy-pasted.
+3. Personalization checklist: 2-3 elements to customize (name, specific reference, relevant emoji).
+4. Response priority matrix: what to respond to first, what can wait, what to skip.
+5. DM conversation flows for top 3 sales conversations with branching responses.
+6. "Comment-to-sale" templates transitioning public comments to private conversions.
+7. "Do Not Respond" list for trolling tactics to ignore.
+
+Format: Categorized library with situation, 3 variations, personalization notes, priority. DM flows as decision trees. Top 10 "Quick Reference Card."
+
+Tone: Match brand voice. Brief for acknowledgments, detailed for sales. Warm, specific, human — never corporate or robotic.</div>
+          <div class="template-actions">
+            <button class="btn-small btn-copy" onclick="event.stopPropagation(); copyTemplate(this)">Copy Template</button>
+            <button class="btn-small btn-close" onclick="event.stopPropagation(); toggleTemplate(this.closest('.template-card'))">Close</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- Industry Prompt Packs -->
+<section id="industries">
+  <div class="container">
+    <span class="section-label">Chapter 3</span>
+    <h2 class="section-title">Industry Prompt Packs</h2>
+    <p class="section-subtitle">Pre-built prompt sets for specific industries. Each pack includes 4 prompts designed for the unique challenges of that business type.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px;">
+
+      <!-- Home Services -->
+      <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+        <div style="font-size: 36px; margin-bottom: 16px;">🔧</div>
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Home Services</h3>
+        <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Landscaping, HVAC, Cleaning, Plumbing</p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Seasonal Service Reminder</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Automated seasonal outreach — spring cleanup, winterization, tune-ups</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run a [HOME SERVICE TYPE] business called [BUSINESS NAME] in [CITY/REGION]. We serve residential customers and our peak seasons are [PEAK SEASONS]. Our average service ticket is $[AMOUNT] and we want to keep customers on a recurring schedule.
+
+<span style="color: #5a6480;">Role:</span>
+You are a local service business marketing specialist who understands seasonal demand cycles for home services.
+
+<span style="color: #5a6480;">Action:</span>
+Write a [SEASON — e.g., "early spring"] service reminder email for customers who haven't booked in [TIMEFRAME — e.g., "6+ months"]. Include:
+- A subject line that creates urgency without being pushy
+- A personalized opening referencing their last service: [SERVICE TYPE, APPROXIMATE DATE]
+- 2-3 seasonal reasons why now is the right time to book
+- A specific offer: [OFFER — e.g., "15% off if booked by March 31"]
+- A single clear CTA to book online or call [PHONE NUMBER]
+
+<span style="color: #5a6480;">Format:</span>
+Subject line on its own line, then the email body. Keep it under 180 words. Use a warm, neighborly tone — not corporate. No emojis in the subject line.
+
+<span style="color: #5a6480;">Target:</span>
+The email should feel personal enough that 30%+ of recipients open it and 10%+ click through to book. Prioritize reactivating lapsed customers over general awareness.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Quick Quote Generator</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Turn job details into professional estimates with line items</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I own [BUSINESS NAME], a [SERVICE TYPE] company. My labor rate is $[RATE]/hr and I typically mark up materials [MARKUP — e.g., "20%"]. I want to send professional-looking quotes within an hour of a site visit instead of waiting days.
+
+<span style="color: #5a6480;">Role:</span>
+You are an experienced estimator for [SERVICE TYPE] businesses who creates clear, trust-building quotes that win jobs.
+
+<span style="color: #5a6480;">Action:</span>
+Generate a professional quote based on these job details:
+- Customer name: [NAME]
+- Property: [ADDRESS or DESCRIPTION]
+- Scope of work: [DESCRIBE THE JOB — e.g., "Remove and replace 200 sq ft of old mulch beds, install new edging, plant 6 shrubs"]
+- Estimated hours: [HOURS]
+- Materials needed: [LIST MATERIALS AND APPROXIMATE COSTS]
+- Any special conditions: [ACCESS ISSUES, PERMITS, SCHEDULING NOTES]
+
+Break the quote into line items with labor, materials, and a total. Include a brief scope description the customer can understand, payment terms, and a validity window.
+
+<span style="color: #5a6480;">Format:</span>
+Professional quote format with: header (business name, date, quote #), customer info, itemized table, total, terms, and a friendly closing with next steps. Use plain text formatting that can be pasted into an email.
+
+<span style="color: #5a6480;">Target:</span>
+The quote should look polished enough to compete with bigger companies while being generated in under 2 minutes. The customer should feel confident in the professionalism and transparency.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Crew Schedule Optimizer</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Weekly schedule builder accounting for travel, equipment, crew skills</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run a [SERVICE TYPE] company with [NUMBER] crews. We operate [DAYS — e.g., "Monday–Friday, 7am–5pm"] in the [CITY/REGION] area. Our jobs range from [SMALL JOB TIME] to [LARGE JOB TIME] in duration. Each crew has a truck with [EQUIPMENT LIST]. Some jobs require specialized skills like [SPECIALIZED SKILLS].
+
+<span style="color: #5a6480;">Role:</span>
+You are an operations manager who maximizes crew utilization while minimizing drive time and equipment conflicts for field service businesses.
+
+<span style="color: #5a6480;">Action:</span>
+Build an optimized weekly schedule for the following jobs:
+[LIST EACH JOB WITH: Customer name, address/area, job type, estimated hours, any special equipment or skill requirements, customer availability constraints]
+
+Crew roster:
+[LIST EACH CREW WITH: Crew lead name, team size, skills, assigned truck/equipment]
+
+Group jobs by geographic zone to minimize windshield time. Flag any conflicts where two jobs need the same specialized equipment. Identify gaps where we could fit in smaller jobs or maintenance calls.
+
+<span style="color: #5a6480;">Format:</span>
+Day-by-day schedule table for each crew showing: time block, customer, location area, job type, estimated duration, and any notes. Add a summary at the bottom with total billable hours per crew and flagged issues.
+
+<span style="color: #5a6480;">Target:</span>
+Each crew should have 6+ billable hours per day with no more than 45 minutes total drive time between jobs. Surface any scheduling problems before the week starts.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Review Request Follow-Up</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Post-job email that gets happy customers to leave Google reviews</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+My [SERVICE TYPE] business, [BUSINESS NAME], currently has [NUMBER] Google reviews with a [RATING] average. I want to grow to [TARGET NUMBER] reviews to rank higher in local search. Most of my customers are happy but only 1 in 20 leaves a review without being asked.
+
+<span style="color: #5a6480;">Role:</span>
+You are a local SEO and reputation management specialist who knows how to ask for reviews without being annoying or violating Google's review policies.
+
+<span style="color: #5a6480;">Action:</span>
+Create a 2-touch review request sequence for after job completion:
+
+Touch 1 — sent [TIMING — e.g., "same day, 2 hours after job completion"]:
+A brief, warm thank-you message that checks if they're satisfied. Reference the specific work done: [JOB TYPE]. If they respond positively, it naturally leads to Touch 2.
+
+Touch 2 — sent [TIMING — e.g., "next day morning"]:
+A direct but low-pressure ask to leave a Google review. Include the exact link: [GOOGLE REVIEW LINK]. Give them 2-3 bullet points they could mention (to make it easy, not to script them).
+
+Include a "safety valve" — if the customer expresses any dissatisfaction in Touch 1, redirect to a private resolution instead of the public review.
+
+<span style="color: #5a6480;">Format:</span>
+Two separate messages formatted as either email or text (specify which works better for [SERVICE TYPE] customers). Keep Touch 1 under 80 words, Touch 2 under 100 words.
+
+<span style="color: #5a6480;">Target:</span>
+Achieve a 25%+ review conversion rate from this sequence. The messages should feel personal and genuine — not like a marketing automation blast.</pre>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- Professional Services -->
+      <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+        <div style="font-size: 36px; margin-bottom: 16px;">⚖️</div>
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Professional Services</h3>
+        <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Accounting, Legal, Consulting, Coaching</p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Client Intake Questionnaire</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Smart intake form that qualifies and onboards simultaneously</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run a [PRACTICE TYPE — e.g., "bookkeeping and tax prep"] practice called [BUSINESS NAME]. My ideal client is [IDEAL CLIENT DESCRIPTION — e.g., "small business owners doing $200K–$2M in revenue"]. I currently waste [TIME] per week on discovery calls with leads who aren't a good fit. My services start at $[MINIMUM ENGAGEMENT] per [PERIOD].
+
+<span style="color: #5a6480;">Role:</span>
+You are a client experience designer for professional service firms who creates intake processes that filter, qualify, and impress simultaneously.
+
+<span style="color: #5a6480;">Action:</span>
+Create a client intake questionnaire that does three things at once:
+1. Qualifies the prospect (budget, timeline, fit for my services)
+2. Gathers the information I need to prepare for a productive first meeting
+3. Makes the prospect feel like they're already working with a premium firm
+
+The questionnaire should cover:
+- Business basics (entity type, revenue range, team size)
+- Current situation: [KEY QUALIFYING QUESTIONS FOR YOUR PRACTICE — e.g., "current accounting software, last tax filing status, pain points"]
+- Goals and timeline
+- Budget expectations (frame this tastefully)
+- [ANY INDUSTRY-SPECIFIC COMPLIANCE QUESTIONS]
+
+Include conditional logic notes — e.g., "If they select revenue under $100K, show this message instead."
+
+<span style="color: #5a6480;">Format:</span>
+Numbered questions with field type noted (text, dropdown, multi-select, scale). Group into 3-4 logical sections. Include the disqualification message and the qualified confirmation message. Keep it to 12-15 questions max.
+
+<span style="color: #5a6480;">Target:</span>
+The form should take under 8 minutes to complete and disqualify 30%+ of non-fit leads before they ever reach your calendar. Qualified leads should arrive to the first call feeling understood.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Engagement Letter Drafter</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Professional scope-of-work from discovery call notes</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I'm a [PROFESSIONAL TITLE] at [BUSINESS NAME]. After discovery calls, it takes me [TIME] to draft engagement letters and scope documents. I need to move faster — the longer I wait to send the proposal, the more likely the prospect goes elsewhere. My services include [LIST OF SERVICES WITH TYPICAL PRICE RANGES].
+
+<span style="color: #5a6480;">Role:</span>
+You are a senior professional services consultant who writes engagement letters that are legally clear, client-friendly, and close deals quickly.
+
+<span style="color: #5a6480;">Action:</span>
+Draft an engagement letter based on these discovery call notes:
+- Client: [CLIENT NAME, BUSINESS NAME]
+- Their situation: [SUMMARY OF THEIR NEEDS AND CURRENT STATE]
+- Services discussed: [WHICH SERVICES WERE RELEVANT]
+- Agreed scope: [WHAT YOU AGREED TO DELIVER]
+- Pricing discussed: [AMOUNT, STRUCTURE — fixed/hourly/retainer]
+- Timeline: [START DATE, MILESTONES, END DATE]
+- Special requests or concerns they raised: [NOTES]
+
+The letter should include: scope of services (specific and bounded), what's explicitly NOT included, deliverables and timeline, fee structure and payment terms, mutual responsibilities, termination clause, and signature block.
+
+<span style="color: #5a6480;">Format:</span>
+Professional letter format. Use clear section headers. Write in plain English — not legalese — but be precise about scope boundaries. Include [BRACKETED NOTES] for anything I need to verify before sending. Keep it to 1.5-2 pages.
+
+<span style="color: #5a6480;">Target:</span>
+The engagement letter should be 90% ready to send within 5 minutes of generation. It should protect both parties while feeling welcoming — not adversarial. The client should be able to sign confidently without needing their own lawyer to review it.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Knowledge Base Article</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Turn expertise into searchable how-to content for clients</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I'm a [PROFESSIONAL TITLE] and I answer the same [NUMBER] client questions every week. My practice, [BUSINESS NAME], serves [CLIENT TYPE]. I want to create a library of articles I can send clients instead of repeating myself — and that also positions me as an authority for SEO.
+
+<span style="color: #5a6480;">Role:</span>
+You are a professional content strategist who translates expert knowledge into clear, jargon-free articles that both educate clients and rank in local search.
+
+<span style="color: #5a6480;">Action:</span>
+Write a knowledge base article on this topic:
+- Question clients ask: [THE COMMON QUESTION — e.g., "Do I need an LLC or S-Corp?"]
+- Key points I always cover: [YOUR EXPERT TALKING POINTS]
+- Common misconceptions: [WHAT CLIENTS USUALLY GET WRONG]
+- When they should contact a professional: [THE LINE BETWEEN DIY AND NEEDING HELP]
+- Local/state-specific nuances: [ANY JURISDICTION-SPECIFIC DETAILS FOR YOUR AREA]
+
+The article should educate without giving away so much that they don't need you. End with a natural bridge to booking a consultation.
+
+<span style="color: #5a6480;">Format:</span>
+SEO-friendly article with: H1 title (question format), brief answer summary (2-3 sentences), detailed sections with H2 headers, a "when to get professional help" section, and a CTA. Target [WORD COUNT — e.g., "800-1200 words"]. Include a meta description suggestion.
+
+<span style="color: #5a6480;">Target:</span>
+The article should rank for "[TOPIC] + [CITY]" long-tail keywords while reducing the number of times I answer this question on calls by at least 50%. Clients should read it and think "this person really knows their stuff."</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Referral Ask Sequence</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Tasteful referral request sequence for happy clients</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+My [PRACTICE TYPE] firm, [BUSINESS NAME], gets [PERCENTAGE]% of new business from referrals, but almost all of them happen organically. I have [NUMBER] active clients, and I know at least [NUMBER] of them are very happy with my work. I've never systematically asked for referrals because it feels awkward. My ideal referral is [DESCRIBE IDEAL NEW CLIENT].
+
+<span style="color: #5a6480;">Role:</span>
+You are a business development strategist for professional service firms who creates referral systems that feel natural and relationship-first, never transactional.
+
+<span style="color: #5a6480;">Action:</span>
+Create a 3-touch referral sequence to deploy after a successful client milestone — [TRIGGER EVENT — e.g., "completed their first tax season with us," "closed a deal using our strategy"]:
+
+Touch 1 — Milestone celebration: Acknowledge the win. Share a specific result or metric. Make them feel great about what was accomplished together. No ask yet.
+
+Touch 2 — The warm ask (sent [TIMING] after Touch 1): Reference the success, then ask: "Do you know anyone in a similar situation who might benefit from this kind of support?" Provide a simple way to refer — [PREFERRED METHOD — e.g., "email intro, share a link, give them my card"].
+
+Touch 3 — The follow-up (sent [TIMING] after Touch 2 only if no response): A lighter touch — share a useful resource or insight, mention you're taking on [NUMBER] new clients this [PERIOD], and include a referral link/card as a P.S.
+
+<span style="color: #5a6480;">Format:</span>
+Three separate emails, each under 120 words. Conversational, first-person tone. Include subject lines. Mark the [PERSONALIZATION POINTS] where I need to insert client-specific details.
+
+<span style="color: #5a6480;">Target:</span>
+Generate 2-3 warm referral introductions per quarter from your existing client base without damaging any relationships. The sequence should feel like something a thoughtful human wrote — not a marketing funnel.</pre>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- Local Retail & E-commerce -->
+      <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+        <div style="font-size: 36px; margin-bottom: 16px;">🛍️</div>
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Local Retail & E-commerce</h3>
+        <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Boutiques, Shops, Online Stores, DTC Brands</p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Product Description Writer</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Compelling descriptions from basic product specs</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run [STORE NAME], a [STORE TYPE — e.g., "women's clothing boutique"] selling [PRODUCT CATEGORY] in the $[PRICE RANGE] range. My customers are [TARGET CUSTOMER DESCRIPTION — e.g., "women 28-45 who value quality basics and sustainable fashion"]. I sell through [CHANNELS — e.g., "Shopify store and a physical location in [CITY]"]. I have [NUMBER] products that need descriptions written or rewritten.
+
+<span style="color: #5a6480;">Role:</span>
+You are a conversion-focused copywriter who specializes in product descriptions for independent retail brands. You write copy that sells without sounding like every other store.
+
+<span style="color: #5a6480;">Action:</span>
+Write a product description for:
+- Product name: [NAME]
+- Category: [CATEGORY]
+- Price: $[PRICE]
+- Key specs: [MATERIALS, DIMENSIONS, WEIGHT, SIZE OPTIONS, etc.]
+- What makes it special: [UNIQUE SELLING POINTS — e.g., "organic cotton, made in Portugal, enzyme-washed for softness"]
+- Who it's for / when they'd use it: [USE CASE]
+- Existing brand voice examples: [PASTE 1-2 SENTENCES FROM YOUR CURRENT COPY OR DESCRIBE YOUR VOICE]
+
+Include: a punchy opening line, 2-3 benefit-driven sentences, a specs section, and a sizing/fit note if applicable.
+
+<span style="color: #5a6480;">Format:</span>
+Two versions — one short (50-75 words for product cards and social) and one full (120-180 words for the product page). Use the brand voice consistently. No generic filler phrases ("high-quality," "perfect for any occasion"). Include 3-5 SEO keyword suggestions for this product.
+
+<span style="color: #5a6480;">Target:</span>
+The description should make someone click "Add to Cart" without seeing the product in person. It should sound like the store owner wrote it — not a content farm.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Seasonal Promotion Planner</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Promotional calendar with email, social, and in-store tactics</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I own [STORE NAME], a [STORE TYPE] with [CHANNELS — e.g., "a physical storefront and a Shopify site"]. My best-selling categories are [TOP CATEGORIES]. My busiest months are [PEAK MONTHS] and my slowest are [SLOW MONTHS]. My marketing budget is roughly $[MONTHLY BUDGET]/month and I currently use [MARKETING CHANNELS — e.g., "Instagram, email list of 2,400, Google Business Profile"]. Last year's revenue was approximately $[REVENUE].
+
+<span style="color: #5a6480;">Role:</span>
+You are a retail marketing strategist for independent stores who creates promotional plans that drive traffic and sales without constant discounting that erodes margins.
+
+<span style="color: #5a6480;">Action:</span>
+Build a promotional calendar for [MONTH/QUARTER/SEASON]:
+- Key dates and holidays in this period: [LIST ANY RELEVANT ONES — e.g., "Valentine's Day, Presidents' Day weekend"]
+- New arrivals or launches planned: [ANY NEW PRODUCTS OR COLLECTIONS]
+- Inventory I need to move: [SLOW-MOVING STOCK OR LAST-SEASON ITEMS]
+- Events or local happenings: [LOCAL EVENTS — e.g., "downtown art walk March 15"]
+
+For each promotion, include: the offer or hook (not always a discount — think events, bundles, exclusives), which channels to use, email subject line, social caption concept, and in-store signage suggestion if applicable.
+
+<span style="color: #5a6480;">Format:</span>
+Week-by-week calendar format. Each week gets: theme, promotion details, channel breakdown (email/social/in-store/paid), and a one-line success metric. Include a budget allocation suggestion across the weeks.
+
+<span style="color: #5a6480;">Target:</span>
+Increase month-over-month revenue by 15-20% compared to the same period last year. At least half the promotions should be margin-friendly (not straight discounts). The plan should be executable by one person in under 5 hours per week.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Inventory Reorder Alert</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Analyze sales velocity to predict reorder timing</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run [STORE NAME] and I regularly run out of best-sellers while sitting on slow-moving inventory. My suppliers have lead times of [LEAD TIMES — e.g., "2-6 weeks depending on vendor"]. I carry approximately [NUMBER] SKUs. I track sales in [SYSTEM — e.g., "Shopify, Square, a spreadsheet"]. My storage space is [LIMITED/ADEQUATE/LARGE] and I try to keep no more than [WEEKS] weeks of inventory on hand.
+
+<span style="color: #5a6480;">Role:</span>
+You are a retail inventory analyst who helps small stores optimize stock levels without expensive inventory management software.
+
+<span style="color: #5a6480;">Action:</span>
+Analyze this sales data and create a reorder alert report:
+
+[PASTE OR DESCRIBE YOUR SALES DATA — e.g., "Product name | Units sold last 30 days | Current stock | Supplier lead time | Unit cost | Retail price"]
+
+For each product, calculate:
+- Daily sales velocity (units/day)
+- Days of stock remaining at current velocity
+- Recommended reorder date (accounting for lead time + [BUFFER DAYS] safety buffer)
+- Suggested reorder quantity based on [TARGET WEEKS] weeks of stock
+- Flag items selling faster or slower than the previous period
+
+Identify: items to reorder this week, items to reorder in 2 weeks, items that are overstocked, and dead stock candidates (less than [THRESHOLD] units sold in [PERIOD]).
+
+<span style="color: #5a6480;">Format:</span>
+Priority-sorted table: RED (reorder now), YELLOW (reorder soon), GREEN (well-stocked), GRAY (overstocked/dead). Include total reorder cost estimate at the bottom. Add a "quick wins" section for bundle or markdown suggestions on slow movers.
+
+<span style="color: #5a6480;">Target:</span>
+Reduce stockouts on top-20 sellers to zero while freeing up cash tied in slow inventory. This report should take 5 minutes to act on every Monday morning.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Customer Loyalty Email</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Segmented emails for VIPs, lapsed buyers, and first-timers</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+[STORE NAME] has an email list of [NUMBER] subscribers. My segments are roughly: VIPs (bought [FREQUENCY]+ times, top [PERCENTAGE]% by spend), active customers (bought in last [TIMEFRAME]), lapsed (haven't bought in [TIMEFRAME]+), and first-timers (one purchase only). My average order value is $[AOV] and my repeat purchase rate is [RATE]%. I use [EMAIL PLATFORM — e.g., "Klaviyo, Mailchimp"].
+
+<span style="color: #5a6480;">Role:</span>
+You are an email marketing specialist for independent retail brands who creates segmented campaigns that drive repeat purchases without constant discounting.
+
+<span style="color: #5a6480;">Action:</span>
+Write 3 segmented emails for a [CAMPAIGN THEME — e.g., "new spring collection drop," "end-of-season event," "loyalty appreciation"]:
+
+Email 1 — VIP segment: Make them feel like insiders. Offer [VIP PERK — e.g., "early access, exclusive colorway, free gift with purchase"]. Reference their loyalty specifically.
+
+Email 2 — Lapsed segment: Re-engage without desperation. Lead with what's new or changed since their last purchase. Include a [LAPSED OFFER — e.g., "welcome-back incentive, limited-time bundle"].
+
+Email 3 — First-timer segment: Build the relationship. Share the brand story or a behind-the-scenes angle. Include a [FIRST-TIMER OFFER — e.g., "second purchase discount, loyalty program invite"].
+
+Each email needs: subject line, preview text, body copy, and CTA button text.
+
+<span style="color: #5a6480;">Format:</span>
+Three separate emails, clearly labeled by segment. Body copy under 150 words each. Include send timing recommendations (day of week, time). Note any personalization merge tags to use (first name, last product purchased, etc.).
+
+<span style="color: #5a6480;">Target:</span>
+VIP email: 40%+ open rate, 8%+ click rate. Lapsed email: 25%+ open rate, 3%+ click rate. First-timer email: 35%+ open rate, 5%+ click rate. Overall goal: increase repeat purchase rate by [TARGET]% this quarter.</pre>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- Health & Wellness -->
+      <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+        <div style="font-size: 36px; margin-bottom: 16px;">🏥</div>
+        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Health & Wellness</h3>
+        <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Gyms, Clinics, Therapists, Spas</p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Appointment Reminder Sequence</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Reduce no-shows with smart pre-appointment messaging</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run [PRACTICE/STUDIO NAME], a [BUSINESS TYPE — e.g., "physical therapy clinic"] in [CITY]. My current no-show rate is [RATE]%, which costs me roughly $[AMOUNT] per month in lost revenue. Appointments are typically [DURATION] and booked [LEAD TIME] in advance. I use [BOOKING SYSTEM — e.g., "Jane App, Mindbody, Acuity"]. My patients/clients [DO/DON'T] prefer text vs. email.
+
+<span style="color: #5a6480;">Role:</span>
+You are a patient/client communication specialist for health and wellness practices who reduces no-shows through thoughtful, multi-touch reminder sequences.
+
+<span style="color: #5a6480;">Action:</span>
+Create a 3-touch appointment reminder sequence:
+
+Touch 1 — [TIMING — e.g., "3 days before"]: Confirmation + preparation. Confirm the appointment details and include any prep instructions: [PREP INSTRUCTIONS — e.g., "wear comfortable clothing, arrive 10 min early, bring insurance card, avoid eating 2 hours prior"]. Include an easy way to reschedule (not cancel).
+
+Touch 2 — [TIMING — e.g., "day before, evening"]: Friendly nudge with logistics. Include parking/directions note: [PARKING/LOCATION DETAILS]. Build anticipation for the visit.
+
+Touch 3 — [TIMING — e.g., "2 hours before"]: Short, warm day-of reminder. Just the essentials: time, location, one prep item. Keep it under 30 words.
+
+For each touch, provide both an email and a text/SMS version. Include a clear reschedule link/CTA rather than a cancel option. Add a conditional message for first-time visitors with extra welcome info.
+
+<span style="color: #5a6480;">Format:</span>
+Three touches, each with email version (subject + body under 100 words) and SMS version (under 160 characters). Label first-timer variants separately. Include recommended send times.
+
+<span style="color: #5a6480;">Target:</span>
+Reduce no-show rate from [CURRENT RATE]% to under [TARGET RATE]%. Reschedule rate should be at least 3x the cancellation rate — we want to keep the appointment, just move it if needed.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Patient/Client Education Content</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Translate clinical info into friendly client-facing materials</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I'm a [PROFESSIONAL TITLE] at [PRACTICE NAME]. I spend [TIME] per week explaining the same concepts to patients/clients. They often leave confused about [COMMON CONFUSION POINTS]. My clients range from [AGE/DEMOGRAPHIC RANGE] and have [VARYING/SIMILAR] health literacy levels. I want educational handouts I can share digitally or print.
+
+<span style="color: #5a6480;">Role:</span>
+You are a health communications specialist who translates clinical and technical wellness information into warm, clear, actionable client-facing content that builds trust and compliance.
+
+<span style="color: #5a6480;">Action:</span>
+Create an educational handout on:
+- Topic: [TOPIC — e.g., "What to expect after your first chiropractic adjustment," "How to use your home exercise program," "Understanding your lab results"]
+- Key clinical points to communicate: [YOUR EXPERT KNOWLEDGE]
+- Common patient questions: [FREQUENTLY ASKED QUESTIONS ON THIS TOPIC]
+- Actions you want them to take: [DESIRED BEHAVIORS — e.g., "do exercises 3x/week, ice for 15 min, call if symptoms worsen"]
+- What to avoid or watch for: [RED FLAGS, CONTRAINDICATIONS, COMMON MISTAKES]
+
+Important: Include a disclaimer that this is educational content and not a substitute for personalized medical/professional advice. Keep the tone reassuring and empowering — not clinical or scary.
+
+<span style="color: #5a6480;">Format:</span>
+Single-page handout format (printable). Use: a clear title, 3-5 sections with headers, bullet points over paragraphs, a "Do This / Not This" comparison if applicable, a "When to Call Us" box, and your practice contact info placeholder. Target 6th-grade reading level.
+
+<span style="color: #5a6480;">Target:</span>
+The handout should reduce follow-up questions by 40%+ and improve treatment compliance. Patients should feel informed and confident — not overwhelmed or anxious.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Program Enrollment Pitch</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Sell group programs, packages, or memberships with benefit-focused copy</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+[PRACTICE/STUDIO NAME] is launching [PROGRAM NAME], a [PROGRAM TYPE — e.g., "6-week strength training program," "12-session massage package," "annual wellness membership"]. Price: $[PRICE] (compare to $[PER-SESSION RATE] per session individually). Capacity: [NUMBER] spots. Start date: [DATE]. My current clients who would be a fit: [DESCRIBE SEGMENT — e.g., "clients who've been coming 1x/week for 3+ months"]. My competitors charge $[COMPETITOR PRICE] for similar programs.
+
+<span style="color: #5a6480;">Role:</span>
+You are a health and wellness business consultant who creates enrollment campaigns that fill programs by focusing on client transformation rather than features and price.
+
+<span style="color: #5a6480;">Action:</span>
+Create a multi-channel enrollment campaign:
+
+1. Announcement email to existing clients — lead with the transformation/outcome, not the logistics. Answer "what will be different about my life/health/body after this?" before explaining what's included.
+
+2. Landing page copy — headline, subheadline, 3-4 benefit bullets, what's included section, ideal candidate description ("This is for you if..."), social proof placeholder, pricing with value anchor, FAQ (3-4 common objections), and CTA.
+
+3. Social media caption (Instagram/Facebook) — thumb-stopping opening line, the emotional hook, key details, and a CTA to DM or click link.
+
+Include urgency elements that are honest (limited spots, real deadline) — not fake scarcity.
+
+<span style="color: #5a6480;">Format:</span>
+Three clearly separated pieces. Email under 200 words. Landing page copy in sections with headers. Social caption under 150 words. Mark all [PERSONALIZATION POINTS] and [SOCIAL PROOF PLACEHOLDERS].
+
+<span style="color: #5a6480;">Target:</span>
+Fill [TARGET]% of spots within [TIMEFRAME] of announcement. Conversion rate from email: 5-8%. The copy should make the right clients feel like this was built specifically for them.</pre>
+            </div>
+          </details>
+
+          <details style="background: #0a0f1a; border: 1px solid #1e2940; border-radius: 8px; padding: 0;">
+            <summary style="padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: start; color: #f0f4ff; font-size: 0.9rem; line-height: 1.5;">
+              <div>
+                <strong style="color: #f0f4ff;">Intake & Assessment Builder</strong>
+                <div style="color: #8892b0; font-size: 0.82rem; margin-top: 4px;">Create thorough intake forms tailored to your practice</div>
+              </div>
+              <span style="color: #5a6480; font-size: 0.75rem; flex-shrink: 0; margin-left: 12px; margin-top: 2px;">▼</span>
+            </summary>
+            <div style="padding: 0 16px 16px 16px; border-top: 1px solid #1e2940;">
+              <pre style="background: #050810; border: 1px solid #1e2940; border-radius: 6px; padding: 16px; margin: 12px 0 0 0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; color: #a8b2d1; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; overflow-x: auto;"><span style="color: #5a6480;">Context:</span>
+I run a [PRACTICE TYPE — e.g., "massage therapy practice," "functional fitness gym," "mental health counseling office"] called [PRACTICE NAME]. I see [VOLUME] new clients per [PERIOD]. My current intake process is [DESCRIBE CURRENT — e.g., "a paper form they fill out in the waiting room," "nothing formal"]. I need to collect [REGULATORY REQUIREMENTS — e.g., "health history, informed consent, liability waiver"] and I want to understand [CLINICAL GOALS — e.g., "their pain points, movement history, goals, contraindications"] before the first session.
+
+<span style="color: #5a6480;">Role:</span>
+You are a practice management consultant for health and wellness businesses who designs intake experiences that are thorough, compliant, and welcoming — not clinical and cold.
+
+<span style="color: #5a6480;">Action:</span>
+Create a digital intake form with these sections:
+
+1. Welcome & basics — set the tone, collect contact info, emergency contact, how they heard about you
+2. Health/wellness history — [RELEVANT HISTORY QUESTIONS FOR YOUR PRACTICE TYPE — e.g., "current medications, past surgeries, chronic conditions, allergies"]
+3. Current situation & goals — what brought them in, what they've tried, what outcome they want
+4. Lifestyle factors — [RELEVANT FACTORS — e.g., "activity level, sleep, stress, occupation demands"]
+5. Consent & policies — [YOUR POLICIES — e.g., "cancellation policy, photo consent, HIPAA acknowledgment, liability waiver language"]
+
+Include smart conditional logic: e.g., "If pregnant → show pregnancy-specific questions. If under 18 → require guardian info."
+
+<span style="color: #5a6480;">Format:</span>
+Numbered questions grouped by section. Note field type for each (text, dropdown, checkbox, date, signature, scale 1-10). Mark required vs. optional fields. Include the welcome message at the top and the confirmation message at the end. Total should be completable in under 10 minutes.
+
+<span style="color: #5a6480;">Target:</span>
+The intake form should give you everything you need to run a productive first session with zero in-room paperwork. Clients should feel cared for — not processed. Completion rate should be 95%+ when sent 24 hours before the appointment.</pre>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align: center; color: #5a6480; font-size: 0.85rem; margin-top: 32px; line-height: 1.6;">Don't see your industry? Every prompt in this playbook can be adapted.<br>Use the CRAFT framework from Chapter 1 to customize any template for your specific business.</p>
+
+  </div>
+</section>
+
   <!-- 90-Day Roadmap -->
   <section id="roadmap">
     <div class="container">
-      <span class="section-label">Chapter 3</span>
+      <span class="section-label">Chapter 4</span>
       <h2 class="section-title">90-Day Implementation Roadmap</h2>
       <p class="section-subtitle">A structured path from AI-curious to AI-operational. Check off tasks as you complete them—your progress is saved.</p>
 
@@ -1453,7 +3045,7 @@ Tone: Thoughtful and rigorous. Help me think, don't just give me an answer.</div
   <!-- ROI Tracker -->
   <section id="roi">
     <div class="container">
-      <span class="section-label">Chapter 4</span>
+      <span class="section-label">Chapter 5</span>
       <h2 class="section-title">ROI Tracker</h2>
       <p class="section-subtitle">Track the value AI creates for your business. Update these numbers weekly to see your cumulative impact.</p>
 
