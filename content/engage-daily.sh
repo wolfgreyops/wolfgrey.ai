@@ -115,7 +115,7 @@ trap "rm -f $CLAUDE_OUTPUT" EXIT
     --model haiku \
     --tools "" \
     --max-turns 3 \
-    --max-budget-usd 0.10 > "$CLAUDE_OUTPUT" 2>&1 || {
+    --max-budget-usd 0.10 > "$CLAUDE_OUTPUT" 2>/dev/null || {
     log "ERROR: Claude CLI failed"
     cat "$CLAUDE_OUTPUT"
     exit 1
@@ -158,7 +158,10 @@ if match:
 print("[]")
 ' <<< "$RAW_RESULT")
 
-reply_count=$(echo "$REPLIES" | jq -r 'length' 2>/dev/null | head -1 | tr -d '[:space:]') || reply_count=0
+# Merge arrays (Claude sometimes outputs two), dedup, cap at requested count
+REPLIES=$(echo "$REPLIES" | jq -sc '[.[][] | {target, topic, reply, style}] | unique_by(.reply) | .[:'"$REPLY_COUNT"']')
+
+reply_count=$(echo "$REPLIES" | jq 'length') || reply_count=0
 
 if [ "$reply_count" -eq 0 ]; then
     log "ERROR: No replies generated"
@@ -166,6 +169,7 @@ if [ "$reply_count" -eq 0 ]; then
 fi
 
 log "Generated $reply_count replies"
+
 
 # ─── Step 3: Write output file ───────────────────────────────────────────────
 
