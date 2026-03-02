@@ -16,6 +16,11 @@ LOG_DIR="$SCRIPT_DIR/logs"
 TODAY=$(date +%Y-%m-%d)
 OUTPUT_FILE="$SCRIPT_DIR/engage/${TODAY}-replies.md"
 
+# ─── Email Config ────────────────────────────────────────────────────────────
+RESEND_API_KEY="re_NK7tKfZ8_Njse9ySf9JsbsyE6FJuWGPMH"
+EMAIL_FROM="engage@mail.wolfgrey.ai"
+EMAIL_TO="hey@wolfgrey.ai"
+
 mkdir -p "$LOG_DIR" "$SCRIPT_DIR/engage"
 
 log() {
@@ -192,6 +197,41 @@ cat >> "$OUTPUT_FILE" << FOOTER
 - If they reply back, continue the conversation — that's where relationships form
 - Spend 10 min total. Don't doom-scroll.
 FOOTER
+
+# ─── Step 4: Email the replies ────────────────────────────────────────────────
+
+log "Sending email to $EMAIL_TO..."
+
+EMAIL_HTML=$(echo "$REPLIES" | jq -r '
+  "<h2 style=\"font-family:monospace;color:#333\">wolfgrey Daily Replies — '"$TODAY"'</h2><p style=\"color:#666;font-size:14px\">Find each target'"'"'s recent post, hit reply, paste your response. ~10 min.</p><hr>" +
+  ([.[] |
+    "<div style=\"margin:20px 0;padding:16px;background:#f8f8f8;border-left:3px solid #ff4d4d;font-family:sans-serif\">" +
+    "<strong>" + .target + "</strong> <span style=\"color:#888\">(" + .style + ")</span><br>" +
+    "<span style=\"color:#666;font-size:13px\">Re: " + .topic + "</span>" +
+    "<p style=\"font-size:15px;line-height:1.5;margin:10px 0 0\">" + .reply + "</p>" +
+    "</div>"
+  ] | join("")) +
+  "<hr><p style=\"color:#888;font-size:13px\"><strong>Tips:</strong> Post between 8-11am or 12-2pm ET. Like 2-3 of their other posts. If they reply back, keep the conversation going.</p>"
+')
+
+EMAIL_PAYLOAD=$(jq -nc \
+  --arg from "$EMAIL_FROM" \
+  --arg to "$EMAIL_TO" \
+  --arg subject "Your X replies for $TODAY" \
+  --arg html "$EMAIL_HTML" \
+  '{from: $from, to: [$to], subject: $subject, html: $html}')
+
+email_response=$(curl -s -w "\n%{http_code}" -X POST "https://api.resend.com/emails" \
+  -H "Authorization: Bearer $RESEND_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "$EMAIL_PAYLOAD" 2>&1)
+
+email_code=$(echo "$email_response" | tail -n1)
+if [ "$email_code" = "200" ] || [ "$email_code" = "201" ]; then
+    log "Email sent to $EMAIL_TO"
+else
+    log "WARNING: Email failed ($email_code)"
+fi
 
 log "=== Done ==="
 log "Review replies: $OUTPUT_FILE"
