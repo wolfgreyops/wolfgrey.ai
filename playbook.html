@@ -8,9 +8,9 @@
   <meta name="description" content="The complete AI implementation system for small business. CRAFT framework, 40+ templates, and 90-day roadmap.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --accent: #ff4d4d;
@@ -58,9 +58,9 @@
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Clash Display', sans-serif;
+      font-family: 'Source Serif 4', sans-serif;
       line-height: 1.2;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -81,7 +81,7 @@
       z-index: 100;
     }
     .logo {
-      font-family: 'Clash Display', sans-serif;
+      font-family: 'Source Serif 4', sans-serif;
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--white);
@@ -131,12 +131,13 @@
       z-index: 1;
     }
     .hero-badge {
+      font-family: 'Doto', sans-serif;
       display: inline-block;
       padding: 6px 16px;
       background: var(--gray-800);
       border: 1px solid var(--accent);
       border-radius: 100px;
-      font-size: 0.75rem;
+      font-size: 16px;
       font-weight: 600;
       color: var(--accent);
       margin-bottom: 24px;
@@ -221,8 +222,9 @@
       margin: 0 auto;
     }
     .section-label {
+      font-family: 'Doto', sans-serif;
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 16px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -266,7 +268,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Clash Display', sans-serif;
+      font-family: 'Source Serif 4', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--white);
@@ -556,7 +558,7 @@
       border-radius: 12px;
     }
     .roi-result-value {
-      font-family: 'Clash Display', sans-serif;
+      font-family: 'Source Serif 4', sans-serif;
       font-size: 2rem;
       font-weight: 600;
       color: var(--accent2);
@@ -662,7 +664,7 @@
       border-top: 1px solid var(--gray-800);
     }
     .footer-logo {
-      font-family: 'Clash Display', sans-serif;
+      font-family: 'Source Serif 4', sans-serif;
       font-size: 1rem;
       font-weight: 600;
       color: var(--white);
@@ -817,7 +819,7 @@
       </div>
 
       <div style="margin-top: 64px;">
-        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.75rem; color: #f0f4ff; margin-bottom: 12px;">Common Prompting Mistakes</h3>
+        <h3 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.75rem; color: #f0f4ff; margin-bottom: 12px;">Common Prompting Mistakes</h3>
         <p style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #8892b0; max-width: 700px; margin-bottom: 40px; line-height: 1.6;">Most prompts fail before the AI even starts. Here are three patterns we see constantly — and how applying the CRAFT framework fixes each one.</p>
 
         <!-- Example 1: Vague → CRAFT-enhanced -->
@@ -876,7 +878,7 @@
       </div>
 
       <div style="margin-top: 64px;">
-        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.75rem; color: #f0f4ff; margin-bottom: 12px;">Prompt Chaining</h3>
+        <h3 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.75rem; color: #f0f4ff; margin-bottom: 12px;">Prompt Chaining</h3>
         <p style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #8892b0; max-width: 700px; margin-bottom: 40px; line-height: 1.6;">The real power of prompting isn't a single shot — it's building a chain. Each prompt feeds its output into the next, turning raw information into a finished deliverable in steps. Think of it like an assembly line for thinking.</p>
 
         <div style="max-width: 680px; margin: 0 auto;">
@@ -884,10 +886,10 @@
           <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 28px 24px; position: relative;">
             <div style="display: flex; align-items: flex-start; gap: 16px;">
               <div style="flex-shrink: 0; width: 40px; height: 40px; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span style="font-family: 'Clash Display', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">1</span>
+                <span style="font-family: 'Source Serif 4', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">1</span>
               </div>
               <div style="flex: 1;">
-                <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Analyze Raw Feedback</h4>
+                <h4 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Analyze Raw Feedback</h4>
                 <div style="background: #0a0f1a; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
                   <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; color: #a8b2d1; line-height: 1.7; margin: 0;"><span style="color: #5a6480;">Prompt:</span> Here are 47 customer support tickets from the last 30 days. Categorize each into themes (e.g., billing, onboarding, feature request, bug). For each category, note the frequency and average sentiment. Output as a structured table.</p>
                 </div>
@@ -909,10 +911,10 @@
           <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 28px 24px; position: relative;">
             <div style="display: flex; align-items: flex-start; gap: 16px;">
               <div style="flex-shrink: 0; width: 40px; height: 40px; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span style="font-family: 'Clash Display', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">2</span>
+                <span style="font-family: 'Source Serif 4', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">2</span>
               </div>
               <div style="flex: 1;">
-                <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Prioritize Action Items</h4>
+                <h4 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Prioritize Action Items</h4>
                 <div style="background: #0a0f1a; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
                   <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; color: #a8b2d1; line-height: 1.7; margin: 0;"><span style="color: #5a6480;">Prompt:</span> Using the categorized feedback below, identify the top 5 issues by business impact. For each, suggest a concrete fix. Score each on effort (1-5) vs. impact (1-5) and rank by best ROI. Format as a prioritized action list with owner suggestions for a 10-person team.</p>
                 </div>
@@ -934,10 +936,10 @@
           <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 28px 24px; position: relative;">
             <div style="display: flex; align-items: flex-start; gap: 16px;">
               <div style="flex-shrink: 0; width: 40px; height: 40px; background: rgba(0, 229, 204, 0.1); border: 1px solid rgba(0, 229, 204, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span style="font-family: 'Clash Display', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">3</span>
+                <span style="font-family: 'Source Serif 4', sans-serif; font-size: 1rem; font-weight: 700; color: #00e5cc;">3</span>
               </div>
               <div style="flex: 1;">
-                <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Build Implementation Timeline</h4>
+                <h4 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.1rem; color: #f0f4ff; margin: 0 0 8px 0;">Build Implementation Timeline</h4>
                 <div style="background: #0a0f1a; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
                   <p style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; color: #a8b2d1; line-height: 1.7; margin: 0;"><span style="color: #5a6480;">Prompt:</span> Take the prioritized action items below and create a 6-week implementation plan. Week 1-2: quick wins (effort ≤ 2). Week 3-4: medium projects. Week 5-6: larger initiatives. Include milestones, dependencies, and a "done" definition for each item. Format as a week-by-week table I can paste into a project tracker.</p>
                 </div>
@@ -2304,7 +2306,7 @@ Tone: Match brand voice. Brief for acknowledgments, detailed for sales. Warm, sp
       <!-- Home Services -->
       <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
         <div style="font-size: 36px; margin-bottom: 16px;">🔧</div>
-        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Home Services</h3>
+        <h3 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Home Services</h3>
         <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Landscaping, HVAC, Cleaning, Plumbing</p>
 
         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -2446,7 +2448,7 @@ Achieve a 25%+ review conversion rate from this sequence. The messages should fe
       <!-- Professional Services -->
       <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
         <div style="font-size: 36px; margin-bottom: 16px;">⚖️</div>
-        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Professional Services</h3>
+        <h3 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Professional Services</h3>
         <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Accounting, Legal, Consulting, Coaching</p>
 
         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -2595,7 +2597,7 @@ Generate 2-3 warm referral introductions per quarter from your existing client b
       <!-- Local Retail & E-commerce -->
       <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
         <div style="font-size: 36px; margin-bottom: 16px;">🛍️</div>
-        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Local Retail & E-commerce</h3>
+        <h3 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Local Retail & E-commerce</h3>
         <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Boutiques, Shops, Online Stores, DTC Brands</p>
 
         <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -2744,7 +2746,7 @@ VIP email: 40%+ open rate, 8%+ click rate. Lapsed email: 25%+ open rate, 3%+ cli
       <!-- Health & Wellness -->
       <div style="background: #111827; border: 1px solid #1e2940; border-radius: 12px; padding: 32px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
         <div style="font-size: 36px; margin-bottom: 16px;">🏥</div>
-        <h3 style="font-family: 'Clash Display', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Health & Wellness</h3>
+        <h3 style="font-family: 'Source Serif 4', sans-serif; font-size: 1.35rem; color: #f0f4ff; margin: 0 0 8px 0;">Health & Wellness</h3>
         <p style="font-size: 0.85rem; color: #5a6480; margin: 0 0 24px 0;">For: Gyms, Clinics, Therapists, Spas</p>
 
         <div style="display: flex; flex-direction: column; gap: 12px;">

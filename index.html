@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --accent: #ff4d4d;
@@ -70,7 +70,7 @@
       }
     }
 
-    h1, h2, h3, h4, h5 { font-family: 'Clash Display', 'Inter', sans-serif; line-height: 1.15; font-weight: 500; }
+    h1, h2, h3, h4, h5 { font-family: 'Source Serif 4', 'Inter', sans-serif; line-height: 1.15; font-weight: 400; }
     a { color: inherit; text-decoration: none; }
 
     /* ── NAV ── */
@@ -266,12 +266,13 @@
     }
     .hero-content { max-width: 800px; position: relative; }
     .hero-badge {
+      font-family: 'Doto', sans-serif;
       display: inline-block;
       padding: 6px 16px;
       background: var(--gray-800);
       border: 1px solid var(--gray-700);
       border-radius: 100px;
-      font-size: 0.8rem;
+      font-size: 16px;
       font-weight: 500;
       color: #00e5cc;
       margin-bottom: 32px;
@@ -333,7 +334,8 @@
     section { padding: 120px 24px; }
     .container { max-width: 1200px; margin: 0 auto; }
     .section-label {
-      font-size: 0.8rem;
+      font-family: 'Doto', sans-serif;
+      font-size: 16px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -751,7 +753,7 @@
       text-align: left;
     }
     .use-stat-number {
-      font-family: 'Clash Display', 'Inter', sans-serif;
+      font-family: 'Source Serif 4', 'Inter', sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--accent2);
@@ -1429,7 +1431,7 @@
     }
     .tetris-game-over.active { display: block; }
     .tetris-game-over h3 {
-      font-family: 'Clash Display', sans-serif;
+      font-family: 'Source Serif 4', sans-serif;
       font-size: 1.5rem;
       color: var(--accent);
       margin-bottom: 8px;
@@ -1457,7 +1459,7 @@
       background: var(--gray-800);
     }
     .ai-stat-number {
-      font-family: 'Clash Display', 'Inter', sans-serif;
+      font-family: 'Source Serif 4', 'Inter', sans-serif;
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--accent);
@@ -1550,7 +1552,7 @@
     }
     @media (max-width: 480px) {
       .hero p { font-size: 0.95rem; }
-      .hero-badge { font-size: 0.7rem; padding: 4px 12px; }
+      .hero-badge { font-size: 16px; padding: 4px 12px; }
       section { padding: 60px 16px; }
       .section-subtitle { font-size: 0.9rem; }
       .service-card { padding: 28px 20px; }
@@ -1747,7 +1749,7 @@
   <!-- AGENT HIERARCHY -->
   <section id="how-it-works" style="padding: 100px 24px; background: var(--gray-900);">
     <style>
-      @keyframes flowDown {
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }      @keyframes flowDown {
         0% { offset-distance: 0%; opacity: 0; }
         10% { opacity: 1; }
         90% { opacity: 1; }
@@ -1821,7 +1823,7 @@
             <circle cx="400" cy="48" r="14" fill="none" stroke="var(--gray-400)" stroke-width="2"/>
             <circle cx="400" cy="44" r="5" fill="var(--gray-400)"/>
             <path d="M388 60 L400 68 L412 60" stroke="var(--gray-400)" stroke-width="2" fill="none"/>
-            <text x="400" y="82" text-anchor="middle" fill="var(--white)" font-family="Clash Display, sans-serif" font-size="14" font-weight="500">You (Operator)</text>
+            <text x="400" y="82" text-anchor="middle" fill="var(--white)" font-family="Source Serif 4, sans-serif" font-size="14" font-weight="500">You (Operator)</text>
           </g>
 
           <!-- Main Claude (Orchestrator) -->
@@ -1830,8 +1832,8 @@
             <rect class="orchestrator-glow" x="300" y="155" width="200" height="100" rx="16" fill="url(#orchestratorGlow)" style="mix-blend-mode: screen;"/>
             <!-- Claude logo simplified -->
             <circle cx="400" cy="190" r="18" fill="none" stroke="var(--accent2)" stroke-width="2"/>
-            <text x="400" y="196" text-anchor="middle" fill="var(--accent2)" font-family="Clash Display, sans-serif" font-size="18" font-weight="600">AI</text>
-            <text x="400" y="235" text-anchor="middle" fill="var(--white)" font-family="Clash Display, sans-serif" font-size="15" font-weight="500">Claude Orchestrator</text>
+            <text x="400" y="196" text-anchor="middle" fill="var(--accent2)" font-family="Source Serif 4, sans-serif" font-size="18" font-weight="600">AI</text>
+            <text x="400" y="235" text-anchor="middle" fill="var(--white)" font-family="Source Serif 4, sans-serif" font-size="15" font-weight="500">Claude Orchestrator</text>
           </g>
 
           <!-- Dispatch hub -->
@@ -1986,18 +1988,18 @@
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px;">
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent2);">
-          <div style="font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">5</div>
-          <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1rem; margin-bottom: 8px;">Copy-Paste Steps</h4>
+          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">5</div>
+          <h4 style="font-family: 'Source Serif 4', sans-serif; font-size: 1rem; margin-bottom: 8px;">Copy-Paste Steps</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">One install command. One verification. One launch. No coding experience or dependencies required.</p>
         </div>
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent);">
-          <div style="font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">10</div>
-          <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1rem; margin-bottom: 8px;">Security Best Practices</h4>
+          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">10</div>
+          <h4 style="font-family: 'Source Serif 4', sans-serif; font-size: 1rem; margin-bottom: 8px;">Security Best Practices</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">API key safety, file permissions, project isolation, and more. Use Claude Code responsibly from day one.</p>
         </div>
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent2);">
-          <div style="font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">$0</div>
-          <h4 style="font-family: 'Clash Display', sans-serif; font-size: 1rem; margin-bottom: 8px;">Completely Free</h4>
+          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">$0</div>
+          <h4 style="font-family: 'Source Serif 4', sans-serif; font-size: 1rem; margin-bottom: 8px;">Completely Free</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">If you have a Claude Pro subscription, Claude Code is already included. This guide gets you from zero to running.</p>
         </div>
       </div>

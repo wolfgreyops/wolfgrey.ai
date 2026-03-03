@@ -13,7 +13,7 @@ wolfgrey is a solo operator plus AI agents — lean, fast, built on the same too
 
 ### Aesthetic Direction
 - **Dark, technical, high-contrast** — near-black blue-tinted backgrounds (#050810) with vivid dual-accent system: red (#ff4d4d) for action/CTAs, teal (#00e5cc) for data/results
-- **Typography:** Clash Display (geometric, editorial weight) for headings, Satoshi (neutral, readable) for body, SF Mono/Fira Code for terminal UI
+- **Typography:** Source Serif 4 Light (variable serif) for headings, Satoshi (neutral, readable) for body, Doto (Google Font) for section labels, SF Mono/Fira Code for terminal UI
 - **Signature details:** Vertical page rail lines, terminal/code UI patterns, animated gradient hero text, card hover lifts with accent top-lines
 - **No stock photos** — flat dark backgrounds with subtle borders and glow effects
 
@@ -41,7 +41,7 @@ wolfgrey is a solo operator plus AI agents — lean, fast, built on the same too
 --gray-300:     #a8b2d1      (secondary text, nav links)
 --white:        #f0f4ff      (primary text — warm white, blue-tinted)
 
-Fonts: Clash Display (headings), Satoshi (body), SF Mono/Fira Code (code)
+Fonts: Source Serif 4 Light (headings), Satoshi (body), Doto (section labels), SF Mono/Fira Code (code)
 Spacing: 24px base, 32-40px card padding, 120px section padding
 Border-radius: 12px (cards), 8px (buttons), 6px (small elements)
 ```
