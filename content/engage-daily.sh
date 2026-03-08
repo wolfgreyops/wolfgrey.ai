@@ -31,19 +31,26 @@ log() {
 # Edit this list: accounts in your niche worth engaging with.
 # Mix of: AI builders, small biz voices, Claude/Anthropic community, solopreneurs
 TARGETS=(
-    "anthropaborras"       # Anthropic community
+    # Core AI / Anthropic orbit
+    "anthropic"            # Anthropic official
     "alexalbert__"         # Anthropic dev rel
-    "nickscamara_"         # AI builder
     "swyx"                 # AI engineering
-    "levelsio"             # solopreneur / indie hacker
+    "nickscamara_"         # AI builder
     "marclouv"             # AI tools
-    "danshipper"           # AI + business writing
+    # Small biz / solopreneur
+    "levelsio"             # solopreneur / indie hacker
     "gregisenberg"         # startup / small biz
-    "dhaborovsky"          # AI automation
     "thesamparr"           # small biz / hustle
+    "danshipper"           # AI + business writing
+    # Community-active accounts (high engagement in Build in Public / AI communities)
+    "dhaborras"            # AI automation
+    "nathanbarry"          # creator economy
+    "taborsi"              # build in public
+    "jaabordi"             # AI for business
+    "caborlane"            # small biz tech
 )
 
-REPLY_COUNT=5  # How many replies to draft
+REPLY_COUNT=8  # How many replies to draft (scaled for growth strategy)
 
 log "=== Daily Engagement Script ==="
 log "Targets: ${#TARGETS[@]} accounts"
@@ -211,7 +218,15 @@ EMAIL_HTML=$(echo "$REPLIES" | jq -r '
     "<p style=\"font-size:15px;line-height:1.5;margin:10px 0 0\">" + .reply + "</p>" +
     "</div>"
   ] | join("")) +
-  "<hr><p style=\"color:#888;font-size:13px\"><strong>Tips:</strong> Post between 8-11am or 12-2pm ET. Like 2-3 of their other posts. If they reply back, keep the conversation going.</p>"
+  "<hr><div style=\"background:#f0f8ff;padding:16px;border-radius:8px;margin:16px 0;font-family:sans-serif\">" +
+  "<strong style=\"color:#333\">Daily Engagement Checklist</strong>" +
+  "<ol style=\"color:#555;font-size:14px;line-height:1.8;margin:8px 0 0\">" +
+  "<li>Reply to all comments on your posts</li>" +
+  "<li>Post 5+ substantive replies on larger accounts (use drafts above)</li>" +
+  "<li>Send 2-3 personalized DMs to new followers</li>" +
+  "<li>Post to X communities (Build in Public, AI/Tech, Small Business)</li>" +
+  "</ol></div>" +
+  "<p style=\"color:#888;font-size:13px\"><strong>Timing:</strong> Post between 8-11am or 12-2pm ET. Like 2-3 of their other posts. If they reply back, keep the conversation going.</p>"
 ')
 
 EMAIL_PAYLOAD=$(jq -nc \
