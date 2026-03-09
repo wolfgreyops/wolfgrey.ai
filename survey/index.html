@@ -291,6 +291,49 @@
       line-height: 1.5;
     }
 
+    /* Text / Email inputs */
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      padding: 12px 18px;
+      color: var(--white);
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 3px rgba(0,229,204,0.08);
+    }
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder {
+      color: var(--gray-600);
+    }
+
+    .contact-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .contact-fields .field-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray-300);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 520px) {
+      .contact-fields { grid-template-columns: 1fr; }
+    }
+
     /* Textarea */
     textarea {
       width: 100%;
@@ -600,6 +643,18 @@
       </p>
     </div>
 
+    <!-- CONTACT FIELDS -->
+    <div class="contact-fields">
+      <div class="field-group">
+        <label for="contact-name">Your name</label>
+        <input type="text" id="contact-name" name="contact_name" placeholder="Jane Smith" autocomplete="name">
+      </div>
+      <div class="field-group">
+        <label for="contact-email">Email address</label>
+        <input type="email" id="contact-email" name="contact_email" placeholder="jane@company.com" autocomplete="email">
+      </div>
+    </div>
+
     <!-- PROGRESS -->
     <div class="progress-wrap" id="survey-progress">
       <div class="progress-steps">
@@ -634,7 +689,7 @@
 
       <!-- Hidden fields for Formspree -->
       <input type="hidden" name="_subject" value="New Automation Discovery Survey Submission">
-      <input type="hidden" name="_replyto" value="">
+      <input type="hidden" name="_replyto" id="replyto-field" value="">
 
       <!-- ── SECTION 1: Where Time Goes ── -->
       <div class="survey-section active" data-section="0">
@@ -1043,6 +1098,11 @@
       });
     });
 
+    // Sync email to _replyto so Formspree reply goes to client
+    document.getElementById('contact-email').addEventListener('input', function() {
+      document.getElementById('replyto-field').value = this.value;
+    });
+
     // Handle form submission → show success screen
     document.getElementById('survey-form').addEventListener('submit', function(e) {
       const submitBtn = document.getElementById('submit-btn');
@@ -1080,6 +1140,7 @@
       document.getElementById('survey-intro').style.display = 'none';
       document.getElementById('survey-progress').style.display = 'none';
       document.getElementById('survey-form').style.display = 'none';
+      document.querySelector('.contact-fields').style.display = 'none';
       document.getElementById('success-screen').classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
