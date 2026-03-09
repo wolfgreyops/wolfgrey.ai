@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation Discovery Survey — wolfgrey</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Source Serif 4';
+      font-style: normal;
+      font-weight: 200 900;
+      font-display: swap;
+      src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Source Serif 4';
+      font-style: italic;
+      font-weight: 200 900;
+      font-display: swap;
+      src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype');
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent:       #ff4d4d;
+      --accent2:      #00e5cc;
+      --dark:         #050810;
+      --gray-900:     #0a0f1a;
+      --gray-800:     #111827;
+      --gray-700:     #1e2940;
+      --gray-600:     #5a6480;
+      --gray-400:     #8892b0;
+      --gray-300:     #a8b2d1;
+      --white:        #f0f4ff;
+      --line-color:   rgba(255,255,255,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Satoshi', -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* Vertical rail lines */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: calc(50% - 560px);
+      width: 1120px;
+      height: 100%;
+      border-left: 1px solid var(--line-color);
+      border-right: 1px solid var(--line-color);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 1168px) {
+      body::before { left: 24px; right: 24px; width: auto; }
+    }
+    @media (max-width: 680px) {
+      body::before { display: none; }
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(5,8,16,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-link img {
+      height: 28px;
+      width: auto;
+    }
+    .header-label {
+      font-family: 'Doto', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--accent2);
+      text-transform: uppercase;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 32px 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      margin-bottom: 56px;
+    }
+    .intro-label {
+      font-family: 'Doto', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--accent2);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .intro h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .intro-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .intro-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .intro-meta-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent2);
+      flex-shrink: 0;
+    }
+    .intro-meta-item span {
+      font-size: 0.875rem;
+      color: var(--gray-400);
+    }
+    .intro-note {
+      margin-top: 24px;
+      padding: 20px 24px;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-left: 3px solid var(--accent2);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      margin-bottom: 48px;
+    }
+    .progress-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .step-bar {
+      height: 3px;
+      border-radius: 2px;
+      background: var(--gray-700);
+      transition: background 0.4s ease;
+    }
+    .progress-step.active .step-bar,
+    .progress-step.done .step-bar {
+      background: var(--accent2);
+    }
+    .step-label {
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      font-weight: 500;
+      transition: color 0.3s;
+      letter-spacing: 0.02em;
+    }
+    .progress-step.active .step-label {
+      color: var(--accent2);
+    }
+    .progress-step.done .step-label {
+      color: var(--gray-400);
+    }
+    .progress-counter {
+      font-family: 'Doto', monospace;
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      letter-spacing: 0.1em;
+    }
+    .progress-counter span {
+      color: var(--accent2);
+    }
+
+    /* ── SECTIONS ── */
+    .survey-section {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+    .survey-section.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .section-num {
+      font-family: 'Doto', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .section-header h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    /* ── QUESTIONS ── */
+    .question-group {
+      margin-bottom: 44px;
+    }
+    .question-group:last-of-type {
+      margin-bottom: 0;
+    }
+    .question-label {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .q-num {
+      font-family: 'Doto', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .question-label label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+      cursor: pointer;
+    }
+    .question-hint {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      margin-bottom: 16px;
+      margin-left: 36px;
+      line-height: 1.5;
+    }
+
+    /* Textarea */
+    textarea {
+      width: 100%;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    textarea:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 3px rgba(0,229,204,0.08);
+    }
+    textarea::placeholder {
+      color: var(--gray-600);
+    }
+
+    /* Checkboxes */
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .check-item:hover {
+      border-color: var(--gray-600);
+      background: var(--gray-800);
+    }
+    .check-item input[type="checkbox"],
+    .check-item input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--gray-700);
+      border-radius: 4px;
+      background: var(--dark);
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .check-item input[type="radio"] {
+      border-radius: 50%;
+    }
+    .check-item input[type="checkbox"]:checked,
+    .check-item input[type="radio"]:checked {
+      background: var(--accent2);
+      border-color: var(--accent2);
+    }
+    .check-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 6px;
+      height: 10px;
+      border: 2px solid #050810;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .check-item input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #050810;
+    }
+    .check-item.checked {
+      border-color: var(--accent2);
+      background: rgba(0,229,204,0.04);
+    }
+    .check-item-text {
+      font-size: 0.9rem;
+      color: var(--gray-300);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Other textarea */
+    .other-field {
+      margin-top: 8px;
+      display: none;
+    }
+    .other-field.visible {
+      display: block;
+    }
+    .other-field textarea {
+      min-height: 64px;
+    }
+
+    /* ── NAVIGATION ── */
+    .section-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-700);
+      gap: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      outline: none;
+      text-decoration: none;
+    }
+    .btn-prev {
+      background: transparent;
+      color: var(--gray-400);
+      border: 1px solid var(--gray-700);
+    }
+    .btn-prev:hover {
+      border-color: var(--gray-600);
+      color: var(--white);
+    }
+    .btn-prev svg { transform: rotate(180deg); }
+
+    .btn-next {
+      background: var(--accent);
+      color: #fff;
+      margin-left: auto;
+    }
+    .btn-next:hover {
+      background: #e63946;
+      transform: translateY(-1px);
+    }
+    .btn-submit {
+      background: var(--accent2);
+      color: #050810;
+      font-weight: 700;
+      margin-left: auto;
+    }
+    .btn-submit:hover {
+      background: #00ccb4;
+      transform: translateY(-1px);
+    }
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 80px 0;
+      animation: fadeIn 0.5s ease;
+    }
+    .success-screen.active {
+      display: block;
+    }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(0,229,204,0.1);
+      border: 1px solid rgba(0,229,204,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+    }
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--accent2);
+    }
+    .success-screen h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .success-screen p {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      max-width: 460px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+    .success-details {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .success-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--gray-300);
+    }
+    .success-tag .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent2);
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--gray-700);
+      position: relative;
+      z-index: 1;
+    }
+    .page-footer p {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+    .page-footer a {
+      color: var(--gray-400);
+      text-decoration: none;
+    }
+    .page-footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      main { padding: 40px 20px 80px; }
+      .header-inner { padding: 0 20px; }
+      .intro h1 { font-size: 1.75rem; }
+      .progress-steps { gap: 4px; }
+      .step-label { font-size: 0.65rem; }
+      .section-nav { flex-wrap: wrap; }
+      .btn-next, .btn-submit { width: 100%; justify-content: center; }
+      .btn-prev { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="https://wolfgrey.ai" class="logo-link">
+        <img src="/logo-white.svg" alt="wolfgrey" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+        <span style="display:none; font-weight:700; font-size:1.1rem; letter-spacing:-0.5px;">wolfgrey</span>
+      </a>
+      <span class="header-label">Automation Discovery</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- INTRO -->
+    <div class="intro" id="survey-intro">
+      <span class="intro-label">Pre-Session Survey</span>
+      <h1>10 Questions to Find What We Can Automate First</h1>
+      <div class="intro-meta">
+        <div class="intro-meta-item">
+          <div class="dot"></div>
+          <span>15–20 min to complete</span>
+        </div>
+        <div class="intro-meta-item">
+          <div class="dot"></div>
+          <span>10 questions across 4 sections</span>
+        </div>
+        <div class="intro-meta-item">
+          <div class="dot"></div>
+          <span>Results: a ranked automation roadmap</span>
+        </div>
+      </div>
+      <p class="intro-note">
+        Complete this before your wolfgrey strategy session. There are no wrong answers — honest, specific responses lead to better automation recommendations. You don't need to know anything about AI or technology. Just describe your business in plain language.
+      </p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap" id="survey-progress">
+      <div class="progress-steps">
+        <div class="progress-step active" data-step="0">
+          <div class="step-bar"></div>
+          <span class="step-label">Where Time Goes</span>
+        </div>
+        <div class="progress-step" data-step="1">
+          <div class="step-bar"></div>
+          <span class="step-label">Where Things Break</span>
+        </div>
+        <div class="progress-step" data-step="2">
+          <div class="step-bar"></div>
+          <span class="step-label">Where You Are</span>
+        </div>
+        <div class="progress-step" data-step="3">
+          <div class="step-bar"></div>
+          <span class="step-label">What Success Looks Like</span>
+        </div>
+      </div>
+      <div class="progress-counter">Section <span id="current-step">1</span> of 4</div>
+    </div>
+
+    <!-- FORM -->
+    <!--
+      SETUP: Replace xlgpgznw below with your Formspree form ID.
+      1. Go to https://formspree.io and create a free account
+      2. Create a new form and copy the form ID (looks like: xpzvwqab)
+      3. Replace xlgpgznw below: action="https://formspree.io/f/xlgpgznw"
+    -->
+    <form id="survey-form" action="https://formspree.io/f/xlgpgznw" method="POST" novalidate>
+
+      <!-- Hidden fields for Formspree -->
+      <input type="hidden" name="_subject" value="New Automation Discovery Survey Submission">
+      <input type="hidden" name="_replyto" value="">
+
+      <!-- ── SECTION 1: Where Time Goes ── -->
+      <div class="survey-section active" data-section="0">
+        <div class="section-header">
+          <span class="section-num">Section 01 — 3 Questions</span>
+          <h2>Where Time Goes</h2>
+        </div>
+
+        <!-- Q1 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q1</span>
+            <label for="q1">What are the top 3 tasks your team does most often — and how long do each take?</label>
+          </div>
+          <p class="question-hint">Think about daily or weekly recurring work. Even 15 minutes per day adds up fast.</p>
+          <textarea id="q1" name="q1_recurring_tasks" rows="5" placeholder="e.g. Responding to client emails (30 min/day), creating weekly reports (2 hrs/week), scheduling appointments (45 min/day)…"></textarea>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q2</span>
+            <label>Which of these best describes your biggest time drains right now?</label>
+          </div>
+          <p class="question-hint">Select all that apply.</p>
+          <div class="checkbox-group" id="q2-group">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q2_time_drains[]" value="copying_moving_data">
+              <span class="check-item-text">Manually copying or moving data between tools</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q2_time_drains[]" value="repetitive_emails">
+              <span class="check-item-text">Writing the same types of emails or messages repeatedly</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q2_time_drains[]" value="scheduling">
+              <span class="check-item-text">Scheduling, rescheduling, or coordinating meetings</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q2_time_drains[]" value="reports_summaries">
+              <span class="check-item-text">Creating reports, summaries, or status updates</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q2_time_drains[]" value="answering_same_questions">
+              <span class="check-item-text">Answering the same client or internal questions repeatedly</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q2_time_drains[]" value="follow_ups">
+              <span class="check-item-text">Manually following up on leads, invoices, or tasks</span>
+            </label>
+            <label class="check-item" id="q2-other-check" onclick="toggleCheck(this); toggleOther('q2-other-check', 'q2-other-field')">
+              <input type="checkbox" name="q2_time_drains[]" value="other">
+              <span class="check-item-text">Other</span>
+            </label>
+          </div>
+          <div class="other-field" id="q2-other-field">
+            <textarea name="q2_time_drains_other" rows="2" placeholder="Describe your other time drain…"></textarea>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q3</span>
+            <label for="q3">How many tools or platforms does your team use on a regular basis?</label>
+          </div>
+          <p class="question-hint">List any you use daily or weekly — even simple ones like email, spreadsheets, or Slack.</p>
+          <textarea id="q3" name="q3_tools" rows="4" placeholder="e.g. Gmail, Google Sheets, QuickBooks, Slack, HubSpot, Calendly, Notion…"></textarea>
+        </div>
+
+        <div class="section-nav">
+          <div></div>
+          <button type="button" class="btn btn-next" onclick="goToSection(1)">
+            Next: Where Things Break
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── SECTION 2: Where Things Break Down ── -->
+      <div class="survey-section" data-section="1">
+        <div class="section-header">
+          <span class="section-num">Section 02 — 3 Questions</span>
+          <h2>Where Things Break Down</h2>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q4</span>
+            <label>When something "falls through the cracks," what is it usually?</label>
+          </div>
+          <p class="question-hint">Think about the last few times something was missed, late, or forgotten. What caused it?</p>
+          <div class="checkbox-group">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q4_cracks[]" value="lead_followup">
+              <span class="check-item-text">A lead or prospect not followed up with in time</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q4_cracks[]" value="invoice_payment">
+              <span class="check-item-text">An invoice or payment that slipped</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q4_cracks[]" value="task_tracking">
+              <span class="check-item-text">A task assigned but not tracked or completed</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q4_cracks[]" value="customer_comms">
+              <span class="check-item-text">Customer communication that went unanswered</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q4_cracks[]" value="deadline_missed">
+              <span class="check-item-text">A deadline or deliverable that was missed</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q4_cracks[]" value="onboarding_handoff">
+              <span class="check-item-text">Onboarding or handoff steps that were skipped</span>
+            </label>
+            <label class="check-item" id="q4-other-check" onclick="toggleCheck(this); toggleOther('q4-other-check', 'q4-other-field')">
+              <input type="checkbox" name="q4_cracks[]" value="other">
+              <span class="check-item-text">Other</span>
+            </label>
+          </div>
+          <div class="other-field" id="q4-other-field">
+            <textarea name="q4_cracks_other" rows="2" placeholder="Describe what typically falls through…"></textarea>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q5</span>
+            <label for="q5">What does your current lead-to-customer process look like?</label>
+          </div>
+          <p class="question-hint">Walk us through what happens from when someone shows interest to when they become a client. Where are the gaps?</p>
+          <textarea id="q5" name="q5_lead_process" rows="6" placeholder="e.g. They fill out a contact form → I email them within a day or two → we schedule a call → I send a proposal in Google Docs → if they say yes, I send an invoice… The part that usually breaks is…"></textarea>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q6</span>
+            <label>Which of these best describes your team's current workflow?</label>
+          </div>
+          <p class="question-hint">Choose the one that fits best.</p>
+          <div class="checkbox-group">
+            <label class="check-item" onclick="selectRadio(this, 'q6-group')">
+              <input type="radio" name="q6_workflow" value="no_system">
+              <span class="check-item-text">We have no real system — things get done as they come up</span>
+            </label>
+            <label class="check-item" onclick="selectRadio(this, 'q6-group')">
+              <input type="radio" name="q6_workflow" value="loose_processes">
+              <span class="check-item-text">We have loose processes but rely on memory and habit</span>
+            </label>
+            <label class="check-item" onclick="selectRadio(this, 'q6-group')">
+              <input type="radio" name="q6_workflow" value="documented_not_followed">
+              <span class="check-item-text">We have documented processes but don't always follow them</span>
+            </label>
+            <label class="check-item" onclick="selectRadio(this, 'q6-group')">
+              <input type="radio" name="q6_workflow" value="solid_manual">
+              <span class="check-item-text">We have solid systems but they're mostly manual</span>
+            </label>
+            <label class="check-item" onclick="selectRadio(this, 'q6-group')">
+              <input type="radio" name="q6_workflow" value="solid_some_automation">
+              <span class="check-item-text">We have solid systems with some automation already in place</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="section-nav">
+          <button type="button" class="btn btn-prev" onclick="goToSection(0)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            Back
+          </button>
+          <button type="button" class="btn btn-next" onclick="goToSection(2)">
+            Next: Where You Are
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── SECTION 3: Where You Are Right Now ── -->
+      <div class="survey-section" data-section="2">
+        <div class="section-header">
+          <span class="section-num">Section 03 — 3 Questions</span>
+          <h2>Where You Are Right Now</h2>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q7</span>
+            <label for="q7">What does a typical week look like for you personally — by role and hours spent?</label>
+          </div>
+          <p class="question-hint">Rough estimates are fine. We're looking for where your highest-value time is being spent on lower-value work.</p>
+          <textarea id="q7" name="q7_typical_week" rows="6" placeholder="e.g. 10 hrs on client projects, 5 hrs on admin/scheduling, 3 hrs answering emails, 4 hrs on sales outreach, 2 hrs doing bookkeeping I should have someone else do…"></textarea>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q8</span>
+            <label for="q8">Where do you feel like you're constantly "reinventing the wheel"?</label>
+          </div>
+          <p class="question-hint">What work gets done over and over that could theoretically be templated, automated, or handled without you?</p>
+          <textarea id="q8" name="q8_reinventing_wheel" rows="5" placeholder="e.g. Every new client proposal starts from scratch. I write the same onboarding email every time. Weekly status reports take 2 hours and I'm basically filling in the same structure…"></textarea>
+        </div>
+
+        <!-- Q9 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q9</span>
+            <label for="q9">If you could eliminate one specific task or headache tomorrow, what would it be?</label>
+          </div>
+          <p class="question-hint">Don't overthink it — your gut answer here is usually your best automation candidate.</p>
+          <textarea id="q9" name="q9_eliminate_task" rows="4" placeholder="e.g. Following up on unpaid invoices. Manually entering data from one system to another. Scheduling back-and-forth…"></textarea>
+        </div>
+
+        <div class="section-nav">
+          <button type="button" class="btn btn-prev" onclick="goToSection(1)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            Back
+          </button>
+          <button type="button" class="btn btn-next" onclick="goToSection(3)">
+            Next: What Success Looks Like
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── SECTION 4: What Success Looks Like ── -->
+      <div class="survey-section" data-section="3">
+        <div class="section-header">
+          <span class="section-num">Section 04 — 1 Question</span>
+          <h2>What Success Looks Like</h2>
+        </div>
+
+        <!-- Q10 -->
+        <div class="question-group">
+          <div class="question-label">
+            <span class="q-num">Q10</span>
+            <label>What would a successful outcome look like for you in 90 days?</label>
+          </div>
+          <p class="question-hint">This helps us prioritize what to automate first based on the impact that matters most to you. Select all that apply.</p>
+          <div class="checkbox-group">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q10_success[]" value="save_hours">
+              <span class="check-item-text">Save at least X hours per week — how many?</span>
+            </label>
+            <div class="other-field" id="q10-hours-field" style="margin-bottom: 0;">
+              <textarea name="q10_hours_detail" rows="1" placeholder="How many hours per week?" style="min-height:48px;"></textarea>
+            </div>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q10_success[]" value="never_miss_followup">
+              <span class="check-item-text">Never miss a follow-up or lead again</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q10_success[]" value="reduce_headcount">
+              <span class="check-item-text">Reduce team headcount or avoid hiring</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q10_success[]" value="faster_onboarding">
+              <span class="check-item-text">Faster client onboarding or delivery</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q10_success[]" value="more_revenue">
+              <span class="check-item-text">More revenue with the same effort</span>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="q10_success[]" value="weekends_back">
+              <span class="check-item-text">Get my weekends back</span>
+            </label>
+            <label class="check-item" id="q10-other-check" onclick="toggleCheck(this); toggleOther('q10-other-check', 'q10-other-field')">
+              <input type="checkbox" name="q10_success[]" value="other">
+              <span class="check-item-text">Other</span>
+            </label>
+          </div>
+          <div class="other-field" id="q10-other-field">
+            <textarea name="q10_success_other" rows="2" placeholder="Describe your ideal outcome…"></textarea>
+          </div>
+        </div>
+
+        <!-- Save hours reveal -->
+        <script>
+          // Reveal hours field when "save hours" is checked
+          document.addEventListener('DOMContentLoaded', function() {
+            var saveHoursCheck = document.querySelector('input[value="save_hours"]');
+            var hoursField = document.getElementById('q10-hours-field');
+            if (saveHoursCheck && hoursField) {
+              saveHoursCheck.closest('.check-item').addEventListener('click', function() {
+                var isChecked = saveHoursCheck.checked;
+                hoursField.classList.toggle('visible', !isChecked);
+              });
+            }
+          });
+        </script>
+
+        <div class="section-nav">
+          <button type="button" class="btn btn-prev" onclick="goToSection(2)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            Back
+          </button>
+          <button type="submit" class="btn btn-submit" id="submit-btn">
+            Submit Survey
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- SUCCESS SCREEN -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <h2>Survey received. We'll see you at your strategy session.</h2>
+      <p>Your responses have been sent to wolfgrey. We'll review them before your session and come prepared with specific automation opportunities ranked by impact.</p>
+      <div class="success-details">
+        <div class="success-tag">
+          <div class="dot"></div>
+          <span>Responses submitted</span>
+        </div>
+        <div class="success-tag">
+          <div class="dot"></div>
+          <span>Roadmap in progress</span>
+        </div>
+        <div class="success-tag">
+          <div class="dot"></div>
+          <span>Session prep underway</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <p><a href="https://wolfgrey.ai">wolfgrey.ai</a> &middot; AI Enablement for Small Business</p>
+  </footer>
+
+  <script>
+    let currentSection = 0;
+    const totalSections = 4;
+
+    function goToSection(index) {
+      // Hide current
+      document.querySelectorAll('.survey-section').forEach(s => s.classList.remove('active'));
+      // Show target
+      document.querySelector(`.survey-section[data-section="${index}"]`).classList.add('active');
+      currentSection = index;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgress() {
+      document.querySelectorAll('.progress-step').forEach((step, i) => {
+        step.classList.remove('active', 'done');
+        if (i === currentSection) step.classList.add('active');
+        if (i < currentSection) step.classList.add('done');
+      });
+      document.getElementById('current-step').textContent = currentSection + 1;
+    }
+
+    function toggleCheck(el) {
+      const input = el.querySelector('input[type="checkbox"]');
+      if (!input) return;
+      // toggling happens natively; just sync the visual class
+      setTimeout(() => {
+        el.classList.toggle('checked', input.checked);
+      }, 0);
+    }
+
+    function selectRadio(el, groupId) {
+      // Deselect all in group
+      const group = el.closest('.checkbox-group');
+      group.querySelectorAll('.check-item').forEach(item => item.classList.remove('checked'));
+      // Select this one
+      setTimeout(() => {
+        const input = el.querySelector('input[type="radio"]');
+        if (input && input.checked) el.classList.add('checked');
+      }, 0);
+    }
+
+    function toggleOther(checkId, fieldId) {
+      setTimeout(() => {
+        const check = document.getElementById(checkId);
+        const field = document.getElementById(fieldId);
+        const input = check.querySelector('input');
+        if (field) field.classList.toggle('visible', input.checked);
+      }, 0);
+    }
+
+    // Handle "Save hours" checkbox reveal
+    document.addEventListener('DOMContentLoaded', function() {
+      var saveHoursItem = document.querySelector('input[value="save_hours"]').closest('.check-item');
+      var hoursField = document.getElementById('q10-hours-field');
+
+      saveHoursItem.addEventListener('click', function() {
+        setTimeout(() => {
+          var input = this.querySelector('input');
+          hoursField.classList.toggle('visible', input.checked);
+        }, 0);
+      });
+    });
+
+    // Handle form submission → show success screen
+    document.getElementById('survey-form').addEventListener('submit', function(e) {
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+
+      // If using Formspree with AJAX
+      const form = this;
+      const data = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          showSuccess();
+        } else {
+          // Fallback: let native submit happen
+          submitBtn.textContent = 'Submit Survey';
+          submitBtn.disabled = false;
+          form.submit();
+        }
+      }).catch(() => {
+        // Network error fallback
+        submitBtn.textContent = 'Submit Survey';
+        submitBtn.disabled = false;
+        form.submit();
+      });
+
+      e.preventDefault();
+    });
+
+    function showSuccess() {
+      document.getElementById('survey-intro').style.display = 'none';
+      document.getElementById('survey-progress').style.display = 'none';
+      document.getElementById('survey-form').style.display = 'none';
+      document.getElementById('success-screen').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

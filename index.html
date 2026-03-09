@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
-    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --accent: #ff4d4d;
@@ -1671,7 +1671,7 @@
   <nav>
     <div class="nav-inner">
       <a href="/" class="logo">
-        <img src="logo.png" alt="wolfgrey" class="wolf-icon" style="height: 38px; vertical-align: middle;">
+        <img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 38px; vertical-align: middle;">
       </a>
       <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">☰</button>
     </div>
@@ -1680,23 +1680,23 @@
   <div class="nav-drawer">
     <div class="nav-drawer-header">
       <a href="/" class="logo">
-        <img src="logo.png" alt="wolfgrey" class="wolf-icon" style="height: 32px; vertical-align: middle;">
+        <img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 32px; vertical-align: middle;">
       </a>
       <button class="nav-drawer-close" onclick="toggleNav()" aria-label="Close menu">&times;</button>
     </div>
     <div class="nav-drawer-links">
       <a href="/" class="active">Home</a>
-      <a href="consulting.html">Consulting</a>
-      <a href="products.html">Products</a>
-      <a href="awaas.html">Agents</a>
+      <a href="/consulting">Consulting</a>
+      <a href="/products">Products</a>
+      <a href="/awaas">Agents</a>
       <button class="nav-accordion-toggle" onclick="toggleAccordion(this)">Resources</button>
       <div class="nav-accordion-panel">
-        <a href="resources.html">Guides</a>
-        <a href="checklist.html">Checklist</a>
+        <a href="/resources">Guides</a>
+        <a href="/checklist">Checklist</a>
       </div>
-      <a href="claude.html">Claude</a>
+      <a href="/claude">Claude</a>
     </div>
-    <a href="products.html" class="nav-drawer-cta">Shop →</a>
+    <a href="/products" class="nav-drawer-cta">Shop →</a>
   </div>
 
   <!-- HERO -->
@@ -1708,7 +1708,7 @@
       <p>Practical AI systems and ready-to-use workflows to help small businesses save time, cut costs, and scale faster.</p>
       <div class="hero-buttons">
         <a href="#products" class="btn btn-primary">Explore Products →</a>
-        <a href="products.html" class="btn btn-secondary">Free AI Quick-Start Guide</a>
+        <a href="/products" class="btn btn-secondary">Free AI Quick-Start Guide</a>
       </div>
     </div>
   </section>
@@ -1750,7 +1750,7 @@
   <!-- AGENT HIERARCHY -->
   <section id="how-it-works" style="padding: 100px 24px; background: var(--gray-900);">
     <style>
-    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('./fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }      @keyframes flowDown {
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }      @keyframes flowDown {
         0% { offset-distance: 0%; opacity: 0; }
         10% { opacity: 1; }
         90% { opacity: 1; }
@@ -2005,8 +2005,8 @@
         </div>
       </div>
       <div style="text-align: center;">
-        <a href="guides/claude-code-setup.html" class="btn btn-primary" style="margin-right: 12px;">Read the Free Guide &rarr;</a>
-        <a href="resources.html" class="btn btn-secondary">All Free Resources &rarr;</a>
+        <a href="/guides/claude-code-setup" class="btn btn-primary" style="margin-right: 12px;">Read the Free Guide &rarr;</a>
+        <a href="/resources" class="btn btn-secondary">All Free Resources &rarr;</a>
       </div>
     </div>
   </section>
@@ -2081,21 +2081,21 @@
           <h3>AI Quick-Start Guide</h3>
           <p>5 ready-to-use prompts, quick-win automation ideas, and tool recommendations. Get started with AI in under 30 minutes.</p>
           <div class="product-price-inline">$0</div>
-          <a href="products.html" class="btn btn-secondary">Get Free Guide →</a>
+          <a href="/products" class="btn btn-secondary">Get Free Guide →</a>
         </div>
         <div class="product-card fade-up">
           <div class="product-tag">Playbook</div>
           <h3>Small Business AI Playbook</h3>
           <p>The CRAFT prompting framework, 40+ templates, and a 90-day implementation roadmap. Everything you need to operationalize AI.</p>
           <div class="product-price-inline">$49</div>
-          <a href="get-playbook.html" class="btn btn-primary">Learn More →</a>
+          <a href="/get-playbook" class="btn btn-primary">Learn More →</a>
         </div>
         <div class="product-card fade-up featured">
           <div class="product-tag">Mastery</div>
           <h3>Claude Mastery Series</h3>
           <p>The complete 10-volume course for non-technical users. From first conversation to advanced workflows — master Claude in depth.</p>
           <div class="product-price-inline">$199</div>
-          <a href="get-mastery.html" class="btn btn-primary">Learn More →</a>
+          <a href="/get-mastery" class="btn btn-primary">Learn More →</a>
         </div>
       </div>
     </div>
@@ -2169,32 +2169,32 @@
       </div>
       <div class="apps-grid">
         <div class="app-card fade-up">
-          <img src="po-processor.png" alt="Purchase Order Processor UI" class="app-screenshot">
+          <img src="/po-processor.png" alt="Purchase Order Processor UI" class="app-screenshot">
           <h3>Purchase Order Processor</h3>
           <p>Automatically intake POs from email or uploads, validate line items against your catalog, flag discrepancies, and route for approval — all without manual data entry.</p>
         </div>
         <div class="app-card fade-up">
-          <img src="invoice-extractor.png" alt="Invoice Data Extractor UI" class="app-screenshot">
+          <img src="/invoice-extractor.png" alt="Invoice Data Extractor UI" class="app-screenshot">
           <h3>Invoice Data Extractor</h3>
           <p>Extract vendor details, line items, totals, and due dates from any invoice format. Matches to POs, flags exceptions, and exports clean data to your accounting system.</p>
         </div>
         <div class="app-card fade-up">
-          <img src="vendor-pricing.png" alt="Vendor Price Analyzer UI" class="app-screenshot">
+          <img src="/vendor-pricing.png" alt="Vendor Price Analyzer UI" class="app-screenshot">
           <h3>Vendor Price Analyzer</h3>
           <p>Compare pricing across multiple vendors for the same products. Track price changes over time, identify savings opportunities, and generate cost comparison reports.</p>
         </div>
         <div class="app-card fade-up">
-          <img src="expense-categorizer.png" alt="Expense Categorizer UI" class="app-screenshot">
+          <img src="/expense-categorizer.png" alt="Expense Categorizer UI" class="app-screenshot">
           <h3>Expense Categorizer</h3>
           <p>Auto-classify expenses into the right GL codes, flag policy violations, and route to appropriate approvers. Turns receipt chaos into organized, audit-ready records.</p>
         </div>
         <div class="app-card fade-up">
-          <img src="contract-reviewer.png" alt="Contract Reviewer UI" class="app-screenshot">
+          <img src="/contract-reviewer.png" alt="Contract Reviewer UI" class="app-screenshot">
           <h3>Contract Reviewer</h3>
           <p>Analyze contracts for key terms, obligations, renewal dates, and potential risks. Surface what matters and create summaries your team can actually use.</p>
         </div>
         <div class="app-card fade-up">
-          <img src="inventory-forecaster.png" alt="Inventory Forecaster UI" class="app-screenshot">
+          <img src="/inventory-forecaster.png" alt="Inventory Forecaster UI" class="app-screenshot">
           <h3>Inventory Forecaster</h3>
           <p>Predict reorder points based on sales velocity, seasonality, and lead times. Get alerts before stockouts happen and optimize your working capital.</p>
         </div>
@@ -2216,7 +2216,7 @@
           <div class="step-price">$0</div>
           <h3>Quick-Start Guide</h3>
           <p>5 ready-to-use prompts and quick-win automation ideas to get started immediately.</p>
-          <a href="products.html" class="btn btn-secondary">Get Free Guide →</a>
+          <a href="/products" class="btn btn-secondary">Get Free Guide →</a>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
@@ -2224,7 +2224,7 @@
           <div class="step-price">$49</div>
           <h3>AI Playbook</h3>
           <p>CRAFT framework, 40+ templates, and 90-day roadmap to operationalize AI.</p>
-          <a href="get-playbook.html" class="btn btn-primary">Learn More →</a>
+          <a href="/get-playbook" class="btn btn-primary">Learn More →</a>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
@@ -2232,7 +2232,7 @@
           <div class="step-price">$199</div>
           <h3>Claude Mastery Series</h3>
           <p>10-volume deep dive for non-technical users. Master Claude from basics to advanced workflows.</p>
-          <a href="get-mastery.html" class="btn btn-primary">Learn More →</a>
+          <a href="/get-mastery" class="btn btn-primary">Learn More →</a>
           <div class="step-arrow">→</div>
         </div>
         <div class="ladder-step fade-up">
@@ -2240,7 +2240,7 @@
           <div class="step-price">$5,000+</div>
           <h3>Done-For-You</h3>
           <p>Coaching or full implementation — we build your AI systems with you or for you.</p>
-          <a href="consulting.html" class="btn btn-secondary">View Options →</a>
+          <a href="/consulting" class="btn btn-secondary">View Options →</a>
         </div>
       </div>
     </div>
@@ -2278,7 +2278,7 @@
       <h2 class="section-title">Take your business into the future with the right guidance. It's a new world.</h2>
     </div>
     <div class="ship-wrap">
-      <img src="ship-small.png" alt="" class="ship-img" id="shipImg">
+      <img src="/ship-small.png" alt="" class="ship-img" id="shipImg">
       <div class="feature-tag floating" style="top: 12%; left: 18%; animation-delay: 0s;">Automated Reports</div>
       <div class="feature-tag gold floating" style="top: 18%; right: 18%; animation-delay: 0.6s;">Sales Automation</div>
       <div class="feature-tag floating" style="top: 40%; left: 16%; animation-delay: 1.2s;">Content Pipelines</div>
@@ -2304,14 +2304,14 @@
   <section class="cta-section">
     <div class="container">
       <div class="mascot-container">
-        <img src="crew.png" alt="wolfgrey crew" class="cta-crew">
+        <img src="/crew.png" alt="wolfgrey crew" class="cta-crew">
       </div>
       <div class="section-label">Get Started</div>
       <h2 class="section-title">Stop reading about AI.<br>Start building with it.</h2>
       <p class="section-subtitle">Grab the free guide, explore the playbook, or get expert help when you need it. Every path leads to the same place — a business that runs smarter.</p>
       <div class="hero-buttons">
-        <a href="products.html" class="btn btn-primary">Start Free →</a>
-        <a href="products.html" class="btn btn-secondary">View All Products →</a>
+        <a href="/products" class="btn btn-primary">Start Free →</a>
+        <a href="/products" class="btn btn-secondary">View All Products →</a>
       </div>
     </div>
   </section>
@@ -2384,10 +2384,10 @@
     <div class="footer-inner">
       <p>&copy; 2026 wolfgrey. All rights reserved.</p>
       <div class="footer-links">
-        <a href="products.html">Products</a>
-        <a href="awaas.html">Agents</a>
+        <a href="/products">Products</a>
+        <a href="/awaas">Agents</a>
         <a href="https://twitter.com/__wolfgrey__" target="_blank" rel="noopener">Twitter</a>
-        <a href="consulting.html">Consulting</a>
+        <a href="/consulting">Consulting</a>
       </div>
     </div>
   </footer>
