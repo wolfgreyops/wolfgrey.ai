@@ -712,5 +712,19 @@
     <p>© 2026 wolfgrey · <a href="/" style="color:#5a6480;text-decoration:underline;">wolfgrey.ai</a></p>
   </footer>
 
+  <script>
+    function toggleNav() {
+      document.querySelector('.nav-overlay').classList.toggle('open');
+      document.querySelector('.nav-drawer').classList.toggle('open');
+      document.body.style.overflow = document.querySelector('.nav-drawer').classList.contains('open') ? 'hidden' : '';
+    }
+    function toggleAccordion(btn) {
+      btn.classList.toggle('open');
+      btn.nextElementSibling.classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-drawer-links a').forEach(link => {
+      link.addEventListener('click', () => toggleNav());
+    });
+  </script>
 </body>
 </html>
