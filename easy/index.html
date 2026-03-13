@@ -25,6 +25,9 @@
       --gray-400:  #8892b0;
       --gray-300:  #a8b2d1;
       --white:     #f0f4ff;
+      --btn: #ff4d4d;
+      --btn-hover: #e63946;
+      --white-bright: #f0f4ff;
       --nav-bg:    rgba(5,8,16,0.9);
       --line-color: rgba(255,255,255,0.06);
     }
@@ -38,6 +41,7 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      padding-top: 64px;
     }
     body::before {
       content: '';
@@ -57,36 +61,33 @@
 
     a { color: inherit; text-decoration: none; }
 
-    /* NAV */
-    .header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      padding: 16px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--gray-800);
-      z-index: 100;
-    }
-    .logo {
-      font-family: 'Source Serif 4', serif;
-      font-weight: 300;
-      font-size: 1.2rem;
-      color: var(--white);
-      letter-spacing: -0.01em;
-    }
+        /* ── NAV ── */
+    nav { position: fixed; top: 0; width: 100%; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-700); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
     .logo span { color: var(--accent); }
-    .back-link {
-      font-size: 0.85rem;
-      color: var(--gray-600);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--accent); }
+    .wolf-icon { filter: invert(1) brightness(1.2); }
+    .nav-toggle { background: none; border: 1px solid var(--gray-700); color: var(--white); font-size: 1.25rem; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: border-color 0.2s; line-height: 1; }
+    .nav-toggle:hover { border-color: var(--gray-400); }
+    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .nav-overlay.open { opacity: 1; pointer-events: all; }
+    .nav-drawer { position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--gray-800); border-left: 1px solid var(--gray-700); z-index: 300; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 64px; border-bottom: 1px solid var(--gray-700); }
+    .nav-drawer-close { background: none; border: none; color: var(--gray-300); font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 4px; }
+    .nav-drawer-close:hover { color: var(--white); }
+    .nav-drawer-links { display: flex; flex-direction: column; padding: 16px 0; flex: 1; }
+    .nav-drawer-links a { padding: 12px 24px; color: var(--gray-300); font-size: 0.95rem; transition: color 0.2s, background 0.2s; }
+    .nav-drawer-links a:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+    .nav-accordion-toggle { background: none; border: none; padding: 12px 24px; color: var(--gray-300); font-size: 0.95rem; cursor: pointer; text-align: left; width: 100%; transition: color 0.2s; display: flex; align-items: center; justify-content: space-between; }
+    .nav-accordion-toggle::after { content: '›'; font-size: 1.1rem; transition: transform 0.2s; }
+    .nav-accordion-toggle.open::after { transform: rotate(90deg); }
+    .nav-accordion-toggle:hover { color: var(--white); }
+    .nav-accordion-panel { display: none; background: rgba(0,0,0,0.2); }
+    .nav-accordion-panel.open { display: block; }
+    .nav-accordion-panel a { padding-left: 40px; font-size: 0.9rem; }
+    .nav-drawer-cta { margin: 16px; padding: 12px 24px; background: var(--accent); color: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-align: center; transition: background 0.2s; }
+    .nav-drawer-cta:hover { background: var(--btn-hover, #e63946); }
 
     /* LAYOUT */
     .container {
@@ -465,7 +466,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 640px) {
-      .header { padding: 14px 20px; }
+
       section { padding: 60px 20px; }
       .hero { padding: 120px 20px 60px; }
       .truth-box { padding: 28px 24px; }
@@ -477,10 +478,32 @@
 <body>
 
   <!-- NAV -->
-  <header class="header">
-    <a href="/" class="logo">wolf<span>grey</span></a>
-    <a href="/" class="back-link">← Back to wolfgrey.ai</a>
-  </header>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo"><img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 38px; vertical-align: middle;"></a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+  <div class="nav-overlay" onclick="toggleNav()"></div>
+  <div class="nav-drawer">
+    <div class="nav-drawer-header">
+      <a href="/" class="logo"><img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 32px; vertical-align: middle;"></a>
+      <button class="nav-drawer-close" onclick="toggleNav()" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="nav-drawer-links">
+      <a href="/">Home</a>
+      <a href="/consulting">Consulting</a>
+      <a href="/products">Products</a>
+      <a href="/awaas">Agents</a>
+      <button class="nav-accordion-toggle" onclick="toggleAccordion(this)">Resources</button>
+      <div class="nav-accordion-panel">
+        <a href="/resources">Guides</a>
+        <a href="/checklist">Checklist</a>
+      </div>
+      <a href="/claude">Claude</a>
+    </div>
+    <a href="/products" class="nav-drawer-cta">Shop &rarr;</a>
+  </div>
 
   <!-- HERO -->
   <div class="hero">

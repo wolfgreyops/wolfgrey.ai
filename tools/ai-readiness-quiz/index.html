@@ -55,17 +55,60 @@
     h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
     a { color: inherit; text-decoration: none; }
 
-    nav { position: fixed; top: 0; width: 100%; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-700); }
-    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-weight: 600; font-size: 1.25rem; }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-700);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
+    .logo span { color: var(--accent); }
     .wolf-icon { filter: invert(1) brightness(1.2); }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--gray-300); transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    .nav-links a.active { color: var(--accent2); }
-    .nav-cta { background: var(--btn) !important; color: var(--white-bright) !important; padding: 8px 20px; border-radius: 6px; font-weight: 600 !important; }
-    .nav-cta:hover { background: var(--btn-hover) !important; }
-    .mobile-toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+    .nav-toggle {
+      background: none;
+      border: 1px solid var(--gray-700);
+      color: var(--white);
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: border-color 0.2s;
+      line-height: 1;
+    }
+    .nav-toggle:hover { border-color: var(--gray-400); }
+    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .nav-overlay.open { opacity: 1; pointer-events: auto; }
+    .nav-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 320px; max-width: 85vw; background: var(--gray-900); border-left: 1px solid var(--gray-700); z-index: 200; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; overflow-y: auto; }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--gray-700); }
+    .nav-drawer-close { background: none; border: none; color: var(--gray-400); font-size: 1.5rem; cursor: pointer; padding: 4px; line-height: 1; transition: color 0.2s; }
+    .nav-drawer-close:hover { color: var(--white); }
+    .nav-drawer-links { padding: 16px 0; flex: 1; }
+    .nav-drawer-links a { display: block; padding: 14px 24px; font-size: 0.95rem; font-weight: 500; color: var(--gray-300); transition: background 0.15s, color 0.15s; }
+    .nav-drawer-links a:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+    .nav-drawer-links a.active { color: var(--white); }
+    .nav-accordion-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 24px; font-size: 0.95rem; font-weight: 500; color: var(--gray-300); background: none; border: none; cursor: pointer; transition: background 0.15s, color 0.15s; text-align: left; }
+    .nav-accordion-toggle:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+    .nav-accordion-toggle::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform 0.2s; flex-shrink: 0; }
+    .nav-accordion-toggle.open::after { transform: rotate(-135deg); }
+    .nav-accordion-panel { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+    .nav-accordion-panel.open { max-height: 200px; }
+    .nav-accordion-panel a { padding: 10px 24px 10px 40px !important; font-size: 0.85rem !important; color: var(--gray-400) !important; }
+    .nav-accordion-panel a:hover { color: var(--white) !important; }
+    .nav-drawer-cta { margin: 8px 24px 24px; padding: 12px 20px; background: var(--btn); color: var(--white-bright) !important; border-radius: 8px; font-weight: 600; text-align: center; transition: background 0.2s; font-size: 0.95rem; }
+    .nav-drawer-cta:hover { background: var(--btn-hover); }
 
     .page-header { padding: 140px 24px 60px; text-align: center; }
     .page-header .breadcrumb { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 24px; }
@@ -214,9 +257,6 @@
     .footer-links a:hover { color: var(--white); }
 
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #050810; border-bottom: 1px solid var(--gray-700); padding: 24px; gap: 20px; }
-      .mobile-toggle { display: block; }
       .page-header { padding: 120px 24px 40px; }
       .quiz-card, .result-card { padding: 32px 20px; }
     }
@@ -226,21 +266,37 @@
 
   <script>if(!localStorage.getItem('wolfgrey_access')){window.location.href='/resources';}</script>
 
+    <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="/" class="logo">
         <img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 38px; vertical-align: middle;">
       </a>
-      <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/consulting">Consulting</a>
-        <a href="/products">Products</a>
-        <a href="/resources" class="active">Resources</a>
-        <a href="/products" class="nav-cta">Shop &rarr;</a>
-      </div>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
     </div>
   </nav>
+  <div class="nav-overlay" onclick="toggleNav()"></div>
+  <div class="nav-drawer">
+    <div class="nav-drawer-header">
+      <a href="/" class="logo">
+        <img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 32px; vertical-align: middle;">
+      </a>
+      <button class="nav-drawer-close" onclick="toggleNav()" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="nav-drawer-links">
+      <a href="/">Home</a>
+      <a href="/consulting">Consulting</a>
+      <a href="/products">Products</a>
+      <a href="/awaas">Agents</a>
+      <button class="nav-accordion-toggle" onclick="toggleAccordion(this)">Resources</button>
+      <div class="nav-accordion-panel">
+        <a href="/resources">Guides</a>
+        <a href="/checklist">Checklist</a>
+      </div>
+      <a href="/claude">Claude</a>
+    </div>
+    <a href="/products" class="nav-drawer-cta">Shop &rarr;</a>
+  </div>
 
   <div class="page-header">
     <div class="breadcrumb"><a href="/resources">Resources</a> / AI Readiness Quiz</div>
@@ -267,215 +323,5 @@
     </div>
   </footer>
 
-  <script>document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
-    });
-
-    const questions = [
-      {
-        q: "How does your team currently handle repetitive tasks like data entry, report writing, or email drafting?",
-        opts: [
-          { text: "Everything is done manually — no automation at all", score: 1 },
-          { text: "We use basic templates and copy-paste workflows", score: 2 },
-          { text: "We have some spreadsheet macros or simple automations", score: 3 },
-          { text: "We already use automation tools for several workflows", score: 4 }
-        ]
-      },
-      {
-        q: "How much time does your team spend on tasks that follow a predictable, repeatable pattern?",
-        opts: [
-          { text: "Less than 5 hours per week", score: 1 },
-          { text: "5-15 hours per week", score: 2 },
-          { text: "15-30 hours per week", score: 3 },
-          { text: "30+ hours per week", score: 4 }
-        ]
-      },
-      {
-        q: "What's your team's comfort level with new technology tools?",
-        opts: [
-          { text: "Most people resist change and prefer familiar methods", score: 1 },
-          { text: "Open to trying things but need a lot of hand-holding", score: 2 },
-          { text: "Generally tech-savvy and willing to experiment", score: 3 },
-          { text: "We actively seek out new tools and adopt them quickly", score: 4 }
-        ]
-      },
-      {
-        q: "How is your business data currently organized?",
-        opts: [
-          { text: "Scattered across emails, paper files, and random spreadsheets", score: 1 },
-          { text: "Mostly in spreadsheets but not consistently formatted", score: 2 },
-          { text: "Organized in a CRM or database with some structure", score: 3 },
-          { text: "Well-structured data in dedicated systems with clear processes", score: 4 }
-        ]
-      },
-      {
-        q: "Have you or your team used any AI tools (ChatGPT, Claude, Copilot, etc.)?",
-        opts: [
-          { text: "Never — we haven't tried any AI tools", score: 1 },
-          { text: "Tried it a few times but didn't stick with it", score: 2 },
-          { text: "Use it occasionally for specific tasks", score: 3 },
-          { text: "Use AI tools regularly as part of our workflow", score: 4 }
-        ]
-      },
-      {
-        q: "How clear are your business processes? Could someone new follow them without much guidance?",
-        opts: [
-          { text: "Processes live in people's heads — nothing is documented", score: 1 },
-          { text: "Some documentation exists but it's outdated or incomplete", score: 2 },
-          { text: "Key processes are documented and mostly followed", score: 3 },
-          { text: "We have SOPs for everything with regular updates", score: 4 }
-        ]
-      },
-      {
-        q: "What's your biggest bottleneck right now?",
-        opts: [
-          { text: "Not enough time in the day for the team", score: 4 },
-          { text: "Too many manual errors slowing things down", score: 3 },
-          { text: "Difficulty scaling without hiring more people", score: 3 },
-          { text: "We're running smoothly — just looking to optimize", score: 2 }
-        ]
-      },
-      {
-        q: "What budget could you allocate to AI automation this quarter?",
-        opts: [
-          { text: "Zero — we need to see value before investing", score: 1 },
-          { text: "Under $500 for tools or one-time projects", score: 2 },
-          { text: "$500-$2,000 for meaningful improvements", score: 3 },
-          { text: "$2,000+ for comprehensive automation", score: 4 }
-        ]
-      },
-      {
-        q: "How quickly do you need to see results from AI implementation?",
-        opts: [
-          { text: "We need immediate ROI — this week or next", score: 1 },
-          { text: "Within a month would be great", score: 2 },
-          { text: "Within a quarter — we can be patient if the payoff is right", score: 3 },
-          { text: "We're thinking long-term — building for the next year+", score: 4 }
-        ]
-      },
-      {
-        q: "Who would own the AI initiative in your organization?",
-        opts: [
-          { text: "No one — we'd need outside help to get started", score: 1 },
-          { text: "The business owner would take it on (that's me)", score: 2 },
-          { text: "We have a tech-savvy team member who could lead it", score: 3 },
-          { text: "We have a dedicated ops or tech team ready to implement", score: 4 }
-        ]
-      }
-    ];
-
-    let currentQ = 0;
-    let answers = [];
-
-    function renderQuestion() {
-      const q = questions[currentQ];
-      const area = document.getElementById('quizArea');
-      area.innerHTML = `
-        <div class="quiz-card">
-          <div class="question-number">Question ${currentQ + 1} of ${questions.length}</div>
-          <div class="question-text">${q.q}</div>
-          ${q.opts.map((opt, i) => `
-            <button class="option" onclick="selectOption(${i}, ${opt.score})">${opt.text}</button>
-          `).join('')}
-        </div>
-      `;
-      document.getElementById('progressFill').style.width = ((currentQ + 1) / questions.length * 100) + '%';
-      document.getElementById('progressLabel').textContent = `Question ${currentQ + 1} of ${questions.length}`;
-    }
-
-    function selectOption(index, score) {
-      const opts = document.querySelectorAll('.option');
-      opts.forEach(o => o.classList.remove('selected'));
-      opts[index].classList.add('selected');
-
-      answers[currentQ] = score;
-
-      setTimeout(() => {
-        currentQ++;
-        if (currentQ < questions.length) {
-          renderQuestion();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          showResults();
-        }
-      }, 400);
-    }
-
-    function showResults() {
-      const total = answers.reduce((sum, a) => sum + a, 0);
-      const maxScore = questions.length * 4;
-      const percent = Math.round((total / maxScore) * 100);
-
-      let tier, tierClass, title, desc, recs, ctaText, ctaLink;
-
-      if (total <= 18) {
-        tier = 'Getting Started';
-        tierClass = 'tier-starter';
-        title = 'You\'re at the starting line';
-        desc = 'Your business has significant room to benefit from AI, but you\'ll want to start with the fundamentals. The good news? Even small automation wins can have outsized impact at this stage.';
-        recs = [
-          'Start with our free AI Quick-Start Guide (7 copy-paste prompts)',
-          'Pick ONE repetitive task and try automating it with ChatGPT or Claude',
-          'Document your most time-consuming processes before automating',
-          'Consider the AI Playbook for a structured 90-day implementation plan'
-        ];
-        ctaText = 'Get the AI Playbook &mdash; $49';
-        ctaLink = '../products.html';
-      } else if (total <= 30) {
-        tier = 'Ready to Build';
-        tierClass = 'tier-ready';
-        title = 'You\'re ready to build';
-        desc = 'Your business has the foundation in place for meaningful AI automation. You have enough process structure and team readiness to see real results quickly.';
-        recs = [
-          'The CRAFT prompting framework will accelerate your implementation',
-          'Focus on automating your highest-volume repetitive tasks first',
-          'Consider a custom automation build for your most painful workflow',
-          'Set up a 90-day roadmap to systematically roll out AI across departments'
-        ];
-        ctaText = 'Get a Custom Automation Build';
-        ctaLink = '/#consulting';
-      } else {
-        tier = 'Ready to Scale';
-        tierClass = 'tier-scale';
-        title = 'You\'re ready to scale';
-        desc = 'Your business is well-positioned for advanced AI automation. You have the data, the processes, and the team readiness to deploy sophisticated systems.';
-        recs = [
-          'Look at our custom app builds for purpose-built automation',
-          'A monthly retainer gives you ongoing access to new workflows',
-          'Explore multi-step automation pipelines across departments',
-          'Consider training your team with the AI Automation Course'
-        ];
-        ctaText = 'Talk to Us About Custom Builds';
-        ctaLink = '/#consulting';
-      }
-
-      document.querySelector('.progress-wrap').style.display = 'none';
-      document.getElementById('quizArea').innerHTML = `
-        <div class="result-card">
-          <div class="result-tier ${tierClass}">${tier}</div>
-          <div class="result-score">${total}/${maxScore}</div>
-          <div class="result-score-label">${percent}% readiness score</div>
-          <h2>${title}</h2>
-          <p>${desc}</p>
-          <ul class="result-recs">
-            ${recs.map(r => `<li>${r}</li>`).join('')}
-          </ul>
-          <div class="result-buttons">
-            <a href="${ctaLink}" class="btn btn-primary">${ctaText} &rarr;</a>
-            <button class="btn btn-secondary" onclick="restartQuiz()">Retake Quiz</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function restartQuiz() {
-      currentQ = 0;
-      answers = [];
-      document.querySelector('.progress-wrap').style.display = 'block';
-      renderQuestion();
-    }
-
-    renderQuestion();
-  </script>
-</body>
+  </body>
 </html>

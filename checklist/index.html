@@ -23,6 +23,9 @@
       --gray-400: #8892b0;
       --gray-300: #a8b2d1;
       --white: #f0f4ff;
+      --btn: #ff4d4d;
+      --btn-hover: #e63946;
+      --white-bright: #f0f4ff;
       --nav-bg: rgba(5,8,16,0.85);
       --line-color: rgba(255,255,255,0.06);
     }
@@ -33,6 +36,7 @@
       color: var(--white);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      padding-top: 64px;
     }
     body::before {
       content: '';
@@ -63,7 +67,7 @@
     }
     .nav-inner {
       max-width: 1200px; margin: 0 auto;
-      padding: 16px 24px;
+      padding: 0 24px; height: 64px;
       display: flex; justify-content: space-between; align-items: center;
     }
     .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
