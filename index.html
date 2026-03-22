@@ -14,20 +14,20 @@
 
     :root {
       --accent: #ff4d4d;
-      --accent2: #00e5cc;
+      --accent2: #d4566a;
       --btn: #ff4d4d;
       --btn-hover: #e63946;
-      --dark: #050810;
-      --gray-900: #0a0f1a;
-      --gray-800: #111827;
-      --gray-700: #1e2940;
-      --gray-600: #5a6480;
-      --gray-400: #8892b0;
-      --gray-300: #a8b2d1;
-      --white: #f0f4ff;
-      --white-bright: #f0f4ff;
-      --nav-bg: rgba(5,8,16,0.85);
-      --line-color: rgba(255,255,255,0.06);
+      --dark: #fef0f0;
+      --gray-900: #fff5f5;
+      --gray-800: #ffffff;
+      --gray-700: #f0d0d0;
+      --gray-600: #8a7070;
+      --gray-400: #5a4040;
+      --gray-300: #3a2020;
+      --white: #1a1a1a;
+      --white-bright: #ffffff;
+      --nav-bg: rgba(254,240,240,0.9);
+      --line-color: rgba(0,0,0,0.06);
     }
 
     html { scroll-behavior: smooth; }
@@ -99,7 +99,7 @@
       letter-spacing: -0.5px;
     }
     .logo span { color: var(--accent); }
-    .wolf-icon { filter: invert(1) brightness(1.2); }
+    .wolf-icon { filter: none; }
     .nav-toggle {
       background: none;
       border: 1px solid var(--gray-700);
@@ -116,7 +116,7 @@
     /* ── SLIDE-OUT NAV ── */
     .nav-overlay {
       position: fixed; inset: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.3);
       z-index: 150;
       opacity: 0;
       pointer-events: none;
@@ -168,7 +168,7 @@
       transition: background 0.15s, color 0.15s;
     }
     .nav-drawer-links a:hover {
-      background: rgba(255,255,255,0.04);
+      background: rgba(0,0,0,0.04);
       color: var(--white);
     }
     .nav-drawer-links a.active {
@@ -190,7 +190,7 @@
       text-align: left;
     }
     .nav-accordion-toggle:hover {
-      background: rgba(255,255,255,0.04);
+      background: rgba(0,0,0,0.04);
       color: var(--white);
     }
     .nav-accordion-toggle::after {
@@ -264,8 +264,9 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      display: none;
     }
-    .hero-content { max-width: 800px; position: relative; }
+    .hero-content { max-width: 800px; position: relative; transition: transform 0.15s ease-out; will-change: transform; }
     .hero-badge {
       font-family: 'Doto', sans-serif;
       display: inline-block;
@@ -275,7 +276,7 @@
       border-radius: 100px;
       font-size: 16px;
       font-weight: 500;
-      color: #00e5cc;
+      color: var(--accent);
       margin-bottom: 32px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -288,7 +289,7 @@
       margin-bottom: 24px;
     }
     .hero h1 .accent {
-      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent), var(--accent2));
+      background: linear-gradient(90deg, var(--accent), #cc2233, var(--accent), #ff6666);
       background-size: 300% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -321,7 +322,7 @@
     }
     .btn-primary {
       background: var(--btn);
-      color: var(--white-bright);
+      color: #ffffff;
     }
     .btn-primary:hover { background: var(--btn-hover); transform: translateY(-1px); }
     .btn-secondary {
@@ -340,7 +341,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: var(--accent2);
+      color: var(--accent);
       margin-bottom: 16px;
     }
     .section-title {
@@ -374,20 +375,20 @@
       transition: all 0.3s;
     }
     .offering-card:hover {
-      border-color: var(--accent2);
+      border-color: var(--accent);
       transform: translateY(-4px);
     }
     .offering-icon {
       width: 56px;
       height: 56px;
-      background: rgba(0,229,204,0.1);
-      border: 1px solid rgba(0,229,204,0.2);
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.18);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      color: var(--accent2);
+      color: var(--accent);
     }
     .offering-card h4 {
       font-size: 1.1rem;
@@ -611,7 +612,7 @@
       display: flex;
       flex-direction: column;
     }
-    .service-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .service-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
     .service-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
@@ -692,9 +693,9 @@
       flex-direction: column;
     }
     .use-card:hover {
-      border-color: var(--accent2);
+      border-color: var(--accent);
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
     .use-card::before {
       content: '';
@@ -703,7 +704,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--accent2);
+      background: var(--accent);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -711,19 +712,19 @@
     .use-icon {
       width: 52px;
       height: 52px;
-      background: rgba(0,229,204,0.08);
-      border: 1px solid rgba(0,229,204,0.18);
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.18);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 24px;
-      color: var(--accent2);
+      color: var(--accent);
       transition: transform 0.4s ease, background 0.4s ease;
     }
     .use-card:hover .use-icon {
       animation: iconFloat 2.4s ease-in-out infinite;
-      background: rgba(0,229,204,0.14);
+      background: rgba(255,77,77,0.14);
     }
     .use-icon svg {
       width: 26px;
@@ -757,7 +758,7 @@
       font-family: 'Source Serif 4', 'Inter', sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
-      color: var(--accent2);
+      color: var(--accent);
       letter-spacing: -0.5px;
       line-height: 1.2;
     }
@@ -790,7 +791,7 @@
     .app-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
     .app-card::before {
       content: '';
@@ -855,7 +856,7 @@
       flex-direction: column;
       transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
     }
-    .product-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .product-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
     .product-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
@@ -893,12 +894,12 @@
     .product-price-inline {
       font-size: 2rem;
       font-weight: 600;
-      color: var(--accent2);
+      color: var(--accent);
       margin: 16px 0 8px;
       letter-spacing: -0.5px;
     }
     .product-card.featured {
-      border-color: var(--accent2);
+      border-color: var(--accent);
       position: relative;
     }
     .product-card.featured::before {
@@ -907,8 +908,8 @@
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--accent2);
-      color: var(--dark);
+      background: var(--accent);
+      color: #ffffff;
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -941,32 +942,32 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: var(--accent2);
+      background: var(--accent);
       opacity: 0;
       transition: opacity 0.3s;
     }
     .resource-teaser-card:hover::before { opacity: 1; }
     .resource-teaser-card:hover {
-      border-color: var(--accent2);
+      border-color: var(--accent);
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
     .resource-teaser-card .resource-icon {
       width: 52px;
       height: 52px;
-      background: rgba(0,229,204,0.08);
-      border: 1px solid rgba(0,229,204,0.18);
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.18);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 24px;
-      color: var(--accent2);
+      color: var(--accent);
       transition: transform 0.4s ease, background 0.4s ease;
     }
     .resource-teaser-card:hover .resource-icon {
       animation: iconFloat 2.4s ease-in-out infinite;
-      background: rgba(0,229,204,0.14);
+      background: rgba(255,77,77,0.14);
     }
     .resource-teaser-card .resource-icon svg {
       width: 26px;
@@ -995,14 +996,14 @@
       display: inline-block;
       width: fit-content;
       padding: 4px 12px;
-      background: rgba(0,229,204,0.1);
-      border: 1px solid rgba(0,229,204,0.2);
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.18);
       border-radius: 4px;
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--accent2);
+      color: var(--accent);
       margin-bottom: 20px;
     }
     .resources-cta {
@@ -1032,7 +1033,7 @@
     .step-number {
       font-size: 0.75rem;
       font-weight: 700;
-      color: var(--accent2);
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 16px;
@@ -1124,14 +1125,14 @@
       flex-shrink: 0;
     }
     .course-visual {
-      background: #0a0f1a;
-      border: 1px solid #1e2940;
+      background: #1a1020;
+      border: 1px solid #2a1a30;
       border-radius: 12px;
       padding: 32px;
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 0.85rem;
       line-height: 1.8;
-      color: #8892b0;
+      color: #a090b0;
       min-height: 420px;
       overflow: hidden;
       display: flex;
@@ -1139,8 +1140,8 @@
       justify-content: flex-start;
     }
     .course-visual .prompt { color: var(--accent); }
-    .course-visual .cmd { color: #f0f4ff; }
-    .course-visual .comment { color: #5a6480; }
+    .course-visual .cmd { color: #f0e8ff; }
+    .course-visual .comment { color: #6a5a70; }
     .course-visual .cursor {
       display: inline-block;
       width: 8px;
@@ -1167,7 +1168,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(255,77,77,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,77,77,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
     .mascot-container {
@@ -1178,7 +1179,7 @@
     }
     .cta-crew {
       width: clamp(280px, 50vw, 600px);
-      filter: drop-shadow(0 0 40px rgba(0,229,204,0.15));
+      filter: drop-shadow(0 0 40px rgba(255,77,77,0.15));
       animation: crewHover 4s ease-in-out infinite;
     }
     @keyframes crewHover {
@@ -1198,60 +1199,7 @@
     }
     .ai-stat { text-align: center; }
 
-    /* ── LIGHT MODE (last section only) ── */
-    .built-by-ai.light-mode {
-      background: #f5f7fa;
-      border-top-color: #dce3ed;
-    }
-    .built-by-ai.light-mode .section-label,
-    .built-by-ai.light-mode .section-title,
-    .built-by-ai.light-mode .section-subtitle,
-    .built-by-ai.light-mode .ai-stat-number,
-    .built-by-ai.light-mode .ai-stat-label,
-    .built-by-ai.light-mode .ai-stat-context {
-      color: #1a1a2e;
-    }
-    .built-by-ai.light-mode .section-subtitle,
-    .built-by-ai.light-mode .ai-stat-context {
-      color: #4b5563;
-    }
-    .built-by-ai.light-mode .ai-stat {
-      background: #ffffff;
-      border-color: #dce3ed;
-    }
-    .built-by-ai.light-mode .ai-stat-label {
-      color: #6b7280;
-    }
-    .built-by-ai.light-mode .demo-terminal-header {
-      background: #dce3ed;
-    }
-    .built-by-ai.light-mode .demo-terminal-title {
-      color: #4b5563;
-    }
-    .built-by-ai.light-mode .demo-terminal {
-      background: #ffffff;
-      border-color: #c9d3e0;
-    }
-    .built-by-ai.light-mode .demo-terminal .output,
-    .built-by-ai.light-mode .demo-terminal .comment {
-      color: #6b7280;
-    }
-    .built-by-ai.light-mode .demo-terminal .cmd {
-      color: #1a1a2e;
-    }
-    .built-by-ai.light-mode .demo-terminal-input {
-      color: #1a1a2e;
-    }
-    .built-by-ai.light-mode .demo-terminal-input::placeholder {
-      color: #9ca3af;
-    }
-    .built-by-ai.light-mode .demo-hint {
-      color: #4b5563;
-    }
-    .built-by-ai.light-mode .demo-hint code {
-      background: #e5e7eb;
-      color: #1a1a2e;
-    }
+    /* ── LIGHT MODE overrides removed — global theme is now light ── */
 
     /* ── INTERACTIVE TERMINAL ── */
     .demo-terminal-wrap {
@@ -1261,7 +1209,7 @@
       margin-right: auto;
     }
     .demo-terminal-header {
-      background: #1e2940;
+      background: #2a1a30;
       border-radius: 12px 12px 0 0;
       padding: 12px 16px;
       display: flex;
@@ -1272,7 +1220,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: #5a6480;
+      background: #6a5a70;
     }
     .demo-terminal-dot.red { background: #ff5f56; }
     .demo-terminal-dot.yellow { background: #ffbd2e; }
@@ -1285,8 +1233,8 @@
       font-family: 'SF Mono', 'Fira Code', monospace;
     }
     .demo-terminal {
-      background: #0a0f1a;
-      border: 1px solid #1e2940;
+      background: #1a1020;
+      border: 1px solid #2a1a30;
       border-top: none;
       border-radius: 0 0 12px 12px;
       padding: 24px;
@@ -1305,10 +1253,10 @@
       margin-bottom: 4px;
     }
     .demo-terminal .prompt { color: var(--accent); }
-    .demo-terminal .cmd { color: #f0f4ff; font-weight: 500; }
-    .demo-terminal .output { color: #8892b0; }
+    .demo-terminal .cmd { color: #f0e8ff; font-weight: 500; }
+    .demo-terminal .output { color: #a090b0; }
     .demo-terminal .success { color: var(--accent2); font-weight: 500; }
-    .demo-terminal .comment { color: #5a6480; }
+    .demo-terminal .comment { color: #6a5a70; }
     .demo-terminal .error { color: var(--accent); }
     .demo-terminal-input-line {
       display: flex;
@@ -1319,12 +1267,12 @@
       background: transparent;
       border: none;
       outline: none;
-      color: #f0f4ff;
+      color: #f0e8ff;
       font-family: inherit;
       font-size: inherit;
       caret-color: var(--accent);
     }
-    .demo-terminal-input::placeholder { color: #5a6480; }
+    .demo-terminal-input::placeholder { color: #6a5a70; }
     .demo-hint {
       text-align: center;
       margin-top: 16px;
@@ -1369,7 +1317,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(5, 8, 16, 0.98);
+      background: rgba(26, 16, 32, 0.98);
       border-radius: 0 0 12px 12px;
       z-index: 10;
       display: none;
@@ -1385,8 +1333,8 @@
     }
     .tetris-canvas {
       display: block;
-      border: 2px solid var(--accent2);
-      box-shadow: 0 0 20px rgba(0, 229, 204, 0.3);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
     }
     .tetris-sidebar {
       display: flex;
@@ -1396,7 +1344,7 @@
     .tetris-score, .tetris-next {
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 0.8rem;
-      color: var(--accent2);
+      color: var(--accent);
     }
     .tetris-score span, .tetris-next span {
       display: block;
@@ -1608,7 +1556,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 40px rgba(255,77,77,0.25)) drop-shadow(0 0 80px rgba(0,229,204,0.15));
+      filter: drop-shadow(0 0 40px rgba(255,77,77,0.25)) drop-shadow(0 0 80px rgba(255,77,77,0.1));
       transition: transform 0.15s ease-out;
       animation: shipHover 4s ease-in-out infinite;
     }
@@ -1619,7 +1567,7 @@
     .feature-tag {
       position: absolute;
       padding: 10px 22px;
-      background: rgba(28, 28, 28, 0.75);
+      background: rgba(255, 255, 255, 0.85);
       border: 1px solid rgba(255, 77, 77, 0.25);
       border-radius: 24px;
       font-size: 1.05rem;
@@ -1718,7 +1666,7 @@
     <div class="container">
       <div class="services-header" style="text-align: center;">
         <div class="section-label">Get connected</div>
-        <h2 class="section-title">Stop asking AI questions<br><span style="background: linear-gradient(90deg, #00e5cc, #ff4d4d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Start giving it jobs</span></h2>
+        <h2 class="section-title">Stop asking AI questions<br><span style="background: linear-gradient(90deg, #cc2233, #ff4d4d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Start giving it jobs</span></h2>
         <p class="section-subtitle" style="margin: 0 auto;">Guides, ready-to-deploy workflows, and hands-on consulting — no coding required.</p>
       </div>
       <div class="offerings-grid">
@@ -2727,6 +2675,72 @@
 
     })();
 
+    // Mobile tilt effect for hero content
+    (function() {
+      const heroContent = document.querySelector('.hero-content');
+      if (!heroContent) return;
+
+      const maxTilt = 12; // max degrees of rotation
+      const maxShift = 15; // max px of translation
+
+      function handleOrientation(e) {
+        // beta: front-to-back tilt (-180 to 180), gamma: left-to-right tilt (-90 to 90)
+        let beta = e.beta || 0;
+        let gamma = e.gamma || 0;
+
+        // Clamp values
+        beta = Math.max(-30, Math.min(30, beta - 20)); // offset by 20 for natural hold angle
+        gamma = Math.max(-30, Math.min(30, gamma));
+
+        // Normalize to -1 to 1
+        const tiltX = gamma / 30;
+        const tiltY = beta / 30;
+
+        const rotateX = -tiltY * maxTilt;
+        const rotateY = tiltX * maxTilt;
+        const translateX = tiltX * maxShift;
+        const translateY = tiltY * maxShift;
+
+        heroContent.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+      }
+
+      // Check if DeviceOrientationEvent needs permission (iOS 13+)
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        // iOS 13+ - request permission on first touch
+        document.querySelector('.hero').addEventListener('touchstart', function reqPerm() {
+          DeviceOrientationEvent.requestPermission()
+            .then(function(state) {
+              if (state === 'granted') {
+                window.addEventListener('deviceorientation', handleOrientation);
+              }
+            })
+            .catch(console.error);
+          document.querySelector('.hero').removeEventListener('touchstart', reqPerm);
+        }, { once: true });
+      } else if ('DeviceOrientationEvent' in window) {
+        // Android and older iOS
+        window.addEventListener('deviceorientation', handleOrientation);
+      }
+
+      // Desktop: subtle mouse-based tilt on hero
+      document.querySelector('.hero').addEventListener('mousemove', function(e) {
+        const rect = heroContent.parentElement.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        const rotateX = -y * 8;
+        const rotateY = x * 8;
+        const translateX = x * 10;
+        const translateY = y * 10;
+
+        heroContent.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+      });
+
+      document.querySelector('.hero').addEventListener('mouseleave', function() {
+        heroContent.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translate(0px, 0px)';
+      });
+    })();
+
     // Ship mouse follow
     (function() {
       const section = document.getElementById('ship-section');
@@ -3047,7 +3061,7 @@
       }
 
       function launchConfetti() {
-        const colors = ['#ff4d4d', '#00e5cc', '#f0f4ff', '#ffbd2e', '#27ca40'];
+        const colors = ['#ff4d4d', '#d4566a', '#1a1a1a', '#ffbd2e', '#27ca40'];
         for (let i = 0; i < 150; i++) {
           const confetti = document.createElement('div');
           confetti.style.cssText = `
@@ -3349,7 +3363,7 @@
       const BLOCK_SIZE = 16;
       const NEXT_BLOCK_SIZE = 12;
 
-      const COLORS = ['#00e5cc', '#ff4d4d', '#ffbd2e', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
+      const COLORS = ['#d4566a', '#ff4d4d', '#ffbd2e', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
       const TETROMINOES = [
         [[1,1,1,1]], // I
         [[1,1],[1,1]], // O
