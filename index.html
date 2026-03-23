@@ -10,27 +10,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
-    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/Redaction-Regular.woff2') format('woff2'); }
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/Redaction-Bold.woff2') format('woff2'); }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --accent: #ff4d4d;
-      --accent2: #ff4d4d;
+      --accent2: #00e5cc;
       --btn: #ff4d4d;
       --btn-hover: #e63946;
-      --dark: #fef5f5;
-      --gray-900: #fff0f0;
-      --gray-800: #ffffff;
-      --gray-700: #e8dada;
-      --gray-600: #8b7e7e;
-      --gray-400: #6b5e5e;
-      --gray-300: #4a3f3f;
-      --white: #1a1015;
-      --white-bright: #1a1015;
-      --nav-bg: rgba(254,245,245,0.95);
-      --line-color: rgba(0,0,0,0.06);
+      --dark: #050810;
+      --gray-900: #0a0f1a;
+      --gray-800: #111827;
+      --gray-700: #1e2940;
+      --gray-600: #5a6480;
+      --gray-400: #8892b0;
+      --gray-300: #a8b2d1;
+      --white: #f0f4ff;
+      --white-bright: #f0f4ff;
+      --nav-bg: rgba(5,8,16,0.85);
+      --line-color: rgba(255,255,255,0.06);
     }
 
     html { scroll-behavior: smooth; }
@@ -73,7 +70,7 @@
       }
     }
 
-    h1, h2 { font-family: 'Redaction', serif; line-height: 1.15; font-weight: 400; }
+    h1, h2 { font-family: 'Source Serif 4', serif; line-height: 1.15; font-weight: 400; }
     h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
     a { color: inherit; text-decoration: none; }
 
@@ -102,7 +99,7 @@
       letter-spacing: -0.5px;
     }
     .logo span { color: var(--accent); }
-    .wolf-icon { }
+    .wolf-icon { filter: invert(1) brightness(1.2); }
     .nav-toggle {
       background: none;
       border: 1px solid var(--gray-700);
@@ -119,7 +116,7 @@
     /* ── SLIDE-OUT NAV ── */
     .nav-overlay {
       position: fixed; inset: 0;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,0.6);
       z-index: 150;
       opacity: 0;
       pointer-events: none;
@@ -171,7 +168,7 @@
       transition: background 0.15s, color 0.15s;
     }
     .nav-drawer-links a:hover {
-      background: rgba(0,0,0,0.04);
+      background: rgba(255,255,255,0.04);
       color: var(--white);
     }
     .nav-drawer-links a.active {
@@ -193,7 +190,7 @@
       text-align: left;
     }
     .nav-accordion-toggle:hover {
-      background: rgba(0,0,0,0.04);
+      background: rgba(255,255,255,0.04);
       color: var(--white);
     }
     .nav-accordion-toggle::after {
@@ -278,7 +275,7 @@
       border-radius: 100px;
       font-size: 16px;
       font-weight: 500;
-      color: #ff4d4d;
+      color: #00e5cc;
       margin-bottom: 32px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -383,8 +380,8 @@
     .offering-icon {
       width: 56px;
       height: 56px;
-      background: rgba(255,77,77,0.08);
-      border: 1px solid rgba(255,77,77,0.2);
+      background: rgba(0,229,204,0.1);
+      border: 1px solid rgba(0,229,204,0.2);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -714,8 +711,8 @@
     .use-icon {
       width: 52px;
       height: 52px;
-      background: rgba(255,77,77,0.06);
-      border: 1px solid rgba(255,77,77,0.15);
+      background: rgba(0,229,204,0.08);
+      border: 1px solid rgba(0,229,204,0.18);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -726,7 +723,7 @@
     }
     .use-card:hover .use-icon {
       animation: iconFloat 2.4s ease-in-out infinite;
-      background: rgba(255,77,77,0.12);
+      background: rgba(0,229,204,0.14);
     }
     .use-icon svg {
       width: 26px;
@@ -757,7 +754,7 @@
       text-align: left;
     }
     .use-stat-number {
-      font-family: 'Redaction', serif;
+      font-family: 'Source Serif 4', 'Inter', sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--accent2);
@@ -957,8 +954,8 @@
     .resource-teaser-card .resource-icon {
       width: 52px;
       height: 52px;
-      background: rgba(255,77,77,0.06);
-      border: 1px solid rgba(255,77,77,0.15);
+      background: rgba(0,229,204,0.08);
+      border: 1px solid rgba(0,229,204,0.18);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -969,7 +966,7 @@
     }
     .resource-teaser-card:hover .resource-icon {
       animation: iconFloat 2.4s ease-in-out infinite;
-      background: rgba(255,77,77,0.12);
+      background: rgba(0,229,204,0.14);
     }
     .resource-teaser-card .resource-icon svg {
       width: 26px;
@@ -998,8 +995,8 @@
       display: inline-block;
       width: fit-content;
       padding: 4px 12px;
-      background: rgba(255,77,77,0.08);
-      border: 1px solid rgba(255,77,77,0.2);
+      background: rgba(0,229,204,0.1);
+      border: 1px solid rgba(0,229,204,0.2);
       border-radius: 4px;
       font-size: 0.75rem;
       font-weight: 600;
@@ -1181,7 +1178,7 @@
     }
     .cta-crew {
       width: clamp(280px, 50vw, 600px);
-      filter: drop-shadow(0 0 40px rgba(255,77,77,0.1));
+      filter: drop-shadow(0 0 40px rgba(0,229,204,0.15));
       animation: crewHover 4s ease-in-out infinite;
     }
     @keyframes crewHover {
@@ -1389,7 +1386,7 @@
     .tetris-canvas {
       display: block;
       border: 2px solid var(--accent2);
-      box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
+      box-shadow: 0 0 20px rgba(0, 229, 204, 0.3);
     }
     .tetris-sidebar {
       display: flex;
@@ -1435,7 +1432,7 @@
     }
     .tetris-game-over.active { display: block; }
     .tetris-game-over h3 {
-      font-family: 'Redaction', serif;
+      font-family: 'Source Serif 4', sans-serif;
       font-size: 1.5rem;
       color: var(--accent);
       margin-bottom: 8px;
@@ -1463,7 +1460,7 @@
       background: var(--gray-800);
     }
     .ai-stat-number {
-      font-family: 'Redaction', serif;
+      font-family: 'Source Serif 4', 'Inter', sans-serif;
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--accent);
@@ -1611,7 +1608,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 40px rgba(255,77,77,0.25)) drop-shadow(0 0 80px rgba(255,77,77,0.1));
+      filter: drop-shadow(0 0 40px rgba(255,77,77,0.25)) drop-shadow(0 0 80px rgba(0,229,204,0.15));
       transition: transform 0.15s ease-out;
       animation: shipHover 4s ease-in-out infinite;
     }
@@ -1721,7 +1718,7 @@
     <div class="container">
       <div class="services-header" style="text-align: center;">
         <div class="section-label">Get connected</div>
-        <h2 class="section-title">Stop asking AI questions<br><span style="color: var(--accent);">Start giving it jobs</span></h2>
+        <h2 class="section-title">Stop asking AI questions<br><span style="background: linear-gradient(90deg, #00e5cc, #ff4d4d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Start giving it jobs</span></h2>
         <p class="section-subtitle" style="margin: 0 auto;">Guides, ready-to-deploy workflows, and hands-on consulting — no coding required.</p>
       </div>
       <div class="offerings-grid">
@@ -1847,7 +1844,7 @@
           <!-- Agent: Sales -->
           <g>
             <rect x="40" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
-            <circle cx="100" cy="425" r="16" fill="rgba(255,77,77,0.08)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="100" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
             <path d="M92 425 L100 433 L108 425 M100 417 L100 433" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             <text x="100" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Sales</text>
             <text x="100" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Outreach & Leads</text>
@@ -1856,7 +1853,7 @@
           <!-- Agent: Marketing -->
           <g>
             <rect x="190" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
-            <circle cx="250" cy="425" r="16" fill="rgba(255,77,77,0.08)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="250" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
             <path d="M242 420 L258 420 M242 425 L255 425 M242 430 L250 430" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             <text x="250" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Marketing</text>
             <text x="250" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Content & Social</text>
@@ -1865,7 +1862,7 @@
           <!-- Agent: Operations -->
           <g>
             <rect x="340" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
-            <circle cx="400" cy="425" r="16" fill="rgba(255,77,77,0.08)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="400" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
             <circle cx="400" cy="425" r="6" fill="none" stroke="var(--accent2)" stroke-width="1.5"/>
             <path d="M400 415 L400 419 M400 431 L400 435 M410 425 L406 425 M394 425 L390 425" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             <text x="400" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Operations</text>
@@ -1875,7 +1872,7 @@
           <!-- Agent: Finance -->
           <g>
             <rect x="490" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
-            <circle cx="550" cy="425" r="16" fill="rgba(255,77,77,0.08)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="550" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
             <text x="550" y="430" text-anchor="middle" fill="var(--accent2)" font-family="Satoshi, sans-serif" font-size="14" font-weight="600">$</text>
             <text x="550" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Finance</text>
             <text x="550" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Reports & Books</text>
@@ -1884,7 +1881,7 @@
           <!-- Agent: Support -->
           <g>
             <rect x="640" y="395" width="120" height="95" rx="10" fill="var(--gray-800)" stroke="var(--gray-700)" stroke-width="1.5"/>
-            <circle cx="700" cy="425" r="16" fill="rgba(255,77,77,0.08)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="700" cy="425" r="16" fill="rgba(0,229,204,0.1)" stroke="var(--accent2)" stroke-width="1.5"/>
             <path d="M693 420 L707 420 L707 430 L700 434 L693 430 Z" stroke="var(--accent2)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             <text x="700" y="458" text-anchor="middle" fill="var(--white)" font-family="Satoshi, sans-serif" font-size="13" font-weight="600">Support</text>
             <text x="700" y="475" text-anchor="middle" fill="var(--gray-400)" font-family="Satoshi, sans-serif" font-size="10">Customer Service</text>
@@ -1992,17 +1989,17 @@
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px;">
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent2);">
-          <div style="font-family: 'Redaction', serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">5</div>
+          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">5</div>
           <h4 style="font-family: 'Satoshi', sans-serif; font-size: 1rem; margin-bottom: 8px;">Copy-Paste Steps</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">One install command. One verification. One launch. No coding experience or dependencies required.</p>
         </div>
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent);">
-          <div style="font-family: 'Redaction', serif; font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">10</div>
+          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">10</div>
           <h4 style="font-family: 'Satoshi', sans-serif; font-size: 1rem; margin-bottom: 8px;">Security Best Practices</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">API key safety, file permissions, project isolation, and more. Use Claude Code responsibly from day one.</p>
         </div>
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent2);">
-          <div style="font-family: 'Redaction', serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">$0</div>
+          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">$0</div>
           <h4 style="font-family: 'Satoshi', sans-serif; font-size: 1rem; margin-bottom: 8px;">Completely Free</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">If you have a Claude Pro subscription, Claude Code is already included. This guide gets you from zero to running.</p>
         </div>
@@ -3050,7 +3047,7 @@
       }
 
       function launchConfetti() {
-        const colors = ['#ff4d4d', '#ff6b6b', '#1a1015', '#ffbd2e', '#27ca40'];
+        const colors = ['#ff4d4d', '#00e5cc', '#f0f4ff', '#ffbd2e', '#27ca40'];
         for (let i = 0; i < 150; i++) {
           const confetti = document.createElement('div');
           confetti.style.cssText = `
@@ -3352,7 +3349,7 @@
       const BLOCK_SIZE = 16;
       const NEXT_BLOCK_SIZE = 12;
 
-      const COLORS = ['#ff4d4d', '#ff6b6b', '#ffbd2e', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
+      const COLORS = ['#00e5cc', '#ff4d4d', '#ffbd2e', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
       const TETROMINOES = [
         [[1,1,1,1]], // I
         [[1,1],[1,1]], // O
@@ -3651,8 +3648,6 @@
       addLine('<span class="comment"># Type "help" for commands — or try "tetris"</span>');
       addLine('');
     })();
-
-
 
 
   </script>
