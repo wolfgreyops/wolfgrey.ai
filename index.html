@@ -10,7 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
-    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }
+    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/Redaction-Regular.woff2') format('woff2'); }
+    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/Redaction-Bold.woff2') format('woff2'); }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --accent: #ff4d4d;
@@ -70,7 +73,7 @@
       }
     }
 
-    h1, h2 { font-family: 'Source Serif 4', serif; line-height: 1.15; font-weight: 400; }
+    h1, h2 { font-family: 'Redaction', serif; line-height: 1.15; font-weight: 400; }
     h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
     a { color: inherit; text-decoration: none; }
 
@@ -754,7 +757,7 @@
       text-align: left;
     }
     .use-stat-number {
-      font-family: 'Source Serif 4', 'Inter', sans-serif;
+      font-family: 'Redaction', serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--accent2);
@@ -1432,7 +1435,7 @@
     }
     .tetris-game-over.active { display: block; }
     .tetris-game-over h3 {
-      font-family: 'Source Serif 4', sans-serif;
+      font-family: 'Redaction', serif;
       font-size: 1.5rem;
       color: var(--accent);
       margin-bottom: 8px;
@@ -1460,7 +1463,7 @@
       background: var(--gray-800);
     }
     .ai-stat-number {
-      font-family: 'Source Serif 4', 'Inter', sans-serif;
+      font-family: 'Redaction', serif;
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--accent);
@@ -1989,17 +1992,17 @@
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px;">
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent2);">
-          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">5</div>
+          <div style="font-family: 'Redaction', serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">5</div>
           <h4 style="font-family: 'Satoshi', sans-serif; font-size: 1rem; margin-bottom: 8px;">Copy-Paste Steps</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">One install command. One verification. One launch. No coding experience or dependencies required.</p>
         </div>
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent);">
-          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">10</div>
+          <div style="font-family: 'Redaction', serif; font-size: 2rem; font-weight: 600; color: var(--accent); margin-bottom: 8px;">10</div>
           <h4 style="font-family: 'Satoshi', sans-serif; font-size: 1rem; margin-bottom: 8px;">Security Best Practices</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">API key safety, file permissions, project isolation, and more. Use Claude Code responsibly from day one.</p>
         </div>
         <div style="background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 12px; padding: 28px; border-top: 3px solid var(--accent2);">
-          <div style="font-family: 'Source Serif 4', sans-serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">$0</div>
+          <div style="font-family: 'Redaction', serif; font-size: 2rem; font-weight: 600; color: var(--accent2); margin-bottom: 8px;">$0</div>
           <h4 style="font-family: 'Satoshi', sans-serif; font-size: 1rem; margin-bottom: 8px;">Completely Free</h4>
           <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.6;">If you have a Claude Pro subscription, Claude Code is already included. This guide gets you from zero to running.</p>
         </div>
