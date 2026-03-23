@@ -16,20 +16,20 @@
 
     :root {
       --accent:    #ff4d4d;
-      --accent2:   #00e5cc;
-      --dark:      #050810;
-      --gray-900:  #0a0f1a;
-      --gray-800:  #111827;
-      --gray-700:  #1e2940;
-      --gray-600:  #5a6480;
-      --gray-400:  #8892b0;
-      --gray-300:  #a8b2d1;
-      --white:     #f0f4ff;
+      --accent2:   #ff4d4d;
+      --dark:      #fef5f5;
+      --gray-900:  #fff0f0;
+      --gray-800:  #ffffff;
+      --gray-700:  #e8dada;
+      --gray-600:  #8b7e7e;
+      --gray-400:  #6b5e5e;
+      --gray-300:  #4a3f3f;
+      --white:     #1a1015;
       --btn: #ff4d4d;
       --btn-hover: #e63946;
-      --white-bright: #f0f4ff;
-      --nav-bg:    rgba(5,8,16,0.9);
-      --line-color: rgba(255,255,255,0.06);
+      --white-bright: #1a1015;
+      --nav-bg:    rgba(254,245,245,0.95);
+      --line-color: rgba(0,0,0,0.06);
     }
 
     html { scroll-behavior: smooth; }
@@ -66,10 +66,10 @@
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
     .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; }
     .logo span { color: var(--accent); }
-    .wolf-icon { filter: invert(1) brightness(1.2); }
+    .wolf-icon { }
     .nav-toggle { background: none; border: 1px solid var(--gray-700); color: var(--white); font-size: 1.25rem; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: border-color 0.2s; line-height: 1; }
     .nav-toggle:hover { border-color: var(--gray-400); }
-    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .nav-overlay.open { opacity: 1; pointer-events: all; }
     .nav-drawer { position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--gray-800); border-left: 1px solid var(--gray-700); z-index: 300; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
     .nav-drawer.open { transform: translateX(0); }
@@ -78,12 +78,12 @@
     .nav-drawer-close:hover { color: var(--white); }
     .nav-drawer-links { display: flex; flex-direction: column; padding: 16px 0; flex: 1; }
     .nav-drawer-links a { padding: 12px 24px; color: var(--gray-300); font-size: 0.95rem; transition: color 0.2s, background 0.2s; }
-    .nav-drawer-links a:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+    .nav-drawer-links a:hover { color: var(--white); background: rgba(0,0,0,0.04); }
     .nav-accordion-toggle { background: none; border: none; padding: 12px 24px; color: var(--gray-300); font-size: 0.95rem; cursor: pointer; text-align: left; width: 100%; transition: color 0.2s; display: flex; align-items: center; justify-content: space-between; }
     .nav-accordion-toggle::after { content: '›'; font-size: 1.1rem; transition: transform 0.2s; }
     .nav-accordion-toggle.open::after { transform: rotate(90deg); }
     .nav-accordion-toggle:hover { color: var(--white); }
-    .nav-accordion-panel { display: none; background: rgba(0,0,0,0.2); }
+    .nav-accordion-panel { display: none; background: rgba(0,0,0,0.04); }
     .nav-accordion-panel.open { display: block; }
     .nav-accordion-panel a { padding-left: 40px; font-size: 0.9rem; }
     .nav-drawer-cta { margin: 16px; padding: 12px 24px; background: var(--accent); color: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-align: center; transition: background 0.2s; }
@@ -106,14 +106,14 @@
       font-family: 'Doto', monospace;
       font-size: 0.75rem;
       letter-spacing: 0.12em;
-      color: var(--accent2);
+      color: var(--white);
       text-transform: uppercase;
       margin-bottom: 24px;
       display: inline-block;
-      background: rgba(0, 229, 204, 0.08);
+      background: rgba(0, 0, 0, 0.05);
       padding: 6px 14px;
       border-radius: 100px;
-      border: 1px solid rgba(0, 229, 204, 0.2);
+      border: 1px solid rgba(0, 0, 0, 0.12);
     }
     .hero h1 {
       font-family: 'Source Serif 4', serif;
@@ -144,7 +144,7 @@
       padding: 14px 28px;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       letter-spacing: 0.01em;
       transition: background 0.2s, transform 0.15s;
     }
@@ -166,9 +166,9 @@
 
     .section-label {
       font-family: 'Doto', monospace;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       letter-spacing: 0.14em;
-      color: var(--accent2);
+      color: var(--white);
       text-transform: uppercase;
       margin-bottom: 16px;
     }
@@ -182,7 +182,7 @@
       color: var(--white);
     }
     .section-intro {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--gray-300);
       max-width: 600px;
       line-height: 1.7;
@@ -192,10 +192,8 @@
     /* PAIN CARDS */
     .pain-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      max-width: 760px;
-      margin: 0 auto;
     }
     .pain-card {
       background: var(--gray-800);
@@ -205,6 +203,7 @@
       position: relative;
       overflow: hidden;
       transition: border-color 0.2s, transform 0.15s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .pain-card:hover { border-color: var(--accent); transform: translateY(-2px); }
     .pain-card::before {
@@ -221,13 +220,13 @@
       display: block;
     }
     .pain-card h3 {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 8px;
       color: var(--white);
     }
     .pain-card p {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: var(--gray-400);
       line-height: 1.6;
     }
@@ -237,8 +236,7 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      max-width: 620px;
-      margin: 0 auto;
+      max-width: none;
       position: relative;
     }
     .steps::before {
@@ -262,7 +260,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: var(--gray-900);
+      background: var(--gray-800);
       border: 2px solid var(--gray-700);
       display: flex;
       align-items: center;
@@ -275,13 +273,13 @@
       position: relative;
     }
     .step-body h3 {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 600;
       margin-bottom: 6px;
       color: var(--white);
     }
     .step-body p {
-      font-size: 0.92rem;
+      font-size: 1rem;
       color: var(--gray-400);
       line-height: 1.65;
     }
@@ -289,56 +287,55 @@
     /* EXAMPLES */
     .examples-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      max-width: 760px;
-      margin: 0 auto;
     }
     .example-card {
-      background: var(--gray-900);
+      background: var(--gray-800);
       border: 1px solid var(--gray-700);
       border-radius: 10px;
       padding: 24px;
       transition: border-color 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .example-card:hover { border-color: var(--accent); }
     .example-card .tag {
-      font-family: 'Doto', monospace;
-      font-size: 0.65rem;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.85rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent2);
-      background: rgba(0, 229, 204, 0.08);
-      border: 1px solid rgba(0, 229, 204, 0.2);
-      padding: 3px 10px;
-      border-radius: 100px;
+      color: var(--accent);
+      background: none;
+      border: none;
+      padding: 0;
+      border-radius: 0;
       display: inline-block;
       margin-bottom: 12px;
     }
     .example-card h3 {
-      font-size: 0.95rem;
+      font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 6px;
       color: var(--white);
     }
     .example-card p {
-      font-size: 0.85rem;
+      font-size: 1rem;
       color: var(--gray-400);
       line-height: 1.6;
     }
 
     /* TRUTH BOX */
     .truth-box {
-      max-width: 620px;
-      margin: 0 auto;
-      background: var(--gray-900);
+      max-width: none;
+      background: var(--gray-800);
       border: 1px solid var(--gray-700);
       border-left: 4px solid var(--accent);
       border-radius: 12px;
       padding: 36px 40px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .truth-box p {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--gray-300);
       line-height: 1.75;
     }
@@ -348,10 +345,9 @@
     /* PRODUCTS TEASER */
     .products-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      max-width: 760px;
-      margin: 0 auto 40px;
+      margin-bottom: 40px;
     }
     .product-card {
       background: var(--gray-800);
@@ -359,6 +355,7 @@
       border-radius: 12px;
       padding: 28px 24px;
       transition: border-color 0.2s, transform 0.15s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .product-card:hover { border-color: var(--accent); transform: translateY(-2px); }
     .product-card .price-tag {
@@ -390,9 +387,9 @@
     }
     .final-cta .eyebrow {
       font-family: 'Doto', monospace;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       letter-spacing: 0.14em;
-      color: var(--accent2);
+      color: var(--white);
       text-transform: uppercase;
       margin-bottom: 20px;
     }
@@ -406,7 +403,7 @@
       color: var(--white);
     }
     .final-cta p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--gray-400);
       max-width: 480px;
       margin: 0 auto 40px;
@@ -427,7 +424,7 @@
       padding: 14px 28px;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       transition: background 0.2s, transform 0.15s;
     }
     .btn-primary:hover { background: #e03030; transform: translateY(-1px); }
@@ -436,15 +433,15 @@
       align-items: center;
       gap: 8px;
       background: transparent;
-      color: var(--gray-300);
+      color: var(--white);
       padding: 14px 28px;
       border-radius: 8px;
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 1rem;
       border: 1px solid var(--gray-700);
       transition: border-color 0.2s, color 0.2s, transform 0.15s;
     }
-    .btn-ghost:hover { border-color: var(--gray-400); color: var(--white); transform: translateY(-1px); }
+    .btn-ghost:hover { border-color: var(--gray-400); color: var(--accent); transform: translateY(-1px); }
 
     /* FOOTER */
     .footer {
@@ -470,6 +467,8 @@
       section { padding: 60px 20px; }
       .hero { padding: 120px 20px 60px; }
       .truth-box { padding: 28px 24px; }
+      .pain-grid, .examples-grid { grid-template-columns: 1fr; }
+      .products-row { grid-template-columns: 1fr; }
       .footer { flex-direction: column; gap: 8px; text-align: center; }
       .steps::before { left: 19px; }
     }
@@ -480,14 +479,14 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a href="/" class="logo"><img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 38px; vertical-align: middle;"></a>
+      <a href="/" class="logo"><img src="../logo.png" alt="wolfgrey" style="height: 32px; vertical-align: middle;"></a>
       <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
     </div>
   </nav>
   <div class="nav-overlay" onclick="toggleNav()"></div>
   <div class="nav-drawer">
     <div class="nav-drawer-header">
-      <a href="/" class="logo"><img src="/logo.png" alt="wolfgrey" class="wolf-icon" style="height: 32px; vertical-align: middle;"></a>
+      <a href="/" class="logo"><img src="../logo.png" alt="wolfgrey" style="height: 28px; vertical-align: middle;"></a>
       <button class="nav-drawer-close" onclick="toggleNav()" aria-label="Close menu">&times;</button>
     </div>
     <div class="nav-drawer-links">
@@ -508,8 +507,9 @@
   <!-- HERO -->
   <div class="hero">
     <div class="container">
-      <h1>AI is eating the world.<br>You're eating lunch at your desk for the fourth time this week because you're too busy.<br><em>These two things are related.</em></h1>
-      <a href="/survey" class="hero-cta">Fix This For Me →</a>
+      <h1>You're drowning in busywork.<br>AI can fix that.</h1>
+      <p class="hero-sub">We help small businesses automate the repetitive stuff — so you can focus on the work that actually grows your business.</p>
+      <a href="mailto:hey@wolfgrey.ai" class="hero-cta">Book a Free Call →</a>
     </div>
   </div>
 
@@ -518,7 +518,7 @@
   <!-- THE PROBLEM -->
   <section class="alt">
     <div class="container">
-      <div class="section-label">Sound Familiar?</div>
+      <div class="section-label">Where Your Time Goes</div>
       <h2 class="section-title">The stuff eating your day</h2>
       <p class="section-intro">Most small business owners spend hours every week on work that's important but repetitive — the kind of thing that keeps you from growing.</p>
       <div class="pain-grid">
@@ -667,28 +667,22 @@
 
   <div class="divider"></div>
 
-  <!-- PRODUCTS TEASER -->
+  <!-- WHAT YOU GET -->
   <section class="alt">
     <div class="container">
-      <div class="section-label">Where to Start</div>
-      <h2 class="section-title">Pick your starting point</h2>
-      <p class="section-intro">You don't have to do everything at once. Start small, see results, build from there.</p>
-      <div class="products-row">
-        <a href="/get-playbook" class="product-card">
-          <div class="price-tag">$49 — Most Popular</div>
-          <h3>Small Business AI Playbook</h3>
-          <p>40+ ready-to-use AI templates and a 90-day roadmap. Do it yourself with a clear guide that actually works.</p>
-        </a>
-        <a href="/get-mastery" class="product-card">
-          <div class="price-tag">$199 — Deep Dive</div>
-          <h3>Claude Mastery Series</h3>
-          <p>The complete course. Hands-on walkthroughs for building real AI systems in your business — step by step.</p>
-        </a>
-        <a href="/consulting" class="product-card">
-          <div class="price-tag">Done For You</div>
-          <h3>1-on-1 AI Consulting</h3>
-          <p>We do it with you — or for you. Identify your biggest bottlenecks and build solutions that run on autopilot.</p>
-        </a>
+      <div class="section-label">The Call</div>
+      <h2 class="section-title">Here's what happens when you reach out</h2>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <span class="pain-icon">🎯</span>
+          <h3>We find the bottleneck</h3>
+          <p>A short, honest conversation about where you're losing time. No jargon. No pitch deck. Just: what's eating your week?</p>
+        </div>
+        <div class="pain-card">
+          <span class="pain-icon">🛠️</span>
+          <h3>We show you what's possible</h3>
+          <p>You'll leave with a clear picture of what AI can do for your specific business — not a generic demo.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -696,12 +690,11 @@
   <!-- FINAL CTA -->
   <div class="final-cta">
     <div class="container">
-      <div class="eyebrow">Ready When You Are</div>
-      <h2>Start with something small.<br>See what's possible.</h2>
-      <p>No commitment. No tech skills needed. Just pick the option that fits where you're at right now.</p>
+      <div class="eyebrow">No Commitment</div>
+      <h2>One conversation.<br>That's all it takes to start.</h2>
+      <p>Tell us what's eating your time. We'll tell you exactly how to fix it — free, no strings attached.</p>
       <div class="cta-buttons">
-        <a href="/products" class="btn-primary">See All Products →</a>
-        <a href="mailto:hey@wolfgrey.ai" class="btn-ghost">Talk to a Human →</a>
+        <a href="mailto:hey@wolfgrey.ai" class="btn-primary">Book a Free Call →</a>
       </div>
     </div>
   </div>
@@ -709,7 +702,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-logo">wolf<span>grey</span></div>
-    <p>© 2026 wolfgrey · <a href="/" style="color:#5a6480;text-decoration:underline;">wolfgrey.ai</a></p>
+    <p>© 2026 wolfgrey · <a href="/" style="color:#8b7e7e;text-decoration:underline;">wolfgrey.ai</a></p>
   </footer>
 
   <script>
