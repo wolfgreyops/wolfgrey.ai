@@ -454,15 +454,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid var(--gray-800);
+      border-top: 1px solid var(--gray-700);
+      position: relative;
+      z-index: 2;
     }
-    .footer-logo {
-      font-family: 'Source Serif 4', serif;
-      font-weight: 300;
-      font-size: 1rem;
-      color: var(--white);
+    .footer-logo img {
+      height: 28px;
+      filter: brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(5765%) hue-rotate(338deg) brightness(101%) contrast(101%);
     }
-    .footer-logo span { color: var(--accent); }
     .footer p { font-size: 0.8rem; color: var(--gray-600); }
 
     /* RESPONSIVE */
@@ -691,7 +690,7 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-logo">wolf<span>grey</span></div>
+    <div class="footer-logo"><a href="/"><img src="../logo.png" alt="wolfgrey"></a></div>
     <p>© 2026 wolfgrey · <a href="/" style="color:#8b7e7e;text-decoration:underline;">wolfgrey.ai</a></p>
   </footer>
 
