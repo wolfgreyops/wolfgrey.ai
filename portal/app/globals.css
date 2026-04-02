@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-red: #C83C32;
+  --brand-teal: #4AA3A3;
+}
+
+body {
+  @apply bg-gray-900 text-gray-100 antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Focus states */
+:focus-visible {
+  @apply outline-none ring-2 ring-brand-teal ring-offset-2 ring-offset-gray-900;
+}
+
+/* Button base */
+.btn {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+}
+
+.btn-primary {
+  @apply bg-brand-teal text-white hover:bg-opacity-90;
+}
+
+.btn-secondary {
+  @apply bg-gray-700 text-white hover:bg-gray-600;
+}
+
+/* Card styles */
+.card {
+  @apply bg-gray-800 border border-gray-700 rounded-xl p-6;
+}
+
+/* Input styles */
+.input {
+  @apply w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal;
+}
