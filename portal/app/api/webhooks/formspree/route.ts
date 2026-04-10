@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server'
 
 export const maxDuration = 60
 
-const ALLOWED_ORIGINS = ['https://wolfgrey.ai', 'https://www.wolfgrey.ai']
+const ALLOWED_ORIGINS = ['https://wolfgrey.ai', 'https://www.wolfgrey.ai', 'https://proposals.wolfgrey.ai']
 const NOTIFY_EMAIL = 'hey@wolfgrey.ai'
 const PROPOSAL_BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || 'https://portal.wolfgrey.ai'
+  process.env.NEXT_PUBLIC_APP_URL || 'https://wolfgrey.ai'
 
 // Reference proposal for Claude to match style/structure
 const REFERENCE_PROPOSAL = {

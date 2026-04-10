@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/proposals/:path*",
+      "destination": "https://portal-wolfgreys-projects.vercel.app/proposals/:path*"
+    },
+    {
+      "source": "/api/webhooks/formspree",
+      "destination": "https://portal-wolfgreys-projects.vercel.app/api/webhooks/formspree"
+    }
+  ]
+}
