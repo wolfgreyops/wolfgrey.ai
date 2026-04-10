@@ -171,22 +171,24 @@ export default async function ProposalPage({
     },
   }
 
-  // Try mock data first, then Supabase
-  let proposal: Proposal | null = mockProposals[slug] || null
+  // Try Supabase first, fall back to mock data
+  let proposal: Proposal | null = null
+
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('proposals')
+      .select('*')
+      .eq('slug', slug)
+      .single()
+
+    proposal = data as Proposal | null
+  } catch {
+    // Supabase not connected yet
+  }
 
   if (!proposal) {
-    try {
-      const supabase = await createClient()
-      const { data } = await supabase
-        .from('proposals')
-        .select('*')
-        .eq('slug', slug)
-        .single()
-
-      proposal = data as Proposal | null
-    } catch {
-      // Supabase not connected yet
-    }
+    proposal = mockProposals[slug] || null
   }
 
   if (!proposal) notFound()
