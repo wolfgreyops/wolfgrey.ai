@@ -6,40 +6,7 @@ export const maxDuration = 60
 
 const ALLOWED_ORIGINS = ['https://wolfgrey.ai', 'https://www.wolfgrey.ai', 'https://proposals.wolfgrey.ai']
 const NOTIFY_EMAIL = 'hey@wolfgrey.ai'
-const PROPOSAL_BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || 'https://wolfgrey.ai'
-
-// Reference proposal for Claude to match style/structure
-const REFERENCE_PROPOSAL = {
-  problem_text:
-    "Glenn is spending 5+ hours a day on lead gen tasks that follow the same pattern every time. Morgan is repeating himself across teams and manually tracking orders in spreadsheets. Leads go cold between steps because follow-up is manual, and nothing talks to anything else.",
-  phases: [
-    {
-      name: 'Phase 1',
-      title: 'Lead Engine',
-      description:
-        "Glenn's 5-hour daily grind of sourcing leads, writing cold emails, and managing outreach manually across UpLead, LinkedIn, and Mailchimp.",
-      items: [
-        'Automated lead enrichment pipeline — new UpLead contacts get formatted, scored, and pushed into your CRM with zero manual entry',
-        'AI-assisted cold email drafts generated from prospect data — Glenn reviews and sends, not writes from scratch',
-        'LinkedIn post scheduling system with a content template library',
-        'Mailchimp campaign triggers tied to CRM stages so follow-up emails fire automatically',
-      ],
-      time_saved: '~3 hours/day saved for Glenn',
-      setup_price_cents: 225000,
-    },
-  ],
-  comparison: [
-    {
-      label: "Glenn's lead gen",
-      before: '5 hrs/day manual',
-      after: '~2 hrs/day reviewing + refining',
-    },
-  ],
-  retainer_price_cents: 150000,
-  retainer_description:
-    'Monitoring, optimization, up to 2 new automation builds per month, and priority support.',
-}
+const PROPOSAL_BASE_URL = 'https://proposals.wolfgrey.ai'
 
 function generateSlug(name: string): string {
   const base = name
@@ -94,26 +61,48 @@ function formatArray(val: unknown): string {
   return ''
 }
 
+// The Gobi proposal HTML serves as the template reference
 const SYSTEM_PROMPT = `You are a proposal generator for wolfgrey.ai, an AI automation consultancy for small businesses.
 
-Given a prospect's survey responses, generate a structured proposal JSON object. Match the tone and style of this reference proposal:
+Given a prospect's survey responses, generate a COMPLETE, self-contained HTML page for an automation proposal. The HTML must be a single file with all CSS inline in a <style> tag. No external dependencies except Google Fonts.
 
-${JSON.stringify(REFERENCE_PROPOSAL, null, 2)}
+Use this exact design system:
+- Fonts: DM Sans (body), Source Serif 4 (headings) via Google Fonts
+- Colors: --black: #111111, --red: #ff4d4d (CTAs, section labels), --teal: #00c9b0 (accents, time-saved badges, list bullets), --gray-600: #555555 (body text), --gray-400: #999999, --gray-200: #e0e0e0 (borders), --gray-100: #f4f4f4 (card backgrounds), --white: #ffffff
+- Layout: max-width 720px, centered, 60px padding
+- Section labels: 11px uppercase, red, letter-spacing 0.1em
+- Headings: Source Serif 4, font-weight 300, letter-spacing -0.02em
+- Body text: 15px, color #555555, line-height 1.7
+- Phase cards: background #f4f4f4, border-radius 12px, 32px padding, 3px left border in red
+- Phase bullets: teal dot before each item
+- Time saved badge: white background, 1px border #e0e0e0, teal text, 6px 14px padding, border-radius 6px
+- Pricing table: clean, minimal, total row has 2px top border
+- Comparison table: 3 columns (label, Before in gray, After in black)
+- CTA: red button (#ff4d4d), white text, 14px 36px padding, border-radius 8px, links to https://cal.com/wolfgrey/ai-kickoff
+- Dividers: 1px solid #e0e0e0, 48px margin
+- Header: logo (img src="/logo.png") + "wolfgrey.ai" left, "Automation Proposal" + date right
+- Footer: centered, small logo + "wolfgrey.ai — AI systems that run small businesses."
 
-Rules:
-- problem_text: 2-3 sentences synthesizing their pain points. Direct, specific to their answers. No jargon.
-- phases: 2-4 phases. Each phase should solve a specific cluster of problems from the survey.
-  - name: "Phase 1", "Phase 2", etc.
-  - title: Short, punchy name (e.g., "Lead Engine", "Pipeline Autopilot", "Operations Layer")
-  - description: One sentence describing the pain this phase solves, written about the prospect
-  - items: 3-5 specific automation deliverables as bullet strings. Use em dashes. Be concrete.
-  - time_saved: Realistic estimate like "~3 hours/day saved" or "~5 hours/week saved"
-  - setup_price_cents: Integer. Phase 1 typically 150000-250000, later phases 100000-200000. Base on complexity.
-- comparison: 4-6 rows showing before/after impact. Each has label, before, after.
-- retainer_price_cents: Integer, typically 100000-150000 (monthly ongoing support)
-- retainer_description: One sentence describing what the retainer covers.
+Structure:
+1. Header with wolfgrey.ai branding and date
+2. "Prepared for" section with client name and company
+3. "The Problem" section — 2-3 sentences synthesizing their pain points
+4. Divider
+5. Phase cards (2-4 phases), each with: phase number label, title, description, bullet items, time saved badge
+6. Divider
+7. Pricing table with setup costs per phase + monthly retainer row + total
+8. Divider
+9. "What Changes" before/after comparison table (4-6 rows)
+10. Divider
+11. CTA section: "Next Step" heading, short paragraph, red "Book a Call" button
+12. Footer
 
-Respond with ONLY valid JSON. No markdown fences. No explanation.`
+Pricing guidelines:
+- Phase setup: $1,500-$2,500 each depending on complexity
+- Monthly retainer: $1,000-$1,500
+- Format prices as "$X,XXX" in the HTML
+
+Generate the COMPLETE HTML. Start with <!DOCTYPE html> and end with </html>. Nothing else.`
 
 function corsHeaders(origin: string | null) {
   const allowedOrigin =
@@ -137,12 +126,10 @@ export async function POST(req: Request) {
   try {
     const data = await req.json()
 
-    // Extract contact info
     const contactName = String(data.contact_name || data['contact_name'] || 'Unknown')
     const contactEmail = String(data.contact_email || data['contact_email'] || '')
     const company = extractCompanyFromEmail(contactEmail)
 
-    // Format survey answers for Claude
     const surveyText = formatSurveyForPrompt(data)
 
     if (!surveyText.trim()) {
@@ -152,56 +139,37 @@ export async function POST(req: Request) {
       )
     }
 
-    // Generate proposal with Claude
+    // Generate full HTML proposal with Claude
     const anthropic = new Anthropic()
+
+    const today = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric',
+    })
 
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: SYSTEM_PROMPT,
       messages: [
         {
           role: 'user',
-          content: `Generate a proposal for this prospect:\n\n${surveyText}`,
+          content: `Generate a proposal for:\nClient: ${contactName}\nCompany: ${company || 'N/A'}\nDate: ${today}\n\nSurvey responses:\n${surveyText}`,
         },
       ],
     })
 
-    const responseText =
+    const htmlContent =
       message.content[0].type === 'text' ? message.content[0].text : ''
 
-    // Strip markdown fences if present
-    const cleanJson = responseText
-      .replace(/^```(?:json)?\s*/m, '')
-      .replace(/\s*```$/m, '')
-      .trim()
-
-    let proposal: {
-      problem_text: string
-      phases: Array<{
-        name: string
-        title: string
-        description: string
-        items: string[]
-        time_saved: string
-        setup_price_cents: number
-      }>
-      comparison: Array<{ label: string; before: string; after: string }>
-      retainer_price_cents: number
-      retainer_description: string
-    }
-
-    try {
-      proposal = JSON.parse(cleanJson)
-    } catch {
-      console.error('Failed to parse Claude response:', cleanJson)
+    if (!htmlContent.includes('<!DOCTYPE html>')) {
+      console.error('Claude did not return valid HTML')
       return NextResponse.json(
-        { error: 'Failed to generate proposal structure' },
+        { error: 'Failed to generate proposal' },
         { status: 500, headers }
       )
     }
 
-    // Generate slug and insert into Supabase
+    // Store in Supabase
     const slug = generateSlug(contactName)
     const supabase = createDirectServiceClient()
 
@@ -209,14 +177,14 @@ export async function POST(req: Request) {
       slug,
       client_name: contactName,
       client_company: company,
-      client_website: company ? `${contactEmail.split('@')[1]}` : null,
+      client_website: company ? contactEmail.split('@')[1] : null,
       prepared_date: new Date().toISOString().split('T')[0],
       status: 'draft',
-      problem_text: proposal.problem_text,
-      phases: proposal.phases,
-      comparison: proposal.comparison,
-      retainer_price_cents: proposal.retainer_price_cents,
-      retainer_description: proposal.retainer_description,
+      problem_text: '',
+      phases: [],
+      comparison: [],
+      retainer_price_cents: 0,
+      html_content: htmlContent,
       cta_url: 'https://cal.com/wolfgrey/ai-kickoff',
       cta_text: 'Book a Call',
     })
@@ -229,17 +197,12 @@ export async function POST(req: Request) {
       )
     }
 
-    // Send notification email via Resend
-    const proposalUrl = `${PROPOSAL_BASE_URL}/proposals/${slug}`
+    // Send notification email
+    const proposalUrl = `${PROPOSAL_BASE_URL}/api/proposals/${slug}`
 
     try {
       const { Resend } = await import('resend')
       const resend = new Resend(process.env.RESEND_API_KEY)
-
-      const totalSetup = proposal.phases.reduce(
-        (sum, p) => sum + p.setup_price_cents,
-        0
-      )
 
       await resend.emails.send({
         from: 'wolfgrey proposals <proposals@wolfgrey.ai>',
@@ -250,17 +213,12 @@ export async function POST(req: Request) {
             <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">New Proposal Draft</p>
             <h2 style="font-size: 24px; font-weight: 400; margin-bottom: 8px;">${contactName}</h2>
             ${company ? `<p style="color: #666; margin-bottom: 24px;">${company} &middot; ${contactEmail}</p>` : `<p style="color: #666; margin-bottom: 24px;">${contactEmail}</p>`}
-            <p style="color: #333; line-height: 1.6; margin-bottom: 24px;">${proposal.problem_text}</p>
-            <p style="color: #666; font-size: 14px; margin-bottom: 24px;">
-              ${proposal.phases.length} phases &middot; $${(totalSetup / 100).toLocaleString()} setup &middot; $${(proposal.retainer_price_cents / 100).toLocaleString()}/mo retainer
-            </p>
             <a href="${proposalUrl}" style="display: inline-block; background: #ff4d4d; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Review Proposal</a>
-            <p style="color: #999; font-size: 13px; margin-top: 32px;">This proposal is in <strong>draft</strong> status. The prospect cannot see it yet.</p>
+            <p style="color: #999; font-size: 13px; margin-top: 32px;">This proposal is in <strong>draft</strong> status.</p>
           </div>
         `,
       })
     } catch (emailErr) {
-      // Log but don't fail the webhook — the proposal is saved
       console.error('Email notification failed:', emailErr)
     }
 
