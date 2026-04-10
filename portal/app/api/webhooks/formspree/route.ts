@@ -143,27 +143,44 @@ export async function POST(req: Request) {
       )
     }
 
-    // Generate full HTML proposal with Claude
+    // Generate proposal HTML and internal action plan in parallel
     const anthropic = new Anthropic()
 
     const today = new Date().toLocaleDateString('en-US', {
       year: 'numeric', month: 'long', day: 'numeric',
     })
 
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 8192,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: `Generate a proposal for:\nClient: ${contactName}\nCompany: ${company || 'N/A'}\nDate: ${today}\n\nSurvey responses:\n${surveyText}`,
-        },
-      ],
-    })
+    const userPrompt = `Generate a proposal for:\nClient: ${contactName}\nCompany: ${company || 'N/A'}\nDate: ${today}\n\nSurvey responses:\n${surveyText}`
+
+    const [message, planMessage] = await Promise.all([
+      anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 8192,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userPrompt }],
+      }),
+      anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2048,
+        system: `You are an internal ops planner for wolfgrey.ai, an AI automation consultancy. Given a prospect's survey responses, write a concise internal action plan — what wolfgrey needs to do if this proposal is approved.
+
+Format as HTML for an email. Keep it practical and specific to this client. Include:
+- Tools to set up or integrate (based on what they use)
+- Specific automations to build per phase
+- Data migrations or imports needed
+- Training/handoff items
+- Timeline estimates per phase
+- Any risks or dependencies to flag
+
+Use simple HTML: <h3> for section headers, <ul><li> for items. No wrapper div. No CSS. Keep it under 20 bullet points total.`,
+        messages: [{ role: 'user', content: `Survey data:\n${surveyText}` }],
+      }),
+    ])
 
     const htmlContent =
       message.content[0].type === 'text' ? message.content[0].text : ''
+    const actionPlan =
+      planMessage.content[0].type === 'text' ? planMessage.content[0].text : ''
 
     if (!htmlContent.includes('<!DOCTYPE html>')) {
       console.error('Claude did not return valid HTML')
@@ -201,7 +218,7 @@ export async function POST(req: Request) {
       )
     }
 
-    // Send notification email
+    // Send notification email with action plan
     const proposalUrl = `${PROPOSAL_BASE_URL}/api/proposals/${slug}`
 
     try {
@@ -213,12 +230,18 @@ export async function POST(req: Request) {
         to: NOTIFY_EMAIL,
         subject: `Draft proposal ready: ${contactName}`,
         html: `
-          <div style="font-family: -apple-system, sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 20px;">
+          <div style="font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
             <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">New Proposal Draft</p>
             <h2 style="font-size: 24px; font-weight: 400; margin-bottom: 8px;">${contactName}</h2>
             ${company ? `<p style="color: #666; margin-bottom: 24px;">${company} &middot; ${contactEmail}</p>` : `<p style="color: #666; margin-bottom: 24px;">${contactEmail}</p>`}
-            <a href="${proposalUrl}" style="display: inline-block; background: #ff4d4d; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Review Proposal</a>
-            <p style="color: #999; font-size: 13px; margin-top: 32px;">This proposal is in <strong>draft</strong> status.</p>
+            <a href="${proposalUrl}" style="display: inline-block; background: #ff4d4d; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-bottom: 32px;">Review Proposal</a>
+            <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 32px 0;">
+            <p style="color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Internal Action Plan</p>
+            <div style="font-size: 14px; color: #333; line-height: 1.7;">
+              ${actionPlan}
+            </div>
+            <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 32px 0;">
+            <p style="color: #999; font-size: 13px;">This proposal is in <strong>draft</strong> status. The prospect cannot see it until you share the link.</p>
           </div>
         `,
       })
