@@ -76,7 +76,7 @@ Use this exact design system:
 - Phase cards: background #f4f4f4, border-radius 12px, 32px padding, 3px left border in red
 - Phase bullets: teal dot before each item
 - Time saved badge: white background, 1px border #e0e0e0, teal text, 6px 14px padding, border-radius 6px
-- Pricing table: clean, minimal, total row has 2px top border
+- Pricing table: clean, minimal, 3 columns (blank, SETUP, MONTHLY as uppercase gray headers). Each phase row shows setup cost and em dash for monthly. "Ongoing Retainer" row shows em dash for setup and "$X,XXX/mo" for monthly. Total row has 2px top border in red and bold text. Below the table include two notes: "Setup includes: Architecture, build, testing, data migration, and training across all phases. Delivered in 3-4 weeks." and "Retainer includes: Monitoring, optimization, up to 2 new automation builds per month, and priority support." — both with bold labels
 - Comparison table: 3 columns (label, Before in gray, After in black)
 - CTA: red button (#ff4d4d), white text, 14px 36px padding, border-radius 8px, links to https://cal.com/wolfgrey/ai-kickoff
 - Dividers: 1px solid #e0e0e0, 48px margin
@@ -97,9 +97,13 @@ Structure:
 11. CTA section: "Next Step" heading, short paragraph, red "Book a Call" button
 12. Footer
 
+Critical rules:
+- NEVER drop or ignore anything the prospect explicitly mentioned in their survey. If they said they want help with social media, newsletters, landing pages, pipelines, or any specific task — it MUST appear as a deliverable in one of the phases. Every stated need gets addressed.
+- Read the Q10 "success/other" and Q1 fields especially carefully — these contain the prospect's own words about what they want. Include ALL of them.
+
 Pricing guidelines:
 - Phase setup: $1,500-$2,500 each depending on complexity
-- Monthly retainer: $1,000-$1,500
+- Monthly retainer: always $2,500/mo
 - Format prices as "$X,XXX" in the HTML
 
 Generate the COMPLETE HTML. Start with <!DOCTYPE html> and end with </html>. Nothing else.`
