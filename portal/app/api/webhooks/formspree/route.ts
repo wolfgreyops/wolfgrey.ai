@@ -80,7 +80,7 @@ Use this exact design system:
 - Comparison table: 3 columns (label, Before in gray, After in black)
 - CTA: red button (#ff4d4d), white text, 14px 36px padding, border-radius 8px, links to https://cal.com/wolfgrey/ai-kickoff
 - Dividers: 1px solid #e0e0e0, 48px margin
-- Header: logo (img src="/logo.png") + "wolfgrey.ai" left, "Automation Proposal" + date right
+- Header: logo (img src="https://wolfgrey.ai/logo.png") + "wolfgrey.ai" left, "Automation Proposal" + date right
 - Footer: centered, small logo + "wolfgrey.ai — AI systems that run small businesses."
 
 Structure:
