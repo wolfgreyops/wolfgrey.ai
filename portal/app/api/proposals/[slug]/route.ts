@@ -18,7 +18,13 @@ export async function GET(
     return new NextResponse('Not found', { status: 404 })
   }
 
-  return new NextResponse(data.html_content, {
+  // Strip markdown code fences if present
+  const html = data.html_content
+    .replace(/^```html\s*/m, '')
+    .replace(/\s*```$/m, '')
+    .trim()
+
+  return new NextResponse(html, {
     headers: { 'Content-Type': 'text/html; charset=utf-8' },
   })
 }

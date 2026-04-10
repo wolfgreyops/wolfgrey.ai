@@ -177,8 +177,14 @@ Use simple HTML: <h3> for section headers, <ul><li> for items. No wrapper div. N
       }),
     ])
 
-    const htmlContent =
+    let htmlContent =
       message.content[0].type === 'text' ? message.content[0].text : ''
+
+    // Strip markdown code fences if Claude wrapped the output
+    htmlContent = htmlContent
+      .replace(/^```html\s*/m, '')
+      .replace(/\s*```$/m, '')
+      .trim()
     const actionPlan =
       planMessage.content[0].type === 'text' ? planMessage.content[0].text : ''
 
