@@ -659,6 +659,9 @@
       </p>
     </div>
 
+    <!-- FORM (wraps contact fields + all questions) -->
+    <form id="survey-form" action="https://portal.wolfgrey.ai/api/webhooks/formspree" method="POST" novalidate>
+
     <!-- CONTACT FIELDS -->
     <div class="contact-fields">
       <div class="field-group">
@@ -695,19 +698,6 @@
     </div>
 
     <!-- FORM -->
-    <!--
-      SETUP: Replace xlgpgznw below with your Formspree form ID.
-      1. Go to https://formspree.io and create a free account
-      2. Create a new form and copy the form ID (looks like: xpzvwqab)
-      3. Replace xlgpgznw below: action="https://formspree.io/f/xlgpgznw"
-    -->
-    <form id="survey-form" action="https://formspree.io/f/xlgpgznw" method="POST" novalidate>
-
-      <!-- Hidden fields for Formspree -->
-      <input type="hidden" name="_subject" value="New Automation Discovery Survey Submission">
-      <input type="hidden" name="_to" value="hey@wolfgrey.ai">
-      <input type="hidden" name="_replyto" id="replyto-field" value="">
-
       <!-- ── SECTION 1: Where Time Goes ── -->
       <div class="survey-section active" data-section="0">
         <div class="section-header">
@@ -1115,42 +1105,42 @@
       });
     });
 
-    // Sync email to _replyto so Formspree reply goes to client
-    document.getElementById('contact-email').addEventListener('input', function() {
-      document.getElementById('replyto-field').value = this.value;
-    });
-
     // Handle form submission → show success screen
     document.getElementById('survey-form').addEventListener('submit', function(e) {
+      e.preventDefault();
       const submitBtn = document.getElementById('submit-btn');
       submitBtn.textContent = 'Sending…';
       submitBtn.disabled = true;
 
-      // If using Formspree with AJAX
       const form = this;
       const data = new FormData(form);
 
+      // Convert FormData to JSON for the API route
+      const json = {};
+      data.forEach(function(value, key) {
+        if (key.endsWith('[]')) {
+          if (!json[key]) json[key] = [];
+          json[key].push(value);
+        } else {
+          json[key] = value;
+        }
+      });
+
       fetch(form.action, {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
+        body: JSON.stringify(json),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function(response) {
         if (response.ok) {
           showSuccess();
         } else {
-          // Fallback: let native submit happen
-          submitBtn.textContent = 'Submit Survey';
+          submitBtn.textContent = 'Something went wrong. Try again.';
           submitBtn.disabled = false;
-          form.submit();
         }
-      }).catch(() => {
-        // Network error fallback
-        submitBtn.textContent = 'Submit Survey';
+      }).catch(function() {
+        submitBtn.textContent = 'Connection error. Try again.';
         submitBtn.disabled = false;
-        form.submit();
       });
-
-      e.preventDefault();
     });
 
     function showSuccess() {

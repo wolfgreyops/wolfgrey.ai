@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 
 export const maxDuration = 60
 
+const ALLOWED_ORIGINS = ['https://wolfgrey.ai', 'https://www.wolfgrey.ai']
 const NOTIFY_EMAIL = 'hey@wolfgrey.ai'
 const PROPOSAL_BASE_URL =
   process.env.NEXT_PUBLIC_APP_URL || 'https://portal.wolfgrey.ai'
@@ -114,7 +115,25 @@ Rules:
 
 Respond with ONLY valid JSON. No markdown fences. No explanation.`
 
+function corsHeaders(origin: string | null) {
+  const allowedOrigin =
+    origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
+}
+
+export async function OPTIONS(req: Request) {
+  const origin = req.headers.get('origin')
+  return new NextResponse(null, { status: 204, headers: corsHeaders(origin) })
+}
+
 export async function POST(req: Request) {
+  const origin = req.headers.get('origin')
+  const headers = corsHeaders(origin)
+
   try {
     const data = await req.json()
 
@@ -129,7 +148,7 @@ export async function POST(req: Request) {
     if (!surveyText.trim()) {
       return NextResponse.json(
         { error: 'No survey data received' },
-        { status: 400 }
+        { status: 400, headers }
       )
     }
 
@@ -178,7 +197,7 @@ export async function POST(req: Request) {
       console.error('Failed to parse Claude response:', cleanJson)
       return NextResponse.json(
         { error: 'Failed to generate proposal structure' },
-        { status: 500 }
+        { status: 500, headers }
       )
     }
 
@@ -206,7 +225,7 @@ export async function POST(req: Request) {
       console.error('Supabase insert error:', insertError)
       return NextResponse.json(
         { error: 'Failed to save proposal' },
-        { status: 500 }
+        { status: 500, headers }
       )
     }
 
@@ -245,12 +264,12 @@ export async function POST(req: Request) {
       console.error('Email notification failed:', emailErr)
     }
 
-    return NextResponse.json({ success: true, slug, url: proposalUrl })
+    return NextResponse.json({ success: true, slug, url: proposalUrl }, { headers })
   } catch (err) {
-    console.error('Formspree webhook error:', err)
+    console.error('Survey webhook error:', err)
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500, headers: corsHeaders(null) }
     )
   }
 }
