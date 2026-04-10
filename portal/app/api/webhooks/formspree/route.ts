@@ -226,7 +226,7 @@ Use simple HTML: <h3> for section headers, <ul><li> for items. No wrapper div. N
       const resend = new Resend(process.env.RESEND_API_KEY)
 
       await resend.emails.send({
-        from: 'wolfgrey proposals <proposals@wolfgrey.ai>',
+        from: 'wolfgrey proposals <proposals@mail.wolfgrey.ai>',
         to: NOTIFY_EMAIL,
         subject: `Draft proposal ready: ${contactName}`,
         html: `
