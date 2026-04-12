@@ -1666,6 +1666,16 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Staggered delays for grid children */
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+    .fade-up.delay-5 { transition-delay: 0.5s; }
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; transform: none; transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -1719,27 +1729,27 @@
   <!-- WHAT WE DO -->
   <section id="what-we-do">
     <div class="container">
-      <div class="services-header" style="text-align: center;">
+      <div class="services-header fade-up" style="text-align: center;">
         <div class="section-label">Get connected</div>
         <h2 class="section-title">Stop asking AI questions<br><span style="background: linear-gradient(90deg, #00e5cc, #ff4d4d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Start giving it jobs</span></h2>
         <p class="section-subtitle" style="margin: 0 auto;">Guides, ready-to-deploy workflows, and hands-on consulting — no coding required.</p>
       </div>
       <div class="offerings-grid">
-        <div class="offering-card fade-up">
+        <div class="offering-card fade-up delay-1">
           <div class="offering-icon">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M2 10h20"/><path d="M6 16h4"/></svg>
           </div>
           <h4>Guides & Playbooks</h4>
           <p>Step-by-step frameworks for building AI workflows that run sales, ops, and support on autopilot.</p>
         </div>
-        <div class="offering-card fade-up">
+        <div class="offering-card fade-up delay-2">
           <div class="offering-icon">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="10"/><circle cx="14" cy="14" r="3"/><path d="M14 4v3"/><path d="M14 21v3"/><path d="M4 14h3"/><path d="M21 14h3"/></svg>
           </div>
           <h4>Agentic Workflows</h4>
           <p>Deploy AI agents that handle tasks autonomously — from lead follow-up to invoice processing.</p>
         </div>
-        <div class="offering-card fade-up">
+        <div class="offering-card fade-up delay-3">
           <div class="offering-icon">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
@@ -1796,12 +1806,12 @@
       }
     </style>
     <div class="container">
-      <div class="services-header" style="text-align: center;">
+      <div class="services-header fade-up" style="text-align: center;">
         <div class="section-label">How It Works</div>
         <h2 class="section-title">AI agents run your operations</h2>
         <p class="section-subtitle" style="margin: 0 auto 60px;">A central AI orchestrator coordinates specialized agents across your business — all reporting to you.</p>
       </div>
-      <div style="display: flex; justify-content: center;">
+      <div class="fade-up delay-2" style="display: flex; justify-content: center;">
         <svg viewBox="0 0 800 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; width: 100%; height: auto;">
           <!-- Connection lines -->
           <path d="M400 95 L400 155" stroke="var(--gray-600)" stroke-width="2" stroke-dasharray="6 4"/>
@@ -1905,38 +1915,38 @@
   <!-- WHY AI -->
   <section id="benefits">
     <div class="container">
-      <div class="services-header">
+      <div class="services-header fade-up">
         <div class="section-label">Why AI</div>
         <h2 class="section-title">The benefits of AI for your business</h2>
         <p class="section-subtitle">Small businesses using AI are outpacing their competition. Here's what's possible when you put it to work.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card fade-up">
+        <div class="service-card fade-up delay-1">
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 2"/></svg></div>
           <h3>Save Hours Every Week</h3>
           <p>Automate repetitive tasks like email drafting, data entry, and report generation — and get your time back for higher-value work.</p>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up delay-2">
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"/><path d="M4 12h16"/><circle cx="12" cy="12" r="9"/><path d="M16 8l-4 4-4-4"/></svg></div>
           <h3>Cut Operating Costs</h3>
           <p>Replace expensive software subscriptions and reduce manual labor costs. One AI system can do the work of multiple tools.</p>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up delay-3">
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <h3>Scale Without Hiring</h3>
           <p>Handle 10x the volume without adding headcount. AI lets you grow revenue without growing your team proportionally.</p>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up delay-1">
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
           <h3>Improve Output Quality</h3>
           <p>Get consistent, professional results every time. No more variability from fatigue, rushed deadlines, or human error.</p>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up delay-2">
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 12 10-12h-9l1-12z"/></svg></div>
           <h3>Move Faster</h3>
           <p>What used to take days now takes minutes. Speed up content creation, research, analysis, and decision-making across your business.</p>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up delay-3">
           <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg></div>
           <h3>Stay Ahead of Competitors</h3>
           <p>Your competitors are already exploring AI. The businesses that adopt now will have a compounding advantage over those that wait.</p>
@@ -1948,33 +1958,33 @@
   <!-- WHY WOLFGREY -->
   <section id="why-wolfgrey">
     <div class="container">
-      <div class="services-header" style="text-align: center;">
+      <div class="services-header fade-up" style="text-align: center;">
         <div class="section-label">Why wolfgrey</div>
         <h2 class="section-title">Built for business owners</h2>
         <p class="section-subtitle" style="margin: 0 auto;">Most AI resources assume you're technical. I don't. Everything I create is designed for people who want results — not a computer science degree.</p>
       </div>
       <div class="why-grid">
-        <div class="why-card fade-up">
+        <div class="why-card fade-up delay-1">
           <h4><span>01</span> No Code Required</h4>
           <p>You won't write a single line of code. My guides use plain English prompts and point-and-click tools that anyone can master.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up delay-2">
           <h4><span>02</span> Practical, Not Theoretical</h4>
           <p>Every lesson includes real prompts, real templates, and real examples you can copy and use in your business today.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up delay-3">
           <h4><span>03</span> Learn at Your Own Pace</h4>
           <p>Self-paced courses mean you can fit AI learning around your schedule — no live sessions, no deadlines, no pressure.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up delay-1">
           <h4><span>04</span> Start Free, Go Deep</h4>
           <p>My free Quick-Start Guide gives you immediate wins. Paid products take you further when you're ready to level up.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up delay-2">
           <h4><span>05</span> Battle-Tested Frameworks</h4>
           <p>The CRAFT framework and my templates come from real implementations — not academic theory or hype cycles.</p>
         </div>
-        <div class="why-card fade-up">
+        <div class="why-card fade-up delay-3">
           <h4><span>06</span> Support When You Need It</h4>
           <p>Stuck? My consulting options give you direct access to hands-on help implementing AI in your specific business.</p>
         </div>
@@ -1985,7 +1995,7 @@
   <!-- FEATURED GUIDE -->
   <section id="featured-guide" style="background: var(--gray-900); padding: 100px 24px;">
     <div class="container" style="max-width: 1100px;">
-      <div style="text-align: center; margin-bottom: 60px;">
+      <div class="fade-up" style="text-align: center; margin-bottom: 60px;">
         <div class="section-label">Featured Guide</div>
         <h2 class="section-title">Install Claude Code on your Mac</h2>
         <p class="section-subtitle" style="margin: 0 auto;">Stop copying and pasting between browser windows. Claude Code works directly in your Terminal &mdash; reading files, writing code, and executing tasks through plain English.</p>
@@ -2017,12 +2027,12 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="container">
-      <div class="services-header">
+      <div class="services-header fade-up">
         <div class="section-label">What You'll Learn</div>
         <h2 class="section-title">Master these AI skills</h2>
         <p class="section-subtitle">Click each skill to see a real prompt example in action.</p>
       </div>
-      <div class="skills-layout">
+      <div class="skills-layout fade-up delay-1">
         <div class="skills-tabs">
           <div class="skill-tab active" data-skill="prompts">
             <h4>Prompt Engineering</h4>
@@ -2075,25 +2085,27 @@
   <!-- PRODUCTS -->
   <section id="products">
     <div class="container">
-      <div class="section-label">Products</div>
-      <h2 class="section-title">Your path to AI mastery</h2>
-      <p class="section-subtitle">Start free, go deep when you're ready. Each tier builds on the last.</p>
+      <div class="fade-up">
+        <div class="section-label">Products</div>
+        <h2 class="section-title">Your path to AI mastery</h2>
+        <p class="section-subtitle">Start free, go deep when you're ready. Each tier builds on the last.</p>
+      </div>
       <div class="products-grid">
-        <div class="product-card fade-up">
+        <div class="product-card fade-up delay-1">
           <div class="product-tag">Free</div>
           <h3>AI Quick-Start Guide</h3>
           <p>5 ready-to-use prompts, quick-win automation ideas, and tool recommendations. Get started with AI in under 30 minutes.</p>
           <div class="product-price-inline">$0</div>
           <a href="/products" class="btn btn-secondary">Get Free Guide →</a>
         </div>
-        <div class="product-card fade-up">
+        <div class="product-card fade-up delay-2">
           <div class="product-tag">Playbook</div>
           <h3>Small Business AI Playbook</h3>
           <p>The CRAFT prompting framework, 40+ templates, and a 90-day implementation roadmap. Everything you need to operationalize AI.</p>
           <div class="product-price-inline">$49</div>
           <a href="/get-playbook" class="btn btn-primary">Learn More →</a>
         </div>
-        <div class="product-card fade-up featured">
+        <div class="product-card fade-up delay-3 featured">
           <div class="product-tag">Mastery</div>
           <h3>Claude Mastery Series</h3>
           <p>The complete 10-volume course for non-technical users. From first conversation to advanced workflows — master Claude in depth.</p>
@@ -2107,13 +2119,13 @@
   <!-- PRACTICAL USES -->
   <section id="uses">
     <div class="container">
-      <div class="uses-header">
+      <div class="uses-header fade-up">
         <div class="section-label">Practical Uses</div>
         <h2 class="section-title">AI that works where you do</h2>
         <p class="section-subtitle">Real applications across your business — automating the repetitive so you can focus on growth.</p>
       </div>
       <div class="uses-grid">
-        <div class="use-card fade-up">
+        <div class="use-card fade-up delay-1">
           <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l6-8 5 4 9-14"/><path d="M19 4h5v5"/><path d="M4 22h20"/><path d="M8 22v-4"/><path d="M13 22v-6"/><path d="M18 22v-9"/><path d="M23 22v-12"/></svg></div>
           <h3>Sales</h3>
           <p>Generate personalized outreach sequences, qualify leads with AI-powered scoring, and automate follow-ups that actually convert. Spend less time prospecting, more time closing.</p>
@@ -2128,7 +2140,7 @@
             </div>
           </div>
         </div>
-        <div class="use-card fade-up">
+        <div class="use-card fade-up delay-2">
           <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2l8 4.5v3L14 14 6 9.5v-3L14 2z"/><path d="M6 9.5v3L14 17l8-4.5v-3"/><path d="M6 12.5v3L14 20l8-4.5v-3"/><path d="M6 15.5v3L14 23l8-4.5v-3"/></svg></div>
           <h3>Marketing</h3>
           <p>Create content at scale — social posts, email campaigns, ad copy — all on-brand and on-message. Analyze performance and optimize messaging without the guesswork.</p>
@@ -2143,7 +2155,7 @@
             </div>
           </div>
         </div>
-        <div class="use-card fade-up">
+        <div class="use-card fade-up delay-3">
           <div class="use-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="22" height="16" rx="2"/><path d="M3 12h22"/><path d="M10 6v16"/><path d="M17 12v10"/><path d="M6 9h2"/><path d="M13 15h2"/><path d="M13 19h2"/><path d="M20 15h2"/><path d="M20 19h2"/></svg></div>
           <h3>Accounting</h3>
           <p>Automate invoice processing, categorize expenses intelligently, and generate financial reports in seconds. Turn hours of manual data entry into one-click workflows.</p>
@@ -2165,38 +2177,38 @@
   <!-- CUSTOM APPS -->
   <section id="custom-apps">
     <div class="container">
-      <div class="apps-header">
+      <div class="apps-header fade-up">
         <div class="section-label">Custom Apps</div>
         <h2 class="section-title">Purpose-built apps for your operations</h2>
         <p class="section-subtitle">Ready-to-deploy applications that automate specific business processes — no coding required.</p>
       </div>
       <div class="apps-grid">
-        <div class="app-card fade-up">
+        <div class="app-card fade-up delay-1">
           <img src="/po-processor.png" alt="Purchase Order Processor UI" class="app-screenshot">
           <h3>Purchase Order Processor</h3>
           <p>Automatically intake POs from email or uploads, validate line items against your catalog, flag discrepancies, and route for approval — all without manual data entry.</p>
         </div>
-        <div class="app-card fade-up">
+        <div class="app-card fade-up delay-2">
           <img src="/invoice-extractor.png" alt="Invoice Data Extractor UI" class="app-screenshot">
           <h3>Invoice Data Extractor</h3>
           <p>Extract vendor details, line items, totals, and due dates from any invoice format. Matches to POs, flags exceptions, and exports clean data to your accounting system.</p>
         </div>
-        <div class="app-card fade-up">
+        <div class="app-card fade-up delay-3">
           <img src="/vendor-pricing.png" alt="Vendor Price Analyzer UI" class="app-screenshot">
           <h3>Vendor Price Analyzer</h3>
           <p>Compare pricing across multiple vendors for the same products. Track price changes over time, identify savings opportunities, and generate cost comparison reports.</p>
         </div>
-        <div class="app-card fade-up">
+        <div class="app-card fade-up delay-1">
           <img src="/expense-categorizer.png" alt="Expense Categorizer UI" class="app-screenshot">
           <h3>Expense Categorizer</h3>
           <p>Auto-classify expenses into the right GL codes, flag policy violations, and route to appropriate approvers. Turns receipt chaos into organized, audit-ready records.</p>
         </div>
-        <div class="app-card fade-up">
+        <div class="app-card fade-up delay-2">
           <img src="/contract-reviewer.png" alt="Contract Reviewer UI" class="app-screenshot">
           <h3>Contract Reviewer</h3>
           <p>Analyze contracts for key terms, obligations, renewal dates, and potential risks. Surface what matters and create summaries your team can actually use.</p>
         </div>
-        <div class="app-card fade-up">
+        <div class="app-card fade-up delay-3">
           <img src="/inventory-forecaster.png" alt="Inventory Forecaster UI" class="app-screenshot">
           <h3>Inventory Forecaster</h3>
           <p>Predict reorder points based on sales velocity, seasonality, and lead times. Get alerts before stockouts happen and optimize your working capital.</p>
@@ -2208,13 +2220,13 @@
   <!-- LADDER -->
   <section id="ladder">
     <div class="container">
-      <div class="ladder-header">
+      <div class="ladder-header fade-up">
         <div class="section-label">Pricing Ladder</div>
         <h2 class="section-title">Start free. Scale when ready.</h2>
         <p class="section-subtitle">Every tier builds on the last. Enter wherever makes sense for your business.</p>
       </div>
       <div class="ladder-steps">
-        <div class="ladder-step fade-up">
+        <div class="ladder-step fade-up delay-1">
           <div class="step-number">Step 01</div>
           <div class="step-price">$0</div>
           <h3>Quick-Start Guide</h3>
@@ -2222,7 +2234,7 @@
           <a href="/products" class="btn btn-secondary">Get Free Guide →</a>
           <div class="step-arrow">→</div>
         </div>
-        <div class="ladder-step fade-up">
+        <div class="ladder-step fade-up delay-2">
           <div class="step-number">Step 02</div>
           <div class="step-price">$49</div>
           <h3>AI Playbook</h3>
@@ -2230,7 +2242,7 @@
           <a href="/get-playbook" class="btn btn-primary">Learn More →</a>
           <div class="step-arrow">→</div>
         </div>
-        <div class="ladder-step fade-up">
+        <div class="ladder-step fade-up delay-3">
           <div class="step-number">Step 03</div>
           <div class="step-price">$199</div>
           <h3>Claude Mastery Series</h3>
@@ -2238,7 +2250,7 @@
           <a href="/get-mastery" class="btn btn-primary">Learn More →</a>
           <div class="step-arrow">→</div>
         </div>
-        <div class="ladder-step fade-up">
+        <div class="ladder-step fade-up delay-4">
           <div class="step-number">Step 04</div>
           <div class="step-price">$5,000+</div>
           <h3>Done-For-You</h3>
@@ -2252,9 +2264,11 @@
   <!-- COURSE -->
   <section id="course">
     <div class="container">
-      <div class="section-label">Course</div>
-      <h2 class="section-title">Go from knowing AI to building with it</h2>
-      <p class="section-subtitle">A hands-on course for non-developers who want to build real automated systems — not just understand the concepts.</p>
+      <div class="fade-up">
+        <div class="section-label">Course</div>
+        <h2 class="section-title">Go from knowing AI to building with it</h2>
+        <p class="section-subtitle">A hands-on course for non-developers who want to build real automated systems — not just understand the concepts.</p>
+      </div>
       <div class="course-block fade-up">
         <div>
           <h3>AI Automation <span class="accent">for Non-Developers</span></h3>
@@ -2276,7 +2290,7 @@
 
   <!-- SHIP SECTION -->
   <section class="ship-section" id="ship-section">
-    <div class="container">
+    <div class="container fade-up">
       <div class="section-label">No Small Business Left Behind</div>
       <h2 class="section-title">Take your business into the future with the right guidance. It's a new world.</h2>
     </div>
@@ -2306,13 +2320,15 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
-      <div class="mascot-container">
+      <div class="mascot-container fade-up">
         <img src="/crew.png" alt="wolfgrey crew" class="cta-crew">
       </div>
-      <div class="section-label">Get Started</div>
-      <h2 class="section-title">Stop reading about AI.<br>Start building with it.</h2>
-      <p class="section-subtitle">Grab the free guide, explore the playbook, or get expert help when you need it. Every path leads to the same place — a business that runs smarter.</p>
-      <div class="hero-buttons">
+      <div class="fade-up">
+        <div class="section-label">Get Started</div>
+        <h2 class="section-title">Stop reading about AI.<br>Start building with it.</h2>
+        <p class="section-subtitle">Grab the free guide, explore the playbook, or get expert help when you need it. Every path leads to the same place — a business that runs smarter.</p>
+      </div>
+      <div class="hero-buttons fade-up delay-1">
         <a href="/products" class="btn btn-primary">Start Free →</a>
         <a href="/products" class="btn btn-secondary">View All Products →</a>
       </div>
@@ -2322,21 +2338,23 @@
   <!-- BUILT BY AI -->
   <section class="built-by-ai">
     <div class="container">
-      <div class="section-label">Don't get left behind</div>
-      <h2 class="section-title" style="text-align: center;">Built with <span style="color: var(--accent);">Claude Code</span></h2>
-      <p class="section-subtitle" style="text-align: center; max-width: 600px; margin: 0 auto 56px;">No designers. No developers. No templates. Just one operator and an AI agent.</p>
+      <div class="fade-up">
+        <div class="section-label">Don't get left behind</div>
+        <h2 class="section-title" style="text-align: center;">Built with <span style="color: var(--accent);">Claude Code</span></h2>
+        <p class="section-subtitle" style="text-align: center; max-width: 600px; margin: 0 auto 56px;">No designers. No developers. No templates. Just one operator and an AI agent.</p>
+      </div>
       <div class="ai-stats">
-        <div class="ai-stat fade-up">
+        <div class="ai-stat fade-up delay-1">
           <div class="ai-stat-number">1,200+</div>
           <div class="ai-stat-label">Lines of code</div>
           <div class="ai-stat-context">Single HTML file, zero dependencies</div>
         </div>
-        <div class="ai-stat fade-up">
+        <div class="ai-stat fade-up delay-2">
           <div class="ai-stat-number">40+</div>
           <div class="ai-stat-label">Iterations shipped</div>
           <div class="ai-stat-context">Design to deploy in seconds</div>
         </div>
-        <div class="ai-stat fade-up">
+        <div class="ai-stat fade-up delay-3">
           <div class="ai-stat-number">1</div>
           <div class="ai-stat-label">Day to launch</div>
           <div class="ai-stat-context">From zero to live with custom domain</div>
