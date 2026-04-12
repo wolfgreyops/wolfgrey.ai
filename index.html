@@ -2131,11 +2131,11 @@
           <p>Generate personalized outreach sequences, qualify leads with AI-powered scoring, and automate follow-ups that actually convert. Spend less time prospecting, more time closing.</p>
           <div class="use-stats">
             <div class="use-stat">
-              <div class="use-stat-number">10hrs</div>
+              <div class="use-stat-number count-up" data-target="10" data-suffix="hrs">10hrs</div>
               <div class="use-stat-label">Saved weekly</div>
             </div>
             <div class="use-stat">
-              <div class="use-stat-number">3x</div>
+              <div class="use-stat-number count-up" data-target="3" data-suffix="x">3x</div>
               <div class="use-stat-label">More outreach</div>
             </div>
           </div>
@@ -2146,11 +2146,11 @@
           <p>Create content at scale — social posts, email campaigns, ad copy — all on-brand and on-message. Analyze performance and optimize messaging without the guesswork.</p>
           <div class="use-stats">
             <div class="use-stat">
-              <div class="use-stat-number">5x</div>
+              <div class="use-stat-number count-up" data-target="5" data-suffix="x">5x</div>
               <div class="use-stat-label">Content output</div>
             </div>
             <div class="use-stat">
-              <div class="use-stat-number">80%</div>
+              <div class="use-stat-number count-up" data-target="80" data-suffix="%">80%</div>
               <div class="use-stat-label">Faster drafts</div>
             </div>
           </div>
@@ -2161,11 +2161,11 @@
           <p>Automate invoice processing, categorize expenses intelligently, and generate financial reports in seconds. Turn hours of manual data entry into one-click workflows.</p>
           <div class="use-stats">
             <div class="use-stat">
-              <div class="use-stat-number">90%</div>
+              <div class="use-stat-number count-up" data-target="90" data-suffix="%">90%</div>
               <div class="use-stat-label">Less manual entry</div>
             </div>
             <div class="use-stat">
-              <div class="use-stat-number">2min</div>
+              <div class="use-stat-number count-up" data-target="2" data-suffix="min">2min</div>
               <div class="use-stat-label">Per report</div>
             </div>
           </div>
@@ -2345,17 +2345,17 @@
       </div>
       <div class="ai-stats">
         <div class="ai-stat fade-up delay-1">
-          <div class="ai-stat-number">1,200+</div>
+          <div class="ai-stat-number count-up" data-target="1200" data-suffix="+" data-separator=",">1,200+</div>
           <div class="ai-stat-label">Lines of code</div>
           <div class="ai-stat-context">Single HTML file, zero dependencies</div>
         </div>
         <div class="ai-stat fade-up delay-2">
-          <div class="ai-stat-number">40+</div>
+          <div class="ai-stat-number count-up" data-target="40" data-suffix="+">40+</div>
           <div class="ai-stat-label">Iterations shipped</div>
           <div class="ai-stat-context">Design to deploy in seconds</div>
         </div>
         <div class="ai-stat fade-up delay-3">
-          <div class="ai-stat-number">1</div>
+          <div class="ai-stat-number count-up" data-target="1" data-suffix="">1</div>
           <div class="ai-stat-label">Day to launch</div>
           <div class="ai-stat-context">From zero to live with custom domain</div>
         </div>
@@ -2433,6 +2433,32 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Count-up animation
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const useSeparator = el.dataset.separator === ',';
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          el.textContent = (useSeparator ? current.toLocaleString() : current) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        el.textContent = '0' + suffix;
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
 
     // Slide-out nav
     function toggleNav() {
@@ -2555,13 +2581,14 @@
       showSkill('prompts');
     })();
 
-    // Hyperspace starfield
+    // Geometric grid with glow nodes
     (function() {
       const canvas = document.getElementById('galaxy');
       const ctx = canvas.getContext('2d');
-      let w, h, stars, nebulae, shootingStars;
+      let w, h, nodes;
       const mouse = { x: 0.5, y: 0.5 };
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const CELL = 80;
 
       function resize() {
         const hero = canvas.parentElement;
@@ -2574,56 +2601,29 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
-      function createStars() {
-        stars = [];
-        const count = Math.min(Math.floor((w * h) / 2000), 500);
-        for (let i = 0; i < count; i++) {
-          stars.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            z: Math.random() * 3 + 0.5,
-            r: Math.random() * 1.2 + 0.3,
-            phase: Math.random() * Math.PI * 2,
-            twinkleSpeed: Math.random() * 0.02 + 0.005,
-            color: Math.random() < 0.05 ? 'coral' : Math.random() < 0.08 ? 'gold' : 'white'
-          });
+      function createNodes() {
+        nodes = [];
+        const cols = Math.ceil(w / CELL) + 1;
+        const rows = Math.ceil(h / CELL) + 1;
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const isGlow = Math.random() < 0.08;
+            nodes.push({
+              x: c * CELL,
+              y: r * CELL,
+              phase: Math.random() * Math.PI * 2,
+              speed: 0.005 + Math.random() * 0.01,
+              glow: isGlow,
+              color: isGlow ? (Math.random() < 0.5 ? 'red' : 'teal') : 'none',
+              pulseSpeed: 0.008 + Math.random() * 0.012
+            });
+          }
         }
       }
 
-      function createNebulae() {
-        nebulae = [
-          { x: w * 0.2, y: h * 0.3, rx: w * 0.3, ry: h * 0.25, hue: 0, sat: 50, alpha: 0.02 },
-          { x: w * 0.75, y: h * 0.6, rx: w * 0.25, ry: h * 0.2, hue: 35, sat: 60, alpha: 0.015 },
-          { x: w * 0.5, y: h * 0.15, rx: w * 0.35, ry: h * 0.15, hue: 240, sat: 30, alpha: 0.012 },
-          { x: w * 0.6, y: h * 0.8, rx: w * 0.2, ry: h * 0.18, hue: 280, sat: 25, alpha: 0.01 },
-        ];
-      }
-
-      function initShootingStars() {
-        shootingStars = [];
-      }
-
-      function spawnShootingStar() {
-        if (Math.random() > 0.003) return;
-        const startX = Math.random() * w * 0.6 + w * 0.2;
-        const startY = Math.random() * h * 0.3;
-        const angle = Math.PI * 0.15 + Math.random() * 0.3;
-        shootingStars.push({
-          x: startX, y: startY,
-          vx: Math.cos(angle) * 8,
-          vy: Math.sin(angle) * 8,
-          life: 1,
-          decay: 0.015 + Math.random() * 0.01,
-          len: 60 + Math.random() * 40
-        });
-      }
-
-
       function init() {
         resize();
-        createStars();
-        createNebulae();
-        initShootingStars();
+        createNodes();
       }
 
       let time = 0;
@@ -2631,104 +2631,72 @@
         time += 1;
         ctx.clearRect(0, 0, w, h);
 
-        // Parallax offset from mouse
-        const px = (mouse.x - 0.5) * 20;
-        const py = (mouse.y - 0.5) * 20;
+        const px = (mouse.x - 0.5) * 12;
+        const py = (mouse.y - 0.5) * 12;
+        const cols = Math.ceil(w / CELL) + 1;
 
-        // Nebula clouds
-        for (const n of nebulae) {
-          const pulse = 1 + Math.sin(time * 0.003 + n.hue) * 0.1;
-          const nx = n.x + px * 0.3;
-          const ny = n.y + py * 0.3;
-          const grad = ctx.createRadialGradient(nx, ny, 0, nx, ny, n.rx * pulse);
-          grad.addColorStop(0, `hsla(${n.hue}, ${n.sat}%, 50%, ${n.alpha * 1.5})`);
-          grad.addColorStop(0.5, `hsla(${n.hue}, ${n.sat}%, 40%, ${n.alpha * 0.6})`);
-          grad.addColorStop(1, 'hsla(0, 0%, 0%, 0)');
+        // Draw grid lines
+        ctx.strokeStyle = 'rgba(30, 41, 64, 0.5)';
+        ctx.lineWidth = 0.5;
+        const rowCount = Math.ceil(h / CELL) + 1;
+        for (let r = 0; r < rowCount; r++) {
+          const y = r * CELL + py * 0.1;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+          ctx.stroke();
+        }
+        for (let c = 0; c < cols; c++) {
+          const x = c * CELL + px * 0.1;
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+          ctx.stroke();
+        }
+
+        // Draw glow nodes
+        for (const n of nodes) {
+          if (!n.glow) continue;
+          const nx = n.x + px * 0.15;
+          const ny = n.y + py * 0.15;
+          const pulse = Math.sin(time * n.pulseSpeed + n.phase) * 0.5 + 0.5;
+
+          let r, g, b;
+          if (n.color === 'red') { r = 255; g = 77; b = 77; }
+          else { r = 0; g = 229; b = 204; }
+
+          // Outer glow
+          const glowRadius = 40 + pulse * 20;
+          const grad = ctx.createRadialGradient(nx, ny, 0, nx, ny, glowRadius);
+          grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${0.06 + pulse * 0.04})`);
+          grad.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${0.02 + pulse * 0.01})`);
+          grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
           ctx.fillStyle = grad;
           ctx.beginPath();
-          ctx.ellipse(nx, ny, n.rx * pulse, n.ry * pulse, 0, 0, Math.PI * 2);
+          ctx.arc(nx, ny, glowRadius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Core dot
+          const dotAlpha = 0.3 + pulse * 0.5;
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${dotAlpha})`;
+          ctx.beginPath();
+          ctx.arc(nx, ny, 2 + pulse, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // Stars with depth parallax
-        for (const s of stars) {
-          const depth = s.z;
-          const sx = s.x + px * depth * 0.15;
-          const sy = s.y + py * depth * 0.15;
-
-          const twinkle = Math.sin(time * s.twinkleSpeed + s.phase) * 0.4 + 0.6;
-          const alpha = (0.3 + depth * 0.2) * twinkle;
-          const radius = s.r * (0.6 + depth * 0.3);
-
-          let r = 200, g = 200, b = 220;
-          if (s.color === 'coral') { r = 255; g = 111; b = 97; }
-          else if (s.color === 'gold') { r = 218; g = 165; b = 32; }
-
-          // Glow for brighter stars
-          if (depth > 2) {
-            const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, radius * 8);
-            glow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.15})`);
-            glow.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${alpha * 0.05})`);
-            glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = glow;
-            ctx.beginPath();
-            ctx.arc(sx, sy, radius * 8, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Cross flare on brightest stars
-            if (depth > 2.5 && twinkle > 0.7) {
-              ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.12})`;
-              ctx.lineWidth = 0.5;
-              const flareLen = radius * 12 * twinkle;
-              ctx.beginPath();
-              ctx.moveTo(sx - flareLen, sy);
-              ctx.lineTo(sx + flareLen, sy);
-              ctx.moveTo(sx, sy - flareLen);
-              ctx.lineTo(sx, sy + flareLen);
-              ctx.stroke();
-            }
-          }
-
-          // Star dot
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        // Mouse proximity highlight — brighten nearby intersections
+        const mx = mouse.x * w;
+        const my = mouse.y * h;
+        const radius = 180;
+        for (const n of nodes) {
+          const nx = n.x + px * 0.15;
+          const ny = n.y + py * 0.15;
+          const dist = Math.hypot(nx - mx, ny - my);
+          if (dist > radius) continue;
+          const intensity = 1 - dist / radius;
+          ctx.fillStyle = `rgba(240, 244, 255, ${intensity * 0.12})`;
           ctx.beginPath();
-          ctx.arc(sx, sy, radius, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        // Shooting stars
-        spawnShootingStar();
-        for (let i = shootingStars.length - 1; i >= 0; i--) {
-          const ss = shootingStars[i];
-          ss.x += ss.vx;
-          ss.y += ss.vy;
-          ss.life -= ss.decay;
-
-          if (ss.life <= 0) {
-            shootingStars.splice(i, 1);
-            continue;
-          }
-
-          const tailX = ss.x - ss.vx * (ss.len / 8);
-          const tailY = ss.y - ss.vy * (ss.len / 8);
-          const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
-          grad.addColorStop(0, `rgba(255, 255, 255, 0)`);
-          grad.addColorStop(0.7, `rgba(255, 200, 150, ${ss.life * 0.3})`);
-          grad.addColorStop(1, `rgba(255, 255, 255, ${ss.life * 0.8})`);
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = 1.5 * ss.life;
-          ctx.beginPath();
-          ctx.moveTo(tailX, tailY);
-          ctx.lineTo(ss.x, ss.y);
-          ctx.stroke();
-
-          // Head glow
-          const hg = ctx.createRadialGradient(ss.x, ss.y, 0, ss.x, ss.y, 4);
-          hg.addColorStop(0, `rgba(255, 255, 255, ${ss.life * 0.6})`);
-          hg.addColorStop(1, 'rgba(255, 255, 255, 0)');
-          ctx.fillStyle = hg;
-          ctx.beginPath();
-          ctx.arc(ss.x, ss.y, 4, 0, Math.PI * 2);
+          ctx.arc(nx, ny, 1.5, 0, Math.PI * 2);
           ctx.fill();
         }
 
