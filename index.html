@@ -11,8 +11,8 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
     @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/Redaction-Regular.woff2') format('woff2'); }
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/Redaction-Bold.woff2') format('woff2'); }
+    @font-face { font-family: 'Lora'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/Lora-VariableFont_wght.ttf') format('truetype'); }
+    @font-face { font-family: 'Lora'; font-style: italic; font-weight: 400 700; font-display: swap; src: url('/fonts/Lora-Italic-VariableFont_wght.ttf') format('truetype'); }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -73,8 +73,8 @@
       }
     }
 
-    h1, h2 { font-family: 'Redaction', serif; line-height: 1.15; font-weight: 400; }
-    h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
+    h1, h2, h3 { font-family: 'Lora', serif; line-height: 1.15; font-weight: 400; }
+    h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
     a { color: inherit; text-decoration: none; }
 
     /* ── NAV ── */
@@ -291,16 +291,7 @@
       margin-bottom: 24px;
     }
     .hero h1 .accent {
-      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent), var(--accent2));
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradient-shift 15s ease-in-out infinite;
-    }
-    @keyframes gradient-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      color: var(--accent2);
     }
     .hero p {
       font-size: 1.2rem;
@@ -757,7 +748,7 @@
       text-align: left;
     }
     .use-stat-number {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--accent2);
@@ -1435,7 +1426,7 @@
     }
     .tetris-game-over.active { display: block; }
     .tetris-game-over h3 {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.5rem;
       color: var(--accent);
       margin-bottom: 8px;
@@ -1463,7 +1454,7 @@
       background: var(--gray-800);
     }
     .ai-stat-number {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--accent);
@@ -1731,7 +1722,7 @@
     <div class="container">
       <div class="services-header fade-up" style="text-align: center;">
         <div class="section-label">What I do</div>
-        <h2 class="section-title">Stop asking AI questions<br><span style="background: linear-gradient(90deg, #00e5cc, #ff4d4d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Start giving it jobs</span></h2>
+        <h2 class="section-title">Stop asking AI questions<br><span style="color: var(--accent2);">Start giving it jobs</span></h2>
         <p class="section-subtitle" style="margin: 0 auto;">I design, build, and maintain AI systems that handle the repetitive work your business runs on.</p>
       </div>
       <div class="offerings-grid">

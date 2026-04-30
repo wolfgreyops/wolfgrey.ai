@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/Redaction-Regular.woff2') format('woff2'); }
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/Redaction-Bold.woff2') format('woff2'); }
+    @font-face { font-family: 'Lora'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/Lora-VariableFont_wght.ttf') format('truetype'); }
+    @font-face { font-family: 'Lora'; font-style: italic; font-weight: 400 700; font-display: swap; src: url('/fonts/Lora-Italic-VariableFont_wght.ttf') format('truetype'); }
     @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); } @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Italic-Variable.ttf') format('truetype'); }    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -114,10 +114,10 @@
       }
     }
 
-    h1, h2 {
-      font-family: 'Redaction', serif; 0;
+    h1, h2, h3 {
+      font-family: 'Lora', serif;
     }
-    h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
+    h4, h5, h6 { font-family: 'Satoshi', sans-serif; line-height: 1.3; font-weight: 500; }
 
     a { color: inherit; text-decoration: none; }
 
@@ -703,7 +703,7 @@
       text-align: center;
     }
     .footer-logo {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 8px;
@@ -756,7 +756,7 @@
       text-align: center;
     }
     .hero-stat-num {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--accent2);
@@ -892,7 +892,7 @@
       background: linear-gradient(90deg, var(--accent), var(--accent2));
     }
     .stat-value {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 2rem;
       font-weight: 600;
       color: var(--white);
@@ -930,7 +930,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--white);
@@ -974,7 +974,7 @@
       position: absolute;
       top: 16px;
       left: 24px;
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 4rem;
       color: var(--accent);
       opacity: 0.3;
@@ -985,7 +985,7 @@
       font-weight: 500;
       color: var(--white);
       line-height: 1.5;
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       letter-spacing: -0.5px;
     }
     .insight-source {
@@ -1011,7 +1011,7 @@
       padding: 8px 20px;
       background: var(--accent);
       border-radius: 8px;
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--white);
@@ -1041,7 +1041,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--white);
@@ -1299,7 +1299,7 @@
       stroke-width: 2;
     }
     .cheat-sheet-title {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 1.2rem;
       font-weight: 600;
       color: var(--white);
@@ -1531,15 +1531,12 @@
       fill: none;
     }
     .celebration-title {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--white);
       margin-bottom: 12px;
-      background: linear-gradient(135deg, var(--white), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent2);
     }
     .celebration-subtitle {
       font-size: 1.1rem;
@@ -1556,7 +1553,7 @@
       text-align: center;
     }
     .celebration-stat-number {
-      font-family: 'Redaction', serif;
+      font-family: 'Lora', serif;
       font-size: 2rem;
       font-weight: 600;
       color: var(--accent2);

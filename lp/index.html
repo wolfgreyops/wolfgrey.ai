@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
   <style>
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/Redaction-Regular.woff2') format('woff2'); }
-    @font-face { font-family: 'Redaction'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/Redaction-Bold.woff2') format('woff2'); }
+    @font-face { font-family: 'Lora'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/Lora-VariableFont_wght.ttf') format('truetype'); }
+    @font-face { font-family: 'Lora'; font-style: italic; font-weight: 400 700; font-display: swap; src: url('/fonts/Lora-Italic-VariableFont_wght.ttf') format('truetype'); }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -26,7 +26,7 @@
       --text-muted: #7a7a72;
       --border: #d8d8d0;
       --terminal-bg: #121212;
-      --font-heading: 'Redaction', serif;
+      --font-heading: 'Lora', serif;
       --font-body: 'Satoshi', system-ui, sans-serif;
       --font-mono: 'Satoshi', system-ui, sans-serif;
     }
@@ -44,8 +44,8 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    h1, h2 { font-family: var(--font-heading); line-height: 1.15; font-weight: 400; color: var(--text-primary); letter-spacing: -0.03em; }
-    h3, h4 { font-family: var(--font-body); line-height: 1.3; font-weight: 600; color: var(--text-primary); }
+    h1, h2, h3 { font-family: var(--font-heading); line-height: 1.15; font-weight: 400; color: var(--text-primary); letter-spacing: -0.03em; }
+    h4 { font-family: var(--font-body); line-height: 1.3; font-weight: 600; color: var(--text-primary); }
 
     /* ── HEADER ── */
     .header {
