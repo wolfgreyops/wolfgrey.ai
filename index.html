@@ -260,14 +260,6 @@
       pointer-events: none;
       z-index: 0;
     }
-    .hero-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
     .hero-content { max-width: 800px; position: relative; }
     .hero-badge {
       font-family: 'Doto', sans-serif;
@@ -1702,7 +1694,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <canvas class="hero-canvas" id="galaxy"></canvas>
     <div class="hero-content">
       <div class="hero-badge">AI-POWERED GROWTH</div>
       <h1>Growth is a system. <span class="accent">Yours should run itself.</span></h1>
@@ -2290,74 +2281,6 @@
       link.addEventListener('click', () => toggleNav());
     });
 
-    // Geometric grid
-    (function() {
-      const canvas = document.getElementById('galaxy');
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      const mouse = { x: 0.5, y: 0.5 };
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const CELL = 80;
-
-      function resize() {
-        const hero = canvas.parentElement;
-        w = hero.offsetWidth;
-        h = hero.offsetHeight;
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
-      function init() {
-        resize();
-      }
-
-      let time = 0;
-      function draw() {
-        time += 1;
-        ctx.clearRect(0, 0, w, h);
-
-        const px = (mouse.x - 0.5) * 12;
-        const py = (mouse.y - 0.5) * 12;
-        const cols = Math.ceil(w / CELL) + 1;
-
-        // Draw grid lines
-        ctx.strokeStyle = 'rgba(30, 41, 64, 0.5)';
-        ctx.lineWidth = 0.5;
-        const rowCount = Math.ceil(h / CELL) + 1;
-        for (let r = 0; r < rowCount; r++) {
-          const y = r * CELL + py * 0.1;
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(w, y);
-          ctx.stroke();
-        }
-        for (let c = 0; c < cols; c++) {
-          const x = c * CELL + px * 0.1;
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, h);
-          ctx.stroke();
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      init();
-      draw();
-
-      window.addEventListener('resize', init);
-
-      document.querySelector('.hero').addEventListener('mousemove', (e) => {
-        const rect = canvas.parentElement.getBoundingClientRect();
-        mouse.x = (e.clientX - rect.left) / w;
-        mouse.y = (e.clientY - rect.top) / h;
-      });
-
-    })();
-
     // Ship mouse follow
     (function() {
       const section = document.getElementById('ship-section');
@@ -2408,7 +2331,6 @@
   <span class="cmd">set background</span> [color]   Change page background
   <span class="cmd">set accent</span> [color]       Change accent color
   <span class="cmd">set text</span> [color]         Change text color
-  <span class="cmd">toggle stars</span>             Toggle starfield animation
   <span class="cmd">add jet</span>                  Deploy fighter escort
   <span class="cmd">confetti</span>                 Launch celebration
   <span class="cmd">light-mode</span>               Toggle light mode theme
@@ -2426,7 +2348,6 @@
             { text: '<span class="cmd">Analysis complete:</span>', delay: 150 },
             { text: '  ├─ <span class="success">1,500+</span> lines of production code', delay: 40 },
             { text: '  ├─ <span class="success">Zero</span> dependencies or frameworks', delay: 40 },
-            { text: '  ├─ <span class="success">Canvas</span> starfield with parallax + shooting stars', delay: 40 },
             { text: '  ├─ <span class="success">Interactive</span> terminal (you\'re using it now)', delay: 40 },
             { text: '  ├─ <span class="success">40+</span> design iterations shipped', delay: 40 },
             { text: '  └─ <span class="success">100%</span> mobile responsive', delay: 40 },
@@ -2558,7 +2479,6 @@
       };
 
       let isTyping = false;
-      let starsEnabled = true;
       const originalColors = {
         dark: getComputedStyle(document.documentElement).getPropertyValue('--dark').trim(),
         accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
@@ -2679,18 +2599,6 @@
             { text: '  └─ Applied: <span class="cmd">' + color + '</span>', delay: 50 },
             { text: '<span class="success">✓ Text color updated</span>', delay: 50 }
           ]);
-        } else if (trimmed === 'toggle stars') {
-          addLine('');
-          const canvas = document.getElementById('galaxy');
-          if (canvas) {
-            starsEnabled = !starsEnabled;
-            canvas.style.opacity = starsEnabled ? '1' : '0';
-            typeSteps([
-              { text: '<span class="success">⚡ Toggling starfield</span>', delay: 100 },
-              { text: '  └─ Starfield: <span class="cmd">' + (starsEnabled ? 'ON' : 'OFF') + '</span>', delay: 50 },
-              { text: '<span class="success">✓ Animation ' + (starsEnabled ? 'enabled' : 'disabled') + '</span>', delay: 50 }
-            ]);
-          }
         } else if (trimmed === 'confetti') {
           addLine('');
           launchConfetti();
@@ -2711,16 +2619,13 @@
           // Reset light mode
           const builtByAi = document.querySelector('.built-by-ai');
           if (builtByAi) builtByAi.classList.remove('light-mode');
-          const canvas = document.getElementById('galaxy');
-          if (canvas) { canvas.style.opacity = '1'; starsEnabled = true; }
           const jet = document.querySelector('.demo-jet');
           if (jet) jet.classList.remove('visible');
           typeSteps([
             { text: '<span class="success">⚡ Resetting theme</span>', delay: 100 },
             { text: '  ├─ Background... <span class="success">✓</span>', delay: 40 },
             { text: '  ├─ Accent color... <span class="success">✓</span>', delay: 40 },
-            { text: '  ├─ Text color... <span class="success">✓</span>', delay: 40 },
-            { text: '  └─ Starfield... <span class="success">✓</span>', delay: 40 },
+            { text: '  └─ Text color... <span class="success">✓</span>', delay: 40 },
             { text: '<span class="success">✓ Original theme restored</span>', delay: 50 }
           ]);
         } else if (trimmed === 'add jet' || trimmed === 'add fighter' || trimmed === 'add ship') {
