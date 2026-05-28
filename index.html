@@ -260,24 +260,7 @@
       pointer-events: none;
       z-index: 0;
     }
-    .hero-orb {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.55;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 0%, transparent 40%, var(--dark) 90%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .hero-content { max-width: 800px; position: relative; z-index: 2; }
+    .hero-content { max-width: 800px; position: relative; }
     .hero-badge {
       font-family: 'Doto', sans-serif;
       display: inline-block;
@@ -1711,7 +1694,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <canvas class="hero-orb" id="heroOrb"></canvas>
     <div class="hero-content">
       <div class="hero-badge">AI-POWERED GROWTH</div>
       <h1>Growth is a system. <span class="accent">Yours should run itself.</span></h1>
@@ -2298,107 +2280,6 @@
     document.querySelectorAll('.nav-drawer-links a').forEach(link => {
       link.addEventListener('click', () => toggleNav());
     });
-
-    // Hero data rain — matrix-style binary stream falling behind the hero text
-    (function() {
-      const canvas = document.getElementById('heroOrb');
-      if (!canvas) return;
-      const hero = canvas.parentElement;
-      const ctx = canvas.getContext('2d');
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      const FONT_SIZE = 14;
-      const COL_GAP = 1.4; // every column is one char wide; gap scales spacing
-      const CHARS = '01';  // pure binary
-      const HEAD_COLOR = '180, 255, 240';   // near-white teal
-      const BODY_COLOR = '0, 229, 204';     // brand teal
-      const FADE_COLOR = '5, 8, 16';        // matches --dark
-
-      let w = 0, h = 0, cols = 0, step = 0, drops = [];
-
-      function resize() {
-        w = hero.offsetWidth;
-        h = hero.offsetHeight;
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        step = FONT_SIZE * COL_GAP;
-        cols = Math.ceil(w / step);
-        drops = new Array(cols).fill(0).map(() => ({
-          y: Math.random() * -h,
-          speed: 0.6 + Math.random() * 0.9, // rows per frame
-          glyph: CHARS[Math.floor(Math.random() * CHARS.length)],
-        }));
-
-        // Paint full background once so the first frames don't show a clear canvas
-        ctx.fillStyle = `rgba(${FADE_COLOR}, 1)`;
-        ctx.fillRect(0, 0, w, h);
-      }
-
-      function draw() {
-        // Trail fade — repeated semi-transparent fill darkens older glyphs to nothing
-        ctx.fillStyle = `rgba(${FADE_COLOR}, 0.08)`;
-        ctx.fillRect(0, 0, w, h);
-
-        ctx.font = `${FONT_SIZE}px "SF Mono", "Fira Code", ui-monospace, monospace`;
-        ctx.textBaseline = 'top';
-
-        for (let i = 0; i < cols; i++) {
-          const d = drops[i];
-          const x = i * step;
-
-          // Occasionally swap the head glyph so the column appears to be streaming
-          if (Math.random() < 0.08) {
-            d.glyph = CHARS[Math.floor(Math.random() * CHARS.length)];
-          }
-
-          // Head — brightest
-          ctx.fillStyle = `rgba(${HEAD_COLOR}, 0.95)`;
-          ctx.fillText(d.glyph, x, d.y);
-
-          // Second glyph behind, mid brightness, for a hint of streak before the trail fade catches up
-          ctx.fillStyle = `rgba(${BODY_COLOR}, 0.6)`;
-          ctx.fillText(d.glyph, x, d.y - FONT_SIZE);
-
-          d.y += d.speed * FONT_SIZE;
-
-          // Reset off-bottom with randomness so columns don't sync
-          if (d.y > h && Math.random() > 0.975) {
-            d.y = -FONT_SIZE * (Math.random() * 12 + 1);
-            d.speed = 0.6 + Math.random() * 0.9;
-          }
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      resize();
-      window.addEventListener('resize', resize);
-
-      if (reduceMotion) {
-        // Static frame — a single stream snapshot, then stop
-        ctx.fillStyle = `rgba(${FADE_COLOR}, 1)`;
-        ctx.fillRect(0, 0, w, h);
-        ctx.font = `${FONT_SIZE}px "SF Mono", "Fira Code", ui-monospace, monospace`;
-        ctx.textBaseline = 'top';
-        for (let i = 0; i < cols; i++) {
-          for (let r = 0; r < 10; r++) {
-            const g = CHARS[Math.floor(Math.random() * CHARS.length)];
-            const y = (drops[i].y + h + r * FONT_SIZE) % h;
-            ctx.fillStyle = r === 0
-              ? `rgba(${HEAD_COLOR}, 0.9)`
-              : `rgba(${BODY_COLOR}, ${0.5 - r * 0.05})`;
-            ctx.fillText(g, i * step, y);
-          }
-        }
-      } else {
-        draw();
-      }
-    })();
 
     // Ship mouse follow
     (function() {
