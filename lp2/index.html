@@ -498,6 +498,50 @@
     .footer-meta a:hover { color: var(--ink); }
     .footer-copy { grid-column: 1 / -1; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line-soft); font-size: 12px; color: var(--ink-mute); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
+    /* ── Scroll reveals ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 1.1s cubic-bezier(0.2, 0.7, 0.2, 1), transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.is-in { opacity: 1; transform: translateY(0); }
+    .reveal-sm { transform: translateY(14px); }
+    .reveal-lg { transform: translateY(40px); }
+
+    /* Word-by-word headline reveal */
+    .reveal-words .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40%);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .reveal-words.is-in .word { opacity: 1; transform: translateY(0); }
+
+    /* Staggered grid reveal */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.95s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.95s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .reveal-stagger.is-in > * { opacity: 1; transform: translateY(0); }
+    .reveal-stagger.is-in > *:nth-child(1) { transition-delay: 0ms; }
+    .reveal-stagger.is-in > *:nth-child(2) { transition-delay: 90ms; }
+    .reveal-stagger.is-in > *:nth-child(3) { transition-delay: 180ms; }
+    .reveal-stagger.is-in > *:nth-child(4) { transition-delay: 270ms; }
+
+    /* Hero parallax target */
+    .hero-headline { will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-words .word, .reveal-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .hero-scroll-line::after { animation: none !important; }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 1024px) {
       .proof { grid-template-columns: repeat(2, 1fr); gap: 48px; }
@@ -553,19 +597,19 @@
   <!-- ── Hero ── -->
   <header class="hero">
     <div class="wrap">
-      <div class="hero-eyebrow-row">
+      <div class="hero-eyebrow-row reveal reveal-sm">
         <span class="dot"></span>
         <span class="eyebrow">AI Growth Systems · For B2B Operators</span>
       </div>
-      <h1 class="display hero-headline">
+      <h1 class="display hero-headline reveal-words" data-split>
         Your sales team can't<br>
         outwork an AI<br>
         <em>that never sleeps.</em>
       </h1>
     </div>
     <div class="wrap hero-foot">
-      <p class="hero-sub">wolfgrey designs and ships the AI infrastructure that runs sales, marketing, content, and operations — without adding headcount, without rebuilding your stack.</p>
-      <div class="hero-scroll">
+      <p class="hero-sub reveal">wolfgrey designs and ships the AI infrastructure that runs sales, marketing, content, and operations — without adding headcount, without rebuilding your stack.</p>
+      <div class="hero-scroll reveal reveal-sm">
         <span>Scroll to discover</span>
         <div class="hero-scroll-line"></div>
       </div>
@@ -576,12 +620,12 @@
   <section id="who">
     <div class="wrap">
       <div class="who-grid">
-        <div class="who-label">01 — Who&nbsp;we&nbsp;are</div>
-        <div class="who-body">
+        <div class="who-label reveal reveal-sm">01 — Who&nbsp;we&nbsp;are</div>
+        <div class="who-body reveal">
           <p>wolfgrey is a solo operator plus a team of AI agents — lean by design, fast by default.</p>
           <p>We build the systems most growth teams talk about and never ship. Live in weeks, not quarters. Owned by you, not us.</p>
         </div>
-        <div class="who-meta">
+        <div class="who-meta reveal reveal-stagger">
           <div class="who-meta-item">
             <div class="label">Founded</div>
             <div class="value num">2025</div>
@@ -606,11 +650,11 @@
   <!-- ── What we build ── -->
   <section id="what">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div class="section-num">02 — What we build</div>
         <h2 class="section-title">Every growth lever <em>— pulled at the same time.</em></h2>
       </div>
-      <div class="services">
+      <div class="services reveal reveal-stagger">
 
         <article class="service-card">
           <div class="num">01</div>
@@ -663,12 +707,12 @@
   <!-- ── How it works ── -->
   <section id="how">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div class="section-num">03 — How it works</div>
         <h2 class="section-title">Three steps. <em>No quarterly roadmaps.</em></h2>
       </div>
     </div>
-    <div class="process">
+    <div class="process reveal reveal-stagger">
       <div class="process-step">
         <div class="step-head">
           <div class="step-num num">01</div>
@@ -699,30 +743,30 @@
   <!-- ── Proof ── -->
   <section id="proof">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div class="section-num">04 — Proof</div>
         <h2 class="section-title">Built on the same tools <em>we ship to you.</em></h2>
       </div>
-      <div class="proof">
+      <div class="proof reveal reveal-stagger">
         <div class="proof-stat">
-          <span class="num">10×</span>
+          <span class="num" data-count="10" data-suffix="×">0×</span>
           <div class="label">Faster than a traditional agency engagement.</div>
         </div>
         <div class="proof-stat">
-          <span class="num">$0</span>
+          <span class="num" data-count="0" data-prefix="$">$0</span>
           <div class="label">Added headcount. Agents run on infrastructure you already pay for.</div>
         </div>
         <div class="proof-stat">
-          <span class="num">30</span>
+          <span class="num" data-count="30">0</span>
           <div class="label">Days to first system in production. Most clients are live inside a month.</div>
         </div>
         <div class="proof-stat">
-          <span class="num">100%</span>
+          <span class="num" data-count="100" data-suffix="%">0%</span>
           <div class="label">You own the systems we build. No vendor lock, no proprietary middleware.</div>
         </div>
       </div>
 
-      <div class="proof-divider">
+      <div class="proof-divider reveal">
         <div class="label">Operator note</div>
         <div>
           <p class="proof-quote">"Every page on this site, every system in our stack, every email that goes out — built and run by AI we ship to clients. <em>The product is the proof.</em>"</p>
@@ -735,16 +779,16 @@
   <!-- ── Final CTA ── -->
   <section class="final-cta" id="cta">
     <div class="wrap">
-      <div class="eyebrow">— Book the assessment</div>
-      <h2>One call. A prioritized build list. <em>No pitch.</em></h2>
-      <div class="final-cta-actions">
+      <div class="eyebrow reveal reveal-sm">— Book the assessment</div>
+      <h2 class="reveal">One call. A prioritized build list. <em>No pitch.</em></h2>
+      <div class="final-cta-actions reveal">
         <a href="https://calendly.com/wolfgrey/ai-assessment" class="btn-primary">
           Book the free AI assessment
           <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M13 1L17 5L13 9M17 5H0" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
         </a>
         <a href="mailto:hey@wolfgrey.ai" class="btn-ghost">Or send a note instead</a>
       </div>
-      <div class="final-cta-foot">
+      <div class="final-cta-foot reveal reveal-stagger">
         <div>
           <span class="k">Duration</span>
           45 minutes · Working call, not a sales call
@@ -781,11 +825,88 @@
   </footer>
 
   <script>
-    // Nav border on scroll
-    const nav = document.getElementById('nav');
-    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    (function() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Nav border on scroll
+      const nav = document.getElementById('nav');
+      const heroEl = document.querySelector('.hero-headline');
+
+      function onScroll() {
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 8);
+        // Subtle hero parallax: headline rises ~80px over the first 600px of scroll
+        if (heroEl && !prefersReduced) {
+          const t = Math.min(1, y / 600);
+          heroEl.style.transform = `translateY(${-80 * t}px)`;
+          heroEl.style.opacity = String(1 - 0.4 * t);
+        }
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Split headline into per-word spans so the reveal can stagger
+      document.querySelectorAll('.reveal-words[data-split]').forEach(el => {
+        const html = el.innerHTML;
+        const wrapped = html
+          .split(/(<br\s*\/?>|<em>|<\/em>)/i)
+          .map(chunk => {
+            if (/^<br|^<\/?em>/i.test(chunk)) return chunk;
+            return chunk
+              .split(/(\s+)/)
+              .map(tok => /^\s+$/.test(tok) ? tok : (tok ? `<span class="word">${tok}</span>` : ''))
+              .join('');
+          })
+          .join('');
+        el.innerHTML = wrapped;
+        // Apply stagger delay to each word
+        const words = el.querySelectorAll('.word');
+        words.forEach((w, i) => {
+          w.style.transitionDelay = (i * 70) + 'ms';
+        });
+      });
+
+      // IntersectionObserver: fire reveals once when an element enters the viewport
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            // Kick off counter if applicable
+            const counters = entry.target.matches('[data-count]')
+              ? [entry.target]
+              : entry.target.querySelectorAll('[data-count]');
+            counters.forEach(animateCount);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-words, .reveal-stagger').forEach(el => io.observe(el));
+
+      // Stat counters
+      function animateCount(node) {
+        if (node.dataset.counted) return;
+        node.dataset.counted = '1';
+        if (prefersReduced) {
+          node.textContent = (node.dataset.prefix || '') + node.dataset.count + (node.dataset.suffix || '');
+          return;
+        }
+        const target = parseFloat(node.dataset.count);
+        const prefix = node.dataset.prefix || '';
+        const suffix = node.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          // ease-out cubic
+          const eased = 1 - Math.pow(1 - t, 3);
+          const v = Math.round(target * eased);
+          node.textContent = prefix + v + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+    })();
   </script>
 
 </body>
