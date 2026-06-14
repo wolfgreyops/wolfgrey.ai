@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wolfgrey.ai // Full Funnel Marketing Proposal for Frank &amp; Christina</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #111111;
+    --gray-800: #222222;
+    --gray-600: #555555;
+    --gray-400: #999999;
+    --gray-200: #e0e0e0;
+    --gray-100: #f4f4f4;
+    --white: #ffffff;
+    --red: #ff4d4d;
+    --teal: #00c9b0;
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .header-left img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header-left span {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .header-meta {
+    font-size: 13px;
+    color: var(--gray-400);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* Prepared for */
+  .prepared-for {
+    margin-bottom: 48px;
+  }
+
+  .prepared-for .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+
+  .prepared-for .name {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .prepared-for .company {
+    font-size: 15px;
+    color: var(--gray-600);
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section h2 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+
+  .section p {
+    font-size: 15px;
+    color: var(--gray-600);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .section p strong {
+    color: var(--black);
+    font-weight: 500;
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    margin: 48px 0;
+  }
+
+  /* Deliverable cards */
+  .deliverable-card {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--red);
+  }
+
+  .deliverable-card .card-number {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .deliverable-card h3 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--black);
+  }
+
+  .deliverable-card .description {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .deliverable-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .deliverable-card ul li {
+    font-size: 14px;
+    color: var(--gray-600);
+    padding: 6px 0;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .deliverable-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* Pricing table */
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .pricing-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    font-weight: 500;
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .pricing-table th:not(:first-child) {
+    text-align: right;
+  }
+
+  .pricing-table td {
+    font-size: 15px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-600);
+  }
+
+  .pricing-table td:not(:first-child) {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pricing-table tr.total td {
+    border-top: 2px solid var(--black);
+    border-bottom: none;
+    font-weight: 600;
+    color: var(--black);
+    padding-top: 16px;
+    font-size: 16px;
+  }
+
+  .pricing-note {
+    font-size: 13px;
+    color: var(--gray-400);
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+
+  .pricing-note strong {
+    color: var(--gray-600);
+  }
+
+  /* Next steps */
+  .next-steps-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .next-steps-list li {
+    font-size: 15px;
+    color: var(--gray-600);
+    padding: 10px 0;
+    padding-left: 22px;
+    position: relative;
+    border-bottom: 1px solid var(--gray-100);
+    line-height: 1.6;
+  }
+
+  .next-steps-list li:last-child {
+    border-bottom: none;
+  }
+
+  .next-steps-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    border: 2px solid var(--gray-400);
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .cta-section h2 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+
+  .cta-section p {
+    font-size: 15px;
+    color: var(--gray-600);
+    margin-bottom: 24px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+
+  .cta-button:hover {
+    opacity: 0.9;
+  }
+
+  .cta-alt {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--gray-400);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .footer img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.3;
+    margin-bottom: 8px;
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  @media print {
+    .page { padding: 40px 20px; }
+    .deliverable-card { break-inside: avoid; }
+    .cta-button { background: var(--black); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <img src="/logo.png" alt="wolfgrey">
+      <span>wolfgrey.ai</span>
+    </div>
+    <div class="header-meta">
+      Full Funnel Marketing Proposal<br>
+      June 14, 2026
+    </div>
+  </div>
+
+  <!-- Prepared For -->
+  <div class="prepared-for">
+    <div class="label">Prepared for</div>
+    <div class="name">Frank &amp; Christina</div>
+    <div class="company">Customer &mdash; Plumbing</div>
+  </div>
+
+  <!-- The Opportunity -->
+  <div class="section">
+    <div class="section-label">The Opportunity</div>
+    <p>
+      You've built a plumbing business on real work and real relationships. The problem isn't the quality of what you do &mdash; it's that the systems around it aren't pulling their weight. Leads slip through. Scheduling is manual. Your online presence isn't working hard enough to bring in the next job.
+    </p>
+    <p>
+      We're going to fix that. From the first time someone searches for a plumber online, all the way through to a confirmed appointment on the calendar &mdash; we'll own that entire path so you can focus on the work itself.
+    </p>
+    <p><strong>Here's what that looks like in practice.</strong></p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Deliverable 1 -->
+  <div class="deliverable-card">
+    <div class="card-number">01</div>
+    <h3>Landing Page</h3>
+    <div class="description">A clean, conversion-focused page that turns website visitors into booked appointments &mdash; built for the way people actually search for a plumber.</div>
+    <ul>
+      <li>Professional design that builds trust on first impression</li>
+      <li>Services, service area, and credentials front and center</li>
+      <li>Click-to-call and contact form optimized for mobile</li>
+      <li>SEO foundation so you show up when it matters</li>
+      <li>Fast-loading, no fluff &mdash; built to convert</li>
+    </ul>
+  </div>
+
+  <!-- Deliverable 2 -->
+  <div class="deliverable-card">
+    <div class="card-number">02</div>
+    <h3>Google Business Profile Cleanup</h3>
+    <div class="description">Your Google Business listing is often the first thing a customer sees. We'll make sure it's complete, accurate, and working for you around the clock.</div>
+    <ul>
+      <li>Profile audit and full cleanup of existing information</li>
+      <li>Hours, services, photos, and categories updated and optimized</li>
+      <li>Keyword-rich business description to improve local search ranking</li>
+      <li>Q&amp;A section populated with common questions</li>
+    </ul>
+  </div>
+
+  <!-- Deliverable 3 -->
+  <div class="deliverable-card">
+    <div class="card-number">03</div>
+    <h3>Listings Optimization</h3>
+    <div class="description">Consistent, accurate listings across directories and platforms build trust with both customers and search engines.</div>
+    <ul>
+      <li>Audit of existing listings across major platforms (Yelp, Angi, etc.)</li>
+      <li>NAP consistency cleanup &mdash; name, address, and phone unified everywhere</li>
+      <li>Category and service optimization per platform</li>
+      <li>Duplicate listings identified and resolved</li>
+    </ul>
+  </div>
+
+  <!-- Deliverable 4 -->
+  <div class="deliverable-card">
+    <div class="card-number">04</div>
+    <h3>Review Retrieval System</h3>
+    <div class="description">Reviews are one of the highest-leverage things a local service business can have. We'll build a system that gets them consistently, without you having to think about it.</div>
+    <ul>
+      <li>Automated review request sent after every completed job</li>
+      <li>Direct links to Google and other priority platforms</li>
+      <li>Simple process that fits into your existing workflow</li>
+      <li>Review monitoring so nothing goes unnoticed</li>
+    </ul>
+  </div>
+
+  <!-- Deliverable 5 -->
+  <div class="deliverable-card">
+    <div class="card-number">05</div>
+    <h3>Content Creation</h3>
+    <div class="description">Consistent content keeps you visible and builds authority in your market &mdash; the kind that turns a search or a scroll into a phone call.</div>
+    <ul>
+      <li>Social posts and Google Business updates on a regular cadence</li>
+      <li>Before/after project highlights and seasonal content</li>
+      <li>Short-form content that drives local visibility and trust</li>
+      <li>Written in your voice &mdash; we handle the execution</li>
+    </ul>
+  </div>
+
+  <!-- Deliverable 6 -->
+  <div class="deliverable-card">
+    <div class="card-number">06</div>
+    <h3>CRM &amp; Customer Base Management</h3>
+    <div class="description">A lightweight CRM that fits how a plumbing business actually operates &mdash; no bloat, no training curve. We'll set it up, keep it running, and actively manage your customer base so no one gets forgotten.</div>
+    <ul>
+      <li>CRM recommendation and setup tailored to your workflow</li>
+      <li>Customer records built and maintained &mdash; service history, contact info, job details</li>
+      <li>Ongoing customer base management: follow-ups, reminders, re-engagement</li>
+      <li>Segmentation so you know who to reach out to and when</li>
+      <li>One place to see every customer relationship, past and active</li>
+    </ul>
+  </div>
+
+  <!-- Deliverable 7 -->
+  <div class="deliverable-card">
+    <div class="card-number">07</div>
+    <h3>Full Funnel Management</h3>
+    <div class="description">Every lead that comes in &mdash; from any source &mdash; gets captured, followed up with, and guided all the way to a scheduled appointment. Nothing falls through the cracks.</div>
+    <ul>
+      <li>Lead capture from website, Google, and listings &mdash; all in one place</li>
+      <li>Automated follow-up so no inquiry goes cold</li>
+      <li>Qualification flow to surface the right jobs</li>
+      <li>Scheduling handled through to confirmed appointment</li>
+      <li>Monthly performance report so you can see what's working</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Pricing -->
+  <div class="section">
+    <div class="section-label">Investment</div>
+    <h2>Pricing</h2>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Setup</th>
+          <th>Monthly</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Full Funnel Marketing &mdash; All Services</td>
+          <td>Included</td>
+          <td>$1,000/mo</td>
+        </tr>
+        <tr class="total">
+          <td>Total</td>
+          <td>$0</td>
+          <td>$1,000/mo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="pricing-note">
+      <strong>No setup fee.</strong> Everything above is included in the monthly retainer from day one.<br>
+      <strong>3-month minimum commitment,</strong> then month-to-month. Gives us enough time to build the system right and show real results.<br>
+      <strong>Retainer includes:</strong> landing page design and launch, Google Business cleanup, listings optimization, review retrieval setup, and ongoing full funnel management &mdash; leads through scheduling.
+    </p>
+    <p class="pricing-note" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200);">
+      <strong>Software expenses.</strong> wolfgrey.ai may recommend third-party software tools (CRM, scheduling, automation platforms, etc.) as part of building your marketing system. Any such recommendations are optional, and the cost of those tools &mdash; whether billed monthly or annually &mdash; is the sole responsibility of the Customer. These costs are not included in the retainer.
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Next Steps -->
+  <div class="section">
+    <div class="section-label">Down the Road</div>
+    <h2>What We Can Add Later</h2>
+    <p>
+      Frank, you're handling invoicing and billing for now, and that makes sense. Once the marketing engine is running and we have a clear picture of the flow, there's a natural next step: automating the back end of the business so the whole thing runs tighter.
+    </p>
+    <ul class="next-steps-list">
+      <li>Automated invoicing and payment collection tied to completed jobs</li>
+      <li>Job tracking from lead all the way through payment</li>
+      <li>Customer communication sequences post-job for repeat business</li>
+      <li>Reporting and revenue dashboards for both of you</li>
+      <li>Direct mail campaigns targeting homeowners and property managers in your service area</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Ready to get started?</h2>
+    <p>Let's lock in a start date and get your funnel up and running.</p>
+    <a href="https://calendly.com/wolfgrey/ai-kickoff" class="cta-button">Book a Call</a>
+    <span class="cta-alt">Or reply directly to this email.</span>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <img src="/logo.png" alt="wolfgrey">
+    <p>wolfgrey.ai &mdash; AI systems that run small businesses.</p>
+  </div>
+
+</div>
+</body>
+</html>
