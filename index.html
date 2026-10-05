@@ -8,444 +8,625 @@
   <meta property="og:title" content="wolfgrey.ai — Growth requires /skills">
   <meta property="og:description" content="AI consulting, growth systems, custom tools and social presence for service businesses.">
   <meta property="og:url" content="https://wolfgrey.ai">
-  <meta name="theme-color" content="#FAFAF9">
+  <meta name="theme-color" content="#1B1919">
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
-    @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 200 900; font-display: swap; src: url('/fonts/SourceSerif4-Variable.ttf') format('truetype'); }
     @font-face { font-family: 'Commit Mono'; font-weight: 400; font-display: swap; src: url('/fonts/CommitMono-400-Regular.otf') format('opentype'); }
 
     :root {
-      --paper: #FAFAF9;
-      --paper-2: #F2F3F5;
-      --ink: #0A0D14;
-      --ink-2: #3D4250;
-      --muted: #6B7080;
-      --line: #E3E5EA;
-      --red: #D12F2F;
-      --red-bright: #FF4D4D;
-      --red-dark: #B02424;
+      /* Dark surfaces */
+      --char: #1B1919;
+      --char-2: #232020;
+      --on-char: #F4F2F0;
+      --on-char-2: #B9B3AE;
+      --on-char-3: #847D78;
+      --line-dark: rgba(255, 255, 255, 0.1);
 
-      --serif: 'Source Serif 4', Georgia, serif;
+      /* Light surfaces */
+      --paper: #FBFAF9;
+      --paper-2: #F4F2F0;
+      --ink: #1B1919;
+      --ink-2: #57514D;
+      --ink-3: #7D7671;
+      --line-light: rgba(10, 10, 10, 0.1);
+
+      --red: #D12F2F;
+      --red-hover: #B92525;
+      --red-bright: #FF4D4D;
+
       --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --mono: 'Commit Mono', 'SF Mono', ui-monospace, Menlo, monospace;
 
-      --gutter: clamp(20px, 5vw, 64px);
-      --max: 1200px;
-      --section: clamp(88px, 12vw, 152px);
+      --frame: min(1248px, calc(100% - 2 * var(--gutter)));
+      --gutter: clamp(16px, 4vw, 48px);
+      --pad: clamp(24px, 4vw, 48px);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      background: var(--paper);
-      color: var(--ink);
+      background: var(--char);
+      color: var(--on-char);
       font-family: var(--sans);
-      font-size: 18px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.55;
+      letter-spacing: -0.01em;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
     }
-    a { color: inherit; }
-    img { display: block; max-width: 100%; }
-    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+    :focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; border-radius: 6px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    /* Surfaces + frame: full-bleed rules, framed content with side rails */
+    .dark  { background: var(--char);  color: var(--on-char); --line: var(--line-dark); --text-2: var(--on-char-2); --text-3: var(--on-char-3); }
+    .light { background: var(--paper); color: var(--ink);     --line: var(--line-light); --text-2: var(--ink-2);    --text-3: var(--ink-3); }
+    .band-rule { border-top: 1px solid var(--line); }
+    .frame { width: var(--frame); margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); position: relative; }
+    .cell { padding: var(--pad); }
+
+    h1, h2, h3 { font-weight: 500; letter-spacing: -0.04em; }
+    h2 { font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.1; }
+    h3 { font-size: 19px; letter-spacing: -0.02em; line-height: 1.3; }
+    .lede { color: var(--text-2); max-width: 46ch; }
+
+    /* Pills */
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 44px; padding: 0 20px;
+      border-radius: 999px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em; white-space: nowrap;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .pill-red { background: var(--red); color: #fff; }
+    .pill-red:hover { background: var(--red-hover); }
+    .pill-outline { border: 1px solid currentColor; }
+    .dark .pill-outline { border-color: rgba(244, 242, 240, .55); }
+    .dark .pill-outline:hover { border-color: var(--on-char); background: rgba(255, 255, 255, .06); }
+    .light .pill-outline { border-color: rgba(27, 25, 25, .45); }
+    .light .pill-outline:hover { border-color: var(--ink); background: rgba(10, 10, 10, .04); }
+    .text-link { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 500; }
+    .text-link svg { width: 16px; height: 16px; transition: transform .15s; }
+    .text-link:hover svg { transform: translateX(2px); }
 
     /* Nav */
-    .nav {
-      position: sticky; top: 0; z-index: 10;
-      background: color-mix(in srgb, var(--paper) 88%, transparent);
-      backdrop-filter: saturate(1.4) blur(12px);
-      -webkit-backdrop-filter: saturate(1.4) blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color .2s;
-    }
-    .nav.scrolled { border-bottom-color: var(--line); }
-    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .nav-logo img { height: 22px; width: auto; }
-    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-    .nav-links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-2); }
-    .nav-links a:hover { color: var(--ink); }
-
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: var(--red); color: #fff;
-      font-family: var(--sans); font-weight: 500; font-size: 16px;
-      text-decoration: none; line-height: 1;
-      padding: 16px 26px; border-radius: 8px;
-      transition: background .15s;
-    }
-    .btn:hover { background: var(--red-dark); }
-    .btn-sm { font-size: 14px; padding: 11px 18px; }
-    .nav-links .btn-sm { color: #fff; }
+    .nav { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line-dark); background: rgba(27, 25, 25, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav-inner { width: var(--frame); margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 40px; }
+    .nav-logo img { height: 20px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; font-size: 15px; color: var(--on-char-2); }
+    .nav-links a:hover { color: var(--on-char); }
+    .nav .pill { margin-left: auto; height: 40px; }
 
     /* Hero */
-    .hero { padding: clamp(72px, 13vw, 168px) 0 clamp(64px, 9vw, 112px); }
-    .hero h1 {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(3.25rem, 10.5vw, 9.5rem);
-      line-height: .98;
-      letter-spacing: -0.035em;
-    }
-    .hero h1 .cmd {
-      display: inline-block;
-      font-family: var(--mono);
-      font-weight: 400;
-      font-size: .82em;
-      letter-spacing: -0.05em;
-      margin-top: .12em;
-    }
-    .caret {
-      display: inline-block;
-      width: .52em; height: .9em;
-      margin-left: .06em;
-      vertical-align: -.08em;
-      background: var(--red-bright);
-      animation: blink 1.1s steps(1) infinite;
-    }
+    .hero { position: relative; overflow: hidden; }
+    .hero canvas, .closing canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+    .hero .frame { border-color: transparent; }
+    .hero-copy { position: relative; z-index: 1; padding: clamp(96px, 14vw, 176px) var(--pad) clamp(96px, 12vw, 152px); max-width: 720px; }
+    .hero h1 { font-size: clamp(2.9rem, 6.6vw, 5rem); line-height: 1.02; letter-spacing: -0.045em; }
+    .hero h1 .cmd { font-family: var(--mono); font-weight: 400; letter-spacing: -0.06em; font-size: .94em; }
+    .caret { display: inline-block; width: .5em; height: .82em; margin-left: .05em; vertical-align: -.06em; background: var(--red-bright); animation: blink 1.1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
-    .hero-sub {
-      max-width: 34ch;
-      margin-top: clamp(32px, 4vw, 48px);
-      font-size: clamp(1.15rem, 1.6vw, 1.375rem);
-      line-height: 1.5;
-      color: var(--ink-2);
-    }
-    .hero-cta { display: flex; align-items: center; gap: 24px; margin-top: 36px; flex-wrap: wrap; }
-    .hero-cta .note { font-size: 15px; color: var(--muted); }
+    .hero .lede { margin-top: 28px; font-size: clamp(17px, 1.5vw, 19px); color: var(--on-char); opacity: .86; max-width: 40ch; }
+    .hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 40px; flex-wrap: wrap; }
 
     /* Rotating audience band */
-    .band {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: var(--paper-2);
-      padding: clamp(40px, 6vw, 72px) 0;
-      overflow: hidden;
-    }
-    .band p {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(2rem, 6vw, 4.75rem);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      display: flex; flex-wrap: wrap; column-gap: .28em;
-    }
-    .rotator {
-      position: relative;
-      display: inline-block;
-      height: 1.15em;
-      overflow: hidden;
-      vertical-align: bottom;
-    }
-    .rotator { transition: width .55s cubic-bezier(.7, 0, .2, 1); }
+    .audience { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px 40px; }
+    .audience p.big { font-size: clamp(1.9rem, 4.4vw, 3.4rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1.15; display: flex; flex-wrap: wrap; column-gap: .25em; flex: 1 1 560px; }
+    .audience small { font-size: 15px; color: var(--text-3); max-width: 30ch; }
+    .rotator { position: relative; display: inline-block; height: 1.15em; overflow: hidden; vertical-align: bottom; flex: none; color: var(--text-2); }
     .rotator span { display: block; white-space: nowrap; }
-    .rotator .word { transition: transform .55s cubic-bezier(.7, 0, .2, 1), opacity .55s; }
+    .rotator .word { transition: transform .45s cubic-bezier(.7, 0, .2, 1), opacity .45s; }
     .rotator .word.out { transform: translateY(-100%); opacity: 0; }
     .rotator .word.in { transform: translateY(100%); opacity: 0; transition: none; }
-    .band small {
-      display: block; margin-top: 18px;
-      font-size: 16px; color: var(--muted);
-    }
 
-    /* Section scaffolding */
-    section.block { padding: var(--section) 0; }
-    .section-head { max-width: 760px; margin-bottom: clamp(48px, 6vw, 80px); }
-    .section-head h2 {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(2.25rem, 5vw, 4rem);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-    }
-    .section-head p { margin-top: 20px; font-size: 19px; color: var(--ink-2); max-width: 56ch; }
+    /* Skills (light) */
+    .split { display: grid; grid-template-columns: 1fr 1fr; }
+    .split > .cell + .cell, .split > div + div { border-left: 1px solid var(--line); }
+    .sticky { position: sticky; top: 120px; }
+    .split-head { padding: clamp(48px, 7vw, 88px) var(--pad); }
+    .split-head .lede { margin-top: 20px; }
+    .split-head .pill { margin-top: 32px; }
+    .feature { padding: clamp(32px, 4vw, 44px) var(--pad); }
+    .feature + .feature { border-top: 1px solid var(--line); }
+    .icon-box { width: 40px; height: 40px; border-radius: 6px; display: grid; place-items: center; background: rgba(10, 10, 10, .04); border: 1px solid var(--line); margin-bottom: 28px; }
+    .feature h3 { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .feature h3 code { font-family: var(--mono); font-size: 18px; font-weight: 400; letter-spacing: -0.04em; color: var(--red); }
+    .feature p { margin-top: 10px; color: var(--text-2); font-size: 16px; max-width: 52ch; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; list-style: none; }
+    .tags li { font-size: 13px; color: var(--text-2); padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
 
-    /* Services */
-    .skills { list-style: none; border-top: 1px solid var(--ink); }
-    .skill {
-      display: grid;
-      grid-template-columns: minmax(200px, 4fr) 5fr 3fr;
-      gap: 24px 48px;
-      padding: clamp(32px, 4vw, 48px) 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .skill-cmd { font-family: var(--mono); font-size: clamp(1.5rem, 2.6vw, 2.125rem); letter-spacing: -0.04em; line-height: 1.1; }
-    .skill-cmd .slash { color: var(--red); }
-    .skill-name { margin-top: 10px; font-size: 15px; font-weight: 500; color: var(--muted); }
-    .skill-desc { font-size: 19px; line-height: 1.55; color: var(--ink); max-width: 44ch; }
-    .skill-list { list-style: none; font-size: 15px; color: var(--ink-2); line-height: 1.5; }
-    .skill-list li + li { margin-top: 8px; }
+    /* Process (dark, interactive) */
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding: clamp(56px, 8vw, 96px) var(--pad) clamp(40px, 5vw, 56px); }
+    .section-head h2 { max-width: 20ch; }
+    .phases { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+    .phase-list { border-right: 1px solid var(--line); }
+    .phase { display: block; width: 100%; position: relative; padding: 26px var(--pad); border-bottom: 1px solid var(--line); }
+    .phase:last-child { border-bottom: 0; }
+    .phase-top { display: flex; align-items: center; gap: 16px; font-size: 17px; font-weight: 500; }
+    .phase-top svg { color: var(--on-char-3); transition: color .2s; }
+    .phase[aria-selected="true"] .phase-top svg { color: var(--red-bright); }
+    .phase-top .step { font-family: var(--mono); font-size: 13px; color: var(--on-char-3); font-weight: 400; margin-left: auto; }
+    .phase-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+    .phase-body > p { overflow: hidden; color: var(--on-char-2); font-size: 15px; padding-left: 36px; max-width: 48ch; }
+    .phase[aria-selected="true"] .phase-body { grid-template-rows: 1fr; }
+    .phase[aria-selected="true"] .phase-body > p { padding-top: 12px; }
+    .phase-bar { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; }
+    .phase-bar i { display: block; height: 100%; width: 0; background: var(--on-char); }
+    .phase[aria-selected="true"] .phase-bar i { animation: fill var(--dur, 7s) linear forwards; }
+    .phases.paused .phase-bar i { animation: none; width: 0; }
+    @keyframes fill { to { width: 100%; } }
+    .stage { position: relative; min-height: 420px; }
+    .stage .tag { position: absolute; top: 20px; right: 20px; font-size: 12px; font-family: var(--mono); color: var(--on-char-2); padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--char-2); display: flex; align-items: center; gap: 8px; z-index: 1; }
+    .stage .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red-bright); }
+    .diagram { position: absolute; inset: 0; display: grid; place-items: center; padding: 56px 24px 32px; opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+    .diagram.on { opacity: 1; visibility: visible; }
+    .diagram svg { width: 100%; max-width: 500px; height: auto; overflow: visible; font-family: var(--sans); }
+    .d-box { fill: var(--char-2); stroke: rgba(255, 255, 255, .22); }
+    .d-box.hot { stroke: var(--on-char); }
+    .d-label { fill: var(--on-char-2); font-size: 12px; text-anchor: middle; letter-spacing: -0.01em; }
+    .d-text { fill: var(--on-char); font-size: 13px; letter-spacing: -0.01em; }
+    .d-dim { fill: var(--on-char-3); }
+    .d-ico { color: var(--on-char); }
+    .d-line { stroke: rgba(255, 255, 255, .35); stroke-dasharray: 3 4; fill: none; }
+    .diagram.on .d-flow { animation: flow 1.2s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -14; } }
+    .diagram.on .scan { animation: scan 4.2s cubic-bezier(.6, 0, .3, 1) infinite; }
+    @keyframes scan { 0%, 6% { transform: translateX(0); } 20%, 26% { transform: translateX(100px); } 40%, 46% { transform: translateX(200px); } 60%, 66% { transform: translateX(300px); } 80%, 100% { transform: translateX(400px); } }
+    .ticker { transition: opacity .3s; }
 
-    /* Process */
-    .process-bg { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(32px, 5vw, 72px); counter-reset: step; }
-    .step { counter-increment: step; }
-    .step::before {
-      content: counter(step);
-      display: block;
-      font-family: var(--serif); font-weight: 300;
-      font-size: clamp(3.5rem, 6vw, 5rem); line-height: 1;
-      color: var(--red);
-      margin-bottom: 24px;
-    }
-    .step h3 { font-family: var(--sans); font-weight: 700; font-size: 21px; letter-spacing: -0.01em; margin-bottom: 10px; }
-    .step p { color: var(--ink-2); font-size: 17px; max-width: 34ch; }
+    /* Compare */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+    .compare > div { padding: clamp(32px, 4vw, 44px) var(--pad) clamp(40px, 5vw, 56px); }
+    .compare > div + div { border-left: 1px solid var(--line); background-image: radial-gradient(rgba(255, 255, 255, .09) 1px, transparent 1.2px); background-size: 6px 6px; }
+    .compare h3 { margin-bottom: 14px; }
+    .compare ul { list-style: none; color: var(--on-char-2); font-size: 16px; }
+    .compare li { padding: 10px 0; border-top: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; }
+    .compare li:first-child { border-top: 0; }
+    .compare li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 50%; transform: translateY(-2px); background: var(--on-char-3); }
+    .compare > div + div li::before { background: var(--red-bright); }
+    .compare > div + div li { color: var(--on-char); }
 
-    /* About */
-    .about { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
-    .about h2 {
-      font-family: var(--serif); font-weight: 300;
-      font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.05; letter-spacing: -0.025em;
-    }
-    .about-body p { font-size: 19px; color: var(--ink-2); max-width: 58ch; }
-    .about-body p + p { margin-top: 20px; }
-    .about-body .lead { font-family: var(--serif); font-weight: 300; font-size: clamp(1.5rem, 2.4vw, 1.875rem); line-height: 1.35; color: var(--ink); letter-spacing: -0.01em; }
-
-    /* FAQ */
-    .faq { max-width: 860px; border-top: 1px solid var(--ink); }
+    /* About + FAQ (light) */
+    .about-copy p { color: var(--text-2); max-width: 54ch; }
+    .about-copy p + p { margin-top: 18px; }
+    .about-copy .big { color: var(--ink); font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.4; letter-spacing: -0.025em; font-weight: 500; }
     .faq details { border-bottom: 1px solid var(--line); }
-    .faq summary {
-      list-style: none; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; gap: 24px;
-      padding: 26px 0;
-      font-size: 20px; font-weight: 500; letter-spacing: -0.01em;
-    }
+    .faq details:last-child { border-bottom: 0; }
+    .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--pad); font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after {
-      content: ''; flex: none;
-      width: 14px; height: 14px;
-      background:
-        linear-gradient(var(--ink), var(--ink)) center / 14px 1.5px no-repeat,
-        linear-gradient(var(--ink), var(--ink)) center / 1.5px 14px no-repeat;
-      transition: transform .2s;
-    }
-    .faq details[open] summary::after { transform: rotate(45deg); }
-    .faq details p { padding: 0 0 28px; max-width: 64ch; color: var(--ink-2); font-size: 17px; }
+    .faq summary svg { transition: transform .2s; color: var(--text-3); }
+    .faq details[open] summary svg { transform: rotate(45deg); }
+    .faq details p { padding: 0 var(--pad) 26px; color: var(--text-2); font-size: 16px; max-width: 60ch; }
 
-    /* Closing CTA */
-    .closing { padding: var(--section) 0; border-top: 1px solid var(--line); }
-    .closing h2 {
-      font-family: var(--serif); font-weight: 300;
-      font-size: clamp(2.75rem, 7.5vw, 6.5rem); line-height: 1; letter-spacing: -0.035em;
-      max-width: 12ch;
-    }
-    .closing p { margin-top: 28px; font-size: 19px; color: var(--ink-2); max-width: 46ch; }
-    .closing .btn { margin-top: 36px; }
-
-    footer { border-top: 1px solid var(--line); padding: 32px 0 40px; }
-    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-    footer img { height: 18px; width: auto; }
-    footer small { font-size: 14px; color: var(--muted); }
-
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    /* Closing */
+    .closing { position: relative; overflow: hidden; }
+    .closing .frame { border-color: transparent; z-index: 1; }
+    .closing-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: clamp(96px, 12vw, 160px) var(--pad) clamp(64px, 8vw, 104px); }
+    .closing-cta h2 { font-size: clamp(2.4rem, 5vw, 3.75rem); letter-spacing: -0.045em; }
+    .closing-cta p { color: var(--on-char-2); margin-top: 14px; max-width: 42ch; }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--pad) 36px; border-top: 1px solid var(--line-dark); font-size: 14px; color: var(--on-char-3); }
+    .foot img { height: 16px; width: auto; display: block; opacity: .9; }
 
     @media (max-width: 900px) {
-      .skill { grid-template-columns: 1fr; gap: 16px; }
-      .skill-list { display: flex; flex-wrap: wrap; gap: 6px 20px; }
-      .skill-list li + li { margin-top: 0; }
-      .steps { grid-template-columns: 1fr; }
-      .about { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 720px) {
-      .nav-links li:not(:last-child) { display: none; }
-      body { font-size: 17px; }
+      .nav-links { display: none; }
+      .split, .phases, .compare { grid-template-columns: 1fr; }
+      .split > .cell + .cell, .split > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .compare > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .phase-list { border-right: 0; border-bottom: 1px solid var(--line); }
+      .sticky { position: static; }
+      .stage { min-height: 340px; }
+      .diagram { padding: 56px 8px 24px; }
+      .diagram svg { max-width: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .caret { animation: none; }
-      .rotator .word { transition: none; }
+      .rotator, .rotator .word, .phase-body, .diagram { transition: none; }
+      .diagram.on .d-flow, .diagram.on .scan { animation: none; }
+      .phase-bar { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13l2.5-7h13L21 13v6H3z"/><path d="M3 13h5l1.5 2.5h5L16 13h5"/></symbol>
+    <symbol id="i-crm" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c1.8.7 3 2.5 3.5 5.2"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9.5h17M3.5 15h17M10 4v16"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-agent" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2.5"/><path d="M12 3v4M9 12.5v1.5M15 12.5v1.5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+    <symbol id="i-blocks" viewBox="0 0 24 24"><rect x="3.5" y="13" width="7.5" height="7.5" rx="1"/><rect x="13" y="13" width="7.5" height="7.5" rx="1"/><rect x="8.25" y="3.5" width="7.5" height="7.5" rx="1"/></symbol>
+    <symbol id="i-loop" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4.5h-4.5"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+    <symbol id="i-grow" viewBox="0 0 24 24"><path d="M3.5 17l5.5-5.5 4 4 7.5-8"/><path d="M15 7.5h5.5V13"/></symbol>
+    <symbol id="i-post" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </svg>
+
   <nav class="nav" aria-label="Main">
-    <div class="wrap">
-      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/logo-dark.svg" alt="wolfgrey" width="101" height="22"></a>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/logo-white.svg" alt="wolfgrey" width="91" height="20"></a>
       <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
+        <li><a href="#skills">Services</a></li>
         <li><a href="#process">How it works</a></li>
         <li><a href="#about">About</a></li>
-        <li><a class="btn btn-sm" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a></li>
       </ul>
+      <a class="pill pill-outline" style="color:var(--on-char);border-color:rgba(244,242,240,.55)" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
     </div>
   </nav>
 
   <main>
-    <header class="hero">
-      <div class="wrap">
-        <h1>Growth requires<br><span class="cmd">/skills<span class="caret" aria-hidden="true"></span></span></h1>
-        <p class="hero-sub">wolfgrey.ai is an AI enablement firm. We give service businesses the AI skills to win more work and spend less time on busywork.</p>
-        <div class="hero-cta">
-          <a class="btn" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
-          <span class="note">Talk through where AI fits in your business.</span>
+    <header class="hero dark">
+      <canvas id="hero-dots" aria-hidden="true"></canvas>
+      <div class="frame">
+        <div class="hero-copy">
+          <h1>Growth requires<br><span class="cmd">/skills<span class="caret" aria-hidden="true"></span></span></h1>
+          <p class="lede">wolfgrey.ai is an AI enablement firm. We give service businesses the AI skills to win more work and spend less time on busywork.</p>
+          <div class="hero-actions">
+            <a class="pill pill-red" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+            <a class="text-link" href="#skills">See the skills <svg class="i"><use href="#i-chev"/></svg></a>
+          </div>
         </div>
       </div>
     </header>
 
-    <div class="band" aria-label="Who we work with">
-      <div class="wrap">
-        <p>
-          <span>AI for</span>
-          <span class="rotator" aria-hidden="true"><span class="word">realtors</span></span>
-          <span class="sr-only">realtors, electricians, landscapers, accountants, plumbers, HVAC contractors, roofers, law firms, dentists, insurance agents, mortgage brokers, property managers, financial advisors, med spas, chiropractors, architects, interior designers, home builders, cleaning companies, auto repair shops, veterinarians, salons, physical therapists, and marketing agencies</span>
-        </p>
-        <small>Built for small and midsize service businesses ready to invest in AI.</small>
-      </div>
-    </div>
-
-    <section class="block" id="services">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Four skills. One partner.</h2>
-          <p>Start with the one that hurts most. Add the rest when you're ready.</p>
+    <section class="dark band-rule" aria-label="Who we work with">
+      <div class="frame">
+        <div class="cell audience">
+          <p class="big">
+            <span>AI for</span>
+            <span class="rotator" aria-hidden="true"><span class="word">realtors</span></span>
+            <span class="sr-only">realtors, electricians, landscapers, accountants, plumbers, HVAC contractors, roofers, law firms, dentists, insurance agents, mortgage brokers, property managers, financial advisors, med spas, chiropractors, architects, interior designers, home builders, cleaning companies, auto repair shops, veterinarians, salons, physical therapists, and marketing agencies</span>
+          </p>
+          <small>Built for small and midsize service businesses ready to invest in AI.</small>
         </div>
-        <ul class="skills">
-          <li class="skill">
-            <div>
-              <div class="skill-cmd"><span class="slash">/</span>implement</div>
-              <div class="skill-name">AI consulting &amp; implementation</div>
-            </div>
-            <p class="skill-desc">We find where AI saves your team real hours, then build it into the tools you already use.</p>
-            <ul class="skill-list">
-              <li>AI audit and roadmap</li>
-              <li>Workflow automation</li>
-              <li>CRM, inbox and document integrations</li>
-              <li>Team training</li>
-            </ul>
-          </li>
-          <li class="skill">
-            <div>
-              <div class="skill-cmd"><span class="slash">/</span>grow</div>
-              <div class="skill-name">AI growth strategies</div>
-            </div>
-            <p class="skill-desc">Lead generation, follow-up and outreach that run every day, not just when someone remembers.</p>
-            <ul class="skill-list">
-              <li>Lead capture and instant alerts</li>
-              <li>Prospect lists and enrichment</li>
-              <li>Outbound email sequences</li>
-              <li>Landing pages that convert</li>
-            </ul>
-          </li>
-          <li class="skill">
-            <div>
-              <div class="skill-cmd"><span class="slash">/</span>build</div>
-              <div class="skill-name">Custom tooling for teams</div>
-            </div>
-            <p class="skill-desc">Internal tools shaped around how your team actually works, so nobody fights a spreadsheet again.</p>
-            <ul class="skill-list">
-              <li>Quoting and pricing tools</li>
-              <li>Dashboards and reporting</li>
-              <li>Document and order processing</li>
-              <li>AI assistants that know your business</li>
-            </ul>
-          </li>
-          <li class="skill">
-            <div>
-              <div class="skill-cmd"><span class="slash">/</span>post</div>
-              <div class="skill-name">Social presence</div>
-            </div>
-            <p class="skill-desc">Curated thought leadership for LinkedIn and X. Drafted by AI, written in your voice, approved by you.</p>
-            <ul class="skill-list">
-              <li>Voice and topic strategy</li>
-              <li>Weekly post drafts</li>
-              <li>Simple approval workflow</li>
-              <li>Scheduling and publishing</li>
-            </ul>
-          </li>
-        </ul>
       </div>
     </section>
 
-    <section class="block process-bg" id="process">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>How it works</h2>
+    <section class="light" id="skills">
+      <div class="frame split">
+        <div>
+          <div class="split-head sticky">
+            <h2>Four skills. One partner.</h2>
+            <p class="lede">Start with the one that hurts most. We plan it, build it, and keep it running, then add the next skill when you're ready.</p>
+            <a class="pill pill-outline" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+          </div>
         </div>
-        <ol class="steps">
-          <li class="step">
-            <h3>Assess</h3>
-            <p>We learn how your business runs and where time and revenue leak. You get a clear plan with the highest-return places to start.</p>
-          </li>
-          <li class="step">
-            <h3>Build</h3>
-            <p>We build it and connect it to the tools you already use. You see progress as each piece ships.</p>
-          </li>
-          <li class="step">
-            <h3>Run</h3>
-            <p>We keep it running, measure what it's doing, and add the next skill when you're ready.</p>
-          </li>
-        </ol>
+        <div>
+          <article class="feature">
+            <div class="icon-box"><svg class="i"><use href="#i-sliders"/></svg></div>
+            <h3><code>/implement</code> AI consulting &amp; implementation</h3>
+            <p>We find where AI saves your team real hours, then build it into the tools you already use.</p>
+            <ul class="tags"><li>AI audit and roadmap</li><li>Workflow automation</li><li>CRM and inbox integrations</li><li>Team training</li></ul>
+          </article>
+          <article class="feature">
+            <div class="icon-box"><svg class="i"><use href="#i-grow"/></svg></div>
+            <h3><code>/grow</code> AI growth strategies</h3>
+            <p>Lead generation, follow-up and outreach that run every day, not just when someone remembers.</p>
+            <ul class="tags"><li>Lead capture and instant alerts</li><li>Prospect lists</li><li>Outbound sequences</li><li>Landing pages</li></ul>
+          </article>
+          <article class="feature">
+            <div class="icon-box"><svg class="i"><use href="#i-blocks"/></svg></div>
+            <h3><code>/build</code> Custom tooling for teams</h3>
+            <p>Internal tools shaped around how your team actually works, so nobody fights a spreadsheet again.</p>
+            <ul class="tags"><li>Quoting and pricing tools</li><li>Dashboards</li><li>Document processing</li><li>AI assistants that know your business</li></ul>
+          </article>
+          <article class="feature">
+            <div class="icon-box"><svg class="i"><use href="#i-post"/></svg></div>
+            <h3><code>/post</code> Social presence</h3>
+            <p>Curated thought leadership for LinkedIn and X. Drafted by AI, written in your voice, approved by you.</p>
+            <ul class="tags"><li>Voice and topic strategy</li><li>Weekly drafts</li><li>Approval workflow</li><li>Scheduling</li></ul>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="block" id="about">
-      <div class="wrap about">
-        <h2>An AI enablement firm</h2>
-        <div class="about-body">
-          <p class="lead">wolfgrey.ai helps service businesses put AI to work: working systems your team uses every day, not slide decks about the future.</p>
+    <section class="dark" id="process">
+      <div class="frame">
+        <div class="section-head">
+          <h2>From first call to AI that runs on its own.</h2>
+        </div>
+        <div class="phases" id="phases">
+          <div class="phase-list" role="tablist" aria-label="How it works">
+            <button class="phase" role="tab" id="tab-0" aria-controls="dia-0" aria-selected="true">
+              <span class="phase-top"><svg class="i"><use href="#i-search"/></svg>Assess<span class="step">01</span></span>
+              <span class="phase-body"><p>We learn how your business runs and where time and revenue leak. You get a clear plan with the highest-return places to start.</p></span>
+              <span class="phase-bar"><i></i></span>
+            </button>
+            <button class="phase" role="tab" id="tab-1" aria-controls="dia-1" aria-selected="false">
+              <span class="phase-top"><svg class="i"><use href="#i-blocks"/></svg>Build<span class="step">02</span></span>
+              <span class="phase-body"><p>We build AI agents and connect them to the tools you already use. You see each piece working as it ships.</p></span>
+              <span class="phase-bar"><i></i></span>
+            </button>
+            <button class="phase" role="tab" id="tab-2" aria-controls="dia-2" aria-selected="false">
+              <span class="phase-top"><svg class="i"><use href="#i-loop"/></svg>Run<span class="step">03</span></span>
+              <span class="phase-body"><p>Your agents work every day. We keep them running, measure what they do, and add the next skill when you're ready.</p></span>
+              <span class="phase-bar"><i></i></span>
+            </button>
+          </div>
+
+          <div class="stage">
+            <!-- Assess: scan your tools, produce a plan -->
+            <div class="diagram on" id="dia-0" role="tabpanel" aria-labelledby="tab-0">
+              <svg viewBox="0 0 520 330" aria-hidden="true">
+                <g class="tools">
+                  <rect class="d-box" x="32" y="20" width="56" height="56" rx="6"/><use href="#i-inbox" class="d-ico" x="48" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="60" y="98">Inbox</text>
+                  <rect class="d-box" x="132" y="20" width="56" height="56" rx="6"/><use href="#i-crm" class="d-ico" x="148" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="160" y="98">CRM</text>
+                  <rect class="d-box" x="232" y="20" width="56" height="56" rx="6"/><use href="#i-cal" class="d-ico" x="248" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="260" y="98">Calendar</text>
+                  <rect class="d-box" x="332" y="20" width="56" height="56" rx="6"/><use href="#i-sheet" class="d-ico" x="348" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="360" y="98">Sheets</text>
+                  <rect class="d-box" x="432" y="20" width="56" height="56" rx="6"/><use href="#i-phone" class="d-ico" x="448" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="460" y="98">Phone</text>
+                </g>
+                <rect class="scan" x="26" y="14" width="68" height="68" rx="9" fill="none" stroke="#FF4D4D" stroke-width="1.5"/>
+                <path class="d-line d-flow" d="M260 116 V 160"/>
+                <rect class="d-box hot" x="130" y="160" width="260" height="150" rx="8"/>
+                <text class="d-text" x="152" y="190" font-weight="500">Your AI plan</text>
+                <g class="d-ico"><use href="#i-check" x="150" y="210" width="18" height="18" fill="none" stroke="#FF4D4D" stroke-width="1.8"/></g><text class="d-text d-dim" x="176" y="224">Answer every lead in minutes</text>
+                <g><use href="#i-check" x="150" y="240" width="18" height="18" fill="none" stroke="#FF4D4D" stroke-width="1.8"/></g><text class="d-text d-dim" x="176" y="254">Automate quote follow-ups</text>
+                <g><use href="#i-check" x="150" y="270" width="18" height="18" fill="none" stroke="#FF4D4D" stroke-width="1.8"/></g><text class="d-text d-dim" x="176" y="284">Weekly report on autopilot</text>
+              </svg>
+            </div>
+
+            <!-- Build: tools converge into agents -->
+            <div class="diagram" id="dia-1" role="tabpanel" aria-labelledby="tab-1">
+              <svg viewBox="0 0 520 330" aria-hidden="true">
+                <rect class="d-box hot" x="32" y="20" width="56" height="56" rx="6"/><use href="#i-inbox" class="d-ico" x="48" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="60" y="98">Inbox</text>
+                <rect class="d-box hot" x="132" y="20" width="56" height="56" rx="6"/><use href="#i-crm" class="d-ico" x="148" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="160" y="98">CRM</text>
+                <rect class="d-box hot" x="232" y="20" width="56" height="56" rx="6"/><use href="#i-cal" class="d-ico" x="248" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="260" y="98">Calendar</text>
+                <rect class="d-box hot" x="332" y="20" width="56" height="56" rx="6"/><use href="#i-sheet" class="d-ico" x="348" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="360" y="98">Sheets</text>
+                <rect class="d-box hot" x="432" y="20" width="56" height="56" rx="6"/><use href="#i-phone" class="d-ico" x="448" y="36" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><text class="d-label" x="460" y="98">Phone</text>
+                <path class="d-line d-flow" d="M60 112 C 60 170, 260 150, 260 210"/>
+                <path class="d-line d-flow" d="M160 112 C 160 170, 260 160, 260 210"/>
+                <path class="d-line d-flow" d="M260 112 V 210"/>
+                <path class="d-line d-flow" d="M360 112 C 360 170, 260 160, 260 210"/>
+                <path class="d-line d-flow" d="M460 112 C 460 170, 260 150, 260 210"/>
+                <rect class="d-box hot" x="150" y="210" width="220" height="48" rx="6"/>
+                <use href="#i-check" x="170" y="224" width="20" height="20" fill="none" stroke="#FF4D4D" stroke-width="1.8"/>
+                <text class="d-text" x="198" y="239">wolfgrey agents, connected</text>
+                <path class="d-line" d="M260 258 V 300"/>
+              </svg>
+            </div>
+
+            <!-- Run: agent working, status ticker -->
+            <div class="diagram" id="dia-2" role="tabpanel" aria-labelledby="tab-2">
+              <svg viewBox="0 0 520 330" aria-hidden="true">
+                <path class="d-line d-flow" d="M260 0 V 120"/>
+                <rect class="d-box hot" x="228" y="120" width="64" height="64" rx="6"/>
+                <use href="#i-agent" class="d-ico" x="246" y="138" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path class="d-line d-flow" d="M260 184 V 330"/>
+                <circle cx="168" cy="221" r="3.5" fill="#FF4D4D"/>
+                <text class="d-text" x="180" y="226" font-weight="500">Agent</text>
+                <text class="d-text d-dim ticker" id="ticker" x="226" y="226">New lead answered</text>
+              </svg>
+            </div>
+
+            <span class="tag" id="stage-tag">Step 1 of 3</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark band-rule">
+      <div class="frame">
+        <div class="section-head">
+          <h2>Most businesses try AI for months and get nowhere.</h2>
+          <a class="pill pill-outline" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+        </div>
+        <div class="compare">
+          <div>
+            <h3>Doing it yourself</h3>
+            <ul>
+              <li>A dozen tools on trial, none connected</li>
+              <li>Prompts that live in one person's head</li>
+              <li>Hours lost to setup instead of customers</li>
+              <li>Hard to tell what's actually working</li>
+            </ul>
+          </div>
+          <div>
+            <h3>With wolfgrey</h3>
+            <ul>
+              <li>A plan built around how you make money</li>
+              <li>AI connected to the tools you already use</li>
+              <li>Your team trained, nothing to babysit</li>
+              <li>Ongoing support as your business grows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" id="about">
+      <div class="frame split">
+        <div class="split-head">
+          <h2>An AI enablement firm.</h2>
+        </div>
+        <div class="split-head about-copy">
+          <p class="big">wolfgrey.ai helps service businesses put AI to work: working systems your team uses every day, not slide decks about the future.</p>
           <p>We're lean on purpose. A small team works alongside AI agents, using the same tools we set up for clients. That's how we move fast, and how we know what actually works before it reaches your business.</p>
           <p>You don't need to be technical. You need to know where the work piles up. We handle the rest.</p>
         </div>
       </div>
     </section>
 
-    <section class="block process-bg" id="faq">
-      <div class="wrap">
-        <div class="section-head">
+    <section class="light band-rule" id="faq">
+      <div class="frame split">
+        <div class="split-head">
           <h2>Questions</h2>
         </div>
         <div class="faq">
           <details>
-            <summary>Do we need to be technical?</summary>
+            <summary>Do we need to be technical? <svg class="i"><use href="#i-plus"/></svg></summary>
             <p>No. We do the technical work and explain everything in plain language. Your team just uses the result.</p>
           </details>
           <details>
-            <summary>What does it cost?</summary>
+            <summary>What does it cost? <svg class="i"><use href="#i-plus"/></svg></summary>
             <p>It depends on scope. Most engagements are a one-time build plus an optional monthly plan to keep things running and improving. You'll get a clear quote after our first call.</p>
           </details>
           <details>
-            <summary>What tools do you work with?</summary>
+            <summary>What tools do you work with? <svg class="i"><use href="#i-plus"/></svg></summary>
             <p>Whatever you already use: HubSpot, Microsoft 365, Google Workspace, Zoho, Notion, QuickBooks and more. When nothing off the shelf fits, we build it.</p>
           </details>
           <details>
-            <summary>Who writes our social posts?</summary>
+            <summary>Who writes our social posts? <svg class="i"><use href="#i-plus"/></svg></summary>
             <p>AI drafts each post from your ideas, expertise and voice. We curate and refine them, and nothing is published until you approve it.</p>
           </details>
           <details>
-            <summary>Where do we start?</summary>
+            <summary>Where do we start? <svg class="i"><use href="#i-plus"/></svg></summary>
             <p>Book a call. We'll talk through how your business runs and point to the first place AI can make a difference.</p>
           </details>
         </div>
       </div>
     </section>
-
-    <section class="closing">
-      <div class="wrap">
-        <h2>Add your first skill.</h2>
-        <p>Tell us where the work piles up. We'll show you what AI can take off your plate.</p>
-        <a class="btn" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <img src="/logo-dark.svg" alt="wolfgrey" width="83" height="18">
-      <small>&copy; 2026 wolfgrey.ai</small>
+  <footer class="closing dark">
+    <canvas id="foot-dots" aria-hidden="true"></canvas>
+    <div class="frame">
+      <div class="closing-cta">
+        <div>
+          <h2>Add your first skill.</h2>
+          <p>Tell us where the work piles up. We'll show you what AI can take off your plate.</p>
+        </div>
+        <a class="pill pill-red" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+      </div>
+      <div class="foot">
+        <img src="/logo-white.svg" alt="wolfgrey" width="73" height="16">
+        <span>&copy; 2026 wolfgrey.ai</span>
+      </div>
     </div>
   </footer>
 
   <script>
-    // Nav border on scroll
-    const nav = document.querySelector('.nav');
-    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Rotating occupations
+    /* ---------- Halftone dot fields ---------- */
+    const hash = (x, y) => { const n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453; return n - Math.floor(n); };
+    const blob = (x, y) => (Math.sin(x * .011) + Math.sin(y * .013 + x * .004) + Math.sin((x + y) * .007)) / 3;
+
+    const sources = {};
+    function loadSource(url) {
+      if (!sources[url]) {
+        const img = new Image();
+        img.src = url;
+        sources[url] = img.decode().then(() => {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth; c.height = img.naturalHeight;
+          const ctx = c.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          return { w: c.width, h: c.height, data: ctx.getImageData(0, 0, c.width, c.height).data };
+        });
+      }
+      return sources[url];
+    }
+
+    function dotField(canvas, opts) {
+      const S = 6;
+      const ready = loadSource(opts.src);
+      let dots = [];
+
+      async function layout() {
+        const src = await ready;
+        const w = canvas.clientWidth, h = canvas.clientHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const box = opts.place(w, h, src.w / src.h);
+        dots = [];
+        for (let y = S / 2; y < h; y += S) {
+          for (let x = S / 2; x < w; x += S) {
+            let t = 0;
+            if (x >= box.x && x < box.x + box.w && y >= box.y && y < box.y + box.h) {
+              const u = Math.floor((x - box.x) / box.w * src.w);
+              const v = Math.floor((y - box.y) / box.h * src.h);
+              const i = (v * src.w + u) * 4;
+              const lum = src.data[i] / 255, a = src.data[i + 3] / 255;
+              t = a * (opts.floor + (1 - opts.floor) * Math.pow(1 - lum, opts.curve)) * box.alpha;
+            }
+            if (t > 0.04 && hash(x * 0.7, y * 1.3) < opts.keep + (1 - opts.keep) * t) {
+              dots.push({ x, y, r: S * opts.size * Math.sqrt(t), a: opts.a0 + opts.a1 * t, d: hash(x, y) * 0.7 });
+            } else {
+              const b = blob(x, y) - opts.ambientCut;
+              if (b > 0 && hash(y, x) < b * 2.4) dots.push({ x, y, r: 0.9, a: 0.07 + b * 0.18, d: hash(x + 1, y) * 0.7 });
+            }
+          }
+        }
+        draw(reduceMotion ? 1 : 0);
+      }
+
+      function draw(p) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        ctx.fillStyle = '#F4F2F0';
+        for (const d of dots) {
+          const k = Math.min(1, Math.max(0, (p - d.d) / 0.3));
+          if (!k) continue;
+          ctx.globalAlpha = d.a * k;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function reveal() {
+        if (reduceMotion || document.hidden) return draw(1);
+        const start = performance.now();
+        const tick = now => {
+          const p = Math.min(1, (now - start) / 1600);
+          draw(p);
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+
+      let lastW = 0, timer;
+      const ro = new ResizeObserver(() => {
+        if (canvas.clientWidth === lastW) return;
+        lastW = canvas.clientWidth;
+        clearTimeout(timer);
+        timer = setTimeout(() => layout().then(() => draw(1)), 120);
+      });
+      layout().then(() => { ro.observe(canvas); lastW = canvas.clientWidth; opts.revealNow ? reveal() : null; });
+      return { reveal, ready };
+    }
+
+    const heroField = dotField(document.getElementById('hero-dots'), {
+      src: '/wolf-head-dots.png',
+      floor: 0.22, curve: 1.6, keep: 0.45, size: 0.38, a0: 0.06, a1: 0.32,
+      ambientCut: 0.25,
+      revealNow: true,
+      place(w, h, ratio) {
+        const narrow = w < 820;
+        const bh = narrow ? h * 0.5 : h * 0.84;
+        const bw = bh * ratio;
+        return narrow
+          ? { x: w - bw * 0.8, y: h - bh * 0.95, w: bw, h: bh, alpha: 0.65 }
+          : { x: Math.max(w * 0.52, w - bw - w * 0.1), y: (h - bh) / 2, w: bw, h: bh, alpha: 1 };
+      }
+    });
+
+    const footCanvas = document.getElementById('foot-dots');
+    const footField = dotField(footCanvas, {
+      src: '/wolf-dots.png',
+      floor: 0.18, curve: 1, keep: 1, size: 0.46, a0: 0.18, a1: 0.7,
+      ambientCut: 0.15,
+      place(w, h, ratio) {
+        const bh = h * 1.1, bw = bh * ratio;
+        return { x: w * (w < 820 ? 0.45 : 0.47), y: h * 0.05, w: bw, h: bh, alpha: w < 820 ? 0.3 : 0.4 };
+      }
+    });
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { footField.ready.then(() => setTimeout(footField.reveal, 50)); obs.disconnect(); }
+    }, { threshold: 0.2 }).observe(footCanvas);
+
+    /* ---------- Rotating occupations ---------- */
     const occupations = [
       'realtors', 'electricians', 'landscapers', 'accountants', 'plumbers',
       'HVAC contractors', 'roofers', 'law firms', 'dentists', 'insurance agents',
@@ -454,35 +635,65 @@
       'cleaning companies', 'auto repair shops', 'veterinarians', 'salons',
       'physical therapists', 'marketing agencies'
     ];
-    const rotator = document.querySelector('.rotator');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let i = 0;
-
-    function next() {
-      i = (i + 1) % occupations.length;
-      const current = rotator.querySelector('.word');
-      if (reduce) { current.textContent = occupations[i]; return; }
-
-      const incoming = document.createElement('span');
-      incoming.className = 'word in';
-      incoming.textContent = occupations[i];
-      incoming.style.position = 'absolute';
-      incoming.style.left = '0';
-      incoming.style.top = '0';
-      rotator.appendChild(incoming);
-      rotator.style.width = Math.max(current.offsetWidth, incoming.offsetWidth) + 'px';
-
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        incoming.classList.remove('in');
-        current.classList.add('out');
-      }));
+    const word = document.querySelector('.rotator .word');
+    let oi = 0;
+    setInterval(() => {
+      oi = (oi + 1) % occupations.length;
+      if (reduceMotion) { word.textContent = occupations[oi]; return; }
+      word.classList.add('out');
       setTimeout(() => {
-        current.remove();
-        incoming.style.position = '';
-        rotator.style.width = incoming.offsetWidth + 'px';
-      }, 600);
+        word.textContent = occupations[oi];
+        word.classList.remove('out');
+        word.classList.add('in');
+        void word.offsetWidth;
+        word.classList.remove('in');
+      }, 450);
+    }, 2400);
+
+    /* ---------- How it works: phased tabs ---------- */
+    const phasesEl = document.getElementById('phases');
+    const tabs = [...phasesEl.querySelectorAll('.phase')];
+    const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+    const stageTag = document.getElementById('stage-tag');
+    let active = 0;
+
+    function select(n, user) {
+      active = n;
+      tabs.forEach((t, i) => { t.setAttribute('aria-selected', i === n); t.tabIndex = i === n ? 0 : -1; });
+      panels.forEach((p, i) => p.classList.toggle('on', i === n));
+      stageTag.textContent = `Step ${n + 1} of 3`;
+      if (user) phasesEl.classList.add('paused');
     }
-    setInterval(next, 2200);
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i, true));
+      t.querySelector('.phase-bar i').addEventListener('animationend', () => {
+        if (!phasesEl.classList.contains('paused')) select((i + 1) % tabs.length);
+      });
+      t.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const n = (i + (e.key === 'ArrowDown' ? 1 : tabs.length - 1)) % tabs.length;
+          select(n, true); tabs[n].focus();
+        }
+      });
+    });
+    if (reduceMotion) phasesEl.classList.add('paused');
+    select(0);
+
+    // Only auto-advance while the section is on screen
+    new IntersectionObserver(([e]) => {
+      tabs.forEach(t => t.querySelector('.phase-bar i').style.animationPlayState = e.isIntersecting ? 'running' : 'paused');
+    }, { threshold: 0.3 }).observe(phasesEl);
+
+    // Run-step status ticker
+    const ticker = document.getElementById('ticker');
+    const events = ['New lead answered', 'Estimate follow-up sent', 'Invoice reminder sent', 'LinkedIn post ready for approval', 'Weekly report delivered', 'Appointment booked'];
+    let ti = 0;
+    setInterval(() => {
+      if (!panels[2].classList.contains('on') || reduceMotion) return;
+      ticker.style.opacity = 0;
+      setTimeout(() => { ti = (ti + 1) % events.length; ticker.textContent = events[ti]; ticker.style.opacity = 1; }, 300);
+    }, 1800);
   </script>
 </body>
 </html>

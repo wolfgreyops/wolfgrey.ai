@@ -15,25 +15,23 @@ Four services, each framed as a slash-command skill:
 Headline: "Growth requires /skills". Single CTA everywhere: Book a call → https://calendly.com/wolfgrey/ai-assessment
 
 ### Aesthetic Direction
-- **Light, minimal, editorial.** Cool off-white paper, blue-black ink, one red accent used sparingly (CTAs, skill slashes, step numbers, the hero caret).
-- **The slash command is the signature.** Mono type is reserved for commands only — not for labels or data.
-- Left-aligned layout, services as hairline-ruled rows (not cards), generous whitespace.
-- **No** case studies, client names, pricing, mock screens, product links or footer link farms on the landing page.
-- **No** all-caps eyebrow labels, arrow-suffixed buttons, scattered scroll animations. The only motion: the rotating "AI for ___" occupation band and the blinking caret (both respect reduced motion).
+Modeled on fragment.ai: a framed, blueprint-like layout mixing dark and light surfaces.
+- **Surfaces:** dark hero, audience band, process and comparison sections; light Skills, About and FAQ; dark closing footer.
+- **Frame:** content sits inside a 1248px frame with 1px side rails; full-bleed 1px rules separate sections; content is split into bordered cells.
+- **Halftone imagery:** canvas dot fields. Hero = the logo wolf head (`wolf-head-dots.png`, shading baked in). Footer = the full wolf character (`wolf-dots.png`). Faint ambient dot clusters behind both. One reveal on load or scroll, no other motion.
+- **Type:** Satoshi only (medium weight, tight tracking, moderate heading sizes). Commit Mono is reserved for slash commands (`/skills`, `/implement`…) and step numbers.
+- **Buttons:** rounded pills. Red filled for the primary CTA, outlined pills for secondary.
+- **Interaction:** "How it works" is a three-step tab list (Assess, Build, Run) with a progress line that auto-advances (stops once the user clicks). Each step has a small animated SVG diagram.
+- **No** case studies, client names, pricing, product links or footer link columns.
 
 ### Design Tokens
 ```
---paper:   #FAFAF9   (page background)
---paper-2: #F2F3F5   (alt section bands)
---ink:     #0A0D14   (primary text)
---ink-2:   #3D4250   (body / secondary text)
---muted:   #6B7080   (captions)
---line:    #E3E5EA   (hairlines)
---red:     #D12F2F   (CTAs, accents — AA on paper and with white text)
---red-bright: #FF4D4D (hero caret only)
+Dark:  --char #1B1919   --char-2 #232020   --on-char #F4F2F0   --on-char-2 #B9B3AE   lines rgba(255,255,255,.1)
+Light: --paper #FBFAF9  --paper-2 #F4F2F0  --ink #1B1919       --ink-2 #57514D       lines rgba(10,10,10,.1)
+Accent: --red #D12F2F (CTAs, slashes)   --red-bright #FF4D4D (caret, dots and markers on dark)
 
-Fonts: Source Serif 4 Light (headings), Satoshi (body), Commit Mono (slash commands only)
-Border-radius: 8px buttons. Section padding ~120-150px desktop.
+Fonts: Satoshi (everything), Commit Mono (slash commands only)
+Pills: 999px radius, 44px tall. Small boxes: 6px radius.
 ```
 
 The previous dark-theme site is preserved on the `archive/dark-site` branch.
