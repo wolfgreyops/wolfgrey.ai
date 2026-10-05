@@ -569,7 +569,10 @@
 
       function draw(p) {
         const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
         ctx.fillStyle = '#F4F2F0';
         for (const d of dots) {
           const k = Math.min(1, Math.max(0, (p - d.d) / 0.3));
@@ -593,19 +596,23 @@
         requestAnimationFrame(tick);
       }
 
-      let lastW = 0, timer;
-      const ro = new ResizeObserver(() => {
-        if (canvas.clientWidth === lastW) return;
-        lastW = canvas.clientWidth;
+      // Re-lay out whenever the canvas changes size (e.g. once web fonts load and the section reflows)
+      let laidOut = '', timer;
+      const size = () => canvas.clientWidth + 'x' + canvas.clientHeight;
+      const relayout = () => {
+        if (size() === laidOut) return;
         clearTimeout(timer);
-        timer = setTimeout(() => layout().then(() => draw(1)), 120);
-      });
-      layout().then(() => { ro.observe(canvas); lastW = canvas.clientWidth; opts.revealNow ? reveal() : null; });
+        timer = setTimeout(() => { laidOut = size(); layout().then(() => draw(1)); }, 120);
+      };
+      const ro = new ResizeObserver(relayout);
+      laidOut = size();
+      layout().then(() => { ro.observe(canvas); relayout(); opts.revealNow ? reveal() : null; });
+      document.fonts && document.fonts.ready.then(relayout);
       return { reveal, ready };
     }
 
     const heroField = dotField(document.getElementById('hero-dots'), {
-      src: '/wolf-hero-dots.png',
+      src: '/wolf-hero-dots.png?v=2',
       step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
       ambientCut: 0.25,
       revealNow: true,
@@ -621,7 +628,7 @@
 
     const footCanvas = document.getElementById('foot-dots');
     const footField = dotField(footCanvas, {
-      src: '/wolf-dots.png?v=2',
+      src: '/wolf-dots.png?v=3',
       step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
       ambientCut: 0.15,
       place(w, h, ratio) {
