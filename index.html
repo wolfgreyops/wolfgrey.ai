@@ -95,7 +95,7 @@
     /* Nav */
     .nav { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line-dark); background: rgba(27, 25, 25, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     .nav-inner { width: var(--frame); margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 40px; }
-    .nav-logo img { height: 20px; width: auto; display: block; }
+    .nav-logo img { height: 30px; width: auto; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; font-size: 15px; color: var(--on-char-2); }
     .nav-links a:hover { color: var(--on-char); }
     .nav .pill { margin-left: auto; height: 40px; }
@@ -252,7 +252,7 @@
 
   <nav class="nav" aria-label="Main">
     <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/logo-white.svg" alt="wolfgrey" width="91" height="20"></a>
+      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/wolf-mark-white.png" alt="wolfgrey" width="28" height="32"></a>
       <ul class="nav-links">
         <li><a href="#skills">Services</a></li>
         <li><a href="#process">How it works</a></li>
@@ -600,17 +600,15 @@
     }
 
     const heroField = dotField(document.getElementById('hero-dots'), {
-      src: '/wolf-head-dots.png?v=2',
-      step: 9, levels: 3, floor: 0.22, curve: 1.6, keep: 0.3, size: 0.36, a0: 0.03, a1: 0.14,
+      src: '/wolf-dots.png',
+      step: 8, levels: 3, floor: 0.2, curve: 1, keep: 0.4, size: 0.4, a0: 0.06, a1: 0.4,
       ambientCut: 0.25,
       revealNow: true,
       place(w, h, ratio) {
         const narrow = w < 820;
-        const bh = narrow ? h * 0.5 : h * 0.84;
+        const bh = narrow ? h * 0.62 : h * 1.04;
         const bw = bh * ratio;
-        return narrow
-          ? { x: w - bw * 0.8, y: h - bh * 0.95, w: bw, h: bh, alpha: 0.65 }
-          : { x: Math.max(w * 0.52, w - bw - w * 0.1), y: (h - bh) / 2, w: bw, h: bh, alpha: 1 };
+        return { x: narrow ? w - bw * 0.82 : Math.max(w * 0.48, w - bw - w * 0.04), y: h - bh, w: bw, h: bh, alpha: narrow ? 0.45 : 1 };
       }
     });
 

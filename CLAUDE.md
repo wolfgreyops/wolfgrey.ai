@@ -18,7 +18,7 @@ Headline: "Growth requires /skills". Single CTA everywhere: Book a call → http
 Modeled on fragment.ai: a framed, blueprint-like layout mixing dark and light surfaces.
 - **Surfaces:** dark hero, audience band, process and comparison sections; light Skills, About and FAQ; dark closing footer.
 - **Frame:** content sits inside a 1248px frame with 1px side rails; full-bleed 1px rules separate sections; content is split into bordered cells.
-- **Halftone imagery:** canvas dot fields. Hero = the logo wolf head (`wolf-head-dots.png`, shading baked in). Footer = the full wolf character (`wolf-dots.png`). Faint ambient dot clusters behind both. One reveal on load or scroll, no other motion.
+- **Halftone imagery:** canvas dot fields. Hero = the wolf character (`wolf-dots.png`) on a coarse, stepped, digitized grid. Footer = the same character, finer and fainter. Nav logo = the white wolf-head mark (`wolf-mark-white.png`). Faint ambient dot clusters behind both. One reveal on load or scroll, no other motion.
 - **Type:** Satoshi only (medium weight, tight tracking, moderate heading sizes). Commit Mono is reserved for slash commands (`/skills`, `/implement`…) and step numbers.
 - **Buttons:** rounded pills. Red filled for the primary CTA, outlined pills for secondary.
 - **Interaction:** "How it works" is a three-step tab list (Assess, Build, Run) with a progress line that auto-advances (stops once the user clicks). Each step has a small animated SVG diagram.
