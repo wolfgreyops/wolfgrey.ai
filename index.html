@@ -600,15 +600,17 @@
     }
 
     const heroField = dotField(document.getElementById('hero-dots'), {
-      src: '/wolf-dots.png',
-      step: 8, levels: 3, floor: 0.2, curve: 1, keep: 0.4, size: 0.4, a0: 0.06, a1: 0.4,
+      src: '/wolf-hero-dots.png',
+      step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
       ambientCut: 0.25,
       revealNow: true,
       place(w, h, ratio) {
         const narrow = w < 820;
-        const bh = narrow ? h * 0.62 : h * 1.04;
+        const bh = narrow ? h * 0.5 : h * 0.94;
         const bw = bh * ratio;
-        return { x: narrow ? w - bw * 0.82 : Math.max(w * 0.48, w - bw - w * 0.04), y: h - bh, w: bw, h: bh, alpha: narrow ? 0.45 : 1 };
+        return narrow
+          ? { x: w - bw * 0.78, y: h - bh, w: bw, h: bh, alpha: 0.5 }
+          : { x: Math.max(w * 0.46, w - bw - w * 0.02), y: h - bh, w: bw, h: bh, alpha: 1 };
       }
     });
 
