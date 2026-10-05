@@ -1,47 +1,39 @@
 ## Design Context
 
 ### Users
-Small business owners, solopreneurs, and operations managers (1-50 employees) who know AI matters but don't know where to start. They're non-technical, time-strapped, and drowning in repetitive tasks. They arrive looking for practical help — not theory, not hype.
+Small and midsize service businesses with a budget for AI — realtors, trades, accountants, law firms, clinics, agencies. Non-technical owners and operators who want AI working in the business, not theory.
 
-### Brand Personality
-**Sharp. Practical. Bold.**
+### Brand
+**wolfgrey.ai is an AI enablement firm.** Always the brand voice ("we"), never a personal name. Sharp, practical, plain-spoken.
 
-wolfgrey is a solo operator plus AI agents — lean, fast, built on the same tools being sold. The voice is direct and confident without being aggressive. It proves credibility through action (the site itself was built with Claude Code in a day) rather than claims.
+Four services, each framed as a slash-command skill:
+- `/implement` — AI consulting & implementation
+- `/grow` — AI growth strategies
+- `/build` — Custom tooling for teams
+- `/post` — Social presence (curated, AI-crafted thought leadership for LinkedIn and X)
 
-### Emotional Goal
-"This is different from the noise." Visitors should feel relief and curiosity — this isn't another generic AI hype page. It's real, practical, and built by someone who actually uses these tools.
+Headline: "Growth requires /skills". Single CTA everywhere: Book a call → https://calendly.com/wolfgrey/ai-assessment
 
 ### Aesthetic Direction
-- **Dark, technical, high-contrast** — near-black blue-tinted backgrounds (#050810) with vivid dual-accent system: red (#ff4d4d) for action/CTAs, teal (#00e5cc) for data/results
-- **Typography:** Source Serif 4 Light (variable serif) for headings, Satoshi (neutral, readable) for body, Doto (Google Font) for section labels, SF Mono/Fira Code for terminal UI
-- **Signature details:** Vertical page rail lines, terminal/code UI patterns, animated gradient hero text, card hover lifts with accent top-lines
-- **No stock photos** — flat dark backgrounds with subtle borders and glow effects
-
-### Anti-References
-- **NOT enterprise SaaS** — no Salesforce/HubSpot blue gradients, stock photos, or corporate jargon
-- **NOT cheap/templated** — no Wix/Squarespace template feel, no generic hero images, no cookie-cutter layouts
-
-### Design Principles
-1. **Show, don't tell** — Terminal UIs, live tools, and real output over marketing claims. The site is proof of the product.
-2. **Dark canvas, bright signals** — Near-black backgrounds make the red and teal accents pop. Every color choice is intentional.
-3. **Earned minimalism** — Clean and focused, but not empty. Every element works. Spacing is generous (24px base, 120px sections).
-4. **Physical interactions** — Cards lift, icons float, lines glow. Interactions feel tactile and purposeful, never decorative.
-5. **One operator energy** — Fast, lean, no bloat. The design reflects the business model: maximum impact, minimum overhead.
+- **Light, minimal, editorial.** Cool off-white paper, blue-black ink, one red accent used sparingly (CTAs, skill slashes, step numbers, the hero caret).
+- **The slash command is the signature.** Mono type is reserved for commands only — not for labels or data.
+- Left-aligned layout, services as hairline-ruled rows (not cards), generous whitespace.
+- **No** case studies, client names, pricing, mock screens, product links or footer link farms on the landing page.
+- **No** all-caps eyebrow labels, arrow-suffixed buttons, scattered scroll animations. The only motion: the rotating "AI for ___" occupation band and the blinking caret (both respect reduced motion).
 
 ### Design Tokens
 ```
---accent:       #ff4d4d      (red — CTAs, hover states, active tabs)
---accent2:      #00e5cc      (teal — labels, stats, data indicators)
---dark:         #050810      (page background)
---gray-900:     #0a0f1a      (alt section backgrounds)
---gray-800:     #111827      (card backgrounds, nav)
---gray-700:     #1e2940      (borders, dividers)
---gray-600:     #5a6480      (muted text)
---gray-400:     #8892b0      (body text on dark)
---gray-300:     #a8b2d1      (secondary text, nav links)
---white:        #f0f4ff      (primary text — warm white, blue-tinted)
+--paper:   #FAFAF9   (page background)
+--paper-2: #F2F3F5   (alt section bands)
+--ink:     #0A0D14   (primary text)
+--ink-2:   #3D4250   (body / secondary text)
+--muted:   #6B7080   (captions)
+--line:    #E3E5EA   (hairlines)
+--red:     #D12F2F   (CTAs, accents — AA on paper and with white text)
+--red-bright: #FF4D4D (hero caret only)
 
-Fonts: Source Serif 4 Light (headings), Satoshi (body), Doto (section labels), SF Mono/Fira Code (code)
-Spacing: 24px base, 32-40px card padding, 120px section padding
-Border-radius: 12px (cards), 8px (buttons), 6px (small elements)
+Fonts: Source Serif 4 Light (headings), Satoshi (body), Commit Mono (slash commands only)
+Border-radius: 8px buttons. Section padding ~120-150px desktop.
 ```
+
+The previous dark-theme site is preserved on the `archive/dark-site` branch.
