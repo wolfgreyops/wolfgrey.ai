@@ -118,7 +118,8 @@
 
     /* Hero */
     .hero { position: relative; overflow: hidden; }
-    .hero canvas, .closing canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+    main > section { position: relative; }
+    .hero canvas, .closing canvas, canvas.bg-dots { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
     .hero .frame { border-color: transparent; }
     .hero-copy { position: relative; z-index: 1; padding: clamp(96px, 14vw, 176px) var(--pad) clamp(96px, 12vw, 152px); max-width: 720px; }
     .hero .kicker { margin-bottom: 22px; font-size: 15px; color: var(--on-char-2); letter-spacing: -0.005em; }
@@ -203,7 +204,7 @@
     /* Compare */
     .compare { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
     .compare > div { padding: clamp(32px, 4vw, 44px) var(--pad) clamp(40px, 5vw, 56px); }
-    .compare > div + div { border-left: 1px solid var(--line); background-image: radial-gradient(rgba(255, 255, 255, .09) 1px, transparent 1.2px); background-size: 6px 6px; }
+    .compare > div + div { border-left: 1px solid var(--line); background: rgba(255, 255, 255, .025); }
     .compare h3 { margin-bottom: 14px; }
     .compare ul { list-style: none; color: var(--on-char-2); font-size: 16px; }
     .compare li { padding: 10px 0; border-top: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; }
@@ -690,23 +691,24 @@
     }
 
     function dotField(canvas, opts) {
-      const S = opts.step || 6;
-      const ready = loadSource(opts.src);
-      let dots = [], dpr = 1, baked = null, revealed = false;
+      const S = opts.step || 5;
+      const ready = opts.src ? loadSource(opts.src) : Promise.resolve(null);
+      const ink = opts.ink || '#F4F2F0', hotInk = opts.hot || '#FF4D4D';
+      let dots = [], dpr = 1, revealed = !opts.src;
 
       async function layout() {
         const src = await ready;
         const w = canvas.clientWidth, h = canvas.clientHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, opts.maxDpr || 2);
         canvas.width = w * dpr; canvas.height = h * dpr;
         canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        const box = opts.place(w, h, src.w / src.h);
+        const box = src ? opts.place(w, h, src.w / src.h) : null;
         dots = [];
         for (let y = S / 2; y < h; y += S) {
           for (let x = S / 2; x < w; x += S) {
             let t = 0;
-            if (x >= box.x && x < box.x + box.w && y >= box.y && y < box.y + box.h) {
+            if (box && x >= box.x && x < box.x + box.w && y >= box.y && y < box.y + box.h) {
               const u = Math.floor((x - box.x) / box.w * src.w);
               const v = Math.floor((y - box.y) / box.h * src.h);
               const i = (v * src.w + u) * 4;
@@ -717,21 +719,14 @@
               let k = Math.sqrt(t);
               if (opts.levels) k = Math.max(1, Math.round(k * opts.levels)) / opts.levels;
               dots.push({ x, y, r: S * opts.size * k, a: opts.a0 + opts.a1 * t, d: hash(x, y) * 0.7 });
-            } else {
-              const b = blob(x, y) - opts.ambientCut;
-              if (b > 0 && hash(y, x) < b * 2.4) dots.push({ x, y, r: 0.9, a: 0.07 + b * 0.18, d: hash(x + 1, y) * 0.7 });
+              continue;
             }
+            // Background: a faint, slightly broken lattice that thickens into soft clusters
+            const bl = blob(x, y), c = Math.max(0, bl - opts.ambientCut);
+            if (hash(y, x) < 0.82) dots.push({ x, y, r: 0.8 + c * 0.6, a: opts.grid * (0.7 + 0.3 * bl) + c * 0.16, d: hash(x + 1, y) * 0.7 });
           }
         }
         draw(revealed || reduceMotion ? 1 : 0);
-      }
-
-      // Snapshot the settled field so pointer frames only redraw dots near the cursor
-      function bake() {
-        if (!opts.interactive) return;
-        baked = baked || document.createElement('canvas');
-        baked.width = canvas.width; baked.height = canvas.height;
-        baked.getContext('2d').drawImage(canvas, 0, 0);
       }
 
       function draw(p) {
@@ -740,7 +735,7 @@
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.restore();
-        ctx.fillStyle = '#F4F2F0';
+        ctx.fillStyle = ink;
         for (const d of dots) {
           const k = Math.min(1, Math.max(0, (p - d.d) / 0.3));
           if (!k) continue;
@@ -753,13 +748,13 @@
       }
 
       function reveal() {
-        if (reduceMotion || document.hidden) { revealed = true; draw(1); return bake(); }
+        if (reduceMotion || document.hidden) { revealed = true; return draw(1); }
         const start = performance.now();
         const tick = now => {
           const p = Math.min(1, (now - start) / 1600);
           draw(p);
           if (p < 1) requestAnimationFrame(tick);
-          else { revealed = true; bake(); }
+          else revealed = true;
         };
         requestAnimationFrame(tick);
       }
@@ -770,59 +765,69 @@
       const relayout = () => {
         if (size() === laidOut) return;
         clearTimeout(timer);
-        timer = setTimeout(() => { laidOut = size(); layout().then(() => { draw(1); bake(); }); }, 120);
+        timer = setTimeout(() => { laidOut = size(); layout().then(() => draw(revealed ? 1 : 0)); }, 120);
       };
       const ro = new ResizeObserver(relayout);
       laidOut = size();
       layout().then(() => { ro.observe(canvas); relayout(); opts.revealNow ? reveal() : null; });
       document.fonts && document.fonts.ready.then(relayout);
-      // Pointer: dots part around the cursor and settle back (mouse only, after the reveal)
+
+      // Pointer: dots part around the cursor and settle back (mouse only, after any reveal).
+      // Each frame repaints only the rectangle the cursor touched this frame and last frame.
       if (opts.interactive && !reduceMotion) {
-        const R = 110, PUSH = 12;
-        const ptr = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0 };
-        let raf = 0;
+        const R = 110, PUSH = 12, PAD = PUSH + S;
+        const ptr = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0, cx: 0, cy: 0 };
+        let raf = 0, prev = null;
         const frame = () => {
           ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
           ptr.s += (ptr.ts - ptr.s) * 0.1;
-          const ctx = canvas.getContext('2d');
-          ctx.setTransform(1, 0, 0, 1, 0, 0);
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(baked, 0, 0);
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          if (ptr.s > 0.002) {
+          const on = ptr.s > 0.002;
+          const cur = on ? [ptr.x - R, ptr.y - R, ptr.x + R, ptr.y + R] : null;
+          const r = prev && cur ? [Math.min(prev[0], cur[0]), Math.min(prev[1], cur[1]), Math.max(prev[2], cur[2]), Math.max(prev[3], cur[3])] : prev || cur;
+          prev = cur;
+          if (r) {
+            const ctx = canvas.getContext('2d');
             ctx.save();
-            ctx.beginPath(); ctx.arc(ptr.x, ptr.y, R, 0, Math.PI * 2); ctx.clip();
-            ctx.clearRect(ptr.x - R, ptr.y - R, R * 2, R * 2);
+            ctx.beginPath(); ctx.rect(r[0], r[1], r[2] - r[0], r[3] - r[1]); ctx.clip();
+            ctx.clearRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
             const hot = [];
-            ctx.fillStyle = '#F4F2F0';
+            ctx.fillStyle = ink;
             for (const d of dots) {
-              const dx = d.x - ptr.x, dy = d.y - ptr.y;
-              if (dx > R || dx < -R || dy > R || dy < -R) continue;
-              const dist = Math.hypot(dx, dy) || 1;
-              let f = dist < R ? 1 - dist / R : 0; f *= f * ptr.s;
-              const x = d.x + dx / dist * f * PUSH, y = d.y + dy / dist * f * PUSH, r = d.r * (1 + f * 0.4);
-              if (f > 0.55) { hot.push(x, y, r); continue; }
-              ctx.globalAlpha = Math.min(1, d.a + f * 0.35);
-              ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+              if (d.x < r[0] - PAD || d.x > r[2] + PAD || d.y < r[1] - PAD || d.y > r[3] + PAD) continue;
+              let x = d.x, y = d.y, rad = d.r, a = d.a;
+              if (on) {
+                const dx = d.x - ptr.x, dy = d.y - ptr.y, dist = Math.hypot(dx, dy) || 1;
+                if (dist < R) {
+                  let f = 1 - dist / R; f *= f * ptr.s;
+                  x += dx / dist * f * PUSH; y += dy / dist * f * PUSH; rad *= 1 + f * 0.4; a = Math.min(1, a + f * 0.45);
+                  if (f > 0.55) { hot.push(x, y, rad); continue; }
+                }
+              }
+              ctx.globalAlpha = a;
+              ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
             }
-            ctx.fillStyle = '#FF4D4D'; ctx.globalAlpha = 0.85;
+            ctx.fillStyle = hotInk; ctx.globalAlpha = 0.85;
             for (let i = 0; i < hot.length; i += 3) { ctx.beginPath(); ctx.arc(hot[i], hot[i + 1], hot[i + 2], 0, Math.PI * 2); ctx.fill(); }
             ctx.restore();
-            ctx.globalAlpha = 1;
           }
-          const moving = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.3 || Math.abs(ptr.ts - ptr.s) > 0.004;
+          const moving = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.3 || Math.abs(ptr.ts - ptr.s) > 0.004 || (!on && prev);
           raf = moving ? requestAnimationFrame(frame) : 0;
+        };
+        const aim = () => {
+          const b = canvas.getBoundingClientRect();
+          ptr.tx = ptr.cx - b.left; ptr.ty = ptr.cy - b.top;
         };
         const host = opts.interactive;
         host.addEventListener('pointermove', e => {
-          if (e.pointerType !== 'mouse' || !revealed || !baked) return;
-          const b = canvas.getBoundingClientRect();
-          ptr.tx = e.clientX - b.left; ptr.ty = e.clientY - b.top;
+          if (e.pointerType !== 'mouse' || !revealed) return;
+          ptr.cx = e.clientX; ptr.cy = e.clientY; aim();
           if (ptr.s < 0.01) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
           ptr.ts = 1;
           if (!raf) raf = requestAnimationFrame(frame);
         });
-        host.addEventListener('pointerleave', () => { ptr.ts = 0; if (!raf && baked) raf = requestAnimationFrame(frame); });
+        host.addEventListener('pointerleave', () => { ptr.ts = 0; if (!raf) raf = requestAnimationFrame(frame); });
+        // Keep the effect under a still cursor while the page scrolls
+        window.addEventListener('scroll', () => { if (ptr.ts) { aim(); if (!raf) raf = requestAnimationFrame(frame); } }, { passive: true });
       }
 
       return { reveal, ready };
@@ -831,7 +836,7 @@
     const heroField = dotField(document.getElementById('hero-dots'), {
       src: '/wolf-hero-dots.png?v=2',
       step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
-      ambientCut: 0.25,
+      grid: 0.05, ambientCut: 0.25,
       revealNow: true,
       interactive: document.querySelector('.hero'),
       place(w, h, ratio) {
@@ -848,7 +853,8 @@
     const footField = dotField(footCanvas, {
       src: '/wolf-dots.png?v=3',
       step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
-      ambientCut: 0.15,
+      grid: 0.05, ambientCut: 0.15,
+      interactive: document.querySelector('.closing'),
       place(w, h, ratio) {
         const bh = h * 1.1, bw = bh * ratio;
         return { x: w * (w < 820 ? 0.45 : 0.47), y: h * 0.05, w: bw, h: bh, alpha: w < 820 ? 0.5 : 0.8 };
@@ -857,6 +863,22 @@
     new IntersectionObserver((entries, obs) => {
       if (entries[0].isIntersecting) { footField.ready.then(() => setTimeout(footField.reveal, 50)); obs.disconnect(); }
     }, { threshold: 0.2 }).observe(footCanvas);
+
+    // Every other section gets the same lattice, inked for its surface; built as it nears the viewport
+    const gridIO = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      gridIO.unobserve(e.target);
+      const sec = e.target, light = sec.classList.contains('light');
+      const c = document.createElement('canvas');
+      c.className = 'bg-dots'; c.setAttribute('aria-hidden', 'true');
+      sec.prepend(c);
+      dotField(c, {
+        step: 5, grid: light ? 0.09 : 0.05, ambientCut: 0.3, maxDpr: 1.5,
+        ink: light ? '#1B1919' : '#F4F2F0', hot: light ? '#D12F2F' : '#FF4D4D',
+        interactive: sec
+      });
+    }), { rootMargin: '300px 0px' });
+    document.querySelectorAll('main > section').forEach(sec => gridIO.observe(sec));
 
     /* ---------- Rotating occupations ---------- */
     const occupations = [
