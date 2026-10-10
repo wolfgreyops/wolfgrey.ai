@@ -1,0 +1,11 @@
+# Keep repo-only files off the live site
+exclude:
+  - CLAUDE.md
+  - package.json
+  - package-lock.json
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
