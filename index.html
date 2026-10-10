@@ -24,6 +24,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
@@ -93,8 +94,9 @@
       height: 44px; padding: 0 20px;
       border-radius: 999px;
       font-size: 15px; font-weight: 500; letter-spacing: -0.01em; white-space: nowrap;
-      transition: background .15s, border-color .15s, color .15s;
+      transition: background .15s, border-color .15s, color .15s, transform .12s;
     }
+    .pill:active { transform: scale(.97); }
     .pill-red { background: var(--red); color: #fff; }
     .pill-red:hover { background: var(--red-hover); }
     .pill-outline { border: 1px solid currentColor; }
@@ -244,8 +246,31 @@
       .diagram { padding: 56px 8px 24px; }
       .diagram svg { max-width: none; }
     }
+    /* Motion layer: only applied when JS adds .motion (skipped for reduced motion) */
+    :root { --ease-expo: cubic-bezier(.16, 1, .3, 1); --ease-quart: cubic-bezier(.25, 1, .5, 1); }
+    .motion .band-rule { position: relative; border-top-color: transparent; }
+    .motion .band-rule::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease-expo); z-index: 2; }
+    .motion .band-rule.in::before { transform: none; }
+    .motion [data-rv] { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-quart), transform .7s var(--ease-quart); transition-delay: calc(var(--i, 0) * 80ms); }
+    .motion [data-rv].in { opacity: 1; transform: none; }
+    @media print { .motion [data-rv] { opacity: 1; transform: none; } .motion .feature code { clip-path: none; } }
+    .motion .compare li::before { transform: translateY(-2px) scale(0); transition: transform .45s var(--ease-expo) .25s; }
+    .motion .compare li.in::before { transform: translateY(-2px); }
+    .motion .feature code { clip-path: inset(0 100% 0 0); }
+    .motion .feature.in code { clip-path: none; animation: type calc(var(--n, 8) * 55ms) steps(var(--n, 8)) backwards; animation-delay: calc(var(--i, 0) * 80ms + 300ms); }
+    @keyframes type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .feature h3 code { position: relative; }
+    .feature h3 code::after { content: ''; position: absolute; left: calc(100% + 2px); top: .14em; width: .34em; height: .86em; background: var(--red); opacity: 0; }
+    .feature:hover h3 code::after { opacity: 1; animation: blink 1.1s steps(1) infinite; }
+    .icon-box { transition: border-color .25s, background .25s; }
+    .icon-box svg { transition: transform .35s var(--ease-expo); }
+    .feature:hover .icon-box { border-color: rgba(10, 10, 10, .22); background: var(--paper); }
+    .feature:hover .icon-box svg { transform: translateY(-2px); }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+      .pill:active { transform: none; }
+      .feature:hover h3 code::after { animation: none; }
       .caret { animation: none; }
       .rotator, .rotator .word, .phase-body, .diagram { transition: none; }
       .diagram.on .d-flow, .diagram.on .ring { animation: none; }
@@ -667,12 +692,12 @@
     function dotField(canvas, opts) {
       const S = opts.step || 6;
       const ready = loadSource(opts.src);
-      let dots = [];
+      let dots = [], dpr = 1, baked = null, revealed = false;
 
       async function layout() {
         const src = await ready;
         const w = canvas.clientWidth, h = canvas.clientHeight;
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = w * dpr; canvas.height = h * dpr;
         canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
 
@@ -698,7 +723,15 @@
             }
           }
         }
-        draw(reduceMotion ? 1 : 0);
+        draw(revealed || reduceMotion ? 1 : 0);
+      }
+
+      // Snapshot the settled field so pointer frames only redraw dots near the cursor
+      function bake() {
+        if (!opts.interactive) return;
+        baked = baked || document.createElement('canvas');
+        baked.width = canvas.width; baked.height = canvas.height;
+        baked.getContext('2d').drawImage(canvas, 0, 0);
       }
 
       function draw(p) {
@@ -720,12 +753,13 @@
       }
 
       function reveal() {
-        if (reduceMotion || document.hidden) return draw(1);
+        if (reduceMotion || document.hidden) { revealed = true; draw(1); return bake(); }
         const start = performance.now();
         const tick = now => {
           const p = Math.min(1, (now - start) / 1600);
           draw(p);
           if (p < 1) requestAnimationFrame(tick);
+          else { revealed = true; bake(); }
         };
         requestAnimationFrame(tick);
       }
@@ -736,12 +770,61 @@
       const relayout = () => {
         if (size() === laidOut) return;
         clearTimeout(timer);
-        timer = setTimeout(() => { laidOut = size(); layout().then(() => draw(1)); }, 120);
+        timer = setTimeout(() => { laidOut = size(); layout().then(() => { draw(1); bake(); }); }, 120);
       };
       const ro = new ResizeObserver(relayout);
       laidOut = size();
       layout().then(() => { ro.observe(canvas); relayout(); opts.revealNow ? reveal() : null; });
       document.fonts && document.fonts.ready.then(relayout);
+      // Pointer: dots part around the cursor and settle back (mouse only, after the reveal)
+      if (opts.interactive && !reduceMotion) {
+        const R = 110, PUSH = 12;
+        const ptr = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0 };
+        let raf = 0;
+        const frame = () => {
+          ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
+          ptr.s += (ptr.ts - ptr.s) * 0.1;
+          const ctx = canvas.getContext('2d');
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(baked, 0, 0);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          if (ptr.s > 0.002) {
+            ctx.save();
+            ctx.beginPath(); ctx.arc(ptr.x, ptr.y, R, 0, Math.PI * 2); ctx.clip();
+            ctx.clearRect(ptr.x - R, ptr.y - R, R * 2, R * 2);
+            const hot = [];
+            ctx.fillStyle = '#F4F2F0';
+            for (const d of dots) {
+              const dx = d.x - ptr.x, dy = d.y - ptr.y;
+              if (dx > R || dx < -R || dy > R || dy < -R) continue;
+              const dist = Math.hypot(dx, dy) || 1;
+              let f = dist < R ? 1 - dist / R : 0; f *= f * ptr.s;
+              const x = d.x + dx / dist * f * PUSH, y = d.y + dy / dist * f * PUSH, r = d.r * (1 + f * 0.4);
+              if (f > 0.55) { hot.push(x, y, r); continue; }
+              ctx.globalAlpha = Math.min(1, d.a + f * 0.35);
+              ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+            }
+            ctx.fillStyle = '#FF4D4D'; ctx.globalAlpha = 0.85;
+            for (let i = 0; i < hot.length; i += 3) { ctx.beginPath(); ctx.arc(hot[i], hot[i + 1], hot[i + 2], 0, Math.PI * 2); ctx.fill(); }
+            ctx.restore();
+            ctx.globalAlpha = 1;
+          }
+          const moving = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.3 || Math.abs(ptr.ts - ptr.s) > 0.004;
+          raf = moving ? requestAnimationFrame(frame) : 0;
+        };
+        const host = opts.interactive;
+        host.addEventListener('pointermove', e => {
+          if (e.pointerType !== 'mouse' || !revealed || !baked) return;
+          const b = canvas.getBoundingClientRect();
+          ptr.tx = e.clientX - b.left; ptr.ty = e.clientY - b.top;
+          if (ptr.s < 0.01) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
+          ptr.ts = 1;
+          if (!raf) raf = requestAnimationFrame(frame);
+        });
+        host.addEventListener('pointerleave', () => { ptr.ts = 0; if (!raf && baked) raf = requestAnimationFrame(frame); });
+      }
+
       return { reveal, ready };
     }
 
@@ -750,6 +833,7 @@
       step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
       ambientCut: 0.25,
       revealNow: true,
+      interactive: document.querySelector('.hero'),
       place(w, h, ratio) {
         const narrow = w < 820;
         const bh = narrow ? h * 0.5 : h * 0.94;
@@ -884,6 +968,25 @@
     }
 
     select(0);
+
+    /* ---------- Scroll reveals ---------- */
+    if (!reduceMotion) {
+      const groups = ['.hero-copy > *', '.audience > *', '.split-head', '.feature', '.section-head > *', '.compare > div', '.compare li', '.about-copy > p', '.faq details', '.closing-cta > *'];
+      for (const sel of groups) {
+        const byParent = new Map();
+        document.querySelectorAll(sel).forEach(el => {
+          const i = byParent.get(el.parentNode) || 0;
+          byParent.set(el.parentNode, i + 1);
+          el.dataset.rv = '';
+          el.style.setProperty('--i', i);
+        });
+      }
+      document.querySelectorAll('.feature code').forEach(c => c.style.setProperty('--n', c.textContent.length));
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('[data-rv], .band-rule').forEach(el => io.observe(el));
+    }
   </script>
 </body>
 </html>
