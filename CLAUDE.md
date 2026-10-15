@@ -10,7 +10,7 @@ Four services, each framed as a slash-command skill:
 - `/implement` — AI consulting & implementation
 - `/grow` — AI growth strategies
 - `/build` — Custom tooling for teams
-- `/post` — Social presence (curated, AI-crafted thought leadership for LinkedIn and X)
+- `/distribute` — Social presence (curated, AI-crafted thought leadership for LinkedIn and X)
 
 Headline: "Growth requires /skills". Single CTA everywhere: Book a call → https://calendly.com/wolfgrey/ai-assessment
 
