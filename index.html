@@ -289,6 +289,53 @@
     .faq details[open] summary svg { transform: rotate(45deg); }
     .faq details p { padding: 0 var(--pad) 26px; color: var(--text-2); font-size: 16px; max-width: 60ch; }
 
+    /* Booking form (light): bordered field cells, posts to the Google Sheet web app */
+    #book { scroll-margin-top: 72px; }
+    .book-grid { display: grid; grid-template-columns: 5fr 6fr; }
+    .book-head { padding: clamp(48px, 7vw, 88px) var(--pad); }
+    .book-head .lede { margin-top: 20px; color: var(--ink-2); }
+    .book-side { border-left: 1px solid var(--line); }
+    .book-form fieldset { border: 0; border-bottom: 1px solid var(--line); min-width: 0; }
+    .book-form legend { float: left; width: 100%; padding: 0; }
+    .chips { clear: both; padding-top: 12px; }
+    .field { display: block; padding: 24px var(--pad); border-bottom: 1px solid var(--line); }
+    .field-label { display: flex; align-items: baseline; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+    .field-label .num { font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--red); }
+    .field-hint { display: block; margin-top: 6px; font-size: 14px; font-weight: 400; color: var(--ink-3); }
+    .field input[type="text"], .field input[type="email"], .field textarea {
+      display: block; width: 100%; margin-top: 12px; padding: 12px 14px;
+      font: inherit; font-size: 16px; font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
+      background: #fff; border: 1px solid rgba(27, 25, 25, .18); border-radius: 6px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field textarea { min-height: 128px; resize: vertical; line-height: 1.5; }
+    .field ::placeholder { color: var(--ink-3); opacity: 1; }
+    .field input:hover, .field textarea:hover { border-color: rgba(27, 25, 25, .35); }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(209, 47, 47, .14); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips label { position: relative; }
+    .chips input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+    .chips span { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border: 1px solid rgba(27, 25, 25, .25); border-radius: 999px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink-2); background: #fff; transition: background .15s, border-color .15s, color .15s, transform .12s; }
+    .chips label:hover span { border-color: var(--ink); color: var(--ink); }
+    .chips input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    .chips input:focus-visible + span { outline: 2px solid var(--red-bright); outline-offset: 3px; }
+    .chips label:active span { transform: scale(.97); }
+    .tried .field input:invalid, .tried .field textarea:invalid, .tried .chips:has(:invalid) span { border-color: var(--red); }
+    .book-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; padding: 28px var(--pad) clamp(48px, 6vw, 72px); }
+    .book-actions .pill { border: 0; cursor: pointer; }
+    .book-actions .pill:disabled { opacity: .6; cursor: progress; }
+    .book-note { font-size: 14px; font-weight: 400; color: var(--ink-3); }
+    .book-status:not(:empty) { flex-basis: 100%; font-size: 14px; font-weight: 500; color: var(--red); }
+    .book-status.sending { color: var(--ink-3); }
+    .book-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .book-done { padding: clamp(48px, 7vw, 88px) var(--pad); outline: none; }
+    .book-done h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.03em; }
+    .book-done p { margin-top: 10px; color: var(--ink-2); font-size: 16px; line-height: 1.6; max-width: 40ch; }
+    @media (max-width: 900px) {
+      .book-grid { grid-template-columns: 1fr; }
+      .book-side { border-left: 0; border-top: 1px solid var(--line); }
+    }
+
     /* Closing */
     .closing { position: relative; overflow: hidden; }
     .closing .frame { border-color: transparent; z-index: 1; }
@@ -498,7 +545,7 @@
         <li><a href="#process">How it works</a></li>
         <li><a href="#about">About</a></li>
       </ul>
-      <a class="pill pill-outline" style="color:var(--on-char);border-color:rgba(244,242,240,.55)" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+      <a class="pill pill-outline" style="color:var(--on-char);border-color:rgba(244,242,240,.55)" href="#book">Book a call</a>
     </div>
   </nav>
 
@@ -511,7 +558,7 @@
           <h1>Growth requires<br><span class="cmd">/skills<span class="caret" aria-hidden="true"></span></span></h1>
           <p class="lede">wolfgrey.ai is an AI enablement firm. We give service businesses the AI skills to win more work and spend less time on busywork.</p>
           <div class="hero-actions">
-            <a class="pill pill-red" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+            <a class="pill pill-red" href="#book">Book a call</a>
             <a class="text-link" href="#skills">See the skills <svg class="i"><use href="#i-chev"/></svg></a>
           </div>
         </div>
@@ -537,7 +584,7 @@
           <div class="split-head sticky">
             <h2>Four skills. One partner.</h2>
             <p class="lede">Start with the one that hurts most. We plan it, build it, and keep it running, then add the next skill when you're ready.</p>
-            <a class="pill pill-outline" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+            <a class="pill pill-outline" href="#book">Book a call</a>
           </div>
         </div>
         <div>
@@ -695,7 +742,7 @@
       <div class="frame">
         <div class="section-head">
           <h2>Most businesses try AI for months and get nowhere.</h2>
-          <a class="pill pill-outline" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+          <a class="pill pill-outline" href="#book">Book a call</a>
         </div>
         <div class="compare">
           <div>
@@ -762,6 +809,53 @@
         </div>
       </div>
     </section>
+
+    <section class="light band-rule" id="book" aria-labelledby="book-h">
+      <div class="frame book-grid">
+        <div class="book-head">
+          <h2 id="book-h">Book a call.</h2>
+          <p class="lede">Four quick questions so we come to the call prepared. We'll be in touch to set a time.</p>
+        </div>
+        <div class="book-side">
+            <form class="book-form" data-source="website" novalidate>
+              <label class="field">
+                <span class="field-label"><span class="num">01</span>Name</span>
+                <input type="text" name="full_name" autocomplete="name" maxlength="255" placeholder="Full name" required>
+              </label>
+              <label class="field">
+                <span class="field-label"><span class="num">02</span>Business email</span>
+                <input type="email" name="business_email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
+              </label>
+              <fieldset class="field">
+                <legend class="field-label"><span class="num">03</span>Annual revenue</legend>
+                <div class="chips">
+                  <label><input type="radio" name="annual_revenue" value="Under $500K" required><span>Under $500K</span></label>
+                  <label><input type="radio" name="annual_revenue" value="$500K to $1M"><span>$500K to $1M</span></label>
+                  <label><input type="radio" name="annual_revenue" value="$1M to $5M"><span>$1M to $5M</span></label>
+                  <label><input type="radio" name="annual_revenue" value="$5M+"><span>$5M+</span></label>
+                </div>
+              </fieldset>
+              <label class="field">
+                <span class="field-label"><span class="num">04</span>Where does the work pile up?</span>
+                <span class="field-hint">Your top three pain points. Be specific.</span>
+                <textarea name="pain_points" maxlength="1000" placeholder="Quotes take hours, leads go cold, invoices sit for weeks…" required></textarea>
+              </label>
+              <div class="book-trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+              <input type="hidden" name="source">
+              <input type="hidden" name="page">
+              <div class="book-actions">
+                <button class="pill pill-red" type="submit">Book a call</button>
+                <span class="book-note">Your answers go straight to our team.</span>
+                <p class="book-status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+            <div class="book-done" hidden tabindex="-1">
+              <h3>Got it. Thanks.</h3>
+              <p>We'll look over your answers and be in touch soon to set a time.</p>
+            </div>
+          </div>
+      </div>
+    </section>
   </main>
 
   <footer class="closing dark">
@@ -772,7 +866,7 @@
           <h2>Add your first skill.</h2>
           <p>Tell us where the work piles up. We'll show you what AI can take off your plate.</p>
         </div>
-        <a class="pill pill-red" href="https://calendly.com/wolfgrey/ai-assessment">Book a call</a>
+        <a class="pill pill-red" href="#book">Book a call</a>
       </div>
       <div class="crew-space" role="img" aria-label="The wolfgrey team: raccoon, fox, wolf, bear and hawk, with a kitten"></div>
       <div class="foot">
@@ -1288,9 +1382,37 @@
       document.addEventListener('visibilitychange', () => { document.hidden ? stop() : visible && ready && start(); });
     })();
 
+    /* ---------- Booking form: one row per submission in the Google Sheet ---------- */
+    // Google Apps Script web app bound to the bookings sheet
+    const BOOK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxZC3Jy5_6ayQOV7JOX5dIZVWT70vaT-sC2OltKmM4kszQmafWmW5jUZjhKlm_RHbdRiA/exec';
+    (() => {
+      const form = document.querySelector('.book-form');
+      if (!form) return;
+      const status = form.querySelector('.book-status'), btn = form.querySelector('button[type="submit"]');
+      const params = new URLSearchParams(location.search), batch = params.get('s');
+      form.elements.source.value = batch ? `${form.dataset.source}:${batch.slice(0, 60)}` : params.get('utm_source') || params.get('ref') || form.dataset.source;
+      form.elements.page.value = location.pathname;
+      const say = (msg, sending) => { status.textContent = msg; status.classList.toggle('sending', !!sending); };
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        form.classList.add('tried');
+        if (!form.checkValidity()) { form.querySelector(':invalid').focus(); say('Fill in all four so we can prepare for the call.'); return; }
+        btn.disabled = true; say('Sending…', true);
+        try {
+          if (!BOOK_ENDPOINT) throw new Error('BOOK_ENDPOINT not set');
+          // Apps Script doesn't send CORS headers, so the response is opaque; a network failure still throws
+          await fetch(BOOK_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) });
+          const done = form.nextElementSibling;
+          form.hidden = true; done.hidden = false; done.focus();
+        } catch {
+          btn.disabled = false; say("That didn't go through. Try again, or email hey@wolfgrey.ai.");
+        }
+      });
+    })();
+
     /* ---------- Scroll reveals ---------- */
     if (!reduceMotion) {
-      const groups = ['.hero-copy > *', '.audience > *', '.split-head', '.feature', '.section-head > *', '.compare > div', '.compare li', '.about-copy > p', '.faq details', '.closing-cta > *'];
+      const groups = ['.hero-copy > *', '.audience > *', '.split-head', '.feature', '.section-head > *', '.compare > div', '.compare li', '.about-copy > p', '.faq details', '.book-head > *', '.book-side', '.closing-cta > *'];
       for (const sel of groups) {
         const byParent = new Map();
         document.querySelectorAll(sel).forEach(el => {
