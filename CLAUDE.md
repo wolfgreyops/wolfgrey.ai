@@ -12,7 +12,7 @@ Four services, each framed as a slash-command skill:
 - `/build` — Custom tooling for teams
 - `/distribute` — Social presence (curated, AI-crafted thought leadership for LinkedIn and X)
 
-Headline: "Growth requires /skills". Single CTA everywhere: Book a call → https://calendly.com/wolfgrey/ai-assessment
+Headline: "Growth requires /skills". Single CTA everywhere: Book a call → the `#book` section: a native four-question form that posts each submission as a row to a Google Sheet (Apps Script web app, `BOOK_ENDPOINT` in each page)
 
 ### Aesthetic Direction
 Modeled on fragment.ai: a framed, blueprint-like layout mixing dark and light surfaces.
