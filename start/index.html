@@ -557,7 +557,7 @@
       const S = opts.step || 5;
       const ready = opts.src ? loadSource(opts.src) : Promise.resolve(null);
       const ink = opts.ink || '#F4F2F0', hotInk = opts.hot || '#FF4D4D';
-      let dots = [], figDots = [], revealed = !opts.src, fp = revealed || reduceMotion ? 1 : 0;
+      let dots = [], figDots = [], revealed = !opts.src, fp = revealed || reduceMotion ? 1 : 0, demo = () => {};
 
       async function layout() {
         const src = await ready;
@@ -583,7 +583,7 @@
           dots.push({ x, y, r: step * opts.size * k, a: opts.a0 + opts.a1 * t, d: hash(x, y) * 0.7 });
           return true;
         };
-        const F = opts.fine;
+        const F = typeof opts.fine === 'function' ? opts.fine(box) : opts.fine;
         dots = [];
         for (let y = S / 2; y < h; y += S) {
           for (let x = S / 2; x < w; x += S) {
@@ -653,7 +653,7 @@
       function reveal() {
         return ready.then(() => {
           if (reduceMotion || document.hidden) { fp = 1; revealed = true; return draw(); }
-          return tween(1800, p => { fp = p; draw(); }, easeInOut).then(() => { revealed = true; });
+          return tween(1800, p => { fp = p; draw(); }, easeInOut).then(() => { revealed = true; demo(); });
         });
       }
 
@@ -712,31 +712,71 @@
           raf = moving ? requestAnimationFrame(frame) : 0;
         };
         const aim = () => { const b = canvas.getBoundingClientRect(); ptr.tx = ptr.cx - b.left; ptr.ty = ptr.cy - b.top; };
-        const host = opts.interactive;
-        host.addEventListener('pointermove', e => {
-          if (e.pointerType !== 'mouse' || !(revealed || opts.bgAlways)) return;
-          ptr.cx = e.clientX; ptr.cy = e.clientY; aim();
+        const host = opts.interactive, live = () => revealed || opts.bgAlways;
+        const press = (cx, cy) => {
+          ptr.cx = cx; ptr.cy = cy; aim();
           if (ptr.s < 0.01) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
           ptr.ts = 1;
           if (!raf) raf = requestAnimationFrame(frame);
-        });
-        host.addEventListener('pointerleave', () => { ptr.ts = 0; if (!raf) raf = requestAnimationFrame(frame); });
+        };
+        const release = () => { ptr.ts = 0; if (!raf) raf = requestAnimationFrame(frame); };
+        host.addEventListener('pointermove', e => { if (e.pointerType === 'mouse' && live()) press(e.clientX, e.clientY); });
+        host.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') release(); });
+        // Touch: dots part under the finger, including while it scrolls the page (passive, never blocks scrolling)
+        let demoing = false;
+        const touch = e => { const t = e.touches[0]; if (t && live() && !demoing) press(t.clientX, t.clientY); };
+        host.addEventListener('touchstart', touch, { passive: true });
+        host.addEventListener('touchmove', touch, { passive: true });
+        host.addEventListener('touchend', e => { if (!e.touches.length && !demoing) release(); }, { passive: true });
+        host.addEventListener('touchcancel', () => { if (!demoing) release(); }, { passive: true });
+
+        // Touch screens have no cursor, so once revealed the field shows the effect itself: when the
+        // figure is mostly on screen, a phantom pointer sweeps across it along opts.demo's path
+        demo = () => {
+          if (!opts.demo || matchMedia('(hover: hover)').matches || !opts.demo(canvas.clientWidth, canvas.clientHeight)) return;
+          const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { io.disconnect(); setTimeout(sweep, 250); } }, { threshold: 0.6 });
+          io.observe(opts.demoTarget || canvas);
+        };
+        const sweep = () => {
+          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight), start = performance.now(), T = 2200;
+          demoing = true;
+          const step = now => {
+            const q = Math.min(1, (now - start) / T), e = easeInOut(q);
+            const seg = e * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(seg)), f = seg - i;
+            const b = canvas.getBoundingClientRect();
+            press(b.left + pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, b.top + pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f);
+            if (q < 1) requestAnimationFrame(step);
+            else { demoing = false; release(); }
+          };
+          requestAnimationFrame(step);
+        };
         window.addEventListener('scroll', () => { if (ptr.ts) { aim(); if (!raf) raf = requestAnimationFrame(frame); } }, { passive: true });
       }
 
       return { reveal, ready };
     }
 
+    // Top of the open space under the hero copy, in canvas coordinates
+    const wolfTop = () => document.querySelector('.scenes').getBoundingClientRect().bottom - document.getElementById('dots').getBoundingClientRect().top + 16;
     // Hero: the lattice is there from the first frame; the wolf only resolves once /start runs
     const heroField = dotField(document.getElementById('dots'), {
       src: '/wolf-hero-dots.png?v=2', bgAlways: true,
-      step: 5, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
+      // Phones draw the wolf on a finer grid (and sharper canvas) so the face reads at small sizes
+      step: 5, fine: box => box && box.w < 600 ? 2.5 : 0, maxDpr: 3, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
       grid: 0.05, ambientCut: 0.25,
       interactive: document.querySelector('.stage'),
       place(w, h, ratio) {
-        if (w < 820) { const bh = h * 0.46, bw = bh * ratio; return { x: w - bw * 0.8, y: h - bh, w: bw, h: bh, alpha: 0.45 }; }
+        // Phones: the wolf stands at full strength in the open space under the copy, never behind it
+        if (w < 820) { const bh = Math.min(Math.min(w, 520) / ratio, h - wolfTop()), bw = bh * ratio; return { x: (w - bw) / 2, y: h - bh, w: bw, h: bh, alpha: 1 }; }
         const bh = h * 0.9, bw = bh * ratio;
         return { x: Math.max(w * 0.5, w - bw - w * 0.02), y: h - bh, w: bw, h: bh, alpha: 1 };
+      },
+      // Sweep across the face, left to right and back toward the muzzle
+      demo(w, h) {
+        if (w >= 820) return null;
+        const bh = Math.min(Math.min(w, 520) / (320 / 241), h - wolfTop()), bw = bh * 320 / 241, x0 = (w - bw) / 2, y0 = h - bh;
+        const at = (u, v) => [x0 + bw * u, y0 + bh * v];
+        return [at(0.12, 0.3), at(0.5, 0.42), at(0.88, 0.3), at(0.55, 0.62)];
       }
     });
 
@@ -906,13 +946,20 @@
       const buildCrew = () => {
       const crew = dotField(crewCanvas, {
         src: '/crew-dots.png?v=6',
-        step: 5, fine: 3.5, levels: 3, floor: 0.12, curve: 1, keep: 1, size: 0.5, a0: 0.1, a1: 0.72,
+        // Team grid scales with the slot: 3.5px on desktop, down to 2.2px on phones so each face reads
+        step: 5, fine: box => Math.min(3.5, Math.max(2.2, box.w / 340)), maxDpr: 3, levels: 3, floor: 0.12, curve: 1, keep: 1, size: 0.5, a0: 0.1, a1: 0.72,
         grid: 0.05, ambientCut: 0.15,
         interactive: document.querySelector('.closing'),
         place() {
           const slot = document.querySelector('.crew-space').getBoundingClientRect(), c = crewCanvas.getBoundingClientRect();
           return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 0.85 };
-        }
+        },
+        demo() {
+          const s = document.querySelector('.crew-space').getBoundingClientRect(), c = crewCanvas.getBoundingClientRect();
+          const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
+          return [at(0.05, 0.25), at(0.35, 0.2), at(0.65, 0.3), at(0.95, 0.22)];
+        },
+        demoTarget: document.querySelector('.crew-space')
       });
       new IntersectionObserver((entries, obs) => {
         if (entries[0].isIntersecting) { crew.ready.then(() => setTimeout(crew.reveal, 50)); obs.disconnect(); }
