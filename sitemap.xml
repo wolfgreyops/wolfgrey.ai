@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wolfgrey.ai/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-18</lastmod>
+  </url>
+  <url>
+    <loc>https://wolfgrey.ai/tools/ai-readiness-quiz/</loc>
+    <lastmod>2026-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://wolfgrey.ai/tools/prompt-generator/</loc>
+    <lastmod>2026-05-27</lastmod>
+  </url>
+  <url>
+    <loc>https://wolfgrey.ai/tools/roi-calculator/</loc>
+    <lastmod>2026-05-27</lastmod>
   </url>
 </urlset>
