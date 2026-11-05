@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI growth for service businesses — wolfgrey.ai</title>
+  <meta name="description" content="Future-proof your service business with proven AI strategies. Show up first in Google and AI answers, reply to every lead in under a minute, and turn every job into a review. AI agents do the busywork. Book a call.">
+  <link rel="canonical" href="https://wolfgrey.ai/services/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="wolfgrey.ai">
+  <meta property="og:title" content="Future-proof your business with proven AI strategies — wolfgrey.ai">
+  <meta property="og:description" content="Show up first. Answer fastest. Earn the review. AI agents run all three for service businesses.">
+  <meta property="og:url" content="https://wolfgrey.ai/services/">
+  <meta property="og:image" content="https://wolfgrey.ai/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="wolfgrey.ai — AI growth for service businesses">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@__wolfgrey__">
+  <meta name="twitter:title" content="Future-proof your business with proven AI strategies">
+  <meta name="twitter:description" content="Show up first. Answer fastest. Earn the review. AI agents run all three for service businesses.">
+  <meta name="twitter:image" content="https://wolfgrey.ai/og-image.png">
+  <meta name="theme-color" content="#1B1919">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'Commit Mono'; font-weight: 400; font-display: swap; src: url('/fonts/CommitMono-400-Regular.otf') format('opentype'); }
+
+    :root {
+      --char: #1B1919;
+      --char-2: #232020;
+      --on-char: #F4F2F0;
+      --on-char-2: #B9B3AE;
+      --on-char-3: #847D78;
+      --line-dark: rgba(255, 255, 255, 0.1);
+
+      --paper: #FBFAF9;
+      --paper-2: #F4F2F0;
+      --ink: #1B1919;
+      --ink-2: #57514D;
+      --ink-3: #7D7671;
+      --line-light: rgba(10, 10, 10, 0.1);
+
+      --red: #D12F2F;
+      --red-hover: #B92525;
+      --red-bright: #FF4D4D;
+
+      --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'Commit Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+
+      --frame: min(1248px, calc(100% - 2 * var(--gutter)));
+      --gutter: clamp(16px, 4vw, 48px);
+      --pad: clamp(24px, 4vw, 48px);
+      --ease-expo: cubic-bezier(.16, 1, .3, 1);
+      --ease-quart: cubic-bezier(.25, 1, .5, 1);
+      --cols: 5fr 7fr;
+      --sec-y: clamp(48px, 7vw, 88px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--char);
+      color: var(--on-char);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+    :focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; border-radius: 6px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+    /* Surfaces + frame */
+    .dark  { background: var(--char);  color: var(--on-char); --line: var(--line-dark); --text-2: var(--on-char-2); --text-3: var(--on-char-3); --accent: var(--red-bright); }
+    .light { background: var(--paper); color: var(--ink);     --line: var(--line-light); --text-2: var(--ink-2);    --text-3: var(--ink-3);    --accent: var(--red); }
+    .band-rule { border-top: 1px solid var(--line); }
+    .frame { width: var(--frame); margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); position: relative; }
+    main > section { position: relative; }
+    canvas.bg-dots, .hero canvas, .closing canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+
+    h1, h2, h3 { font-weight: 500; letter-spacing: -0.04em; }
+    h1, h2 { text-wrap: balance; }
+    .lede, .agents li, .faq details p, blockquote { text-wrap: pretty; }
+    h2 { font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.1; }
+    h3 { font-size: 19px; letter-spacing: -0.02em; line-height: 1.3; }
+    .lede { color: var(--text-2); max-width: 46ch; }
+
+    /* Pills */
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 44px; padding: 0 20px;
+      border-radius: 999px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em; white-space: nowrap;
+      transition: background .15s, border-color .15s, color .15s, transform .12s;
+    }
+    .pill:active { transform: scale(.97); }
+    .pill-red { background: var(--red); color: #fff; }
+    .pill-red:hover { background: var(--red-hover); }
+    .pill-outline { border: 1px solid currentColor; }
+    .dark .pill-outline { border-color: rgba(244, 242, 240, .55); }
+    .dark .pill-outline:hover { border-color: var(--on-char); background: rgba(255, 255, 255, .06); }
+    .light .pill-outline { border-color: rgba(27, 25, 25, .45); }
+    .light .pill-outline:hover { border-color: var(--ink); background: rgba(10, 10, 10, .04); }
+    .text-link { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 500; }
+    .text-link svg { width: 16px; height: 16px; transition: transform .15s; }
+    .text-link:hover svg { transform: translateX(2px); }
+
+    /* Nav + funnel progress */
+    .nav { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line-dark); background: rgba(27, 25, 25, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav-inner { width: var(--frame); margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 40px; }
+    .nav-logo img { height: 30px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; font-size: 15px; color: var(--on-char-2); }
+    .nav-links a:hover { color: var(--on-char); }
+    .nav .pill { margin-left: auto; height: 40px; color: var(--on-char); border-color: rgba(244, 242, 240, .55); }
+
+    .funnel { position: absolute; left: 0; right: 0; top: 100%; background: rgba(27, 25, 25, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line-dark); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .35s var(--ease-quart), transform .35s var(--ease-quart), visibility 0s .35s; }
+    .nav.staged .funnel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+    .funnel ol { width: var(--frame); margin: 0 auto; display: flex; list-style: none; border-left: 1px solid var(--line-dark); border-right: 1px solid var(--line-dark); }
+    .funnel li { flex: 1 1 0; min-width: 0; transition: flex-grow .4s var(--ease-expo); }
+    .funnel li + li { border-left: 1px solid var(--line-dark); }
+    .funnel a { position: relative; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px; font-size: 13px; color: var(--on-char-2); white-space: nowrap; overflow: hidden; transition: color .25s; }
+    .funnel a:hover { color: var(--on-char); }
+    .funnel .n { font-family: var(--mono); font-size: 12px; color: var(--on-char-3); transition: color .25s; }
+    .funnel .l { overflow: hidden; text-overflow: ellipsis; }
+    .funnel .s { margin-left: auto; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--on-char-3); opacity: .8; }
+    .funnel a.on { color: var(--on-char); }
+    .funnel a.on .n { color: var(--red-bright); }
+    .funnel i { position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--red-bright); transform: scaleX(var(--p, 0)); transform-origin: left; }
+    @media (max-width: 1080px) { .funnel .s { display: none; } }
+    @media (max-width: 720px) {
+      .funnel li.on { flex-grow: 4; }
+      .funnel li:not(.on) .l { display: none; }
+      .funnel a { padding: 0 12px; justify-content: center; }
+      .funnel li.on a { justify-content: flex-start; }
+    }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; }
+    .hero .frame { border-color: transparent; }
+    .hero-copy { position: relative; z-index: 1; padding: clamp(96px, 13vw, 168px) var(--pad) clamp(88px, 11vw, 140px); max-width: 760px; }
+    .hero .kicker { margin-bottom: 22px; font-size: 15px; color: var(--on-char-2); }
+    .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.5rem); line-height: 1.03; letter-spacing: -0.045em; max-width: 14ch; }
+    .triad { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 30px; list-style: none; font-size: clamp(17px, 1.5vw, 19px); font-weight: 500; letter-spacing: -0.02em; }
+    .triad li { display: flex; align-items: baseline; gap: 10px; }
+    .triad li + li::before { content: ''; width: 18px; height: 1px; background: var(--on-char-3); align-self: center; }
+    .triad .n { font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--red-bright); }
+    @media (max-width: 520px) { .triad { flex-direction: column; } .triad li + li::before { display: none; } }
+    .hero .lede { margin-top: 16px; font-size: clamp(17px, 1.5vw, 19px); color: var(--on-char); opacity: .82; max-width: 42ch; }
+    .hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 40px; flex-wrap: wrap; }
+    .hero-art { display: none; aspect-ratio: 320 / 241; margin: 0 auto; width: min(100%, 520px); }
+    @media (max-width: 819px) {
+      .hero-copy { padding-top: 40px; padding-bottom: 0; }
+      .hero-art { display: block; }
+    }
+
+    /* Funnel stage: head + body */
+    .step-head { display: grid; grid-template-columns: var(--cols); gap: 20px 0; align-items: end; padding: clamp(64px, 9vw, 112px) 0 clamp(36px, 4.5vw, 56px); }
+    .eyebrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 18px; font-size: 15px; color: var(--text-2); }
+    .eyebrow .num { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+    .eyebrow .stage { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .step-head h2 { font-size: clamp(2.3rem, 4.8vw, 3.75rem); line-height: 1.02; letter-spacing: -0.045em; }
+    .step-head .lede { font-size: 17px; max-width: 48ch; }
+    /* Right-column copy starts on the same line as the figures below it */
+    .step-head > *, .section-head > * { padding: 0 var(--pad); }
+    .step-body { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
+    .step-body > * + * { border-left: 1px solid var(--line); }
+    .agents { padding: clamp(28px, 3.5vw, 40px) var(--pad) clamp(36px, 4vw, 48px); }
+    .agents-h { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .agents-h::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .agents ol { list-style: none; margin-top: 16px; }
+    .agents li { display: flex; gap: 14px; align-items: baseline; padding: 13px 0; border-top: 1px solid var(--line); font-size: 16px; }
+    .agents li:first-child { border-top: 0; }
+    .agents li svg { width: 16px; height: 16px; color: var(--accent); transform: translateY(3px); }
+    .runs { margin-top: 22px; font-size: 14px; color: var(--text-3); }
+    .runs code { font-family: var(--mono); font-size: 14px; color: var(--text-2); letter-spacing: -0.03em; }
+    .runs code b { font-weight: 400; color: var(--accent); }
+    .fig { position: relative; padding: clamp(28px, 3.5vw, 44px) var(--pad); display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+    .fig-tag { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .fig-tag span:first-child { font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+    /* 01 · The answer engine demo */
+    .pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .pick-l { font-size: 14px; color: var(--text-3); margin-right: 4px; }
+    .tchip { position: relative; }
+    .tchip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+    .tchip span { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border: 1px solid rgba(244, 242, 240, .2); border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--on-char-2); transition: background .15s, border-color .15s, color .15s, transform .12s; }
+    .tchip:hover span { border-color: rgba(244, 242, 240, .55); color: var(--on-char); }
+    .tchip input:checked + span { background: var(--on-char); border-color: var(--on-char); color: var(--char); }
+    .tchip input:focus-visible + span { outline: 2px solid var(--red-bright); outline-offset: 3px; }
+    .tchip:active span { transform: scale(.97); }
+    .city { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 6px 0 14px; border: 1px solid rgba(244, 242, 240, .2); border-radius: 999px; font-size: 14px; color: var(--on-char-3); transition: border-color .15s; }
+    .city:focus-within { border-color: var(--on-char); }
+    .city input { width: 9.5em; height: 100%; background: none; border: 0; outline: none; font: inherit; font-weight: 500; color: var(--on-char); }
+    .city input::placeholder { color: var(--on-char-3); font-weight: 400; }
+
+    .ask { border: 1px solid var(--line); border-radius: 6px; background: var(--char-2); overflow: hidden; }
+    .ask-q { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 16px; min-height: 54px; }
+    .ask-q svg { color: var(--on-char-3); }
+    .ask-q .q { flex: 1; min-width: 0; }
+    .ask-q .caret { display: inline-block; width: .45em; height: 1em; margin-left: 2px; vertical-align: -.15em; background: var(--red-bright); animation: blink 1.1s steps(1) infinite; }
+    .ask-q .caret.off { visibility: hidden; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .ask-a { padding: 18px 18px 20px; }
+    .ask-status { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--on-char-3); }
+    .ask-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red-bright); }
+    .ask.thinking .ask-status::before { animation: blink .7s steps(1) infinite; }
+    .ask-text { margin-top: 12px; font-size: 16px; line-height: 1.6; color: var(--on-char-2); min-height: 6.4em; }
+    .ask-text .w { opacity: 0; transition: opacity .25s; }
+    .ask-text .w.on { opacity: 1; }
+    .ask-text mark { color: var(--on-char); font-weight: 500; padding: 0 .08em; background: linear-gradient(rgba(255, 77, 77, .3), rgba(255, 77, 77, .3)) no-repeat 0 100% / 0% .42em; transition: background-size .7s var(--ease-expo); }
+    .ask-text mark.lit { background-size: 100% .42em; }
+    .ask-text sup { font-family: var(--mono); font-size: 10.5px; color: var(--red-bright); margin-left: 1px; }
+    .ask-src { display: grid; gap: 6px; margin-top: 16px; list-style: none; }
+    .ask-src li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--on-char-2); opacity: 0; transform: translateY(4px); transition: opacity .35s var(--ease-quart), transform .35s var(--ease-quart); min-width: 0; }
+    .ask-src li.on { opacity: 1; transform: none; }
+    .ask-src b { flex: none; display: grid; place-items: center; width: 18px; height: 18px; border: 1px solid var(--line); border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--on-char-2); }
+    .ask-src span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ask-src .you span { color: var(--on-char); }
+    .ask-also { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--on-char-2); opacity: 0; transition: opacity .4s; }
+    .ask-also.on { opacity: 1; }
+
+    /* 02 · First-glance profile */
+    .seg { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper-2); margin-bottom: 16px; align-self: flex-start; }
+    .seg button { height: 32px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--ink-2); transition: background .2s, color .2s, transform .12s; }
+    .seg button:hover { color: var(--ink); }
+    .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .seg button:active { transform: scale(.97); }
+    .prof { border: 1px solid var(--line); border-radius: 6px; background: #fff; overflow: hidden; }
+    .prof-top { display: flex; align-items: center; gap: 14px; padding: 18px 20px; }
+    .prof-mark { width: 44px; height: 44px; border-radius: 6px; background: var(--ink); display: grid; place-items: center; flex: none; }
+    .prof-mark img { width: 22px; height: auto; }
+    .prof-top > div:nth-child(2) { flex: 1; min-width: 0; }
+    .prof-name { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
+    .prof-sub { font-size: 14px; color: var(--ink-3); }
+    .stars { margin-left: auto; display: flex; gap: 2px; color: var(--ink); flex: none; }
+    .stars svg { width: 15px; height: 15px; fill: currentColor; stroke: none; transition: opacity .4s, color .4s; }
+    .prof:not(.after) .stars svg:nth-child(n+4) { opacity: .18; }
+    .prof.after .stars svg:nth-child(4) { transition-delay: .3s; }
+    .prof.after .stars svg:nth-child(5) { transition-delay: .45s; }
+    .prow { display: grid; grid-template-columns: 22px 104px 1fr; gap: 12px; align-items: baseline; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
+    .prow .k { font-size: 13px; color: var(--ink-3); }
+    .prow .st { width: 16px; height: 16px; transform: translateY(3px); }
+    .prow .st .ok { stroke: var(--red); opacity: 0; transition: opacity .3s; }
+    .prow .st .no { stroke: var(--ink-3); opacity: 1; transition: opacity .3s; }
+    .prow .v { display: grid; }
+    .prow .v > span { grid-area: 1 / 1; transition: opacity .35s var(--ease-quart), transform .35s var(--ease-quart); }
+    .prow .v .b { color: var(--ink-2); }
+    .prow .v .a { opacity: 0; transform: translateY(6px); color: var(--ink); }
+    .prof.after .prow .v .b { opacity: 0; transform: translateY(-6px); }
+    .prof.after .prow .v .a { opacity: 1; transform: none; }
+    .prof.after .prow .st .ok { opacity: 1; }
+    .prof.after .prow .st .no { opacity: 0; }
+    .prof .prow .v > span { transition-delay: calc(var(--r, 0) * 70ms); }
+
+    /* 03 · Speed to lead thread */
+    .thread { border: 1px solid var(--line); border-radius: 6px; background: var(--char-2); overflow: hidden; }
+    .thread-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--on-char-2); }
+    .thread-top b { font-weight: 500; color: var(--on-char); }
+    .clock { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--on-char-3); }
+    .clock .t { font-weight: 400; font-family: var(--mono); font-size: 14px; letter-spacing: 0; color: var(--on-char); min-width: 4ch; text-align: right; }
+    .clock.done .t { color: var(--red-bright); }
+    .msgs { display: flex; flex-direction: column; gap: 10px; padding: 18px; min-height: 340px; }
+    .msg { max-width: 84%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.45; opacity: 0; transform: translateY(8px); transition: opacity .4s var(--ease-quart), transform .4s var(--ease-quart); }
+    .msg.on { opacity: 1; transform: none; }
+    .msg.in { align-self: flex-start; background: rgba(255, 255, 255, .07); border-bottom-left-radius: 4px; color: var(--on-char); }
+    .msg.out { align-self: flex-end; background: var(--on-char); color: var(--char); border-bottom-right-radius: 4px; }
+    .who { align-self: flex-end; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--on-char-3); opacity: 0; transition: opacity .3s; margin-bottom: -4px; }
+    .who.on { opacity: 1; }
+    .typing { align-self: flex-end; display: none; gap: 4px; padding: 12px 14px; border-radius: 14px; border-bottom-right-radius: 4px; background: rgba(244, 242, 240, .14); }
+    .typing.on { display: flex; }
+    .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--on-char-2); animation: bob 1s ease-in-out infinite; }
+    .typing i:nth-child(2) { animation-delay: .15s; }
+    .typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes bob { 0%, 60%, 100% { opacity: .35; } 30% { opacity: 1; } }
+    .booked { display: flex; align-items: center; gap: 14px; margin-top: 6px; padding: 14px 16px; border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; opacity: 0; transform: translateY(8px); transition: opacity .45s var(--ease-quart), transform .45s var(--ease-quart); }
+    .booked.on { opacity: 1; transform: none; }
+    .booked svg { color: var(--red-bright); }
+    .booked b { display: block; font-weight: 500; font-size: 15px; }
+    .booked small { display: block; font-size: 13px; color: var(--on-char-2); }
+    .aside { align-self: center; margin-top: 4px; font-size: 13px; color: var(--on-char-2); opacity: 0; transition: opacity .5s var(--ease-quart); }
+    .aside.on { opacity: 1; }
+    .replay { font-size: 13px; color: var(--on-char-3); display: inline-flex; gap: 6px; align-items: center; }
+    .replay:hover { color: var(--on-char); }
+    .replay svg { width: 14px; height: 14px; }
+
+    /* 04 · Review + reply */
+    .review { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 20px; }
+    .review .stars { margin: 0 0 12px; color: var(--red); }
+    .review blockquote { font-size: clamp(17px, 1.6vw, 19px); line-height: 1.45; letter-spacing: -0.02em; font-weight: 500; color: var(--ink); }
+    .review cite { display: block; margin-top: 10px; font-style: normal; font-size: 14px; color: var(--ink-3); }
+    .reply { margin: 18px 0 0 16px; padding: 4px 0 2px 16px; border-left: 1px solid var(--line); }
+    .reply-h { font-size: 13px; color: var(--ink-3); }
+    .reply-h b { font-weight: 500; color: var(--ink); }
+    .reply p { margin-top: 4px; font-size: 15px; color: var(--ink-2); }
+    .review-flow { display: grid; gap: 10px; margin-top: 18px; list-style: none; }
+    .review-flow li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); font-size: 14px; color: var(--ink-2); }
+    .review-flow .n { font-family: var(--mono); font-size: 12px; color: var(--red); }
+    .review-flow b { font-weight: 500; color: var(--ink); }
+    .motion .review-step { opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease-quart), transform .5s var(--ease-quart); transition-delay: calc(var(--i, 0) * 260ms + 200ms); }
+    .motion .in .review-step, .motion .review-step.in { opacity: 1; transform: none; }
+
+    /* Loop (dark) */
+    .section-head { display: grid; grid-template-columns: var(--cols); gap: 20px 0; align-items: end; padding: clamp(64px, 9vw, 112px) 0 clamp(36px, 4.5vw, 56px); }
+    .loop-fig { border-top: 1px solid var(--line); padding: 18px var(--pad) 20px; }
+    .loop-svg { display: block; width: 100%; max-width: 1000px; height: auto; margin: 0 auto; font-family: var(--sans); overflow: visible; }
+    .lp-track { fill: none; stroke: rgba(255, 255, 255, .16); stroke-dasharray: 3 5; }
+    .lp-lit { fill: none; stroke: rgba(255, 255, 255, .5); }
+    .lp-node circle { fill: var(--char); stroke: rgba(255, 255, 255, .35); transition: stroke .3s, fill .3s; }
+    .lp-node .ring { fill: none; stroke: var(--red-bright); opacity: 0; }
+    .lp-node.hot circle.core { stroke: var(--on-char); }
+    .lp-node.hot .ring { animation: lp-ring 1.2s var(--ease-quart); }
+    @keyframes lp-ring { 0% { opacity: .9; r: 9; } 100% { opacity: 0; r: 26; } }
+    .lp-node.human circle.core { fill: var(--red-bright); stroke: var(--red-bright); }
+    .lp-num { font-family: var(--mono); font-size: 13px; fill: var(--red-bright); }
+    .lp-name { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; fill: var(--on-char); }
+    .lp-sub { font-size: 13.5px; fill: var(--on-char-3); }
+    .lp-center { font-size: 22px; font-weight: 500; letter-spacing: -0.03em; fill: var(--on-char); }
+    .lp-center-sub { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; fill: var(--on-char-3); }
+    .lp-pkt { fill: var(--red-bright); }
+    .lp-trail { fill: none; stroke: var(--red-bright); stroke-linecap: round; }
+    .loop-list { display: none; list-style: none; max-width: 520px; margin: 8px auto; }
+    .loop-list li { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 2px 8px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--char-2); }
+    .loop-list li + li { margin-top: 22px; }
+    .loop-list li + li::before { content: ''; position: absolute; left: 50%; top: -23px; height: 22px; border-left: 1px dashed rgba(255, 255, 255, .26); }
+    .loop-list .n { font-family: var(--mono); font-size: 13px; color: var(--red-bright); padding-top: 2px; }
+    .loop-list b { font-weight: 500; }
+    .loop-list small { grid-column: 2; font-size: 14px; color: var(--on-char-3); }
+    .loop-list li.human { border-color: rgba(255, 77, 77, .5); }
+    .loop-list li.back { text-align: center; display: block; border-style: dashed; background: none; color: var(--on-char-2); font-size: 14px; }
+    @media (max-width: 760px) { .loop-svg { display: none; } .loop-list { display: block; } }
+
+    /* Agents vs people */
+    .compare { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
+    .compare > div { padding: clamp(32px, 4vw, 44px) var(--pad) clamp(40px, 5vw, 56px); }
+    .compare > div + div { border-left: 1px solid var(--line); background: rgba(255, 255, 255, .025); }
+    .compare h3 { margin-bottom: 4px; }
+    .compare p.sub { color: var(--on-char-3); font-size: 15px; margin-bottom: 14px; }
+    .compare ul { list-style: none; color: var(--on-char-2); font-size: 16px; }
+    .compare li { padding: 10px 0; border-top: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; }
+    .compare li:first-child { border-top: 0; }
+    .compare li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 50%; transform: translateY(-2px); background: var(--on-char-3); }
+    .compare > div + div li::before { background: var(--red-bright); }
+    .compare > div + div li { color: var(--on-char); }
+
+    /* FAQ */
+    .split { display: grid; grid-template-columns: var(--cols); }
+    .split > div + div { border-left: 1px solid var(--line); }
+    .split-head { padding: var(--sec-y) var(--pad); }
+    .split-head .lede { margin-top: 20px; }
+    .faq { padding: calc(var(--sec-y) - 28px) 0 calc(var(--sec-y) - 26px); }
+    .faq details { border-bottom: 1px solid var(--line); }
+        .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--pad); font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary svg { transition: transform .2s; color: var(--text-3); }
+    .faq details[open] summary svg { transform: rotate(45deg); }
+    .faq details p { padding: 0 var(--pad) 26px; color: var(--text-2); font-size: 16px; max-width: 60ch; }
+
+    /* Booking form */
+    #book, #faq, #loop { scroll-margin-top: 72px; }
+    .step { scroll-margin-top: 112px; }
+    .book-grid { display: grid; grid-template-columns: var(--cols); }
+    .book-head { padding: var(--sec-y) var(--pad); }
+    .book-head .lede { margin-top: 20px; color: var(--ink-2); }
+    .book-bring { list-style: none; margin-top: 28px; max-width: 40ch; }
+    .book-bring li { display: flex; gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-2); }
+    .book-bring li svg { width: 16px; height: 16px; color: var(--red); transform: translateY(3px); }
+    .book-side { border-left: 1px solid var(--line); padding-top: calc(var(--sec-y) - 6px); }
+    .book-form > .field:first-child { padding-top: 0; }
+    .book-form fieldset { border: 0; border-bottom: 1px solid var(--line); min-width: 0; }
+    .book-form legend { float: left; width: 100%; padding: 0; }
+    .chips { clear: both; padding-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .field { display: block; padding: 24px var(--pad); border-bottom: 1px solid var(--line); }
+    .field-label { display: flex; align-items: baseline; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+    .field-label .num { font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--red); }
+    .field-hint { display: block; margin-top: 6px; font-size: 14px; font-weight: 400; color: var(--ink-3); }
+    .field input[type="text"], .field input[type="email"], .field textarea {
+      display: block; width: 100%; margin-top: 12px; padding: 12px 14px;
+      font: inherit; font-size: 16px; font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
+      background: #fff; border: 1px solid rgba(27, 25, 25, .18); border-radius: 6px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field textarea { min-height: 128px; resize: vertical; line-height: 1.5; }
+    .field ::placeholder { color: var(--ink-3); opacity: 1; }
+    .field input:hover, .field textarea:hover { border-color: rgba(27, 25, 25, .35); }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(209, 47, 47, .14); }
+    .chips label { position: relative; }
+    .chips input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+    .chips span { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border: 1px solid rgba(27, 25, 25, .25); border-radius: 999px; font-size: 15px; font-weight: 500; color: var(--ink-2); background: #fff; transition: background .15s, border-color .15s, color .15s, transform .12s; }
+    .chips label:hover span { border-color: var(--ink); color: var(--ink); }
+    .chips input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    .chips input:focus-visible + span { outline: 2px solid var(--red-bright); outline-offset: 3px; }
+    .chips label:active span { transform: scale(.97); }
+    .tried .field input:invalid, .tried .field textarea:invalid, .tried .chips:has(:invalid) span { border-color: var(--red); }
+    .book-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; padding: 28px var(--pad) clamp(48px, 6vw, 72px); }
+    .book-actions .pill { border: 0; cursor: pointer; }
+    .book-actions .pill:disabled { opacity: .6; cursor: progress; }
+    .book-note { font-size: 14px; color: var(--ink-3); }
+    .book-status:not(:empty) { flex-basis: 100%; font-size: 14px; font-weight: 500; color: var(--red); }
+    .book-status.sending { color: var(--ink-3); }
+    .book-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .book-done { padding: 22px var(--pad) var(--sec-y); outline: none; }
+    .done-check { width: 44px; height: 44px; margin-bottom: 22px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; color: var(--red); }
+    .done-check svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .motion .book-done:not([hidden]) .done-check path { stroke-dasharray: 20; animation: draw .6s var(--ease-expo) .15s backwards; }
+    @keyframes draw { from { stroke-dashoffset: 20; } }
+    .book-done h3 { font-size: 22px; letter-spacing: -0.03em; }
+    .book-done p { margin-top: 10px; color: var(--ink-2); font-size: 16px; line-height: 1.6; max-width: 40ch; }
+
+    /* Closing */
+    .closing { position: relative; overflow: hidden; }
+    .closing .frame { border-color: transparent; z-index: 1; }
+    .closing-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: clamp(96px, 12vw, 160px) var(--pad) clamp(32px, 4vw, 56px); }
+    .crew-space { aspect-ratio: 1.807; margin: 0 clamp(0px, 2vw, 24px); }
+    .closing-cta h2 { font-size: clamp(2.4rem, 5vw, 3.75rem); letter-spacing: -0.045em; }
+    .closing-cta p { color: var(--on-char-2); margin-top: 14px; max-width: 42ch; }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--pad) 36px; border-top: 1px solid var(--line-dark); font-size: 14px; color: var(--on-char-3); }
+    .foot-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .foot-meta a:hover { color: var(--on-char); }
+    .foot img { height: 16px; width: auto; display: block; opacity: .9; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .step-head, .section-head { grid-template-columns: 1fr; }
+      .step-body, .step-body.flip, .split, .compare, .book-grid { grid-template-columns: 1fr; }
+      .step-body > * + *, .split > div + div, .compare > div + div, .book-side { border-left: 0; border-top: 1px solid var(--line); }
+      .msgs { min-height: 0; }
+      .faq, .book-side { padding-top: 0; }
+      .faq { padding-bottom: 0; }
+      .faq details:last-child { border-bottom: 0; }
+      .book-form > .field:first-child { padding-top: 24px; }
+    }
+    @media (pointer: coarse) {
+      .tchip span, .city, .seg button { height: 44px; }
+      .replay { min-height: 44px; }
+    }
+    @media (max-width: 480px) {
+      .prof-top { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; row-gap: 6px; align-items: center; }
+      .prof-mark { grid-row: span 2; }
+      .prof-top .stars { grid-column: 2; margin-left: 0; }
+      .prow { grid-template-columns: 22px 1fr; }
+      .prow .k { display: none; }
+      .msg { max-width: 92%; }
+    }
+
+    /* Motion layer */
+    .motion .band-rule { position: relative; border-top-color: transparent; }
+    .motion .band-rule::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease-expo); z-index: 2; }
+    .motion .band-rule.in::before { transform: none; }
+    .motion [data-rv] { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-quart), transform .7s var(--ease-quart); transition-delay: calc(var(--i, 0) * 80ms); }
+    .motion [data-rv].in { opacity: 1; transform: none; }
+    .motion .agents li svg { transform: translateY(3px) scale(0); transition: transform .45s var(--ease-expo) .25s; }
+    .motion .agents li.in svg { transform: translateY(3px); }
+    .motion .compare li::before { transform: translateY(-2px) scale(0); transition: transform .45s var(--ease-expo) .25s; }
+    .motion .compare li.in::before { transform: translateY(-2px); }
+    @media print { .motion [data-rv], .motion .review-step { opacity: 1; transform: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .pill:active, .tchip:active span, .seg button:active { transform: none; }
+      .ask-q .caret, .typing i, .ask.thinking .ask-status::before { animation: none; }
+      .funnel, .funnel li, .prow .v > span, .msg, .booked, .aside, .ask-src li, .ask-text .w, .ask-text mark, .stars svg { transition: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://wolfgrey.ai/services/#page",
+      "url": "https://wolfgrey.ai/services/",
+      "name": "AI growth for service businesses",
+      "description": "Show up first in Google and AI answers, reply to every lead in under a minute, and turn every job into a review. AI agents run the funnel for service businesses.",
+      "isPartOf": { "@id": "https://wolfgrey.ai/#site" },
+      "about": { "@id": "https://wolfgrey.ai/#org" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://wolfgrey.ai/services/#service",
+      "name": "AI growth systems for service businesses",
+      "serviceType": "SEO, answer engine optimization (AEO), speed-to-lead automation and review management with AI agents",
+      "provider": { "@id": "https://wolfgrey.ai/#org" },
+      "audience": { "@type": "BusinessAudience", "name": "Small and midsize service businesses" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wolfgrey.ai/services/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What's the difference between SEO and AEO?", "acceptedAnswer": { "@type": "Answer", "text": "SEO is how you rank in search results. AEO, answer engine optimization, is how you get named inside AI answers from ChatGPT, Perplexity, Google's AI Overviews and others. Both reward the same thing: clear, specific, trustworthy answers to the questions your customers actually ask. We build for both at once." } },
+        { "@type": "Question", "name": "Will AI-written content hurt our Google ranking?", "acceptedAnswer": { "@type": "Answer", "text": "Google's guidance is about whether content is helpful and accurate, not how it was produced. Every page we publish starts from your real expertise, is reviewed by us, and goes live only after you approve it." } },
+        { "@type": "Question", "name": "Will customers know they're talking to an AI?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you want them to, and most owners do. The agent introduces itself as your assistant, writes in your voice, handles the first reply, the questions and the booking, and passes anything sensitive to a person right away." } },
+        { "@type": "Question", "name": "What happens when someone leaves a bad review?", "acceptedAnswer": { "@type": "Answer", "text": "You hear about it first. The agent alerts you and drafts a calm, specific reply for you to approve. Because every job gets a follow-up, unhappy customers are often caught earlier, before they ever post." } },
+        { "@type": "Question", "name": "Do we need to be technical?", "acceptedAnswer": { "@type": "Answer", "text": "No. We do the technical work and explain everything in plain language. Your team just sees more booked jobs and fewer missed calls." } },
+        { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on scope. Most engagements are a one-time build plus an optional monthly plan to keep the agents running and improving. You'll get a clear quote after our first call." } }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 24 24"><path d="M7 12h10"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-loop" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4.5h-4.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+  </svg>
+
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/wolf-mark-white.png" alt="wolfgrey" width="28" height="32"></a>
+      <ul class="nav-links">
+        <li><a href="#found">Show up first</a></li>
+        <li><a href="#ask">Answer fastest</a></li>
+        <li><a href="#choice">Earn the review</a></li>
+        <li><a href="#faq">Questions</a></li>
+      </ul>
+      <a class="pill pill-outline" href="#book">Book a call</a>
+    </div>
+    <div class="funnel">
+      <ol aria-label="Funnel steps">
+        <li><a href="#found"><span class="n">01</span><span class="l">Show up first</span><span class="s">Top</span><i></i></a></li>
+        <li><a href="#seen"><span class="n">02</span><span class="l">Be the obvious choice</span><span class="s">Top → Middle</span><i></i></a></li>
+        <li><a href="#ask"><span class="n">03</span><span class="l">Answer fastest</span><span class="s">Middle</span><i></i></a></li>
+        <li><a href="#choice"><span class="n">04</span><span class="l">Earn the review</span><span class="s">Bottom</span><i></i></a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero dark">
+      <canvas id="hero-dots" aria-hidden="true"></canvas>
+      <div class="frame">
+        <div class="hero-copy">
+          <p class="kicker">AI growth systems for service businesses</p>
+          <h1>Future-proof your business with proven AI strategies.</h1>
+          <ol class="triad">
+            <li>Show up first.</li>
+            <li>Answer fastest.</li>
+            <li>Earn the review.</li>
+          </ol>
+          <p class="lede">AI agents run all three, every day. You and your team are left with the work only people can do.</p>
+          <div class="hero-actions">
+            <a class="pill pill-red" href="#book">Book a call</a>
+            <a class="text-link" href="#found">See how it works <svg class="i"><use href="#i-chev"/></svg></a>
+          </div>
+        </div>
+        <div class="hero-art"></div>
+      </div>
+    </header>
+
+    <!-- 01 · How do they find you? -->
+    <section class="dark band-rule step" id="found" aria-labelledby="found-h">
+      <div class="frame">
+        <div class="step-head">
+          <div>
+            <p class="eyebrow"><span class="num">01</span><span>How do they find you?</span><span class="stage">Top of funnel</span></p>
+            <h2 id="found-h">Show up first.</h2>
+          </div>
+          <p class="lede">Your customers still search Google. More and more, they also ask ChatGPT, Perplexity and Google's AI answers, and those answers name only a few businesses. SEO gets you ranked. AEO gets you named.</p>
+        </div>
+        <div class="step-body">
+          <div class="agents">
+            <p class="agents-h">What the agents do</p>
+            <ol>
+              <li><svg class="i"><use href="#i-check"/></svg>Write a page for every service and every town you serve</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Answer the real questions customers ask, in plain language</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Mark up every page so search engines and AI can read it</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Post to your Google Business Profile every week</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Track where you rank, and where AI names you</li>
+            </ol>
+            <p class="runs">Runs on <code><b>/</b>grow</code> and <code><b>/</b>distribute</code></p>
+          </div>
+          <div class="fig">
+            <div class="pick" role="radiogroup" aria-label="Pick your business">
+              <span class="pick-l">Try it as</span>
+              <label class="tchip"><input type="radio" name="trade" value="plumbers" checked><span>Plumbers</span></label>
+              <label class="tchip"><input type="radio" name="trade" value="roofers"><span>Roofers</span></label>
+              <label class="tchip"><input type="radio" name="trade" value="hvac"><span>HVAC</span></label>
+              <label class="tchip"><input type="radio" name="trade" value="dentists"><span>Dentists</span></label>
+              <label class="tchip"><input type="radio" name="trade" value="accountants"><span>Accountants</span></label>
+              <label class="tchip"><input type="radio" name="trade" value="realtors"><span>Realtors</span></label>
+              <label class="city">in <input type="text" id="city" maxlength="32" placeholder="your town" autocomplete="address-level2" aria-label="Your town or city"></label>
+            </div>
+            <div class="ask" id="ask-ui">
+              <div class="ask-q"><svg class="i"><use href="#i-search"/></svg><span class="q"><span id="ask-q"></span><span class="caret" aria-hidden="true"></span></span></div>
+              <div class="ask-a">
+                <p class="ask-status" id="ask-status">AI answer</p>
+                <p class="ask-text" id="ask-text"></p>
+                <ol class="ask-src" id="ask-src"></ol>
+                <p class="ask-also" id="ask-also"></p>
+              </div>
+            </div>
+            <div class="fig-tag"><span>Fig 01</span><span>Illustrative answer</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · What do they see? -->
+    <section class="light step" id="seen" aria-labelledby="seen-h">
+      <div class="frame">
+        <div class="step-head">
+          <div>
+            <p class="eyebrow"><span class="num">02</span><span>When they find you, what do they see?</span><span class="stage">Top to middle</span></p>
+            <h2 id="seen-h">Look like the obvious choice.</h2>
+          </div>
+          <p class="lede">People decide in seconds. They check how recent your reviews are, whether you reply, and whether your site answers their question. Agents keep every one of those current.</p>
+        </div>
+        <div class="step-body">
+          <div class="agents">
+            <p class="agents-h">What the agents do</p>
+            <ol>
+              <li><svg class="i"><use href="#i-check"/></svg>Keep your hours, services and details right everywhere</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Post fresh photos and updates every week</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Reply to every review within a day</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Keep your site fast, clear, and pointed at one next step</li>
+            </ol>
+            <p class="runs">Runs on <code><b>/</b>grow</code></p>
+          </div>
+          <div class="fig">
+            <div class="seg" role="group" aria-label="Compare your profile">
+              <button type="button" aria-pressed="true" data-view="before">Today</button>
+              <button type="button" aria-pressed="false" data-view="after">With agents</button>
+            </div>
+            <div class="prof" id="prof">
+              <div class="prof-top">
+                <div class="prof-mark"><img src="/wolf-mark-white.png" alt="" width="22" height="25"></div>
+                <div>
+                  <p class="prof-name">Your business</p>
+                  <p class="prof-sub" data-t="profSub">Plumber · Your town</p>
+                </div>
+                <span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+              </div>
+              <div class="prow" style="--r:0"><svg class="st i" aria-hidden="true"><use class="no" href="#i-dash"/><use class="ok" href="#i-check"/></svg><span class="k">Reviews</span><span class="v"><span class="b">Last review 7 months ago</span><span class="a">New review 2 days ago</span></span></div>
+              <div class="prow" style="--r:1"><svg class="st i" aria-hidden="true"><use class="no" href="#i-dash"/><use class="ok" href="#i-check"/></svg><span class="k">Replies</span><span class="v"><span class="b">Most reviews unanswered</span><span class="a">Every review answered within a day</span></span></div>
+              <div class="prow" style="--r:2"><svg class="st i" aria-hidden="true"><use class="no" href="#i-dash"/><use class="ok" href="#i-check"/></svg><span class="k">Updates</span><span class="v"><span class="b">Last post over a year ago</span><span class="a" data-t="post">Posted this week</span></span></div>
+              <div class="prow" style="--r:3"><svg class="st i" aria-hidden="true"><use class="no" href="#i-dash"/><use class="ok" href="#i-check"/></svg><span class="k">Website</span><span class="v"><span class="b">Slow to load, no straight answers</span><span class="a" data-t="faqA">Answers the question they asked</span></span></div>
+              <div class="prow" style="--r:4"><svg class="st i" aria-hidden="true"><use class="no" href="#i-dash"/><use class="ok" href="#i-check"/></svg><span class="k">Next step</span><span class="v"><span class="b">Call during business hours</span><span class="a">Text or book online, day or night</span></span></div>
+            </div>
+            <div class="fig-tag"><span>Fig 02</span><span>Illustrative profile</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · What do we ask for? -->
+    <section class="dark step" id="ask" aria-labelledby="ask-h">
+      <div class="frame">
+        <div class="step-head">
+          <div>
+            <p class="eyebrow"><span class="num">03</span><span>When they see you, what do you ask for?</span><span class="stage">Middle of funnel</span></p>
+            <h2 id="ask-h">Answer fastest.</h2>
+          </div>
+          <p class="lede">One ask: book. The business that replies first usually gets the job, and plenty of leads arrive after hours. Your agent answers every call, text and form in under a minute, day or night.</p>
+        </div>
+        <div class="step-body">
+          <div class="agents">
+            <p class="agents-h">What the agents do</p>
+            <ol>
+              <li><svg class="i"><use href="#i-check"/></svg>Text back every missed call</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Answer forms and site chat in under a minute</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Ask the right questions to qualify the job</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Book straight onto your calendar, with reminders</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Hand you the details, so you walk in prepared</li>
+            </ol>
+            <p class="runs">Runs on <code><b>/</b>implement</code></p>
+          </div>
+          <div class="fig">
+            <div class="thread" id="thread">
+              <div class="thread-top">
+                <span><b>New text</b> · <span id="lead-time">9:42 pm</span></span>
+                <span class="clock" id="clock" aria-hidden="true">Reply time <b class="t">0:00</b></span><span class="sr-only">Replied in 38 seconds</span>
+              </div>
+              <div class="msgs">
+                <p class="msg in" data-t="lead">Hi, there’s water coming from under my kitchen sink. Can someone come out?</p>
+                <p class="who">Your agent</p>
+                <span class="typing" aria-hidden="true"><i></i><i></i><i></i></span>
+                <p class="msg out" data-t="reply">Sorry to hear that. We can have a plumber there tomorrow between 8 and 10 am, or tonight as an emergency call. Which works better?</p>
+                <p class="msg in" data-t="pick">Tomorrow at 8 works.</p>
+                <p class="msg out">Booked. You’ll get a reminder the day before and a text when we’re on the way.</p>
+                <div class="booked"><svg class="i"><use href="#i-cal"/></svg><div><b data-t="booked">Leak repair · Tomorrow, 8:00 am</b><small>On your calendar · Owner notified with notes</small></div></div>
+                <p class="aside">Handled at <span id="handled-time">9:43 pm</span>. You saw it over breakfast.</p>
+              </div>
+            </div>
+            <div class="fig-tag"><span>Fig 03</span><button type="button" class="replay" id="replay"><svg class="i"><use href="#i-loop"/></svg>Replay</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · How do we become the provider of choice? -->
+    <section class="light step" id="choice" aria-labelledby="choice-h">
+      <div class="frame">
+        <div class="step-head">
+          <div>
+            <p class="eyebrow"><span class="num">04</span><span>How do you become the provider of choice?</span><span class="stage">Bottom of funnel</span></p>
+            <h2 id="choice-h">Earn the review.</h2>
+          </div>
+          <p class="lede">You do great work. The agent makes sure people hear about it. Every finished job gets a follow-up, a review request at the right moment, and a reply. Then the best reviews become new content that brings in the next customer.</p>
+        </div>
+        <div class="step-body">
+          <div class="agents">
+            <p class="agents-h">What the agents do</p>
+            <ol>
+              <li><svg class="i"><use href="#i-check"/></svg>Check in after every job</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Ask for a review when the customer is happiest</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Catch unhappy customers early and alert you</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Reply to every review in your voice, with your approval</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Turn reviews into new pages and posts that feed step 01</li>
+            </ol>
+            <p class="runs">Runs on <code><b>/</b>implement</code> and <code><b>/</b>distribute</code></p>
+          </div>
+          <div class="fig" id="review-fig">
+            <div class="review review-step" style="--i:0">
+              <span class="stars" role="img" aria-label="Five stars"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+              <blockquote data-t="review">“Replied to my text at 10 pm and had a plumber here by 8. Fixed in under an hour.”</blockquote>
+              <cite data-t="who">Dana · after a finished job</cite>
+              <div class="reply review-step" style="--i:1">
+                <p class="reply-h"><b>Reply from Your business</b> · drafted by your agent, approved by you</p>
+                <p data-t="thanks">Thank you, Dana. Glad we caught it before it got worse. We’re here whenever you need us.</p>
+              </div>
+            </div>
+            <ol class="review-flow">
+              <li class="review-step" style="--i:2"><span class="n">→ 01</span><span>Becomes a quote on your <b data-t="slugPage">service page</b></span></li>
+              <li class="review-step" style="--i:3"><span class="n">→ 01</span><span>Feeds the answer to <b data-t="faq">“How much does it cost to fix a leaking pipe?”</b></span></li>
+            </ol>
+            <div class="fig-tag"><span>Fig 04</span><span>Illustrative review</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The loop -->
+    <section class="dark" id="loop" aria-labelledby="loop-h">
+      <div class="frame">
+        <div class="section-head">
+          <h2 id="loop-h">The funnel is really a loop.</h2>
+          <p class="lede">Every review makes you easier to find. Every fast reply makes you easier to choose. Agents keep it turning. Your team does the one step that's theirs: the work.</p>
+        </div>
+        <figure class="loop-fig" id="loop-fig">
+          <svg class="loop-svg" viewBox="0 0 1000 440" role="img" aria-label="The loop: 01 show up first, 02 be the obvious choice, 03 answer fastest, then your team does the job, 04 the agent earns the review, and that review becomes new content that helps you show up first again.">
+            <path id="lp-path" class="lp-track" d="M300 100H700A120 120 0 0 1 700 340H300A120 120 0 0 1 300 100Z"/>
+            <path id="lp-trail" class="lp-trail" d=""/>
+            <g class="lp-node" data-at="330,100"><circle class="ring" cx="330" cy="100" r="9"/><circle class="core" cx="330" cy="100" r="7"/><text class="lp-num" x="330" y="52" text-anchor="middle">01</text><text class="lp-name" x="330" y="76" text-anchor="middle">Show up first</text></g>
+            <g class="lp-node" data-at="500,100"><circle class="ring" cx="500" cy="100" r="9"/><circle class="core" cx="500" cy="100" r="7"/><text class="lp-num" x="500" y="52" text-anchor="middle">02</text><text class="lp-name" x="500" y="76" text-anchor="middle">Be the obvious choice</text></g>
+            <g class="lp-node" data-at="670,100"><circle class="ring" cx="670" cy="100" r="9"/><circle class="core" cx="670" cy="100" r="7"/><text class="lp-num" x="670" y="52" text-anchor="middle">03</text><text class="lp-name" x="670" y="76" text-anchor="middle">Answer fastest</text></g>
+            <g class="lp-node human" data-at="820,220"><circle class="ring" cx="820" cy="220" r="9"/><circle class="core" cx="820" cy="220" r="7"/><text class="lp-name" x="846" y="216">You do the job</text><text class="lp-sub" x="846" y="238">The human part</text></g>
+            <g class="lp-node" data-at="600,340"><circle class="ring" cx="600" cy="340" r="9"/><circle class="core" cx="600" cy="340" r="7"/><text class="lp-num" x="600" y="378" text-anchor="middle">04</text><text class="lp-name" x="600" y="402" text-anchor="middle">Earn the review</text></g>
+            <g class="lp-node" data-at="380,340"><circle class="ring" cx="380" cy="340" r="9"/><circle class="core" cx="380" cy="340" r="7"/><text class="lp-sub" x="380" y="378" text-anchor="middle">Reviews become</text><text class="lp-name" x="380" y="402" text-anchor="middle">New content</text></g>
+            <circle id="lp-pkt" class="lp-pkt" r="5" cx="330" cy="100"/>
+            <text class="lp-center-sub" x="500" y="208" text-anchor="middle">Run by agents</text>
+            <text class="lp-center" x="500" y="240" text-anchor="middle">Every job feeds the next search.</text>
+          </svg>
+          <ol class="loop-list">
+            <li><span class="n">01</span><b>Show up first</b><small>Ranked in Google, named in AI answers</small></li>
+            <li><span class="n">02</span><b>Be the obvious choice</b><small>Fresh reviews, replies and answers</small></li>
+            <li><span class="n">03</span><b>Answer fastest</b><small>Every lead answered in under a minute</small></li>
+            <li class="human"><span class="n">→</span><b>You do the job</b><small>The human part</small></li>
+            <li><span class="n">04</span><b>Earn the review</b><small>Follow-up, request, reply</small></li>
+            <li class="back">Reviews become new content, back to 01</li>
+          </ol>
+          <div class="fig-tag"><span>Fig 05</span><span>The loop</span></div>
+        </figure>
+        <div class="compare">
+          <div>
+            <h3>Your AI agents handle</h3>
+            <p class="sub">Every day, without being asked.</p>
+            <ul>
+              <li>Service pages, FAQs and weekly profile posts</li>
+              <li>The first reply to every call, text and form</li>
+              <li>Questions, booking and reminders</li>
+              <li>Follow-ups, review requests and review replies</li>
+              <li>A weekly report on what's working</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Your people handle</h3>
+            <p class="sub">The work only people can do.</p>
+            <ul>
+              <li>The job itself, done well</li>
+              <li>The walk-through and the estimate</li>
+              <li>The judgment calls</li>
+              <li>The handshake, and the relationship that follows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" id="faq">
+      <div class="frame split">
+        <div class="split-head">
+          <h2>Questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>What's the difference between SEO and AEO? <svg class="i"><use href="#i-plus"/></svg></summary>
+            <p>SEO is how you rank in search results. AEO, answer engine optimization, is how you get named inside AI answers from ChatGPT, Perplexity, Google's AI Overviews and others. Both reward the same thing: clear, specific, trustworthy answers to the questions your customers actually ask. We build for both at once.</p>
+          </details>
+          <details>
+            <summary>Will AI-written content hurt our Google ranking? <svg class="i"><use href="#i-plus"/></svg></summary>
+            <p>Google's guidance is about whether content is helpful and accurate, not how it was produced. Every page we publish starts from your real expertise, is reviewed by us, and goes live only after you approve it.</p>
+          </details>
+          <details>
+            <summary>Will customers know they're talking to an AI? <svg class="i"><use href="#i-plus"/></svg></summary>
+            <p>Yes, if you want them to, and most owners do. The agent introduces itself as your assistant, writes in your voice, handles the first reply, the questions and the booking, and passes anything sensitive to a person right away.</p>
+          </details>
+          <details>
+            <summary>What happens when someone leaves a bad review? <svg class="i"><use href="#i-plus"/></svg></summary>
+            <p>You hear about it first. The agent alerts you and drafts a calm, specific reply for you to approve. Because every job gets a follow-up, unhappy customers are often caught earlier, before they ever post.</p>
+          </details>
+          <details>
+            <summary>Do we need to be technical? <svg class="i"><use href="#i-plus"/></svg></summary>
+            <p>No. We do the technical work and explain everything in plain language. Your team just sees more booked jobs and fewer missed calls.</p>
+          </details>
+          <details>
+            <summary>What does it cost? <svg class="i"><use href="#i-plus"/></svg></summary>
+            <p>It depends on scope. Most engagements are a one-time build plus an optional monthly plan to keep the agents running and improving. You'll get a clear quote after our first call.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="light band-rule" id="book" aria-labelledby="book-h">
+      <div class="frame book-grid">
+        <div class="book-head">
+          <h2 id="book-h">Book a call.</h2>
+          <p class="lede">Four quick questions so we come prepared. We'll be in touch to set a time.</p>
+          <ul class="book-bring">
+            <li><svg class="i"><use href="#i-check"/></svg>Where you show up in Google and AI answers today</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Where leads are slipping through the cracks</li>
+            <li><svg class="i"><use href="#i-check"/></svg>The first agent we'd put to work</li>
+          </ul>
+        </div>
+        <div class="book-side">
+          <form class="book-form" data-source="services" novalidate>
+            <label class="field">
+              <span class="field-label"><span class="num">01</span>Name</span>
+              <input type="text" name="full_name" autocomplete="name" maxlength="255" placeholder="Full name" required>
+            </label>
+            <label class="field">
+              <span class="field-label"><span class="num">02</span>Business email</span>
+              <input type="email" name="business_email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
+            </label>
+            <fieldset class="field">
+              <legend class="field-label"><span class="num">03</span>Annual revenue</legend>
+              <div class="chips">
+                <label><input type="radio" name="annual_revenue" value="Under $500K" required><span>Under $500K</span></label>
+                <label><input type="radio" name="annual_revenue" value="$500K to $1M"><span>$500K to $1M</span></label>
+                <label><input type="radio" name="annual_revenue" value="$1M to $5M"><span>$1M to $5M</span></label>
+                <label><input type="radio" name="annual_revenue" value="$5M+"><span>$5M+</span></label>
+              </div>
+            </fieldset>
+            <label class="field">
+              <span class="field-label"><span class="num">04</span>Where does the work pile up?</span>
+              <span class="field-hint">Your top three pain points. Be specific.</span>
+              <textarea name="pain_points" maxlength="1000" placeholder="Missed calls after hours, slow quote follow-up, hardly any new reviews…" required></textarea>
+            </label>
+            <div class="book-trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            <input type="hidden" name="source">
+            <input type="hidden" name="page">
+            <div class="book-actions">
+              <button class="pill pill-red" type="submit">Book a call</button>
+              <span class="book-note">Your answers go straight to our team.</span>
+              <p class="book-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+          <div class="book-done" hidden tabindex="-1">
+            <div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="20" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <h3>Got it. Thanks.</h3>
+            <p id="done-msg">We'll look over your answers and be in touch soon to set a time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="closing dark">
+    <canvas id="foot-dots" aria-hidden="true"></canvas>
+    <div class="frame">
+      <div class="closing-cta">
+        <div>
+          <h2>Be the answer.</h2>
+          <p>Show up first, answer fastest, earn the review. We'll set up the agents that do all three.</p>
+        </div>
+        <a class="pill pill-red" href="#book">Book a call</a>
+      </div>
+      <div class="crew-space" role="img" aria-label="The wolfgrey team: raccoon, fox, wolf, bear and hawk, with a kitten"></div>
+      <div class="foot">
+        <img src="/logo-white.svg" alt="wolfgrey" width="73" height="16">
+        <span class="foot-meta"><a href="mailto:hey@wolfgrey.ai">hey@wolfgrey.ai</a><a href="https://x.com/__wolfgrey__">X</a><span>&copy; 2026 wolfgrey.ai</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Halftone dot fields (shared with the homepage) ---------- */
+    const hash = (x, y) => { const n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453; return n - Math.floor(n); };
+    const blob = (x, y) => (Math.sin(x * .011) + Math.sin(y * .013 + x * .004) + Math.sin((x + y) * .007)) / 3;
+
+    const sources = {};
+    function loadSource(url) {
+      if (!sources[url]) {
+        const img = new Image();
+        img.src = url;
+        sources[url] = img.decode().then(() => {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth; c.height = img.naturalHeight;
+          const ctx = c.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          return { w: c.width, h: c.height, data: ctx.getImageData(0, 0, c.width, c.height).data };
+        });
+      }
+      return sources[url];
+    }
+
+    function dotField(canvas, opts) {
+      const S = opts.step || 5;
+      const ready = opts.src ? loadSource(opts.src) : Promise.resolve(null);
+      const ink = opts.ink || '#F4F2F0', hotInk = opts.hot || '#FF4D4D';
+      let dots = [], dpr = 1, revealed = !opts.src, demo = () => {};
+
+      async function layout() {
+        const src = await ready;
+        const w = canvas.clientWidth, h = canvas.clientHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, opts.maxDpr || 2);
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const box = src ? opts.place(w, h, src.w / src.h) : null;
+        const sample = (x, y) => {
+          if (!box || x < box.x || x >= box.x + box.w || y < box.y || y >= box.y + box.h) return { a: 0, t: 0 };
+          const u = Math.floor((x - box.x) / box.w * src.w);
+          const v = Math.floor((y - box.y) / box.h * src.h);
+          const i = (v * src.w + u) * 4;
+          const lum = src.data[i] / 255, a = src.data[i + 3] / 255;
+          return { a, t: a * (opts.floor + (1 - opts.floor) * Math.pow(1 - lum, opts.curve)) * box.alpha };
+        };
+        const figure = (x, y, step) => {
+          const { t } = sample(x, y);
+          if (t <= 0.04 || hash(x * 0.7, y * 1.3) >= opts.keep + (1 - opts.keep) * t) return false;
+          let k = Math.sqrt(t);
+          if (opts.levels) k = Math.max(1, Math.round(k * opts.levels)) / opts.levels;
+          dots.push({ x, y, r: step * opts.size * k, a: opts.a0 + opts.a1 * t, d: hash(x, y) * 0.7 });
+          return true;
+        };
+        const F = typeof opts.fine === 'function' ? opts.fine(box) : opts.fine;
+        dots = [];
+        for (let y = S / 2; y < h; y += S) {
+          for (let x = S / 2; x < w; x += S) {
+            if (F ? sample(x, y).a > 0.1 : figure(x, y, S)) continue;
+            const bl = blob(x, y), c = Math.max(0, bl - opts.ambientCut);
+            if (hash(y, x) < 0.82) dots.push({ x, y, r: 0.8 + c * 0.6, a: opts.grid * (0.7 + 0.3 * bl) + c * 0.16, d: hash(x + 1, y) * 0.7 });
+          }
+        }
+        if (F && box) {
+          for (let y = box.y + F / 2; y < Math.min(h, box.y + box.h); y += F) {
+            for (let x = box.x + F / 2; x < Math.min(w, box.x + box.w); x += F) {
+              if (sample(x, y).a > 0.1) figure(x, y, F);
+            }
+          }
+        }
+        draw(revealed || reduceMotion ? 1 : 0);
+      }
+
+      function draw(p) {
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        ctx.fillStyle = ink;
+        for (const d of dots) {
+          const k = Math.min(1, Math.max(0, (p - d.d) / 0.3));
+          if (!k) continue;
+          ctx.globalAlpha = d.a * k;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function reveal() {
+        if (reduceMotion || document.hidden) { revealed = true; return draw(1); }
+        const start = performance.now();
+        const tick = now => {
+          const p = Math.min(1, (now - start) / 1600);
+          draw(p);
+          if (p < 1) requestAnimationFrame(tick);
+          else { revealed = true; demo(); }
+        };
+        requestAnimationFrame(tick);
+      }
+
+      let laidOut = '', timer;
+      const size = () => canvas.clientWidth + 'x' + canvas.clientHeight;
+      const relayout = () => {
+        if (size() === laidOut) return;
+        clearTimeout(timer);
+        timer = setTimeout(() => { laidOut = size(); layout().then(() => draw(revealed ? 1 : 0)); }, 120);
+      };
+      const ro = new ResizeObserver(relayout);
+      laidOut = size();
+      layout().then(() => { ro.observe(canvas); relayout(); opts.revealNow ? reveal() : null; });
+      document.fonts && document.fonts.ready.then(relayout);
+
+      if (opts.interactive && !reduceMotion) {
+        const R = 110, PUSH = 12, PAD = PUSH + S;
+        const ptr = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0, cx: 0, cy: 0 };
+        let raf = 0, prev = null;
+        const frame = () => {
+          ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
+          ptr.s += (ptr.ts - ptr.s) * 0.1;
+          const on = ptr.s > 0.002;
+          const cur = on ? [ptr.x - R, ptr.y - R, ptr.x + R, ptr.y + R] : null;
+          const r = prev && cur ? [Math.min(prev[0], cur[0]), Math.min(prev[1], cur[1]), Math.max(prev[2], cur[2]), Math.max(prev[3], cur[3])] : prev || cur;
+          prev = cur;
+          if (r) {
+            const ctx = canvas.getContext('2d');
+            ctx.save();
+            ctx.beginPath(); ctx.rect(r[0], r[1], r[2] - r[0], r[3] - r[1]); ctx.clip();
+            ctx.clearRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
+            const hot = [];
+            ctx.fillStyle = ink;
+            for (const d of dots) {
+              if (d.x < r[0] - PAD || d.x > r[2] + PAD || d.y < r[1] - PAD || d.y > r[3] + PAD) continue;
+              let x = d.x, y = d.y, rad = d.r, a = d.a;
+              if (on) {
+                const dx = d.x - ptr.x, dy = d.y - ptr.y, dist = Math.hypot(dx, dy) || 1;
+                if (dist < R) {
+                  let f = 1 - dist / R; f *= f * ptr.s;
+                  x += dx / dist * f * PUSH; y += dy / dist * f * PUSH; rad *= 1 + f * 0.4; a = Math.min(1, a + f * 0.45);
+                  if (f > 0.55) { hot.push(x, y, rad); continue; }
+                }
+              }
+              ctx.globalAlpha = a;
+              ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
+            }
+            ctx.fillStyle = hotInk; ctx.globalAlpha = 0.85;
+            for (let i = 0; i < hot.length; i += 3) { ctx.beginPath(); ctx.arc(hot[i], hot[i + 1], hot[i + 2], 0, Math.PI * 2); ctx.fill(); }
+            ctx.restore();
+          }
+          const moving = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.3 || Math.abs(ptr.ts - ptr.s) > 0.004 || (!on && prev);
+          raf = moving ? requestAnimationFrame(frame) : 0;
+        };
+        const aim = () => {
+          const b = canvas.getBoundingClientRect();
+          ptr.tx = ptr.cx - b.left; ptr.ty = ptr.cy - b.top;
+        };
+        const host = opts.interactive;
+        const press = (cx, cy) => {
+          ptr.cx = cx; ptr.cy = cy; aim();
+          if (ptr.s < 0.01) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
+          ptr.ts = 1;
+          if (!raf) raf = requestAnimationFrame(frame);
+        };
+        const release = () => { ptr.ts = 0; if (!raf) raf = requestAnimationFrame(frame); };
+        host.addEventListener('pointermove', e => {
+          if (e.pointerType === 'mouse' && revealed) press(e.clientX, e.clientY);
+        });
+        host.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') release(); });
+        const touch = e => { const t = e.touches[0]; if (t && revealed && !demoing) press(t.clientX, t.clientY); };
+        host.addEventListener('touchstart', touch, { passive: true });
+        host.addEventListener('touchmove', touch, { passive: true });
+        host.addEventListener('touchend', e => { if (!e.touches.length && !demoing) release(); }, { passive: true });
+        host.addEventListener('touchcancel', () => { if (!demoing) release(); }, { passive: true });
+
+        var demoing = false;
+        demo = () => {
+          if (!opts.demo || matchMedia('(hover: hover)').matches) return;
+          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight);
+          if (!pts) return;
+          const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { io.disconnect(); setTimeout(sweep, 250); } }, { threshold: 0.6 });
+          io.observe(opts.demoTarget || canvas);
+        };
+        const sweep = () => {
+          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight);
+          const start = performance.now(), T = 2200;
+          demoing = true;
+          const step = now => {
+            const q = Math.min(1, (now - start) / T), e = q < .5 ? 2 * q * q : 1 - Math.pow(-2 * q + 2, 2) / 2;
+            const seg = e * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(seg)), f = seg - i;
+            const x = pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, y = pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f;
+            const b = canvas.getBoundingClientRect();
+            press(b.left + x, b.top + y);
+            if (q < 1) requestAnimationFrame(step);
+            else { demoing = false; release(); }
+          };
+          requestAnimationFrame(step);
+        };
+        window.addEventListener('scroll', () => { if (ptr.ts) { aim(); if (!raf) raf = requestAnimationFrame(frame); } }, { passive: true });
+      }
+
+      return { reveal, ready };
+    }
+
+    dotField(document.getElementById('hero-dots'), {
+      src: '/wolf-hero-dots.png?v=2',
+      step: 5, fine: box => box && box.w < 600 ? 2.5 : 0, maxDpr: 3, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
+      grid: 0.05, ambientCut: 0.25,
+      revealNow: true,
+      interactive: document.querySelector('.hero'),
+      place(w, h, ratio) {
+        if (w < 820) {
+          const slot = document.querySelector('.hero-art').getBoundingClientRect(), c = document.getElementById('hero-dots').getBoundingClientRect();
+          return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 1 };
+        }
+        const bh = h * 0.94, bw = bh * ratio;
+        return { x: Math.max(w * 0.5, w - bw - w * 0.02), y: h - bh, w: bw, h: bh, alpha: 1 };
+      },
+      demo(w) {
+        if (w >= 820) return null;
+        const s = document.querySelector('.hero-art').getBoundingClientRect(), c = document.getElementById('hero-dots').getBoundingClientRect();
+        const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
+        return [at(0.12, 0.3), at(0.5, 0.42), at(0.88, 0.3), at(0.55, 0.62)];
+      },
+      demoTarget: document.querySelector('.hero-art')
+    });
+
+    const footCanvas = document.getElementById('foot-dots');
+    const footField = dotField(footCanvas, {
+      src: '/crew-dots.png?v=6',
+      step: 5, fine: box => Math.min(3.5, Math.max(2.2, box.w / 340)), maxDpr: 3, levels: 3, floor: 0.12, curve: 1, keep: 1, size: 0.5, a0: 0.1, a1: 0.72,
+      grid: 0.05, ambientCut: 0.15,
+      interactive: document.querySelector('.closing'),
+      place() {
+        const slot = document.querySelector('.crew-space').getBoundingClientRect(), c = footCanvas.getBoundingClientRect();
+        return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 0.85 };
+      },
+      demo() {
+        const s = document.querySelector('.crew-space').getBoundingClientRect(), c = footCanvas.getBoundingClientRect();
+        const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
+        return [at(0.05, 0.25), at(0.35, 0.2), at(0.65, 0.3), at(0.95, 0.22)];
+      },
+      demoTarget: document.querySelector('.crew-space')
+    });
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { footField.ready.then(() => setTimeout(footField.reveal, 50)); obs.disconnect(); }
+    }, { threshold: 0.2 }).observe(footCanvas);
+
+    const gridIO = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      gridIO.unobserve(e.target);
+      const sec = e.target, light = sec.classList.contains('light');
+      const c = document.createElement('canvas');
+      c.className = 'bg-dots'; c.setAttribute('aria-hidden', 'true');
+      sec.prepend(c);
+      dotField(c, {
+        step: 5, grid: light ? 0.09 : 0.05, ambientCut: 0.3, maxDpr: 1.5,
+        ink: light ? '#1B1919' : '#F4F2F0', hot: light ? '#D12F2F' : '#FF4D4D',
+        interactive: sec
+      });
+    }), { rootMargin: '300px 0px' });
+    document.querySelectorAll('main > section').forEach(sec => gridIO.observe(sec));
+
+    /* ---------- One business, carried down the page ----------
+       Pick a trade (and a town) in step 01; every figure below speaks that trade. */
+    const TRADES = {
+      plumbers: {
+        pain: 'Missed calls while we’re on jobs, quotes that go cold, hardly any new reviews…',
+        one: 'Plumber', many: 'plumbers', slug: 'leak-repair', page: 'leak repair page',
+        q: 'Who’s the best plumber {in} for a leak under the sink?',
+        praise: 'same-day replies and upfront pricing',
+        faq: 'How much does it cost to fix a leaking pipe?',
+        post: '3 signs your water heater is about to go',
+        lead: 'Hi, there’s water coming from under my kitchen sink. Can someone come out?',
+        reply: 'Sorry to hear that. We can have a plumber there tomorrow between 8 and 10 am, or tonight as an emergency call. Which works better?',
+        pick: 'Tomorrow at 8 works.',
+        booked: 'Leak repair · Tomorrow, 8:00 am',
+        review: '“Replied to my text at 10 pm and had a plumber here by 8. Fixed in under an hour.”',
+        who: 'Dana',
+        thanks: 'Thank you, Dana. Glad we caught it before it got worse. We’re here whenever you need us.'
+      },
+      roofers: {
+        pain: 'Call floods after storms, slow inspection scheduling, few new reviews…',
+        one: 'Roofer', many: 'roofers', slug: 'storm-damage', page: 'storm damage page',
+        q: 'Which roofer {in} can inspect storm damage this week?',
+        praise: 'quick inspections and clear photos for insurance',
+        faq: 'Does homeowners insurance cover storm damage to a roof?',
+        post: 'What to check on your roof after a storm',
+        lead: 'We lost some shingles in last night’s storm. Can you take a look?',
+        reply: 'We can. An inspector is free Thursday at 10 am or Friday at 2 pm, and we’ll send photos you can share with your insurer. Which suits you?',
+        pick: 'Thursday at 10, please.',
+        booked: 'Roof inspection · Thursday, 10:00 am',
+        review: '“Someone was on our roof two days after the storm, and they sent photos we could hand straight to our insurer.”',
+        who: 'Marcus',
+        thanks: 'Thanks, Marcus. Storm weeks are busy, and we’re glad we got to you fast.'
+      },
+      hvac: {
+        pain: 'Missed after-hours calls, slow tune-up follow-ups, few new reviews…',
+        one: 'HVAC company', many: 'HVAC companies', slug: 'ac-repair', page: 'AC repair page',
+        q: 'Who can fix my AC {in} today?',
+        praise: 'same-day service and techs who explain the fix',
+        faq: 'Why is my AC running but not cooling?',
+        post: 'Change this filter before summer',
+        lead: 'My AC is running but the house won’t cool down. Can anyone come today?',
+        reply: 'We can. A tech is free today between 2 and 4 pm. Meanwhile, check that the filter isn’t clogged. Want the 2 pm slot?',
+        pick: 'Yes, 2 pm please.',
+        booked: 'AC repair · Today, 2:00 pm',
+        review: '“Booked by text in two minutes and the tech was here that afternoon. Cold air by dinner.”',
+        who: 'Priya',
+        thanks: 'Thanks, Priya. Nobody should sweat through dinner. Glad we could help.'
+      },
+      dentists: {
+        pain: 'Unanswered new-patient calls, no-shows, few recent reviews…',
+        one: 'Dentist', many: 'dentists', slug: 'new-patients', page: 'new patients page',
+        q: 'Which dentist {in} is taking new patients this week?',
+        praise: 'easy booking and a gentle, unhurried team',
+        faq: 'Do you take my dental insurance?',
+        post: 'What to do if you chip a tooth',
+        lead: 'Hi, I chipped a tooth. Are you taking new patients?',
+        reply: 'We are, and we keep room for urgent visits. We have Wednesday at 9:30 am or 3:15 pm. Which works for you?',
+        pick: '3:15 on Wednesday.',
+        booked: 'New patient visit · Wednesday, 3:15 pm',
+        review: '“Texted on a Sunday night and had an appointment by Monday morning. The whole team was kind.”',
+        who: 'Sam',
+        thanks: 'Thank you, Sam. We’re so glad you found us. See you at your next cleaning.'
+      },
+      accountants: {
+        pain: 'Slow replies to inquiries, chasing documents, few new reviews…',
+        one: 'Accountant', many: 'accountants', slug: 'small-business-tax', page: 'small business tax page',
+        q: 'Who’s the best small business accountant {in}?',
+        praise: 'fast answers and plain-English explanations',
+        faq: 'When are quarterly estimated taxes due?',
+        post: 'The 4 tax dates every owner should know',
+        lead: 'I need help with my business taxes. I’m behind on two quarters.',
+        reply: 'We can get you caught up. Could you do a 20-minute intro call Tuesday at 11 am or Wednesday at 4 pm?',
+        pick: 'Tuesday at 11.',
+        booked: 'Intro call · Tuesday, 11:00 am',
+        review: '“They answered within minutes, caught me up on two quarters, and explained everything in plain English.”',
+        who: 'Lee',
+        thanks: 'Thank you, Lee. Being caught up is a great feeling. We’ll keep you there.'
+      },
+      realtors: {
+        pain: 'Leads going cold overnight, slow follow-up, few new reviews…',
+        one: 'Realtor', many: 'realtors', slug: 'home-value', page: 'home value page',
+        q: 'Who’s the best listing agent {in}?',
+        praise: 'quick replies and pricing that holds up',
+        faq: 'What is my home worth in today’s market?',
+        post: '5 fixes that pay off before you list',
+        lead: 'We’re thinking about selling in the spring. What’s our place worth?',
+        reply: 'Happy to help. I can walk through it with you and leave a pricing estimate. Saturday at 10 am or Sunday at 1 pm?',
+        pick: 'Saturday works.',
+        booked: 'Home valuation · Saturday, 10:00 am',
+        review: '“Replied the same night, priced our home right, and walked us through every offer.”',
+        who: 'Jordan',
+        thanks: 'Thank you, Jordan. It was a pleasure helping you find the right buyer.'
+      }
+    };
+
+    const cityInput = document.getElementById('city');
+    const state = { trade: 'plumbers', city: '', touched: false };
+    const cityName = () => state.city || 'Your town';
+    const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const setText = (key, text) => document.querySelectorAll(`[data-t="${key}"]`).forEach(el => { el.textContent = text; });
+
+    // Static copy for steps 02–04 (always safe: textContent only)
+    function paintStatic() {
+      const t = TRADES[state.trade];
+      setText('profSub', `${t.one} · ${cityName()}`);
+      setText('post', `Posted this week: “${t.post}”`);
+      setText('faqA', `Answers “${t.faq}”`);
+      setText('lead', t.lead);
+      setText('reply', t.reply);
+      setText('pick', t.pick);
+      setText('booked', t.booked);
+      setText('review', t.review);
+      setText('who', `${t.who}${state.city ? ', ' + state.city : ''} · after a finished job`);
+      setText('thanks', t.thanks);
+      setText('slugPage', t.page);
+      setText('faq', `“${t.faq}”`);
+      if (state.touched) document.querySelector('.book-form textarea').placeholder = t.pain;
+    }
+
+    /* ---------- 01 · Answer engine demo ---------- */
+    const askUI = document.getElementById('ask-ui');
+    const askQ = document.getElementById('ask-q'), askText = document.getElementById('ask-text');
+    const askSrc = document.getElementById('ask-src'), askAlso = document.getElementById('ask-also');
+    const askStatus = document.getElementById('ask-status'), caret = askUI.querySelector('.caret');
+    let askRun = 0;
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+
+    function buildAnswer() {
+      const t = TRADES[state.trade];
+      const loc = state.city ? `in ${state.city}` : 'near you';
+      // Segments: [text, kind] where kind is '', 'mark' or 'sup'
+      const segs = [
+        [`A few ${t.many} ${loc} come up often. `, ''],
+        ['Your business', 'mark'],
+        [` stands out: customers mention ${t.praise}, and reviews from the past month are consistently strong.`, ''],
+        ['1 2', 'sup'],
+        [` Their site also answers “${t.faq}”`, ''],
+        ['3', 'sup']
+      ];
+      askText.textContent = '';
+      const words = [];
+      let mark = null;
+      for (const [text, kind] of segs) {
+        if (kind === 'sup') { const s = document.createElement('sup'); s.className = 'w'; s.textContent = text; askText.append(s); words.push(s); continue; }
+        const host = kind === 'mark' ? (mark = askText.appendChild(document.createElement('mark'))) : askText;
+        text.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { host.append(part); return; }
+          const w = document.createElement('span'); w.className = 'w'; w.textContent = part; host.append(w); words.push(w);
+        });
+      }
+      const site = `yourbusiness.com/${t.slug}${state.city ? '-' + slugify(state.city) : ''}`;
+      askSrc.textContent = '';
+      [[site, true], ['Google reviews · Your business', true], ['yourbusiness.com/faq', true]].forEach(([label, you], i) => {
+        const li = document.createElement('li'); if (you) li.className = 'you';
+        const b = document.createElement('b'); b.textContent = i + 1;
+        const s = document.createElement('span'); s.textContent = label;
+        li.append(b, s); askSrc.append(li);
+      });
+      askAlso.textContent = `Also mentioned: two other local ${t.many}`;
+      words.mark = mark;
+      return words;
+    }
+
+    async function runAsk(instant) {
+      const run = ++askRun, alive = () => run === askRun;
+      const t = TRADES[state.trade];
+      const query = t.q.replace('{in}', state.city ? `in ${state.city}` : 'near me');
+      const words = buildAnswer();
+      const srcs = [...askSrc.children];
+      askAlso.classList.remove('on');
+      if (instant || reduceMotion) {
+        askQ.textContent = query; caret.classList.add('off');
+        words.forEach(w => w.classList.add('on')); words.mark.classList.add('lit'); srcs.forEach(s => s.classList.add('on')); askAlso.classList.add('on');
+        askStatus.textContent = 'AI answer';
+        return;
+      }
+      caret.classList.remove('off');
+      askQ.textContent = '';
+      askStatus.textContent = 'AI answer';
+      for (let i = 1; i <= query.length; i++) {
+        if (!alive()) return;
+        askQ.textContent = query.slice(0, i);
+        await wait(query[i - 1] === ' ' ? 40 : 22);
+      }
+      if (!alive()) return;
+      caret.classList.add('off');
+      // While it "thinks", show what answer engines actually weigh
+      askUI.classList.add('thinking');
+      for (const m of ['Reading service pages', 'Checking recent reviews', `Comparing local ${t.many}`]) {
+        if (!alive()) return;
+        askStatus.textContent = m;
+        await wait(480);
+      }
+      if (!alive()) return;
+      askUI.classList.remove('thinking'); askStatus.textContent = 'AI answer';
+      for (const w of words) {
+        if (!alive()) return;
+        w.classList.add('on');
+        if (w.parentNode === words.mark && w === words.mark.lastElementChild) setTimeout(() => alive() && words.mark.classList.add('lit'), 120);
+        await wait(38);
+      }
+      for (const s of srcs) {
+        if (!alive()) return;
+        s.classList.add('on');
+        await wait(140);
+      }
+      askAlso.classList.add('on');
+    }
+
+    let askSeen = false;
+    new IntersectionObserver(([e], obs) => {
+      if (e.isIntersecting) { askSeen = true; obs.disconnect(); runAsk(); }
+    }, { threshold: 0.45 }).observe(askUI);
+
+    /* ---------- 02 · Today vs with agents ---------- */
+    const prof = document.getElementById('prof');
+    const segBtns = [...document.querySelectorAll('.seg button')];
+    let profTouched = false;
+    const setView = after => {
+      prof.classList.toggle('after', after);
+      segBtns.forEach(b => b.setAttribute('aria-pressed', (b.dataset.view === 'after') === after));
+    };
+    segBtns.forEach(b => b.addEventListener('click', () => { profTouched = true; setView(b.dataset.view === 'after'); }));
+    // On first view, show "Today" for a beat, then flip to "With agents"
+    new IntersectionObserver(([e], obs) => {
+      if (!e.isIntersecting) return;
+      obs.disconnect();
+      setTimeout(() => { if (!profTouched) setView(true); }, reduceMotion ? 0 : 1400);
+    }, { threshold: 0.6 }).observe(prof);
+
+    /* ---------- 03 · Speed to lead ---------- */
+    const thread = document.getElementById('thread');
+    const clock = document.getElementById('clock'), clockOut = clock.querySelector('.t');
+    const seq = [...thread.querySelectorAll('.msg, .who, .booked')];
+    const typing = thread.querySelector('.typing');
+    const aside = thread.querySelector('.aside');
+    let threadRun = 0, threadDirty = true, threadVisible = false;
+    // After hours? The lead arrives at the visitor's own time: this is exactly when it would happen
+    (() => {
+      const now = new Date(), h = now.getHours();
+      if (h >= 8 && h < 18) return;
+      const fmt = d => d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase();
+      document.getElementById('lead-time').textContent = fmt(now);
+      document.getElementById('handled-time').textContent = fmt(new Date(now.getTime() + 60000));
+    })();
+
+    async function runThread() {
+      const run = ++threadRun, alive = () => run === threadRun;
+      threadDirty = false;
+      const [lead, who, reply, pick, confirm, booked] = seq;
+      seq.forEach(el => el.classList.remove('on'));
+      typing.classList.remove('on'); aside.classList.remove('on'); clock.classList.remove('done'); clockOut.textContent = '0:00';
+      if (reduceMotion) { seq.forEach(el => el.classList.add('on')); aside.classList.add('on'); clockOut.textContent = '0:38'; clock.classList.add('done'); return; }
+      await wait(300); if (!alive()) return;
+      lead.classList.add('on');
+      await wait(500); if (!alive()) return;
+      who.classList.add('on'); typing.classList.add('on');
+      // The clock runs while the agent types: 38 seconds, shown in 1.6
+      const t0 = performance.now();
+      await new Promise(done => {
+        const tick = now => {
+          if (!alive()) return done();
+          const p = Math.min(1, (now - t0) / 1600), s = Math.round(38 * (1 - Math.pow(1 - p, 2)));
+          clockOut.textContent = `0:${String(s).padStart(2, '0')}`;
+          p < 1 ? requestAnimationFrame(tick) : done();
+        };
+        requestAnimationFrame(tick);
+      });
+      if (!alive()) return;
+      typing.classList.remove('on'); reply.classList.add('on'); clock.classList.add('done');
+      await wait(1300); if (!alive()) return;
+      pick.classList.add('on');
+      await wait(700); if (!alive()) return;
+      typing.classList.add('on');
+      await wait(800); if (!alive()) return;
+      typing.classList.remove('on'); confirm.classList.add('on');
+      await wait(600); if (!alive()) return;
+      booked.classList.add('on');
+      await wait(900); if (!alive()) return;
+      aside.classList.add('on');
+    }
+    new IntersectionObserver(([e]) => {
+      threadVisible = e.isIntersecting;
+      if (threadVisible && threadDirty) runThread();
+    }, { threshold: 0.45 }).observe(thread);
+    document.getElementById('replay').addEventListener('click', runThread);
+
+    /* ---------- Trade + town wiring ---------- */
+    const onChange = () => {
+      paintStatic();
+      if (askSeen) runAsk();
+      threadDirty = true;
+      if (threadVisible) runThread();
+    };
+    document.querySelectorAll('input[name="trade"]').forEach(r => r.addEventListener('change', () => { state.trade = r.value; state.touched = true; onChange(); }));
+    let cityTimer;
+    cityInput.addEventListener('input', () => {
+      clearTimeout(cityTimer);
+      cityTimer = setTimeout(() => {
+        const v = cityInput.value.replace(/[^\p{L}\p{N} .,'’-]/gu, '').trim().slice(0, 32);
+        if (v === state.city) return;
+        state.city = v; state.touched = true; onChange();
+      }, 550);
+    });
+    paintStatic();
+    reduceMotion ? runAsk(true) : buildAnswer();
+
+    /* ---------- 04 · Review steps reveal ---------- */
+    if (!reduceMotion) {
+      new IntersectionObserver(([e], obs) => {
+        if (e.isIntersecting) { document.getElementById('review-fig').classList.add('in'); obs.disconnect(); }
+      }, { threshold: 0.35 }).observe(document.getElementById('review-fig'));
+    }
+
+    /* ---------- The loop: a packet laps the track; each stop lights as it passes ---------- */
+    (() => {
+      const svg = document.querySelector('.loop-svg');
+      const path = document.getElementById('lp-path'), pkt = document.getElementById('lp-pkt'), trail = document.getElementById('lp-trail');
+      const len = path.getTotalLength();
+      // Find each node's distance along the track
+      const nodes = [...svg.querySelectorAll('.lp-node')].map(g => {
+        const [x, y] = g.dataset.at.split(',').map(Number);
+        let best = 0, bd = Infinity;
+        for (let s = 0; s <= 400; s++) { const p = path.getPointAtLength(s / 400 * len), d = Math.hypot(p.x - x, p.y - y); if (d < bd) { bd = d; best = s / 400 * len; } }
+        return { g, at: best };
+      });
+      if (reduceMotion) { pkt.style.display = 'none'; return; }
+      const LAP = 9000, TAIL = 90;
+      let raf = 0, t0 = 0, last = 0, running = false;
+      const frame = now => {
+        const d = ((now - t0) % LAP) / LAP * len;
+        const p = path.getPointAtLength(d);
+        pkt.setAttribute('cx', p.x.toFixed(1)); pkt.setAttribute('cy', p.y.toFixed(1));
+        // Short fading tail behind the packet
+        let dpath = '';
+        for (let k = 0; k <= 12; k++) { const q = path.getPointAtLength((d - TAIL * k / 12 + len) % len); dpath += (k ? 'L' : 'M') + q.x.toFixed(1) + ' ' + q.y.toFixed(1); }
+        trail.setAttribute('d', dpath); trail.setAttribute('stroke-opacity', '.5');
+        nodes.forEach(n => {
+          const crossed = last <= d ? (n.at > last && n.at <= d) : (n.at > last || n.at <= d);
+          if (crossed) { n.g.classList.remove('hot'); void n.g.getBBox(); n.g.classList.add('hot'); }
+        });
+        last = d;
+        raf = requestAnimationFrame(frame);
+      };
+      const start = () => { if (running) return; running = true; t0 = performance.now() - (last / len) * LAP; raf = requestAnimationFrame(frame); };
+      const stop = () => { running = false; cancelAnimationFrame(raf); };
+      let visible = false;
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible && !document.hidden ? start() : stop(); }, { threshold: 0.2 }).observe(svg);
+      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : visible && start(); });
+    })();
+
+    /* ---------- Funnel progress under the nav ---------- */
+    (() => {
+      const nav = document.querySelector('.nav'), hero = document.querySelector('.hero');
+      const links = [...document.querySelectorAll('.funnel a')];
+      const steps = links.map(a => document.querySelector(a.getAttribute('href')));
+      const end = document.getElementById('loop');
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const vh = innerHeight, mid = vh * 0.45;
+        const hb = hero.getBoundingClientRect().bottom, eb = end.getBoundingClientRect().top;
+        nav.classList.toggle('staged', hb < 80 && eb > mid);
+        let active = -1;
+        steps.forEach((s, i) => {
+          const r = s.getBoundingClientRect();
+          const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+          links[i].querySelector('i').style.setProperty('--p', p.toFixed(3));
+          if (r.top <= mid) active = i;
+        });
+        links.forEach((a, i) => { a.classList.toggle('on', i === active); a.parentNode.classList.toggle('on', i === active); i === active ? a.setAttribute('aria-current', 'step') : a.removeAttribute('aria-current'); });
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll);
+      update();
+    })();
+
+    /* ---------- Booking form: one row per submission in the Google Sheet ---------- */
+    const BOOK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxZC3Jy5_6ayQOV7JOX5dIZVWT70vaT-sC2OltKmM4kszQmafWmW5jUZjhKlm_RHbdRiA/exec';
+    (() => {
+      const form = document.querySelector('.book-form');
+      if (!form) return;
+      const status = form.querySelector('.book-status'), btn = form.querySelector('button[type="submit"]');
+      const params = new URLSearchParams(location.search), batch = params.get('s');
+      form.elements.source.value = batch ? `${form.dataset.source}:${batch.slice(0, 60)}` : params.get('utm_source') || params.get('ref') || form.dataset.source;
+      form.elements.page.value = location.pathname;
+      const say = (msg, sending) => { status.textContent = msg; status.classList.toggle('sending', !!sending); };
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        form.classList.add('tried');
+        if (!form.checkValidity()) { form.querySelector(':invalid').focus(); say('Fill in all four so we can prepare for the call.'); return; }
+        btn.disabled = true; say('Sending…', true);
+        try {
+          await fetch(BOOK_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) });
+          const done = form.nextElementSibling;
+          if (state.touched) {
+            const t = TRADES[state.trade];
+            document.getElementById('done-msg').textContent = `We'll look over your answers and be in touch soon to set a time. Before we talk, we'll look at how ${t.many}${state.city ? ' in ' + state.city : ' near you'} show up in Google and AI answers.`;
+          }
+          form.hidden = true; done.hidden = false; done.focus();
+        } catch {
+          btn.disabled = false; say("That didn't go through. Try again, or email hey@wolfgrey.ai.");
+        }
+      });
+    })();
+
+    console.log('%cwolfgrey.ai', 'font: 500 14px Satoshi, sans-serif; color: #D12F2F', '\nBuilt alongside the same AI agents we set up for clients. Curious how? hey@wolfgrey.ai');
+
+    /* ---------- Scroll reveals ---------- */
+    if (!reduceMotion) {
+      const groups = ['.hero-copy > *', '.step-head > *', '.section-head > *', '.agents > *', '.agents li', '.fig', '.loop-fig', '.compare > div', '.compare li', '.split-head', '.faq details', '.book-head > *', '.book-side', '.closing-cta > *'];
+      for (const sel of groups) {
+        const byParent = new Map();
+        document.querySelectorAll(sel).forEach(el => {
+          if (el.hasAttribute('data-rv')) return;
+          const i = byParent.get(el.parentNode) || 0;
+          byParent.set(el.parentNode, i + 1);
+          el.dataset.rv = '';
+          el.style.setProperty('--i', i);
+        });
+      }
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('[data-rv], .band-rule').forEach(el => io.observe(el));
+    }
+  </script>
+</body>
+</html>
