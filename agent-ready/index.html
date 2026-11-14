@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Transition Package: make your website agent-ready — wolfgrey.ai</title>
+  <meta name="description" content="Enter your URL for a free AI scan. See what AI agents see on your website, what they tell your customers, and what it takes to fix it. The AI Transition Package makes your site easy for agents to find, understand and act on.">
+  <link rel="canonical" href="https://wolfgrey.ai/agent-ready/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="wolfgrey.ai">
+  <meta property="og:title" content="Are you ready to do business with agents? — wolfgrey.ai">
+  <meta property="og:description" content="Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.">
+  <meta property="og:url" content="https://wolfgrey.ai/agent-ready/">
+  <meta property="og:image" content="https://wolfgrey.ai/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="wolfgrey.ai — the AI Transition Package">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@__wolfgrey__">
+  <meta name="twitter:title" content="Are you ready to do business with agents?">
+  <meta name="twitter:description" content="Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.">
+  <meta name="twitter:image" content="https://wolfgrey.ai/og-image.png">
+  <meta name="theme-color" content="#1B1919">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'Commit Mono'; font-weight: 400; font-display: swap; src: url('/fonts/CommitMono-400-Regular.otf') format('opentype'); }
+
+    :root {
+      --char: #1B1919;
+      --char-2: #232020;
+      --on-char: #F4F2F0;
+      --on-char-2: #B9B3AE;
+      --on-char-3: #847D78;
+      --line-dark: rgba(255, 255, 255, 0.1);
+
+      --paper: #FBFAF9;
+      --paper-2: #F4F2F0;
+      --ink: #1B1919;
+      --ink-2: #57514D;
+      --ink-3: #7D7671;
+      --line-light: rgba(10, 10, 10, 0.1);
+
+      --red: #D12F2F;
+      --red-hover: #B92525;
+      --red-bright: #FF4D4D;
+
+      --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'Commit Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+
+      --frame: min(1248px, calc(100% - 2 * var(--gutter)));
+      --gutter: clamp(16px, 4vw, 48px);
+      --pad: clamp(24px, 4vw, 48px);
+      --ease-expo: cubic-bezier(.16, 1, .3, 1);
+      --ease-quart: cubic-bezier(.25, 1, .5, 1);
+      --cols: 5fr 7fr;
+      --sec-y: clamp(48px, 7vw, 88px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--char);
+      color: var(--on-char);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
+    :focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; border-radius: 6px; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+    /* Surfaces + frame */
+    .dark  { background: var(--char);  color: var(--on-char); --line: var(--line-dark); --text-2: var(--on-char-2); --text-3: var(--on-char-3); --accent: var(--red-bright); }
+    .light { background: var(--paper); color: var(--ink);     --line: var(--line-light); --text-2: var(--ink-2);    --text-3: var(--ink-3);    --accent: var(--red); }
+    .band-rule { border-top: 1px solid var(--line); }
+    .frame { width: var(--frame); margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); position: relative; }
+    main > section { position: relative; scroll-margin-top: 72px; }
+    canvas.bg-dots, .hero canvas, .closing canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+
+    h1, h2, h3 { font-weight: 500; letter-spacing: -0.04em; }
+    h1, h2 { text-wrap: balance; }
+    p, li, td { text-wrap: pretty; }
+    h2 { font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.1; }
+    h3 { font-size: 19px; letter-spacing: -0.02em; line-height: 1.3; }
+    .lede { color: var(--text-2); max-width: 48ch; }
+    .tag { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .num { font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--accent); }
+
+    /* Pills */
+    .pill {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 44px; padding: 0 20px;
+      border-radius: 999px;
+      font-size: 15px; font-weight: 500; letter-spacing: -0.01em; white-space: nowrap;
+      transition: background .15s, border-color .15s, color .15s, transform .12s;
+    }
+    .pill:active { transform: scale(.97); }
+    .pill-red { background: var(--red); color: #fff; }
+    .pill-red:hover { background: var(--red-hover); }
+    .pill-outline { border: 1px solid currentColor; }
+    .dark .pill-outline { border-color: rgba(244, 242, 240, .55); }
+    .dark .pill-outline:hover { border-color: var(--on-char); background: rgba(255, 255, 255, .06); }
+    button.pill { cursor: pointer; }
+    button.pill:disabled { opacity: .6; cursor: progress; }
+
+    /* Nav */
+    .nav { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line-dark); background: rgba(27, 25, 25, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav-inner { width: var(--frame); margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 40px; }
+    .nav-logo img { height: 30px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; font-size: 15px; color: var(--on-char-2); }
+    .nav-links a:hover { color: var(--on-char); }
+    .nav .pill { margin-left: auto; height: 40px; color: var(--on-char); border-color: rgba(244, 242, 240, .55); }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; }
+    .hero .frame { border-color: transparent; }
+    .hero-copy { position: relative; z-index: 1; padding: clamp(72px, 10vw, 128px) var(--pad) clamp(72px, 9vw, 112px); max-width: 720px; }
+    .hero .kicker { margin-bottom: 22px; font-size: 15px; color: var(--on-char-2); }
+    .hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); line-height: 1.04; letter-spacing: -0.045em; max-width: 17ch; }
+    .hero h1 span { display: block; margin-top: .28em; color: var(--on-char-2); }
+    .hero .lede { margin-top: 24px; font-size: clamp(17px, 1.5vw, 19px); color: var(--on-char); opacity: .82; max-width: 44ch; }
+    .hero-art { display: none; aspect-ratio: 320 / 241; margin: 0 auto; width: min(100%, 520px); }
+    @media (max-width: 819px) {
+      .hero-copy { padding-top: 40px; padding-bottom: 0; }
+      .hero-art { display: block; }
+    }
+
+    /* Scan form, compact (hero): two labelled cells and the button in one bordered box */
+    .scan-box { margin-top: 36px; max-width: 600px; }
+    .scan-form.compact { display: grid; grid-template-columns: 1.15fr 1fr auto; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char-2); transition: border-color .15s; }
+    .scan-form.compact:focus-within { border-color: rgba(244, 242, 240, .5); }
+    .scan-form.compact label { display: block; padding: 11px 16px 10px; min-width: 0; }
+    .scan-form.compact label + label { border-left: 1px solid var(--line-dark); }
+    .scan-form.compact .tag { display: block; color: var(--on-char-3); white-space: nowrap; }
+    .scan-form.compact input { display: block; width: 100%; margin-top: 3px; padding: 2px 0; background: none; border: 0; outline: none; font: inherit; font-size: 16px; color: var(--on-char); }
+    .scan-form.compact input::placeholder { color: var(--on-char-3); opacity: 1; }
+    .scan-form.compact .go { display: flex; align-items: center; padding: 0 10px 0 4px; }
+    .scan-form.compact.tried input:invalid { box-shadow: 0 1px 0 var(--red-bright); }
+    .scan-note { margin-top: 14px; font-size: 14px; color: var(--on-char-3); }
+    .scan-status:not(:empty) { margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--red-bright); }
+    .scan-status.sending { color: var(--on-char-3); }
+    .light .scan-status:not(:empty) { color: var(--red); }
+    .light .scan-status.sending { color: var(--ink-3); }
+    .scan-done.compact { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; background: var(--char-2); outline: none; }
+    .scan-done.compact svg { width: 20px; height: 20px; color: var(--red-bright); margin-top: 3px; }
+    .scan-done.compact b { display: block; font-weight: 500; }
+    .scan-done.compact span { display: block; font-size: 15px; color: var(--on-char-2); }
+    @media (max-width: 640px) {
+      .scan-form.compact { grid-template-columns: 1fr; }
+      .scan-form.compact label + label { border-left: 0; border-top: 1px solid var(--line-dark); }
+      .scan-form.compact .go { padding: 12px; border-top: 1px solid var(--line-dark); }
+      .scan-form.compact .go .pill { width: 100%; }
+    }
+
+    /* Section heads */
+    .section-head { display: grid; grid-template-columns: var(--cols); gap: 20px 0; align-items: end; padding: clamp(64px, 9vw, 112px) 0 clamp(36px, 4.5vw, 56px); }
+    .section-head > * { padding: 0 var(--pad); }
+    .section-head h2 { font-size: clamp(2.1rem, 4.2vw, 3.25rem); line-height: 1.04; letter-spacing: -0.045em; }
+    .section-head .lede + .lede { margin-top: 14px; }
+    .eyebrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 18px; font-size: 15px; color: var(--text-2); }
+
+    /* Why now: one row per statistic, so any one can be edited or removed on its own */
+    .stats { list-style: none; }
+    .stats li { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
+    .stats li > * { padding: clamp(22px, 2.6vw, 32px) var(--pad); }
+    .stats li > div + div { border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; }
+    .stats .stat-fig { font-size: clamp(2.6rem, 5.6vw, 4.25rem); font-weight: 500; line-height: 1; letter-spacing: -0.05em; }
+    .stats .stat-fig.word { font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.04em; line-height: 1.1; }
+    .stats li > div:first-child { display: flex; align-items: center; }
+    .stats p { font-size: clamp(17px, 1.5vw, 19px); max-width: 46ch; }
+    .stats .src { display: block; margin-top: 8px; }
+    .why-close { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
+    .why-close > p { padding: clamp(32px, 4vw, 48px) var(--pad) clamp(48px, 6vw, 72px); }
+    .why-close > p + p { border-left: 1px solid var(--line); color: var(--text-2); }
+    .why-close > p:first-child { font-size: clamp(19px, 1.9vw, 23px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.35; }
+    .why-close > p + p { max-width: none; }
+    .why-close > p + p span { display: block; max-width: 52ch; }
+
+    /* The package: three layers */
+    .gap { padding-bottom: clamp(36px, 4.5vw, 56px); display: grid; grid-template-columns: var(--cols); }
+    .gap p { grid-column: 2; padding: 0 var(--pad); max-width: calc(62ch + 2 * var(--pad)); color: var(--ink-2); }
+    .layers { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); list-style: none; }
+    .layers > li { display: flex; flex-direction: column; padding: clamp(28px, 3.2vw, 40px) var(--pad) clamp(32px, 3.6vw, 44px); min-width: 0; }
+    .layers > li + li { border-left: 1px solid var(--line); }
+    .layer-h { display: flex; align-items: baseline; gap: 12px; }
+    .layer-h h3 { font-size: clamp(1.6rem, 2.4vw, 2rem); letter-spacing: -0.04em; line-height: 1.1; }
+    .layer-h .tag { margin-left: auto; }
+    .layers ul { list-style: none; margin-top: 20px; flex: 1; }
+    .layers ul li { display: flex; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--line); font-size: 15.5px; color: var(--ink-2); }
+    .layers ul li svg { width: 16px; height: 16px; color: var(--red); transform: translateY(3px); }
+    .changes { margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+    .changes .tag { display: block; margin-bottom: 6px; }
+    .changes p { font-size: 16px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.4; }
+
+    /* How it works: sample scorecard + steps */
+    .how { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
+    .how > * + * { border-left: 1px solid var(--line); }
+    .fig { padding: clamp(28px, 3.5vw, 44px) var(--pad); min-width: 0; }
+    .card { border: 1px solid var(--line); border-radius: 6px; background: var(--char-2); overflow: hidden; }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 15px; }
+    .card-top b { font-weight: 500; }
+    .card ul { list-style: none; }
+    .card li { display: grid; grid-template-columns: 18px 1fr auto; gap: 12px; align-items: baseline; padding: 12px 18px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--on-char-2); }
+    .card li:first-child { border-top: 0; }
+    .card li svg { width: 16px; height: 16px; transform: translateY(3px); color: var(--on-char-3); }
+    .card li.fail { color: var(--on-char); }
+    .card li.fail svg { color: var(--red-bright); }
+    .card-foot { padding: 14px 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--on-char-2); }
+    .card-foot b { font-weight: 500; color: var(--on-char); }
+    .fig-tag { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; }
+    .steps { list-style: none; }
+    .steps li { display: grid; grid-template-columns: 44px 1fr; padding: clamp(20px, 2.2vw, 26px) var(--pad); border-top: 1px solid var(--line); }
+    .steps li:first-child { border-top: 0; }
+    .steps .num { padding-top: 5px; }
+    .step-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+    .steps p { margin-top: 6px; font-size: 16px; color: var(--text-2); max-width: 54ch; }
+
+    /* Measures */
+    .measures { width: 100%; border-collapse: collapse; border-top: 1px solid var(--line); text-align: left; }
+    .measures th, .measures td { padding: 18px var(--pad); vertical-align: top; border-bottom: 1px solid var(--line); font-size: 16px; }
+    .measures thead th { padding-top: 14px; padding-bottom: 14px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .measures tbody th[scope="row"] { width: 28%; font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
+    .measures td { color: var(--ink-2); }
+    .measures td:last-child { width: 28%; color: var(--ink); font-weight: 500; }
+    .measures th + td, .measures td + td, .measures thead th + th { border-left: 1px solid var(--line); }
+    .measures .group th { padding-top: 12px; padding-bottom: 12px; background: var(--paper-2); font-size: 14px; font-weight: 500; color: var(--ink); }
+    .measures .group th::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 10px; border-radius: 50%; background: var(--red); transform: translateY(-2px); }
+    .measures .group.soft th::before { background: none; box-shadow: inset 0 0 0 1px var(--ink-3); }
+    .measures .group th span { font-weight: 400; color: var(--ink-2); }
+    .measures tbody:last-child tr:last-child > * { border-bottom: 0; }
+    @media (max-width: 760px) {
+      .measures, .measures tbody, .measures tr, .measures th, .measures td { display: block; width: auto !important; }
+      .measures thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .measures tbody tr:not(.group) { padding: 18px 0; border-bottom: 1px solid var(--line); }
+      .measures tbody tr:not(.group) > * { padding-top: 0; padding-bottom: 0; border: 0 !important; }
+      .measures td { margin-top: 8px; }
+      .measures td::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+      .measures tbody:last-child tr:last-child { border-bottom: 0; }
+    }
+
+    /* Scan form, full (closing section) */
+    .book-grid { display: grid; grid-template-columns: var(--cols); }
+    .book-head { padding: var(--sec-y) var(--pad); }
+    .book-head .lede { margin-top: 20px; color: var(--ink-2); }
+    .book-bring { list-style: none; margin-top: 28px; max-width: 40ch; }
+    .book-bring li { display: flex; gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-2); }
+    .book-bring li svg { width: 16px; height: 16px; color: var(--red); transform: translateY(3px); }
+    .book-side { border-left: 1px solid var(--line); padding-top: calc(var(--sec-y) - 6px); }
+    .scan-form.full > .field:first-child { padding-top: 0; }
+    .field { display: block; padding: 24px var(--pad); border-bottom: 1px solid var(--line); }
+    .field-label { display: flex; align-items: baseline; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+    .field-hint { display: block; margin-top: 6px; font-size: 14px; font-weight: 400; color: var(--ink-3); }
+    .field input {
+      display: block; width: 100%; margin-top: 12px; padding: 12px 14px;
+      font: inherit; font-size: 16px; font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
+      background: #fff; border: 1px solid rgba(27, 25, 25, .18); border-radius: 6px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field ::placeholder { color: var(--ink-3); opacity: 1; }
+    .field input:hover { border-color: rgba(27, 25, 25, .35); }
+    .field input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(209, 47, 47, .14); }
+    .tried .field input:invalid { border-color: var(--red); }
+    .book-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; padding: 28px var(--pad) clamp(48px, 6vw, 72px); }
+    .book-note { font-size: 14px; color: var(--ink-3); }
+    .book-actions .scan-status:not(:empty) { flex-basis: 100%; margin-top: 0; }
+    .scan-done.full { padding: 22px var(--pad) var(--sec-y); outline: none; }
+    .done-check { width: 44px; height: 44px; margin-bottom: 22px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; color: var(--red); }
+    .done-check svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .motion .scan-done.full:not([hidden]) .done-check path { stroke-dasharray: 20; animation: draw .6s var(--ease-expo) .15s backwards; }
+    @keyframes draw { from { stroke-dashoffset: 20; } }
+    .scan-done.full h3 { font-size: 22px; letter-spacing: -0.03em; }
+    .scan-done.full p { margin-top: 10px; color: var(--ink-2); font-size: 16px; line-height: 1.6; max-width: 42ch; }
+
+    /* Closing */
+    .closing { position: relative; overflow: hidden; }
+    .closing .frame { border-color: transparent; z-index: 1; }
+    .closing-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: clamp(96px, 12vw, 160px) var(--pad) clamp(32px, 4vw, 56px); }
+    .crew-space { aspect-ratio: 1.807; margin: 0 clamp(0px, 2vw, 24px); }
+    .closing-cta h2 { font-size: clamp(2.4rem, 5vw, 3.75rem); letter-spacing: -0.045em; }
+    .closing-cta p { color: var(--on-char-2); margin-top: 14px; max-width: 42ch; }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--pad) 36px; border-top: 1px solid var(--line-dark); font-size: 14px; color: var(--on-char-3); }
+    .foot-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .foot-meta a:hover { color: var(--on-char); }
+    .foot img { height: 16px; width: auto; display: block; opacity: .9; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .section-head, .stats li, .why-close, .how, .book-grid, .gap { grid-template-columns: 1fr; }
+      .gap p { grid-column: 1; }
+      .stats li > div:first-child { padding-bottom: 0; }
+      .stats li > div + div { border-left: 0; padding-top: 12px; }
+      .why-close > p:first-child { padding-bottom: 0; }
+      .why-close > p + p { border-left: 0; padding-top: 18px; }
+      .how > * + *, .book-side { border-left: 0; border-top: 1px solid var(--line); }
+      .layers { grid-template-columns: 1fr; }
+      .layers > li + li { border-left: 0; border-top: 1px solid var(--line); }
+      .book-side { padding-top: 0; }
+      .scan-form.full > .field:first-child { padding-top: 24px; }
+    }
+
+    /* Motion layer */
+    .motion .band-rule { position: relative; border-top-color: transparent; }
+    .motion .band-rule::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease-expo); z-index: 2; }
+    .motion .band-rule.in::before { transform: none; }
+    .motion [data-rv] { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-quart), transform .7s var(--ease-quart); transition-delay: calc(var(--i, 0) * 80ms); }
+    .motion [data-rv].in { opacity: 1; transform: none; }
+    .motion .layers ul li svg, .motion .card li svg { transform: translateY(3px) scale(0); transition: transform .45s var(--ease-expo) .25s; }
+    .motion .layers ul li.in svg, .motion .card li.in svg { transform: translateY(3px); }
+    @media print { .motion [data-rv] { opacity: 1; transform: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .pill:active { transform: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://wolfgrey.ai/#org",
+      "name": "wolfgrey.ai",
+      "alternateName": "wolfgrey",
+      "url": "https://wolfgrey.ai/",
+      "logo": "https://wolfgrey.ai/logo.png",
+      "image": "https://wolfgrey.ai/og-image.png",
+      "description": "AI enablement firm for small and midsize service businesses.",
+      "email": "hey@wolfgrey.ai",
+      "sameAs": ["https://x.com/__wolfgrey__"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://wolfgrey.ai/agent-ready/#page",
+      "url": "https://wolfgrey.ai/agent-ready/",
+      "name": "AI Transition Package",
+      "description": "Enter your URL for a free AI scan and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.",
+      "isPartOf": { "@id": "https://wolfgrey.ai/#site" },
+      "about": { "@id": "https://wolfgrey.ai/agent-ready/#package" },
+      "publisher": { "@id": "https://wolfgrey.ai/#org" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://wolfgrey.ai/agent-ready/#scan",
+      "name": "Agent-Readiness Scan",
+      "description": "An automated scan of your website URL that tests the site the way AI agents and answer engines do, and returns a scorecard: what they can find, what they get wrong, and where they give up.",
+      "serviceType": "Website AI agent-readiness scan",
+      "provider": { "@id": "https://wolfgrey.ai/#org" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "url": "https://wolfgrey.ai/agent-ready/#scan",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://wolfgrey.ai/agent-ready/#package",
+      "name": "AI Transition Package",
+      "description": "A fixed-scope, four-week engagement that makes a business website easy for AI agents to find, understand and act on. Three layers: Find (SEO), Understand (answer engine optimization) and Act (agent-ready quote, booking, contact and order paths), verified with a before-and-after scorecard.",
+      "serviceType": "SEO, answer engine optimization (AEO) and agent-readiness for business websites",
+      "provider": { "@id": "https://wolfgrey.ai/#org" },
+      "audience": { "@type": "BusinessAudience", "name": "Small businesses with $1 million or more in annual revenue whose website produces leads, bookings or orders" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "What's included",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Find (SEO)", "description": "Crawl and index fixes, page speed, titles, internal links, sitemap, and robots rules that let search and AI crawlers in on purpose." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Understand (AEO)", "description": "Structured data, key pages rewritten in plain statements an assistant can quote, and consistent name, address, phone and offer details." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Act (agent-ready)", "description": "Quote, booking, contact and order paths an agent can complete, a machine-readable business summary, and an agent-ready product feed where products are sold." } }
+        ]
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  </svg>
+
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/wolf-mark-white.png" alt="wolfgrey" width="28" height="32"></a>
+      <ul class="nav-links">
+        <li><a href="#why">Why now</a></li>
+        <li><a href="#package">The package</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#measures">What we measure</a></li>
+      </ul>
+      <a class="pill pill-outline" href="#scan">Scan my site</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero dark">
+      <canvas id="hero-dots" aria-hidden="true"></canvas>
+      <div class="frame">
+        <div class="hero-copy">
+          <p class="kicker">The AI Transition Package</p>
+          <h1>Half the web's traffic is no longer human. <span>Are you ready to do business with agents?</span></h1>
+          <p class="lede">Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.</p>
+          <div class="scan-box">
+            <form class="scan-form compact" method="post" data-source="agent-ready-hero" aria-label="Free AI scan" novalidate>
+              <label>
+                <span class="tag">Website URL</span>
+                <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
+              </label>
+              <label>
+                <span class="tag">Email</span>
+                <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
+              </label>
+              <input type="hidden" name="source">
+              <input type="hidden" name="page">
+              <div class="go"><button class="pill pill-red" type="submit">Scan my site</button></div>
+            </form>
+            <div class="scan-done compact" hidden tabindex="-1">
+              <svg class="i" aria-hidden="true"><use href="#i-check"/></svg>
+              <div><b>Scan requested.</b><span class="done-msg">Your scorecard is on its way to your inbox.</span></div>
+            </div>
+            <p class="scan-status" role="status" aria-live="polite"></p>
+            <p class="scan-note">Free scan. Takes minutes. The scorecard comes to your inbox.</p>
+          </div>
+        </div>
+        <div class="hero-art"></div>
+      </div>
+    </header>
+
+    <!-- Why now -->
+    <section class="dark band-rule" id="why" aria-labelledby="why-h">
+      <div class="frame">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Why now</p>
+            <h2 id="why-h">Most web traffic is already automated.</h2>
+          </div>
+          <p class="lede">And the part that acts for real customers is the fastest-growing part.</p>
+        </div>
+
+        <!-- Statistics: each <li> is self-contained. Edit the figure and sentence, or delete the whole <li>. -->
+        <ul class="stats">
+          <li data-stat="bots-57">
+            <!-- Guardrail: this counts all bots. Keep "bots" or "automated" next to the figure. -->
+            <div><p class="stat-fig">57%</p></div>
+            <div>
+              <p>Bots passed humans in June 2026, at about 57% of web page traffic on Cloudflare's network.</p>
+              <span class="tag src">All automated traffic · Cloudflare</span>
+            </div>
+          </li>
+          <li data-stat="agents-7851">
+            <div><p class="stat-fig">7,851%</p></div>
+            <div>
+              <p>Growth in a year of traffic from agents that click, fill in forms and check out.</p>
+              <span class="tag src">HUMAN Security</span>
+            </div>
+          </li>
+          <li data-stat="requests-41">
+            <div><p class="stat-fig">41.5%</p></div>
+            <div>
+              <p>Rise in AI agent requests on DataDome's network in a single quarter, Q3 2026.</p>
+              <span class="tag src">DataDome</span>
+            </div>
+          </li>
+          <li data-stat="referrals-303">
+            <div><p class="stat-fig">303%</p></div>
+            <div>
+              <p>Rise in ChatGPT referrals to B2B websites in the year to June 2026.</p>
+              <span class="tag src">Demandbase</span>
+            </div>
+          </li>
+          <li data-stat="agent-payments">
+            <div><p class="stat-fig word">Agents can pay.</p></div>
+            <div>
+              <p>Google, OpenAI with Stripe, and the card networks have all shipped standards that let an agent pay on a customer's behalf.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="why-close">
+          <p>Your customers have started asking an assistant instead of typing a search.</p>
+          <p>
+            <span>The assistant reads a handful of sites, picks the ones it can make sense of, and recommends or acts. A business it cannot read is not on the list.</span>
+            <span style="margin-top: 14px">The businesses that adapt this year will be the ones AI already knows when the volume arrives. The ones that wait will be catching up against competitors with a head start.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The offer -->
+    <section class="light" id="package" aria-labelledby="package-h">
+      <div class="frame">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">The AI Transition Package</p>
+            <h2 id="package-h">Easy for AI agents to find, understand and act on.</h2>
+          </div>
+          <div>
+            <p class="lede">One fixed-scope engagement. You keep the site you have. We rebuild what sits underneath it so that search engines, answer engines and agents can all use it.</p>
+          </div>
+        </div>
+        <div class="gap">
+          <p>Your site was built for people who browse. Agents do not browse. They fetch a page, look for facts they can trust, and try to complete a task: get a price, check availability, book, order. If any of those steps fails, the agent moves to a competitor whose site works, and the customer never sees your name. We close that gap.</p>
+        </div>
+
+        <ol class="layers" aria-label="What's included: three layers">
+          <li>
+            <div class="layer-h"><span class="num">01</span><h3>Find</h3><span class="tag">SEO</span></div>
+            <ul>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Fix crawl and index problems</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Page speed, titles, internal links and sitemap</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Robots rules that let search and AI crawlers in on purpose, not block them by a default</li>
+            </ul>
+            <div class="changes">
+              <span class="tag">What it changes</span>
+              <p>Search engines and AI crawlers can reach every page that matters.</p>
+            </div>
+          </li>
+          <li>
+            <div class="layer-h"><span class="num">02</span><h3>Understand</h3><span class="tag">AEO</span></div>
+            <ul>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Structured data for the business, services, products, prices, hours, service area, reviews and FAQs</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Key pages rewritten to answer the questions customers ask, in plain statements an assistant can quote</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Name, address, phone and offer details that match everywhere they appear</li>
+            </ul>
+            <div class="changes">
+              <span class="tag">What it changes</span>
+              <p>Answer engines such as ChatGPT, Gemini, Claude, Perplexity and Google's AI results can state what you do, where, and for how much, and cite you for it.</p>
+            </div>
+          </li>
+          <li>
+            <div class="layer-h"><span class="num">03</span><h3>Act</h3><span class="tag">Agent-ready</span></div>
+            <ul>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Quote, booking, contact and order forms with labeled fields and no dead ends</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>No bot wall in front of a paying customer's agent</li>
+              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>A machine-readable summary of the business and, where you sell products, an agent-ready product feed</li>
+            </ul>
+            <div class="changes">
+              <span class="tag">What it changes</span>
+              <p>An agent sent to get a quote, book a slot or place an order can finish the job on your site.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="dark" id="how" aria-labelledby="how-h">
+      <div class="frame">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2 id="how-h">It starts with a URL and finishes in four weeks.</h2>
+          </div>
+          <p class="lede">With almost nothing asked of you. You grant access once and approve customer-facing wording once.</p>
+        </div>
+        <div class="how">
+          <figure class="fig">
+            <div class="card">
+              <div class="card-top"><b>yourbusiness.com</b><span class="tag">Sample</span></div>
+              <ul>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>AI crawlers blocked by a default robots rule</span><span class="tag">Find</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>Sitemap found and readable</span><span class="tag">Find</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>No structured data for services or prices</span><span class="tag">Understand</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>Assistants state the wrong opening hours</span><span class="tag">Understand</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>Booking: agent gave up at an unlabeled field</span><span class="tag">Act</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>Contact form completed by an agent</span><span class="tag">Act</span></li>
+              </ul>
+              <p class="card-foot"><b>4 of 6 checks failed.</b> Each one maps to a fix in the package.</p>
+            </div>
+            <figcaption class="fig-tag"><span class="tag">Sample scorecard</span><span class="tag">Yours will differ</span></figcaption>
+          </figure>
+          <ol class="steps">
+            <li>
+              <span class="num">01</span>
+              <div>
+                <div class="step-h"><h3>Scan</h3><span class="tag">Free · minutes</span></div>
+                <p>You enter your URL. Our AI scan tests the site the way agents and answer engines do, and sends back a scorecard: what they can find, what they get wrong, and where they give up.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <div>
+                <div class="step-h"><h3>Proposal</h3><span class="tag">Same day</span></div>
+                <p>The scorecard is the proposal. Each failed check maps to a fix in the package.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <div>
+                <div class="step-h"><h3>Build</h3><span class="tag">Weeks 1 to 3</span></div>
+                <p>We do the find, understand and act work on the live site. You grant access once and approve customer-facing wording once.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">04</span>
+              <div>
+                <div class="step-h"><h3>Verify</h3><span class="tag">Week 4</span></div>
+                <p>We rerun the same scan. The engagement is finished when an agent can complete each revenue path, and you get the before-and-after scorecard.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">05</span>
+              <div>
+                <div class="step-h"><h3>Retainer</h3><span class="tag">Monthly</span></div>
+                <p>We keep servicing the site: rescans, AI visibility reporting, and updates as the assistants and standards change.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- What you get, and how we measure it -->
+    <section class="light" id="measures" aria-labelledby="measures-h">
+      <div class="frame">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">What you get</p>
+            <h2 id="measures-h">Six measures, tested before and after.</h2>
+          </div>
+          <p class="lede">The first four are ours to deliver, and we commit to them. The last two depend on the assistants, so we report them and work to move them, without promising a number.</p>
+        </div>
+        <table class="measures">
+          <caption class="sr-only">What the AI Transition Package delivers and how each measure is tested</caption>
+          <thead>
+            <tr><th scope="col">Measure</th><th scope="col">How it is tested</th><th scope="col">Target at week 4</th></tr>
+          </thead>
+          <tbody>
+            <tr class="group"><th colspan="3" scope="rowgroup">We commit to these <span>· ours to deliver</span></th></tr>
+            <tr><th scope="row">Crawler access</th><td data-l="How it is tested">Search and AI crawlers request every key page</td><td data-l="Target at week 4">All key pages reachable</td></tr>
+            <tr><th scope="row">Structured data</th><td data-l="How it is tested">Validation of business, service, product and FAQ markup</td><td data-l="Target at week 4">No errors on key pages</td></tr>
+            <tr><th scope="row">Agent task completion</th><td data-l="How it is tested">AI agents attempt each revenue path: quote, booking, order</td><td data-l="Target at week 4">Every path completed</td></tr>
+            <tr><th scope="row">AI answer accuracy</th><td data-l="How it is tested">Assistants asked what the business does, where, and at what price</td><td data-l="Target at week 4">Correct on all three</td></tr>
+          </tbody>
+          <tbody>
+            <tr class="group soft"><th colspan="3" scope="rowgroup">We report these <span>· they depend on the assistants</span></th></tr>
+            <tr><th scope="row">AI visibility</th><td data-l="How it is tested">Share of 20 target customer questions where the business is mentioned or cited</td><td data-l="Target at week 4">Baseline set, then tracked monthly</td></tr>
+            <tr><th scope="row">AI referral visits</th><td data-l="How it is tested">Analytics segment for visits arriving from AI assistants</td><td data-l="Target at week 4">Baseline set, then tracked monthly</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Scan (repeat) -->
+    <section class="light band-rule" id="scan" aria-labelledby="scan-h">
+      <div class="frame book-grid">
+        <div class="book-head">
+          <h2 id="scan-h">See what agents see.</h2>
+          <p class="lede">Enter your URL. Our AI scan tests your site the way agents and answer engines do, and sends back a scorecard.</p>
+          <ul class="book-bring">
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they can find</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they get wrong</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Where they give up</li>
+          </ul>
+        </div>
+        <div class="book-side">
+          <form class="scan-form full" method="post" data-source="agent-ready" aria-labelledby="scan-h" novalidate>
+            <label class="field">
+              <span class="field-label"><span class="num">01</span>Website URL</span>
+              <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
+            </label>
+            <label class="field">
+              <span class="field-label"><span class="num">02</span>Email</span>
+              <span class="field-hint">Where we send the scorecard.</span>
+              <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
+            </label>
+            <input type="hidden" name="source">
+            <input type="hidden" name="page">
+            <div class="book-actions">
+              <button class="pill pill-red" type="submit">Scan my site</button>
+              <span class="book-note">Free scan. Takes minutes.</span>
+              <p class="scan-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+          <div class="scan-done full" hidden tabindex="-1">
+            <div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="20" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <h3>Scan requested.</h3>
+            <p class="done-msg">Your scorecard is on its way to your inbox.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="closing dark">
+    <canvas id="foot-dots" aria-hidden="true"></canvas>
+    <div class="frame">
+      <div class="closing-cta">
+        <div>
+          <h2>Be on the list.</h2>
+          <p>A business an assistant cannot read is not recommended. Find out where yours stands.</p>
+        </div>
+        <a class="pill pill-red" href="#scan">Scan my site</a>
+      </div>
+      <div class="crew-space" role="img" aria-label="The wolfgrey team: raccoon, fox, wolf, bear and hawk, with a kitten"></div>
+      <div class="foot">
+        <img src="/logo-white.svg" alt="wolfgrey" width="73" height="16">
+        <span class="foot-meta"><a href="mailto:hey@wolfgrey.ai">hey@wolfgrey.ai</a><a href="https://x.com/__wolfgrey__">X</a><span>&copy; 2026 wolfgrey.ai</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Halftone dot fields (shared with the homepage) ---------- */
+    const hash = (x, y) => { const n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453; return n - Math.floor(n); };
+    const blob = (x, y) => (Math.sin(x * .011) + Math.sin(y * .013 + x * .004) + Math.sin((x + y) * .007)) / 3;
+
+    const sources = {};
+    function loadSource(url) {
+      if (!sources[url]) {
+        const img = new Image();
+        img.src = url;
+        sources[url] = img.decode().then(() => {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth; c.height = img.naturalHeight;
+          const ctx = c.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          return { w: c.width, h: c.height, data: ctx.getImageData(0, 0, c.width, c.height).data };
+        });
+      }
+      return sources[url];
+    }
+
+    function dotField(canvas, opts) {
+      const S = opts.step || 5;
+      const ready = opts.src ? loadSource(opts.src) : Promise.resolve(null);
+      const ink = opts.ink || '#F4F2F0', hotInk = opts.hot || '#FF4D4D';
+      let dots = [], dpr = 1, revealed = !opts.src, demo = () => {};
+
+      async function layout() {
+        const src = await ready;
+        const w = canvas.clientWidth, h = canvas.clientHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, opts.maxDpr || 2);
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const box = src ? opts.place(w, h, src.w / src.h) : null;
+        const sample = (x, y) => {
+          if (!box || x < box.x || x >= box.x + box.w || y < box.y || y >= box.y + box.h) return { a: 0, t: 0 };
+          const u = Math.floor((x - box.x) / box.w * src.w);
+          const v = Math.floor((y - box.y) / box.h * src.h);
+          const i = (v * src.w + u) * 4;
+          const lum = src.data[i] / 255, a = src.data[i + 3] / 255;
+          return { a, t: a * (opts.floor + (1 - opts.floor) * Math.pow(1 - lum, opts.curve)) * box.alpha };
+        };
+        const figure = (x, y, step) => {
+          const { t } = sample(x, y);
+          if (t <= 0.04 || hash(x * 0.7, y * 1.3) >= opts.keep + (1 - opts.keep) * t) return false;
+          let k = Math.sqrt(t);
+          if (opts.levels) k = Math.max(1, Math.round(k * opts.levels)) / opts.levels;
+          dots.push({ x, y, r: step * opts.size * k, a: opts.a0 + opts.a1 * t, d: hash(x, y) * 0.7 });
+          return true;
+        };
+        const F = typeof opts.fine === 'function' ? opts.fine(box) : opts.fine;
+        dots = [];
+        for (let y = S / 2; y < h; y += S) {
+          for (let x = S / 2; x < w; x += S) {
+            if (F ? sample(x, y).a > 0.1 : figure(x, y, S)) continue;
+            const bl = blob(x, y), c = Math.max(0, bl - opts.ambientCut);
+            if (hash(y, x) < 0.82) dots.push({ x, y, r: 0.8 + c * 0.6, a: opts.grid * (0.7 + 0.3 * bl) + c * 0.16, d: hash(x + 1, y) * 0.7 });
+          }
+        }
+        if (F && box) {
+          for (let y = box.y + F / 2; y < Math.min(h, box.y + box.h); y += F) {
+            for (let x = box.x + F / 2; x < Math.min(w, box.x + box.w); x += F) {
+              if (sample(x, y).a > 0.1) figure(x, y, F);
+            }
+          }
+        }
+        draw(revealed || reduceMotion ? 1 : 0);
+      }
+
+      function draw(p) {
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        ctx.fillStyle = ink;
+        for (const d of dots) {
+          const k = Math.min(1, Math.max(0, (p - d.d) / 0.3));
+          if (!k) continue;
+          ctx.globalAlpha = d.a * k;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function reveal() {
+        if (reduceMotion || document.hidden) { revealed = true; return draw(1); }
+        const start = performance.now();
+        const tick = now => {
+          const p = Math.min(1, (now - start) / 1600);
+          draw(p);
+          if (p < 1) requestAnimationFrame(tick);
+          else { revealed = true; demo(); }
+        };
+        requestAnimationFrame(tick);
+      }
+
+      let laidOut = '', timer;
+      const size = () => canvas.clientWidth + 'x' + canvas.clientHeight;
+      const relayout = () => {
+        if (size() === laidOut) return;
+        clearTimeout(timer);
+        timer = setTimeout(() => { laidOut = size(); layout().then(() => draw(revealed ? 1 : 0)); }, 120);
+      };
+      const ro = new ResizeObserver(relayout);
+      laidOut = size();
+      layout().then(() => { ro.observe(canvas); relayout(); opts.revealNow ? reveal() : null; });
+      document.fonts && document.fonts.ready.then(relayout);
+
+      if (opts.interactive && !reduceMotion) {
+        const R = 110, PUSH = 12, PAD = PUSH + S;
+        const ptr = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0, cx: 0, cy: 0 };
+        let raf = 0, prev = null;
+        const frame = () => {
+          ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
+          ptr.s += (ptr.ts - ptr.s) * 0.1;
+          const on = ptr.s > 0.002;
+          const cur = on ? [ptr.x - R, ptr.y - R, ptr.x + R, ptr.y + R] : null;
+          const r = prev && cur ? [Math.min(prev[0], cur[0]), Math.min(prev[1], cur[1]), Math.max(prev[2], cur[2]), Math.max(prev[3], cur[3])] : prev || cur;
+          prev = cur;
+          if (r) {
+            const ctx = canvas.getContext('2d');
+            ctx.save();
+            ctx.beginPath(); ctx.rect(r[0], r[1], r[2] - r[0], r[3] - r[1]); ctx.clip();
+            ctx.clearRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
+            const hot = [];
+            ctx.fillStyle = ink;
+            for (const d of dots) {
+              if (d.x < r[0] - PAD || d.x > r[2] + PAD || d.y < r[1] - PAD || d.y > r[3] + PAD) continue;
+              let x = d.x, y = d.y, rad = d.r, a = d.a;
+              if (on) {
+                const dx = d.x - ptr.x, dy = d.y - ptr.y, dist = Math.hypot(dx, dy) || 1;
+                if (dist < R) {
+                  let f = 1 - dist / R; f *= f * ptr.s;
+                  x += dx / dist * f * PUSH; y += dy / dist * f * PUSH; rad *= 1 + f * 0.4; a = Math.min(1, a + f * 0.45);
+                  if (f > 0.55) { hot.push(x, y, rad); continue; }
+                }
+              }
+              ctx.globalAlpha = a;
+              ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
+            }
+            ctx.fillStyle = hotInk; ctx.globalAlpha = 0.85;
+            for (let i = 0; i < hot.length; i += 3) { ctx.beginPath(); ctx.arc(hot[i], hot[i + 1], hot[i + 2], 0, Math.PI * 2); ctx.fill(); }
+            ctx.restore();
+          }
+          const moving = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.3 || Math.abs(ptr.ts - ptr.s) > 0.004 || (!on && prev);
+          raf = moving ? requestAnimationFrame(frame) : 0;
+        };
+        const aim = () => {
+          const b = canvas.getBoundingClientRect();
+          ptr.tx = ptr.cx - b.left; ptr.ty = ptr.cy - b.top;
+        };
+        const host = opts.interactive;
+        const press = (cx, cy) => {
+          ptr.cx = cx; ptr.cy = cy; aim();
+          if (ptr.s < 0.01) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
+          ptr.ts = 1;
+          if (!raf) raf = requestAnimationFrame(frame);
+        };
+        const release = () => { ptr.ts = 0; if (!raf) raf = requestAnimationFrame(frame); };
+        host.addEventListener('pointermove', e => {
+          if (e.pointerType === 'mouse' && revealed) press(e.clientX, e.clientY);
+        });
+        host.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') release(); });
+        const touch = e => { const t = e.touches[0]; if (t && revealed && !demoing) press(t.clientX, t.clientY); };
+        host.addEventListener('touchstart', touch, { passive: true });
+        host.addEventListener('touchmove', touch, { passive: true });
+        host.addEventListener('touchend', e => { if (!e.touches.length && !demoing) release(); }, { passive: true });
+        host.addEventListener('touchcancel', () => { if (!demoing) release(); }, { passive: true });
+
+        var demoing = false;
+        demo = () => {
+          if (!opts.demo || matchMedia('(hover: hover)').matches) return;
+          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight);
+          if (!pts) return;
+          const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { io.disconnect(); setTimeout(sweep, 250); } }, { threshold: 0.6 });
+          io.observe(opts.demoTarget || canvas);
+        };
+        const sweep = () => {
+          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight);
+          const start = performance.now(), T = 2200;
+          demoing = true;
+          const step = now => {
+            const q = Math.min(1, (now - start) / T), e = q < .5 ? 2 * q * q : 1 - Math.pow(-2 * q + 2, 2) / 2;
+            const seg = e * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(seg)), f = seg - i;
+            const x = pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, y = pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f;
+            const b = canvas.getBoundingClientRect();
+            press(b.left + x, b.top + y);
+            if (q < 1) requestAnimationFrame(step);
+            else { demoing = false; release(); }
+          };
+          requestAnimationFrame(step);
+        };
+        window.addEventListener('scroll', () => { if (ptr.ts) { aim(); if (!raf) raf = requestAnimationFrame(frame); } }, { passive: true });
+      }
+
+      return { reveal, ready };
+    }
+
+    dotField(document.getElementById('hero-dots'), {
+      src: '/wolf-hero-dots.png?v=2',
+      step: 5, fine: box => box && box.w < 600 ? 2.5 : 0, maxDpr: 3, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
+      grid: 0.05, ambientCut: 0.25,
+      revealNow: true,
+      interactive: document.querySelector('.hero'),
+      place(w, h, ratio) {
+        if (w < 820) {
+          const slot = document.querySelector('.hero-art').getBoundingClientRect(), c = document.getElementById('hero-dots').getBoundingClientRect();
+          return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 1 };
+        }
+        const bh = h * 0.94, bw = bh * ratio;
+        return { x: Math.max(w * 0.5, w - bw - w * 0.02), y: h - bh, w: bw, h: bh, alpha: 1 };
+      },
+      demo(w) {
+        if (w >= 820) return null;
+        const s = document.querySelector('.hero-art').getBoundingClientRect(), c = document.getElementById('hero-dots').getBoundingClientRect();
+        const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
+        return [at(0.12, 0.3), at(0.5, 0.42), at(0.88, 0.3), at(0.55, 0.62)];
+      },
+      demoTarget: document.querySelector('.hero-art')
+    });
+
+    const footCanvas = document.getElementById('foot-dots');
+    const footField = dotField(footCanvas, {
+      src: '/crew-dots.png?v=6',
+      step: 5, fine: box => Math.min(3.5, Math.max(2.2, box.w / 340)), maxDpr: 3, levels: 3, floor: 0.12, curve: 1, keep: 1, size: 0.5, a0: 0.1, a1: 0.72,
+      grid: 0.05, ambientCut: 0.15,
+      interactive: document.querySelector('.closing'),
+      place() {
+        const slot = document.querySelector('.crew-space').getBoundingClientRect(), c = footCanvas.getBoundingClientRect();
+        return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 0.85 };
+      },
+      demo() {
+        const s = document.querySelector('.crew-space').getBoundingClientRect(), c = footCanvas.getBoundingClientRect();
+        const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
+        return [at(0.05, 0.25), at(0.35, 0.2), at(0.65, 0.3), at(0.95, 0.22)];
+      },
+      demoTarget: document.querySelector('.crew-space')
+    });
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { footField.ready.then(() => setTimeout(footField.reveal, 50)); obs.disconnect(); }
+    }, { threshold: 0.2 }).observe(footCanvas);
+
+    const gridIO = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      gridIO.unobserve(e.target);
+      const sec = e.target, light = sec.classList.contains('light');
+      const c = document.createElement('canvas');
+      c.className = 'bg-dots'; c.setAttribute('aria-hidden', 'true');
+      sec.prepend(c);
+      dotField(c, {
+        step: 5, grid: light ? 0.09 : 0.05, ambientCut: 0.3, maxDpr: 1.5,
+        ink: light ? '#1B1919' : '#F4F2F0', hot: light ? '#D12F2F' : '#FF4D4D',
+        interactive: sec
+      });
+    }), { rootMargin: '300px 0px' });
+    document.querySelectorAll('main > section').forEach(sec => gridIO.observe(sec));
+
+    /* ---------- Scan form ----------
+       Both forms post { url, email, source, page } to this one endpoint.
+       The scan backend is not built yet: while SCAN_ENDPOINT is empty the form validates and
+       shows the confirmation, but NOTHING IS SENT OR SAVED. Set the URL here to wire it up. */
+    const SCAN_ENDPOINT = '';
+    (() => {
+      const forms = [...document.querySelectorAll('.scan-form')];
+      const params = new URLSearchParams(location.search), batch = params.get('s');
+
+      // "yourbusiness.com" -> "https://yourbusiness.com/"; returns null if it is not a web address
+      const normalize = raw => {
+        const v = raw.trim();
+        if (!v || /\s/.test(v)) return null;
+        try {
+          const u = new URL(/^https?:\/\//i.test(v) ? v : 'https://' + v);
+          return /^[^.]+(\.[^.]+)+$/.test(u.hostname) ? u : null;
+        } catch { return null; }
+      };
+
+      const finish = (host, email) => forms.forEach(f => {
+        const done = f.nextElementSibling;
+        done.querySelector('.done-msg').textContent = `We're testing ${host} the way agents and answer engines do. Your scorecard will land at ${email} in a few minutes.`;
+        f.hidden = true; done.hidden = false;
+        const note = f.parentNode.querySelector('.scan-note'); if (note) note.hidden = true;
+        f.parentNode.querySelector('.scan-status').textContent = '';
+      });
+
+      forms.forEach(form => {
+        const status = form.parentNode.querySelector('.scan-status'), btn = form.querySelector('button[type="submit"]');
+        const url = form.elements.url, email = form.elements.email;
+        if (SCAN_ENDPOINT) form.action = SCAN_ENDPOINT;
+        form.elements.source.value = batch ? `${form.dataset.source}:${batch.slice(0, 60)}` : params.get('utm_source') || params.get('ref') || form.dataset.source;
+        form.elements.page.value = location.pathname;
+        const say = (msg, sending) => { status.textContent = msg; status.classList.toggle('sending', !!sending); };
+
+        // What is typed in one form carries to the other
+        [url, email].forEach(el => el.addEventListener('input', () => {
+          forms.forEach(f => { if (f !== form) f.elements[el.name].value = el.value; });
+          el.setCustomValidity('');
+        }));
+
+        form.addEventListener('submit', async e => {
+          e.preventDefault();
+          form.classList.add('tried');
+          const target = normalize(url.value);
+          url.setCustomValidity(target ? '' : 'Enter a website address');
+          if (!target) { url.focus(); say('Enter your website address, like yourbusiness.com.'); return; }
+          if (!email.checkValidity()) { email.focus(); say('Enter the email address the scorecard should go to.'); return; }
+          btn.disabled = true; say('Sending…', true);
+          const body = new URLSearchParams(new FormData(form));
+          body.set('url', target.href);
+          try {
+            if (SCAN_ENDPOINT) await fetch(SCAN_ENDPOINT, { method: 'POST', mode: 'no-cors', body });
+            else console.warn('SCAN_ENDPOINT is not set. This scan request was not sent:', Object.fromEntries(body));
+            finish(target.hostname.replace(/^www\./, ''), email.value.trim());
+            form.nextElementSibling.focus();
+          } catch {
+            btn.disabled = false; say("That didn't go through. Try again, or email hey@wolfgrey.ai.");
+          }
+        });
+      });
+    })();
+
+    console.log('%cwolfgrey.ai', 'font: 500 14px Satoshi, sans-serif; color: #D12F2F', '\nBuilt alongside the same AI agents we set up for clients. Curious how? hey@wolfgrey.ai');
+
+    /* ---------- Scroll reveals ---------- */
+    if (!reduceMotion) {
+      const groups = ['.hero-copy > *', '.section-head > *', '.stats li', '.why-close > *', '.gap', '.layers > li', '.layers ul li', '.fig', '.card li', '.steps li', '.measures tbody tr', '.book-head > *', '.book-side', '.closing-cta > *'];
+      for (const sel of groups) {
+        const byParent = new Map();
+        document.querySelectorAll(sel).forEach(el => {
+          if (el.hasAttribute('data-rv')) return;
+          const i = byParent.get(el.parentNode) || 0;
+          byParent.set(el.parentNode, i + 1);
+          el.dataset.rv = '';
+          el.style.setProperty('--i', i);
+        });
+      }
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('[data-rv], .band-rule').forEach(el => io.observe(el));
+    }
+  </script>
+</body>
+</html>
