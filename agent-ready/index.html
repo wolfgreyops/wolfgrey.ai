@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Transition Package: make your website agent-ready — wolfgrey.ai</title>
-  <meta name="description" content="Enter your URL for a free AI scan. See what AI agents see on your website, what they tell your customers, and what it takes to fix it. The AI Transition Package makes your site easy for agents to find, understand and act on.">
+  <meta name="description" content="Enter your URL for a free agent-readiness scan. See what AI agents see on your website, what they tell your customers, and what it takes to fix it. The AI Transition Package makes your site easy for agents to find, understand and act on.">
   <link rel="canonical" href="https://wolfgrey.ai/agent-ready/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="wolfgrey.ai">
@@ -137,8 +137,8 @@
     }
 
     /* Scan form, compact (hero): two labelled cells and the button in one bordered box */
-    .scan-box { margin-top: 36px; max-width: 600px; }
-    .scan-form.compact { display: grid; grid-template-columns: 1.15fr 1fr auto; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char-2); transition: border-color .15s; }
+    .scan-box { margin-top: 36px; max-width: 520px; }
+    .scan-form.compact { display: grid; grid-template-columns: 1fr auto; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char-2); transition: border-color .15s; }
     .scan-form.compact:focus-within { border-color: rgba(244, 242, 240, .5); }
     .scan-form.compact label { display: block; padding: 11px 16px 10px; min-width: 0; }
     .scan-form.compact label + label { border-left: 1px solid var(--line-dark); }
@@ -152,15 +152,80 @@
     .scan-status.sending { color: var(--on-char-3); }
     .light .scan-status:not(:empty) { color: var(--red); }
     .light .scan-status.sending { color: var(--ink-3); }
-    .scan-done.compact { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; background: var(--char-2); outline: none; }
-    .scan-done.compact svg { width: 20px; height: 20px; color: var(--red-bright); margin-top: 3px; }
-    .scan-done.compact b { display: block; font-weight: 500; }
-    .scan-done.compact span { display: block; font-size: 15px; color: var(--on-char-2); }
     @media (max-width: 640px) {
       .scan-form.compact { grid-template-columns: 1fr; }
       .scan-form.compact label + label { border-left: 0; border-top: 1px solid var(--line-dark); }
       .scan-form.compact .go { padding: 12px; border-top: 1px solid var(--line-dark); }
       .scan-form.compact .go .pill { width: 100%; }
+    }
+
+    /* Scorecard */
+    #scorecard { scroll-margin-top: 72px; }
+    .sc { display: grid; grid-template-columns: var(--cols); }
+    .sc-side { padding: var(--sec-y) var(--pad); }
+    .sc-side h2 { margin-top: 14px; font-size: clamp(1.7rem, 3vw, 2.4rem); overflow-wrap: anywhere; outline: none; }
+    .sc-fig { margin-top: 28px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; }
+    .sc-fig b { font-size: clamp(3rem, 6.5vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -0.05em; }
+    .sc-fig span { font-size: 17px; color: var(--text-2); }
+    .sc-layers { list-style: none; margin-top: 28px; max-width: 360px; }
+    .sc-layers li { display: grid; grid-template-columns: 104px 1fr auto; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); font-size: 15px; }
+    .sc-layers .pips { display: flex; gap: 4px; }
+    .sc-layers .pips i { width: 14px; height: 6px; border-radius: 1px; background: var(--on-char); }
+    .sc-layers .pips i.fail { background: var(--red-bright); }
+    .sc-layers .pips i.untested { background: none; box-shadow: inset 0 0 0 1px var(--on-char-3); }
+    .sc-layers small { font-size: 13px; color: var(--text-3); white-space: nowrap; }
+    .sc-score { margin-top: 22px; font-size: 15px; color: var(--text-2); }
+    .sc-score b { font-weight: 500; color: var(--on-char); }
+    .sc-main { border-left: 1px solid var(--line); padding: calc(var(--sec-y) - 8px) 0 var(--sec-y); min-width: 0; }
+    .sc-progress { list-style: none; padding: 0 var(--pad); }
+    .sc-progress li { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line); color: var(--text-3); transition: color .3s; }
+    .sc-progress li:first-child { border-top: 0; }
+    .sc-progress li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--on-char-3); flex: none; }
+    .sc-progress li.on { color: var(--on-char); }
+    .sc-progress li.on::before { background: var(--red-bright); box-shadow: none; animation: blink .7s steps(1) infinite; }
+    .sc-progress li.done { color: var(--text-2); }
+    .sc-progress li.done::before { background: var(--on-char-2); box-shadow: none; }
+    @keyframes blink { 50% { opacity: .25; } }
+    .sc-error { margin: 0 var(--pad); padding: 16px 18px; border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; }
+    .gate { margin: 0 var(--pad) 28px; padding: clamp(20px, 2.4vw, 28px); border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; background: var(--char-2); }
+    .gate h3 { font-size: clamp(20px, 2vw, 24px); letter-spacing: -0.03em; }
+    .gate-sub { margin-top: 6px; color: var(--text-2); font-size: 16px; }
+    .gate-row { display: grid; grid-template-columns: 1fr auto; margin-top: 18px; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char); transition: border-color .15s; }
+    .gate-row:focus-within { border-color: rgba(244, 242, 240, .5); }
+    .gate-row label { display: block; padding: 11px 16px 10px; min-width: 0; }
+    .gate-row .tag { display: block; }
+    .gate-row input { display: block; width: 100%; margin-top: 3px; padding: 2px 0; background: none; border: 0; outline: none; font: inherit; font-size: 16px; color: var(--on-char); }
+    .gate-row input::placeholder { color: var(--on-char-3); opacity: 1; }
+    .gate-row .go { display: flex; align-items: center; padding: 0 10px 0 4px; }
+    .gate.tried .gate-row:has(input:invalid) { border-color: var(--red-bright); }
+    .gate-status:not(:empty) { margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--red-bright); }
+    .gate-status.sending { color: var(--on-char-3); }
+    .gate-note { margin-top: 12px; font-size: 13px; color: var(--text-3); }
+    .sc-rows { list-style: none; border-top: 1px solid var(--line); }
+    .sc-rows li { display: grid; grid-template-columns: 18px 1fr auto; gap: 14px; align-items: baseline; padding: 15px var(--pad); border-bottom: 1px solid var(--line); }
+    .sc-rows svg { width: 16px; height: 16px; transform: translateY(3px); color: var(--on-char-3); }
+    .sc-rows li.fail svg { color: var(--red-bright); }
+    .sc-rows li.pass svg { color: var(--on-char-2); }
+    .sc-rows b { display: block; font-weight: 500; font-size: 16px; letter-spacing: -0.015em; }
+    .sc-rows li:not(.fail) b { color: var(--text-2); }
+    .sc-rows p { margin-top: 3px; font-size: 14.5px; color: var(--text-2); max-width: 58ch; }
+    .sc-rows li:not(.fail) p { color: var(--text-3); }
+    .sc-rows .redact { display: block; height: 10px; margin: 7px 0 6px; border-radius: 2px; background: rgba(244, 242, 240, .13); }
+    .sc-rows li.fail .redact { background: rgba(244, 242, 240, .26); }
+    .sc-next { padding: 28px var(--pad) 0; }
+    .sc-next p { max-width: 56ch; color: var(--text-2); }
+    .sc-next p b { font-weight: 500; color: var(--on-char); }
+    .sc-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 22px; }
+    .text-btn { font-size: 15px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--on-char-3); min-height: 44px; }
+    .text-btn:hover { text-decoration-color: currentColor; }
+    .motion .sc-rows li { animation: rise .5s var(--ease-quart) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+    @media (max-width: 560px) {
+      .gate-row { grid-template-columns: 1fr; }
+      .gate-row .go { padding: 12px; border-top: 1px solid var(--line-dark); }
+      .gate-row .go .pill { width: 100%; }
+      .sc-rows li { grid-template-columns: 18px 1fr; }
+      .sc-rows li > .tag { grid-column: 2; }
     }
 
     /* Section heads */
@@ -274,13 +339,6 @@
     .book-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; padding: 28px var(--pad) clamp(48px, 6vw, 72px); }
     .book-note { font-size: 14px; color: var(--ink-3); }
     .book-actions .scan-status:not(:empty) { flex-basis: 100%; margin-top: 0; }
-    .scan-done.full { padding: 22px var(--pad) var(--sec-y); outline: none; }
-    .done-check { width: 44px; height: 44px; margin-bottom: 22px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; color: var(--red); }
-    .done-check svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .motion .scan-done.full:not([hidden]) .done-check path { stroke-dasharray: 20; animation: draw .6s var(--ease-expo) .15s backwards; }
-    @keyframes draw { from { stroke-dashoffset: 20; } }
-    .scan-done.full h3 { font-size: 22px; letter-spacing: -0.03em; }
-    .scan-done.full p { margin-top: 10px; color: var(--ink-2); font-size: 16px; line-height: 1.6; max-width: 42ch; }
 
     /* Closing */
     .closing { position: relative; overflow: hidden; }
@@ -296,7 +354,9 @@
 
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .section-head, .stats li, .why-close, .how, .book-grid, .gap { grid-template-columns: 1fr; }
+      .section-head, .stats li, .why-close, .how, .book-grid, .gap, .sc { grid-template-columns: 1fr; }
+      .sc-side { padding-bottom: 28px; }
+      .sc-main { border-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
       .gap p { grid-column: 1; }
       .stats li > div:first-child { padding-bottom: 0; }
       .stats li > div + div { border-left: 0; padding-top: 12px; }
@@ -322,6 +382,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .pill:active { transform: none; }
+      .sc-progress li.on::before { animation: none; }
     }
   </style>
   <script type="application/ld+json">
@@ -345,7 +406,7 @@
       "@id": "https://wolfgrey.ai/agent-ready/#page",
       "url": "https://wolfgrey.ai/agent-ready/",
       "name": "AI Transition Package",
-      "description": "Enter your URL for a free AI scan and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.",
+      "description": "Enter your URL for a free agent-readiness scan and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.",
       "isPartOf": { "@id": "https://wolfgrey.ai/#site" },
       "about": { "@id": "https://wolfgrey.ai/agent-ready/#package" },
       "publisher": { "@id": "https://wolfgrey.ai/#org" }
@@ -354,7 +415,7 @@
       "@type": "Service",
       "@id": "https://wolfgrey.ai/agent-ready/#scan",
       "name": "Agent-Readiness Scan",
-      "description": "An automated scan of your website URL that tests the site the way AI agents and answer engines do, and returns a scorecard: what they can find, what they get wrong, and where they give up.",
+      "description": "An automated scan of your website URL that checks what search crawlers, answer engines and AI agents meet when they arrive, and returns a scorecard across three layers: find, understand and act.",
       "serviceType": "Website AI agent-readiness scan",
       "provider": { "@id": "https://wolfgrey.ai/#org" },
       "offers": {
@@ -392,6 +453,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 24 24"><path d="M7 12h10"/></symbol>
   </svg>
 
   <nav class="nav" aria-label="Main">
@@ -416,30 +478,64 @@
           <h1>Half the web's traffic is no longer human. <span>Are you ready to do business with agents?</span></h1>
           <p class="lede">Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.</p>
           <div class="scan-box">
-            <form class="scan-form compact" method="post" data-source="agent-ready-hero" aria-label="Free AI scan" novalidate>
+            <form class="scan-form compact" method="post" data-source="agent-ready-hero" aria-label="Free agent-readiness scan" novalidate>
               <label>
                 <span class="tag">Website URL</span>
                 <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
               </label>
-              <label>
-                <span class="tag">Email</span>
-                <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
-              </label>
-              <input type="hidden" name="source">
-              <input type="hidden" name="page">
               <div class="go"><button class="pill pill-red" type="submit">Scan my site</button></div>
             </form>
-            <div class="scan-done compact" hidden tabindex="-1">
-              <svg class="i" aria-hidden="true"><use href="#i-check"/></svg>
-              <div><b>Scan requested.</b><span class="done-msg">Your scorecard is on its way to your inbox.</span></div>
-            </div>
             <p class="scan-status" role="status" aria-live="polite"></p>
-            <p class="scan-note">Free scan. Takes minutes. The scorecard comes to your inbox.</p>
+            <p class="scan-note">Free scan. 15 checks. Takes under a minute.</p>
           </div>
         </div>
         <div class="hero-art"></div>
       </div>
     </header>
+
+    <!-- Scorecard: hidden until a scan runs. Counts show first; the checks unlock for an email. -->
+    <section class="dark band-rule" id="scorecard" aria-labelledby="sc-h" hidden>
+      <div class="frame sc">
+        <div class="sc-side">
+          <p class="tag">Agent-readiness scorecard</p>
+          <h2 id="sc-h" tabindex="-1">Scanning…</h2>
+          <p class="sc-fig" hidden><b></b><span></span></p>
+          <ul class="sc-layers" hidden></ul>
+          <p class="sc-score" hidden></p>
+        </div>
+        <div class="sc-main">
+          <ol class="sc-progress" aria-hidden="true">
+            <li>Fetching your home page</li>
+            <li>Reading robots.txt and the sitemap</li>
+            <li>Looking for structured data</li>
+            <li>Arriving as an AI agent</li>
+            <li>Testing your forms</li>
+          </ol>
+          <p class="sc-error" role="alert" hidden></p>
+          <form class="gate" aria-labelledby="gate-h" novalidate hidden>
+            <h3 id="gate-h"></h3>
+            <p class="gate-sub">Enter your email to see which checks failed and what each one means.</p>
+            <div class="gate-row">
+              <label>
+                <span class="tag">Email</span>
+                <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
+              </label>
+              <div class="go"><button class="pill pill-red" type="submit">Show my scorecard</button></div>
+            </div>
+            <p class="gate-status" role="status" aria-live="polite"></p>
+            <p class="gate-note">We'll also email you about what it takes to fix them.</p>
+          </form>
+          <ul class="sc-rows" hidden></ul>
+          <div class="sc-next" hidden>
+            <p><b>Each failed check maps to a fix in the AI Transition Package.</b> We'll be in touch by email with what it takes to fix yours.</p>
+            <div class="sc-actions">
+              <a class="pill pill-red" href="/#book">Book a call</a>
+              <button class="text-btn" type="button" data-rescan>Scan another site</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Why now -->
     <section class="dark band-rule" id="why" aria-labelledby="why-h">
@@ -573,12 +669,12 @@
             <div class="card">
               <div class="card-top"><b>yourbusiness.com</b><span class="tag">Sample</span></div>
               <ul>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>AI crawlers blocked by a default robots rule</span><span class="tag">Find</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>Sitemap found and readable</span><span class="tag">Find</span></li>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>No structured data for services or prices</span><span class="tag">Understand</span></li>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>Assistants state the wrong opening hours</span><span class="tag">Understand</span></li>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>Booking: agent gave up at an unlabeled field</span><span class="tag">Act</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>Contact form completed by an agent</span><span class="tag">Act</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>AI crawlers are blocked by robots.txt</span><span class="tag">Find</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>Sitemap found</span><span class="tag">Find</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>No services or prices marked up</span><span class="tag">Understand</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>Content needs JavaScript to be read</span><span class="tag">Understand</span></li>
+                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>3 of 5 form fields have no label</span><span class="tag">Act</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>No bot wall in front of agents</span><span class="tag">Act</span></li>
               </ul>
               <p class="card-foot"><b>4 of 6 checks failed.</b> Each one maps to a fix in the package.</p>
             </div>
@@ -588,8 +684,8 @@
             <li>
               <span class="num">01</span>
               <div>
-                <div class="step-h"><h3>Scan</h3><span class="tag">Free · minutes</span></div>
-                <p>You enter your URL. Our AI scan tests the site the way agents and answer engines do, and sends back a scorecard: what they can find, what they get wrong, and where they give up.</p>
+                <div class="step-h"><h3>Scan</h3><span class="tag">Free · under a minute</span></div>
+                <p>You enter your URL. Our scan checks what crawlers, answer engines and agents meet when they arrive, and gives you a scorecard: what they can find, what they can understand, and where they give up.</p>
               </div>
             </li>
             <li>
@@ -661,37 +757,26 @@
       <div class="frame book-grid">
         <div class="book-head">
           <h2 id="scan-h">See what agents see.</h2>
-          <p class="lede">Enter your URL. Our AI scan tests your site the way agents and answer engines do, and sends back a scorecard.</p>
+          <p class="lede">Enter your URL. Our scan checks what crawlers, answer engines and agents meet when they arrive, and gives you a scorecard.</p>
           <ul class="book-bring">
             <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they can find</li>
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they get wrong</li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they can understand</li>
             <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Where they give up</li>
           </ul>
         </div>
         <div class="book-side">
           <form class="scan-form full" method="post" data-source="agent-ready" aria-labelledby="scan-h" novalidate>
             <label class="field">
-              <span class="field-label"><span class="num">01</span>Website URL</span>
+              <span class="field-label">Website URL</span>
+              <span class="field-hint">Your home page address is enough.</span>
               <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
             </label>
-            <label class="field">
-              <span class="field-label"><span class="num">02</span>Email</span>
-              <span class="field-hint">Where we send the scorecard.</span>
-              <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
-            </label>
-            <input type="hidden" name="source">
-            <input type="hidden" name="page">
             <div class="book-actions">
               <button class="pill pill-red" type="submit">Scan my site</button>
-              <span class="book-note">Free scan. Takes minutes.</span>
+              <span class="book-note">Free scan. 15 checks. Takes under a minute.</span>
               <p class="scan-status" role="status" aria-live="polite"></p>
             </div>
           </form>
-          <div class="scan-done full" hidden tabindex="-1">
-            <div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="20" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-            <h3>Scan requested.</h3>
-            <p class="done-msg">Your scorecard is on its way to your inbox.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -978,16 +1063,21 @@
     }), { rootMargin: '300px 0px' });
     document.querySelectorAll('main > section').forEach(sec => gridIO.observe(sec));
 
-    /* ---------- Scan form ----------
-       Both forms post { url, email, source, page } to this one endpoint.
-       The scan backend is not built yet: while SCAN_ENDPOINT is empty the form validates and
-       shows the confirmation, but NOTHING IS SENT OR SAVED. Set the URL here to wire it up. */
-    const SCAN_ENDPOINT = '';
+    /* ---------- Scan, then scorecard ----------
+       1. POST {url} to /api/scan: runs the checks, returns the counts and a sealed token.
+       2. POST {token, email} to /api/lead: saves the lead, returns the full scorecard.
+       The API is the wolfgrey-scan project on Vercel. */
+    const SCAN_API = 'https://wolfgrey-scan.vercel.app';
     (() => {
       const forms = [...document.querySelectorAll('.scan-form')];
+      const sec = document.getElementById('scorecard'), $ = s => sec.querySelector(s);
+      const head = $('#sc-h'), fig = $('.sc-fig'), layersEl = $('.sc-layers'), scoreEl = $('.sc-score');
+      const progress = $('.sc-progress'), errorEl = $('.sc-error'), gate = $('.gate'), rowsEl = $('.sc-rows'), next = $('.sc-next');
       const params = new URLSearchParams(location.search), batch = params.get('s');
+      const sourceOf = form => batch ? `${form.dataset.source}:${batch.slice(0, 60)}` : params.get('utm_source') || params.get('ref') || form.dataset.source;
+      let token = '', source = '', busy = false, ticker = 0;
 
-      // "yourbusiness.com" -> "https://yourbusiness.com/"; returns null if it is not a web address
+      // "yourbusiness.com" -> URL; null if it is not a web address
       const normalize = raw => {
         const v = raw.trim();
         if (!v || /\s/.test(v)) return null;
@@ -996,48 +1086,123 @@
           return /^[^.]+(\.[^.]+)+$/.test(u.hostname) ? u : null;
         } catch { return null; }
       };
+      const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+      const icon = status => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        svg.setAttribute('class', 'i'); svg.setAttribute('aria-hidden', 'true');
+        use.setAttribute('href', status === 'pass' ? '#i-check' : status === 'fail' ? '#i-x' : '#i-dash');
+        svg.append(use); return svg;
+      };
+      const LABEL = { pass: 'Passed', fail: 'Failed', untested: 'Not tested' };
+      const post = async (path, data) => {
+        const res = await fetch(SCAN_API + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok) throw Object.assign(new Error(out.message || 'Request failed'), { friendly: out.message });
+        return out;
+      };
+      const show = (...els) => [fig, layersEl, scoreEl, progress, errorEl, gate, rowsEl, next].forEach(n => { n.hidden = !els.includes(n); });
 
-      const finish = (host, email) => forms.forEach(f => {
-        const done = f.nextElementSibling;
-        done.querySelector('.done-msg').textContent = `We're testing ${host} the way agents and answer engines do. Your scorecard will land at ${email} in a few minutes.`;
-        f.hidden = true; done.hidden = false;
-        const note = f.parentNode.querySelector('.scan-note'); if (note) note.hidden = true;
-        f.parentNode.querySelector('.scan-status').textContent = '';
-      });
+      function summary(r) {
+        fig.firstElementChild.textContent = `${r.failed} of ${r.total}`;
+        fig.lastElementChild.textContent = r.failed === 1 ? 'check failed' : 'checks failed';
+        layersEl.replaceChildren(...Object.entries(r.layers).map(([name, n]) => {
+          const li = el('li'), pips = el('span', 'pips'), all = n.pass + n.fail + n.untested;
+          pips.setAttribute('aria-hidden', 'true');
+          for (const s of ['pass', 'fail', 'untested']) for (let i = 0; i < n[s]; i++) pips.append(el('i', s));
+          li.append(el('span', '', name), pips, el('small', '', `${n.pass} of ${all} passed`));
+          return li;
+        }));
+      }
+
+      function rows(list, locked) {
+        rowsEl.replaceChildren(...list.map((c, i) => {
+          const li = el('li', c.status), body = el('div');
+          li.style.setProperty('--i', i);
+          if (locked) {
+            const bar = el('span', 'redact'); bar.style.width = 38 + (i * 37) % 45 + '%';
+            body.append(bar);
+          } else {
+            const b = el('b'); b.append(el('span', 'sr-only', LABEL[c.status] + ': '), c.title);
+            body.append(b, el('p', '', c.detail));
+          }
+          li.append(icon(c.status), body, el('span', 'tag', c.layer));
+          return li;
+        }));
+        locked ? rowsEl.setAttribute('aria-hidden', 'true') : rowsEl.removeAttribute('aria-hidden');
+      }
+
+      async function scan(target, form) {
+        if (busy) return;
+        busy = true;
+        const host = target.hostname.replace(/^www\./, '');
+        forms.forEach(f => { f.querySelector('button').disabled = true; f.parentNode.querySelector('.scan-status').textContent = ''; });
+        head.textContent = `Scanning ${host}…`;
+        show(progress);
+        const steps = [...progress.children]; let at = 0;
+        const tick = () => steps.forEach((li, i) => { li.classList.toggle('done', i < at); li.classList.toggle('on', i === at); });
+        tick(); clearInterval(ticker);
+        ticker = setInterval(() => { if (at < steps.length - 1) { at++; tick(); } }, 650);
+        sec.hidden = false;
+        sec.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        head.focus({ preventScroll: true });
+        try {
+          const [r] = await Promise.all([post('/api/scan', { url: target.href }), new Promise(ok => setTimeout(ok, 1600))]);
+          token = r.token; source = sourceOf(form);
+          head.textContent = r.host;
+          summary(r);
+          rows(r.rows, true);
+          $('#gate-h').textContent = r.failed ? `${r.failed} of ${r.total} checks failed on ${r.host}.` : `${r.host} passed all ${r.passed} checks we could run.`;
+          gate.querySelector('.gate-sub').textContent = r.failed ? 'Enter your email to see which checks failed and what each one means.' : 'Enter your email to see the full scorecard.';
+          gate.classList.remove('tried'); gate.querySelector('.gate-status').textContent = '';
+          show(fig, layersEl, gate, rowsEl);
+          head.focus({ preventScroll: true });
+        } catch (e) {
+          head.textContent = host;
+          errorEl.textContent = e.friendly || "The scan didn't go through. Try again in a moment, or email hey@wolfgrey.ai.";
+          show(errorEl);
+        } finally {
+          clearInterval(ticker); busy = false;
+          forms.forEach(f => { f.querySelector('button').disabled = false; });
+        }
+      }
 
       forms.forEach(form => {
-        const status = form.parentNode.querySelector('.scan-status'), btn = form.querySelector('button[type="submit"]');
-        const url = form.elements.url, email = form.elements.email;
-        if (SCAN_ENDPOINT) form.action = SCAN_ENDPOINT;
-        form.elements.source.value = batch ? `${form.dataset.source}:${batch.slice(0, 60)}` : params.get('utm_source') || params.get('ref') || form.dataset.source;
-        form.elements.page.value = location.pathname;
-        const say = (msg, sending) => { status.textContent = msg; status.classList.toggle('sending', !!sending); };
-
+        const status = form.parentNode.querySelector('.scan-status'), url = form.elements.url;
         // What is typed in one form carries to the other
-        [url, email].forEach(el => el.addEventListener('input', () => {
-          forms.forEach(f => { if (f !== form) f.elements[el.name].value = el.value; });
-          el.setCustomValidity('');
-        }));
-
-        form.addEventListener('submit', async e => {
+        url.addEventListener('input', () => { forms.forEach(f => { if (f !== form) f.elements.url.value = url.value; }); url.setCustomValidity(''); });
+        form.addEventListener('submit', e => {
           e.preventDefault();
           form.classList.add('tried');
           const target = normalize(url.value);
           url.setCustomValidity(target ? '' : 'Enter a website address');
-          if (!target) { url.focus(); say('Enter your website address, like yourbusiness.com.'); return; }
-          if (!email.checkValidity()) { email.focus(); say('Enter the email address the scorecard should go to.'); return; }
-          btn.disabled = true; say('Sending…', true);
-          const body = new URLSearchParams(new FormData(form));
-          body.set('url', target.href);
-          try {
-            if (SCAN_ENDPOINT) await fetch(SCAN_ENDPOINT, { method: 'POST', mode: 'no-cors', body });
-            else console.warn('SCAN_ENDPOINT is not set. This scan request was not sent:', Object.fromEntries(body));
-            finish(target.hostname.replace(/^www\./, ''), email.value.trim());
-            form.nextElementSibling.focus();
-          } catch {
-            btn.disabled = false; say("That didn't go through. Try again, or email hey@wolfgrey.ai.");
-          }
+          if (!target) { url.focus(); status.textContent = 'Enter your website address, like yourbusiness.com.'; return; }
+          scan(target, form);
         });
+      });
+
+      gate.addEventListener('submit', async e => {
+        e.preventDefault();
+        gate.classList.add('tried');
+        const email = gate.elements.email, status = gate.querySelector('.gate-status'), btn = gate.querySelector('button');
+        const say = (msg, sending) => { status.textContent = msg; status.classList.toggle('sending', !!sending); };
+        if (!email.checkValidity()) { email.focus(); say('Enter the email address for your scorecard.'); return; }
+        btn.disabled = true; say('Opening your scorecard…', true);
+        try {
+          const r = await post('/api/lead', { token, email: email.value.trim(), source });
+          rows(r.checks, false);
+          scoreEl.replaceChildren('Agent-readiness score: ', el('b', '', `${r.score} out of 100`), r.untested ? ` · ${r.untested} not tested` : '');
+          show(fig, layersEl, scoreEl, rowsEl, next);
+          head.focus({ preventScroll: true });
+        } catch (err) {
+          say(err.friendly || "That didn't go through. Try again, or email hey@wolfgrey.ai.");
+        } finally { btn.disabled = false; }
+      });
+
+      $('[data-rescan]').addEventListener('click', () => {
+        sec.hidden = true; token = '';
+        forms.forEach(f => { f.elements.url.value = ''; });
+        document.querySelector('.hero').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        forms[0].elements.url.focus({ preventScroll: true });
       });
     })();
 
