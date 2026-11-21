@@ -1,25 +1,20 @@
 <!DOCTYPE html>
+<!-- Reading the source? So do agents. Everything this page says is in the HTML below. The scripts add nothing an agent needs. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Transition Package: make your website agent-ready — wolfgrey.ai</title>
-  <meta name="description" content="Enter your URL for a free agent-readiness scan. See what AI agents see on your website, what they tell your customers, and what it takes to fix it. The AI Transition Package makes your site easy for agents to find, understand and act on.">
+  <title>Your website has two readers now — wolfgrey.ai</title>
+  <meta name="description" content="People look at your website. AI agents read it. Run the free scan to see what an agent gets from your site, or flip the switch to see this page the way an agent does.">
   <link rel="canonical" href="https://wolfgrey.ai/agent-ready/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="wolfgrey.ai">
-  <meta property="og:title" content="Are you ready to do business with agents? — wolfgrey.ai">
-  <meta property="og:description" content="Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.">
+  <meta property="og:title" content="Your website has two readers now — wolfgrey.ai">
+  <meta property="og:description" content="People look at your website. AI agents read it. Scan your site to see what an agent gets from it.">
   <meta property="og:url" content="https://wolfgrey.ai/agent-ready/">
   <meta property="og:image" content="https://wolfgrey.ai/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="wolfgrey.ai — the AI Transition Package">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@__wolfgrey__">
-  <meta name="twitter:title" content="Are you ready to do business with agents?">
-  <meta name="twitter:description" content="Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.">
-  <meta name="twitter:image" content="https://wolfgrey.ai/og-image.png">
   <meta name="theme-color" content="#1B1919">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/logo.png">
@@ -52,400 +47,375 @@
       --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --mono: 'Commit Mono', 'SF Mono', ui-monospace, Menlo, monospace;
 
-      --frame: min(1248px, calc(100% - 2 * var(--gutter)));
       --gutter: clamp(16px, 4vw, 48px);
       --pad: clamp(24px, 4vw, 48px);
+      --frame: min(1248px, calc(100% - 2 * var(--gutter)));
+      --nav-h: 68px;
+      --sec-y: clamp(56px, 8vw, 104px);   /* top of a section */
+      --cell-y: clamp(32px, 4vw, 52px);   /* inside a bordered cell */
+      --hero-y: clamp(64px, 9vw, 120px);  /* hero and closing */
       --ease-expo: cubic-bezier(.16, 1, .3, 1);
       --ease-quart: cubic-bezier(.25, 1, .5, 1);
-      --cols: 5fr 7fr;
-      --sec-y: clamp(48px, 7vw, 88px);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    .dark  { --bg: var(--char);  --bg-2: var(--char-2);  --fg: var(--on-char); --fg-2: var(--on-char-2); --fg-3: var(--on-char-3); --line: var(--line-dark);  --slash: var(--red-bright); --pill-line: rgba(255, 255, 255, .28); --pill-line-h: rgba(255, 255, 255, .6); }
+    .light { --bg: var(--paper); --bg-2: var(--paper-2); --fg: var(--ink);     --fg-2: var(--ink-2);     --fg-3: var(--ink-3);     --line: var(--line-light); --slash: var(--red);        --pill-line: rgba(10, 10, 10, .26);    --pill-line-h: rgba(10, 10, 10, .6); }
+    .light.alt { --bg: var(--paper-2); --bg-2: var(--paper); }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav-h); }
     body {
-      background: var(--char);
-      color: var(--on-char);
-      font-family: var(--sans);
-      font-size: 17px;
-      line-height: 1.55;
-      letter-spacing: -0.01em;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
+      margin: 0; background: var(--char); color: var(--on-char);
+      font-family: var(--sans); font-weight: 500; font-size: 17px; line-height: 1.5; letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: left; }
-    :focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; border-radius: 6px; }
+    h1, h2, h3, p, ul, ol { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--red-bright); outline-offset: 3px; }
     [hidden] { display: none !important; }
+    [tabindex="-1"]:focus { outline: none; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    svg.i { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    .motion { scroll-behavior: smooth; }
 
-    /* Surfaces + frame */
-    .dark  { background: var(--char);  color: var(--on-char); --line: var(--line-dark); --text-2: var(--on-char-2); --text-3: var(--on-char-3); --accent: var(--red-bright); }
-    .light { background: var(--paper); color: var(--ink);     --line: var(--line-light); --text-2: var(--ink-2);    --text-3: var(--ink-3);    --accent: var(--red); }
-    .band-rule { border-top: 1px solid var(--line); }
-    .frame { width: var(--frame); margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); position: relative; }
-    main > section { position: relative; scroll-margin-top: 72px; }
-    canvas.bg-dots, .hero canvas, .closing canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+    /* ---------- Frame, rules, cells ---------- */
+    .band { position: relative; background: var(--bg); color: var(--fg); border-top: 1px solid var(--line); }
+    .frame { position: relative; z-index: 1; width: var(--frame); margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+    canvas.bg-dots { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 
-    h1, h2, h3 { font-weight: 500; letter-spacing: -0.04em; }
-    h1, h2 { text-wrap: balance; }
-    p, li, td { text-wrap: pretty; }
-    h2 { font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.1; }
-    h3 { font-size: 19px; letter-spacing: -0.02em; line-height: 1.3; }
-    .lede { color: var(--text-2); max-width: 48ch; }
-    .tag { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
-    .num { font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--accent); }
+    .head { display: grid; grid-template-columns: 5fr 7fr; gap: var(--pad); padding: var(--sec-y) var(--pad) clamp(40px, 5vw, 64px); align-items: end; }
+    .cells { display: grid; border-top: 1px solid var(--line); }
+    .cells.c2 { grid-template-columns: repeat(2, 1fr); }
+    .cells.c3 { grid-template-columns: repeat(3, 1fr); }
+    .cells.c4 { grid-template-columns: repeat(4, 1fr); }
+    .cells > * { padding: var(--cell-y) var(--pad); border-left: 1px solid var(--line); min-width: 0; }
+    .cells > :first-child { border-left: 0; }
 
-    /* Pills */
+    /* ---------- Type ---------- */
+    h1 { font-weight: 500; font-size: clamp(38px, 5.6vw, 66px); line-height: 1.02; letter-spacing: -0.04em; text-wrap: balance; }
+    h2 { font-weight: 500; font-size: clamp(28px, 3.3vw, 42px); line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
+    h3 { font-weight: 500; font-size: 20px; line-height: 1.25; letter-spacing: -0.02em; }
+    .eyebrow { font-size: 14px; color: var(--fg-3); letter-spacing: 0; margin-bottom: 16px; }
+    .lede { font-size: clamp(17px, 1.5vw, 20px); color: var(--fg-2); text-wrap: pretty; max-width: 56ch; }
+    .body { color: var(--fg-2); text-wrap: pretty; }
+    .num { display: block; font-family: var(--mono); font-size: 13px; color: var(--fg-3); margin-bottom: clamp(28px, 4vw, 56px); }
+    .cmd { font-family: var(--mono); font-weight: 400; font-size: 19px; letter-spacing: -0.02em; }
+    .cmd b { font-weight: 400; color: var(--slash); }
+
+    /* ---------- Pills ---------- */
     .pill {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      height: 44px; padding: 0 20px;
-      border-radius: 999px;
-      font-size: 15px; font-weight: 500; letter-spacing: -0.01em; white-space: nowrap;
-      transition: background .15s, border-color .15s, color .15s, transform .12s;
+      display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 22px;
+      border-radius: 999px; border: 1px solid var(--pill-line); background: none; color: var(--fg);
+      font: inherit; font-size: 16px; text-decoration: none; cursor: pointer; white-space: nowrap;
+      transition: transform .18s var(--ease-quart), background-color .18s, border-color .18s;
     }
+    .pill:hover { border-color: var(--pill-line-h); }
     .pill:active { transform: scale(.97); }
-    .pill-red { background: var(--red); color: #fff; }
-    .pill-red:hover { background: var(--red-hover); }
-    .pill-outline { border: 1px solid currentColor; }
-    .dark .pill-outline { border-color: rgba(244, 242, 240, .55); }
-    .dark .pill-outline:hover { border-color: var(--on-char); background: rgba(255, 255, 255, .06); }
-    button.pill { cursor: pointer; }
-    button.pill:disabled { opacity: .6; cursor: progress; }
+    .pill-red { background: var(--red); border-color: var(--red); color: #fff; }
+    .pill-red:hover { background: var(--red-hover); border-color: var(--red-hover); }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    /* Nav */
-    .nav { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line-dark); background: rgba(27, 25, 25, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    .nav-inner { width: var(--frame); margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 40px; }
-    .nav-logo img { height: 30px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; font-size: 15px; color: var(--on-char-2); }
-    .nav-links a:hover { color: var(--on-char); }
-    .nav .pill { margin-left: auto; height: 40px; color: var(--on-char); border-color: rgba(244, 242, 240, .55); }
+    /* ---------- Nav + view switch ---------- */
+    .nav { position: sticky; top: 0; z-index: 20; background: var(--char); border-bottom: 1px solid var(--line-dark); }
+    .nav .frame { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: var(--nav-h); padding: 0 var(--pad); }
+    .mark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 17px; justify-self: start; }
+    .mark img { width: 28px; height: 28px; display: block; }
+    .nav .pill { justify-self: end; }
 
-    /* Hero */
-    .hero { position: relative; overflow: hidden; }
-    .hero .frame { border-color: transparent; }
-    .hero-copy { position: relative; z-index: 1; padding: clamp(72px, 10vw, 128px) var(--pad) clamp(72px, 9vw, 112px); max-width: 720px; }
-    .hero .kicker { margin-bottom: 22px; font-size: 15px; color: var(--on-char-2); }
-    .hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); line-height: 1.04; letter-spacing: -0.045em; max-width: 17ch; }
-    .hero h1 span { display: block; margin-top: .28em; color: var(--on-char-2); }
-    .hero .lede { margin-top: 24px; font-size: clamp(17px, 1.5vw, 19px); color: var(--on-char); opacity: .82; max-width: 44ch; }
-    .hero-art { display: none; aspect-ratio: 320 / 241; margin: 0 auto; width: min(100%, 520px); }
-    @media (max-width: 819px) {
-      .hero-copy { padding-top: 40px; padding-bottom: 0; }
-      .hero-art { display: block; }
+    .switch {
+      position: relative; display: grid; grid-template-columns: 1fr 1fr; height: 44px; padding: 3px;
+      border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; background: var(--char-2);
     }
-
-    /* Scan form, compact (hero): two labelled cells and the button in one bordered box */
-    .scan-box { margin-top: 36px; max-width: 520px; }
-    .scan-form.compact { display: grid; grid-template-columns: 1fr auto; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char-2); transition: border-color .15s; }
-    .scan-form.compact:focus-within { border-color: rgba(244, 242, 240, .5); }
-    .scan-form.compact label { display: block; padding: 11px 16px 10px; min-width: 0; }
-    .scan-form.compact label + label { border-left: 1px solid var(--line-dark); }
-    .scan-form.compact .tag { display: block; color: var(--on-char-3); white-space: nowrap; }
-    .scan-form.compact input { display: block; width: 100%; margin-top: 3px; padding: 2px 0; background: none; border: 0; outline: none; font: inherit; font-size: 16px; color: var(--on-char); }
-    .scan-form.compact input::placeholder { color: var(--on-char-3); opacity: 1; }
-    .scan-form.compact .go { display: flex; align-items: center; padding: 0 10px 0 4px; }
-    .scan-form.compact.tried input:invalid { box-shadow: 0 1px 0 var(--red-bright); }
-    .scan-note { margin-top: 14px; font-size: 14px; color: var(--on-char-3); }
-    .scan-status:not(:empty) { margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--red-bright); }
-    .scan-status.sending { color: var(--on-char-3); }
-    .light .scan-status:not(:empty) { color: var(--red); }
-    .light .scan-status.sending { color: var(--ink-3); }
-    @media (max-width: 640px) {
-      .scan-form.compact { grid-template-columns: 1fr; }
-      .scan-form.compact label + label { border-left: 0; border-top: 1px solid var(--line-dark); }
-      .scan-form.compact .go { padding: 12px; border-top: 1px solid var(--line-dark); }
-      .scan-form.compact .go .pill { width: 100%; }
+    .switch button {
+      position: relative; z-index: 1; min-width: 88px; padding: 0 18px; border: 0; border-radius: 999px; background: none;
+      color: var(--on-char-2); font: inherit; font-size: 15px; cursor: pointer; transition: color .25s;
     }
+    .switch button[aria-pressed="true"] { color: var(--char); }
+    .switch .thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: var(--on-char); }
+    .motion .switch .thumb { transition: transform .55s var(--ease-expo); }
+    [data-view="agent"] .switch .thumb { transform: translateX(100%); }
 
-    /* Scorecard */
-    #scorecard { scroll-margin-top: 72px; }
-    .sc { display: grid; grid-template-columns: var(--cols); }
-    .sc-side { padding: var(--sec-y) var(--pad); }
-    .sc-side h2 { margin-top: 14px; font-size: clamp(1.7rem, 3vw, 2.4rem); overflow-wrap: anywhere; outline: none; }
-    .sc-fig { margin-top: 28px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; }
-    .sc-fig b { font-size: clamp(3rem, 6.5vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -0.05em; }
-    .sc-fig span { font-size: 17px; color: var(--text-2); }
-    .sc-layers { list-style: none; margin-top: 28px; max-width: 360px; }
+    /* ---------- Hero ---------- */
+    .hero { border-top: 0; }
+    .hero .frame { display: grid; grid-template-columns: 7fr 5fr; min-height: min(720px, calc(100vh - var(--nav-h))); }
+    .hero-copy { padding: var(--hero-y) var(--pad); display: flex; flex-direction: column; justify-content: center; }
+    .hero-copy .lede { margin: 24px 0 36px; }
+    .scan-box { max-width: 540px; }
+    .hero-side { border-left: 1px solid var(--line); display: grid; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+    .hero-side > div { position: relative; overflow: hidden; min-height: 0; padding: var(--pad); display: flex; flex-direction: column; gap: 18px; background: color-mix(in srgb, var(--char) 72%, transparent); }
+    .hero-side > div + div { border-top: 1px solid var(--line); }
+    .hero-side .who { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--fg-3); }
+    .hero-side .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--on-char-3); }
+    .hero-side .agent .dot { background: var(--red-bright); }
+    canvas.tone { display: block; pointer-events: none; }
+    .hero-side canvas.tone { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .peek { flex: 1; min-height: 0; overflow: hidden; -webkit-mask-image: linear-gradient(#000 45%, transparent 96%); mask-image: linear-gradient(#000 45%, transparent 96%); }
+    .peek.doc { font-size: 14px; line-height: 1.5; }
+    .peek.doc .ln { margin-top: 6px; }
+    .peek.doc .ln i { color: var(--red-bright); }
+    .peek.doc .h1 { font-size: 18px; margin-top: 2px; }
+    .peek.doc .h2 { font-size: 16px; margin-top: 2px; }
+    .peek.doc .eb { margin-top: 14px; font-size: 13px; }
+    .peek.doc .eb:first-child { margin-top: 0; }
+
+    /* ---------- Sections ---------- */
+    .needs .cells h3 { margin-bottom: 10px; }
+    .why .cells > div { display: flex; flex-direction: column; gap: 12px; }
+    .why .fig { font-size: clamp(42px, 5.2vw, 66px); line-height: 1; letter-spacing: -0.05em; margin-bottom: clamp(12px, 2vw, 28px); }
+    .why .src { font-size: 14px; color: var(--fg-3); margin-top: auto; padding-top: 8px; }
+    .compare h3 { color: var(--fg-3); font-size: 15px; letter-spacing: 0; margin-bottom: 20px; }
+    .compare li { font-size: clamp(20px, 2.2vw, 28px); line-height: 1.2; letter-spacing: -0.025em; padding: 14px 0; border-top: 1px solid var(--line); display: flex; gap: 14px; align-items: baseline; }
+    .compare li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--fg-3); transform: translateY(-4px); }
+    .compare .agent li::before { background: var(--red-bright); }
+    .faq .frame { display: grid; grid-template-columns: 5fr 7fr; }
+    .faq .faq-h { padding: var(--sec-y) var(--pad); align-self: start; position: sticky; top: var(--nav-h); }
+    .faq .faq-list { border-left: 1px solid var(--line); padding: calc(var(--sec-y) - 12px) 0 calc(var(--sec-y) - 26px); }
+    details { border-top: 1px solid var(--line); }
+    details:first-child { border-top: 0; }
+    summary { list-style: none; cursor: pointer; padding: 26px var(--pad); display: flex; justify-content: space-between; gap: 24px; align-items: center; font-size: 20px; letter-spacing: -0.02em; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: ''; flex: none; width: 11px; height: 11px; border-right: 1.5px solid var(--fg-3); border-bottom: 1.5px solid var(--fg-3); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--ease-quart); }
+    details[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+    details p { padding: 0 var(--pad) 28px; color: var(--fg-2); max-width: 62ch; }
+    details a { text-underline-offset: 3px; }
+    .closing-cta { padding: var(--hero-y) var(--pad) var(--cell-y); }
+    .closing .lede { margin: 20px 0 36px; }
+    .closing canvas.crew { width: calc(100% - 2 * var(--pad)); margin: 0 auto; aspect-ratio: 1.807; }
+    .foot { font-size: 14px; color: var(--fg-3); }
+    .foot .frame { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px 48px; flex-wrap: wrap; padding: 32px var(--pad) 36px; }
+    .foot-about p { margin-top: 16px; max-width: 52ch; }
+    .foot img { height: 16px; width: auto; display: block; opacity: .9; }
+    .foot-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .foot-meta a { text-decoration: none; }
+    .foot-meta a:hover { color: var(--fg); }
+
+    /* ---------- Scan + scorecard ---------- */
+    .scan { scroll-margin-top: var(--nav-h); }
+    .sc { display: grid; grid-template-columns: 5fr 7fr; }
+    .sc > * { min-width: 0; }
+    .sc-side { padding: var(--sec-y) var(--pad); align-self: start; position: sticky; top: var(--nav-h); }
+    .sc-side .lede { margin: 18px 0 32px; }
+    .scan-form { display: grid; grid-template-columns: 1fr auto; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char-2); transition: border-color .15s; }
+    .scan-form:focus-within, .gate-row:focus-within { border-color: rgba(244, 242, 240, .5); }
+    .scan-form label, .gate-row label { display: block; padding: 11px 16px 10px; min-width: 0; }
+    .lab { display: block; font-size: 13px; color: var(--fg-3); white-space: nowrap; }
+    .scan-form input, .gate-row input { display: block; width: 100%; margin-top: 2px; padding: 2px 0; background: none; border: 0; outline: none; font: inherit; font-size: 16px; color: var(--fg); }
+    .scan-form input::placeholder, .gate-row input::placeholder { color: var(--fg-3); opacity: 1; }
+    .go { display: flex; align-items: center; padding: 0 8px 0 4px; }
+    .scan-form.tried:has(input:invalid), .gate.tried .gate-row:has(input:invalid) { border-color: var(--red-bright); }
+    .scan-note { margin-top: 14px; font-size: 14px; color: var(--fg-3); }
+    .scan-status:not(:empty), .gate-status:not(:empty) { margin-top: 10px; font-size: 14px; color: var(--red-bright); }
+    .gate-status.sending { color: var(--fg-3); }
+    .sc-sum { margin-top: clamp(32px, 4vw, 48px); padding-top: clamp(24px, 3vw, 32px); border-top: 1px solid var(--line); }
+    .sc-sum h3 { font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -0.03em; overflow-wrap: anywhere; }
+    .sc-fig { margin-top: 20px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; }
+    .sc-fig b { font-weight: 500; font-size: clamp(48px, 6vw, 72px); line-height: 1; letter-spacing: -0.05em; }
+    .sc-fig span { color: var(--fg-2); }
+    .sc-layers { margin-top: 24px; }
     .sc-layers li { display: grid; grid-template-columns: 104px 1fr auto; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); font-size: 15px; }
-    .sc-layers .pips { display: flex; gap: 4px; }
-    .sc-layers .pips i { width: 14px; height: 6px; border-radius: 1px; background: var(--on-char); }
-    .sc-layers .pips i.fail { background: var(--red-bright); }
-    .sc-layers .pips i.untested { background: none; box-shadow: inset 0 0 0 1px var(--on-char-3); }
-    .sc-layers small { font-size: 13px; color: var(--text-3); white-space: nowrap; }
-    .sc-score { margin-top: 22px; font-size: 15px; color: var(--text-2); }
-    .sc-score b { font-weight: 500; color: var(--on-char); }
-    .sc-main { border-left: 1px solid var(--line); padding: calc(var(--sec-y) - 8px) 0 var(--sec-y); min-width: 0; }
-    .sc-progress { list-style: none; padding: 0 var(--pad); }
-    .sc-progress li { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line); color: var(--text-3); transition: color .3s; }
-    .sc-progress li:first-child { border-top: 0; }
-    .sc-progress li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--on-char-3); flex: none; }
-    .sc-progress li.on { color: var(--on-char); }
-    .sc-progress li.on::before { background: var(--red-bright); box-shadow: none; animation: blink .7s steps(1) infinite; }
-    .sc-progress li.done { color: var(--text-2); }
+    .pips { display: flex; gap: 4px; }
+    .pips i { width: 14px; height: 6px; border-radius: 1px; background: var(--on-char); }
+    .pips i.fail { background: var(--red-bright); }
+    .pips i.untested { background: none; box-shadow: inset 0 0 0 1px var(--on-char-3); }
+    .sc-layers small { font-size: 13px; color: var(--fg-3); white-space: nowrap; }
+    .sc-score { margin-top: 20px; font-size: 15px; color: var(--fg-2); }
+    .sc-time { margin-top: 16px; font-size: 14px; color: var(--fg-3); }
+    .sc-score b { font-weight: 500; color: var(--fg); }
+    .sc-main { border-left: 1px solid var(--line); }
+    .sc-main { display: flex; flex-direction: column; justify-content: center; }
+    .sc-idle li, .sc-progress li { padding: var(--cell-y) var(--pad); border-top: 1px solid var(--line); }
+    .sc-idle li:first-child, .sc-progress li:first-child { border-top: 0; }
+    .sc-idle li { display: grid; grid-template-columns: 40px 1fr; gap: 8px; align-items: baseline; }
+    .sc-idle .num { margin: 0; }
+    .sc-idle h3 { margin-bottom: 6px; }
+    .sc-progress li { display: flex; align-items: center; gap: 14px; padding-top: 20px; padding-bottom: 20px; color: var(--fg-3); transition: color .3s; }
+    .sc-progress li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--on-char-3); }
+    .sc-progress li.on { color: var(--fg); }
+    .sc-progress li.on::before { background: var(--red-bright); box-shadow: none; }
+    .motion .sc-progress li.on::before { animation: blink .7s steps(1) infinite; }
+    .sc-progress li.done { color: var(--fg-2); }
     .sc-progress li.done::before { background: var(--on-char-2); box-shadow: none; }
     @keyframes blink { 50% { opacity: .25; } }
-    .sc-error { margin: 0 var(--pad); padding: 16px 18px; border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; }
-    .gate { margin: 0 var(--pad) 28px; padding: clamp(20px, 2.4vw, 28px); border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; background: var(--char-2); }
+    .sc-error { margin: var(--pad); padding: 16px 18px; border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; }
+    .gate { margin: var(--pad); padding: clamp(20px, 2.4vw, 28px); border: 1px solid rgba(255, 77, 77, .45); border-radius: 6px; background: var(--char-2); }
     .gate h3 { font-size: clamp(20px, 2vw, 24px); letter-spacing: -0.03em; }
-    .gate-sub { margin-top: 6px; color: var(--text-2); font-size: 16px; }
+    .gate-sub { margin-top: 6px; color: var(--fg-2); font-size: 16px; }
     .gate-row { display: grid; grid-template-columns: 1fr auto; margin-top: 18px; border: 1px solid rgba(244, 242, 240, .22); border-radius: 6px; background: var(--char); transition: border-color .15s; }
-    .gate-row:focus-within { border-color: rgba(244, 242, 240, .5); }
-    .gate-row label { display: block; padding: 11px 16px 10px; min-width: 0; }
-    .gate-row .tag { display: block; }
-    .gate-row input { display: block; width: 100%; margin-top: 3px; padding: 2px 0; background: none; border: 0; outline: none; font: inherit; font-size: 16px; color: var(--on-char); }
-    .gate-row input::placeholder { color: var(--on-char-3); opacity: 1; }
-    .gate-row .go { display: flex; align-items: center; padding: 0 10px 0 4px; }
-    .gate.tried .gate-row:has(input:invalid) { border-color: var(--red-bright); }
-    .gate-status:not(:empty) { margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--red-bright); }
-    .gate-status.sending { color: var(--on-char-3); }
-    .gate-note { margin-top: 12px; font-size: 13px; color: var(--text-3); }
-    .sc-rows { list-style: none; border-top: 1px solid var(--line); }
-    .sc-rows li { display: grid; grid-template-columns: 18px 1fr auto; gap: 14px; align-items: baseline; padding: 15px var(--pad); border-bottom: 1px solid var(--line); }
-    .sc-rows svg { width: 16px; height: 16px; transform: translateY(3px); color: var(--on-char-3); }
+    .gate-note { margin-top: 12px; font-size: 13px; color: var(--fg-3); }
+    .sc-rows { border-top: 1px solid var(--line); }
+    .sc-rows li { display: grid; grid-template-columns: 18px 1fr; gap: 14px; align-items: baseline; padding: 15px var(--pad); border-bottom: 1px solid var(--line); }
+    .sc-rows li.grp { display: flex; justify-content: space-between; padding-top: 12px; padding-bottom: 12px; background: var(--char-2); font-size: 15px; }
+    .sc-rows li.grp small { font-size: 13px; color: var(--fg-3); }
+    .sc-rows li:last-child { border-bottom: 0; }
+    .motion .sc-rows li { animation: rise .5s var(--ease-quart) backwards; animation-delay: calc(var(--i, 0) * 30ms); }
+    .sc-rows svg { transform: translateY(3px); color: var(--fg-3); }
     .sc-rows li.fail svg { color: var(--red-bright); }
-    .sc-rows li.pass svg { color: var(--on-char-2); }
-    .sc-rows b { display: block; font-weight: 500; font-size: 16px; letter-spacing: -0.015em; }
-    .sc-rows li:not(.fail) b { color: var(--text-2); }
-    .sc-rows p { margin-top: 3px; font-size: 14.5px; color: var(--text-2); max-width: 58ch; }
-    .sc-rows li:not(.fail) p { color: var(--text-3); }
-    .sc-rows .redact { display: block; height: 10px; margin: 7px 0 6px; border-radius: 2px; background: rgba(244, 242, 240, .13); }
+    .sc-rows li.pass svg { color: var(--fg-2); }
+    .sc-rows b { display: block; font-weight: 500; font-size: 16px; }
+    .sc-rows li:not(.fail) b { color: var(--fg-2); }
+    .sc-rows p { margin-top: 3px; font-size: 14.5px; color: var(--fg-2); max-width: 58ch; }
+    .sc-rows li:not(.fail) p { color: var(--fg-3); }
+    .redact { display: block; height: 10px; margin: 7px 0 6px; border-radius: 2px; background: rgba(244, 242, 240, .13); }
     .sc-rows li.fail .redact { background: rgba(244, 242, 240, .26); }
-    .sc-next { padding: 28px var(--pad) 0; }
-    .sc-next p { max-width: 56ch; color: var(--text-2); }
-    .sc-next p b { font-weight: 500; color: var(--on-char); }
+    .sc-next { padding: var(--pad); border-top: 1px solid var(--line); }
+    .sc-next p { max-width: 56ch; color: var(--fg-2); }
+    .sc-next p b { font-weight: 500; color: var(--fg); }
     .sc-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 22px; }
-    .text-btn { font-size: 15px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--on-char-3); min-height: 44px; }
+    .text-btn { min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-size: 15px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--fg-3); }
     .text-btn:hover { text-decoration-color: currentColor; }
-    .motion .sc-rows li { animation: rise .5s var(--ease-quart) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
-    @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
-    @media (max-width: 560px) {
-      .gate-row { grid-template-columns: 1fr; }
-      .gate-row .go { padding: 12px; border-top: 1px solid var(--line-dark); }
-      .gate-row .go .pill { width: 100%; }
-      .sc-rows li { grid-template-columns: 18px 1fr; }
-      .sc-rows li > .tag { grid-column: 2; }
-    }
 
-    /* Section heads */
-    .section-head { display: grid; grid-template-columns: var(--cols); gap: 20px 0; align-items: end; padding: clamp(64px, 9vw, 112px) 0 clamp(36px, 4.5vw, 56px); }
-    .section-head > * { padding: 0 var(--pad); }
-    .section-head h2 { font-size: clamp(2.1rem, 4.2vw, 3.25rem); line-height: 1.04; letter-spacing: -0.045em; }
-    .section-head .lede + .lede { margin-top: 14px; }
-    .eyebrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 18px; font-size: 15px; color: var(--text-2); }
+    /* ---------- Agent view ---------- */
+    .agent-view { min-height: calc(100vh - var(--nav-h)); }
+    .agent-view .head { align-items: start; padding-bottom: clamp(40px, 5vw, 64px); }
+    .agent-view .head .pill { margin-top: 28px; }
+    .stats > div { padding-top: 22px; padding-bottom: 22px; }
+    .stats strong { display: block; font-weight: 500; font-size: clamp(26px, 3vw, 38px); letter-spacing: -0.03em; line-height: 1.1; }
+    .stats span { font-size: 14px; color: var(--fg-3); }
+    .av-steps { border-top: 1px solid var(--line); }
+    .av-step { display: grid; grid-template-columns: 5fr 7fr; border-top: 1px solid var(--line); }
+    .av-step:first-child { border-top: 0; }
+    .av-step > * { padding: var(--cell-y) var(--pad); min-width: 0; }
+    .av-why { position: sticky; top: var(--nav-h); align-self: start; }
+    .av-why .num { color: var(--red); margin-bottom: 20px; }
+    .av-why .num span { font-family: var(--sans); font-size: 14px; color: var(--fg-3); margin-left: 12px; }
+    .av-why h3 { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .av-why .body { max-width: 42ch; }
+    .av-data { border-left: 1px solid var(--line); }
+    .av-note { font-size: 14px; color: var(--fg-3); margin-top: 20px; }
+    .av-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .av-bar p { color: var(--fg-2); }
+    .av-full { margin-top: 20px; border: 1px solid var(--line); border-radius: 6px; }
+    .av-full summary { padding: 14px 18px; font-size: 16px; }
+    .av-full .doc { padding: 6px 18px 22px; border-top: 1px solid var(--line); }
+    .outline .ln { margin-top: 0; padding: 9px 0; border-top: 1px solid var(--line); color: var(--fg); }
+    .outline .ln:first-child { border-top: 0; padding-top: 0; }
+    .outline .h1 { font-size: 20px; letter-spacing: -0.02em; }
+    .outline .h2 { padding-left: 22px; }
+    .outline .h3 { padding-left: 52px; color: var(--fg-2); }
 
-    /* Why now: one row per statistic, so any one can be edited or removed on its own */
-    .stats { list-style: none; }
-    .stats li { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
-    .stats li > * { padding: clamp(22px, 2.6vw, 32px) var(--pad); }
-    .stats li > div + div { border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; }
-    .stats .stat-fig { font-size: clamp(2.6rem, 5.6vw, 4.25rem); font-weight: 500; line-height: 1; letter-spacing: -0.05em; }
-    .stats .stat-fig.word { font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.04em; line-height: 1.1; }
-    .stats li > div:first-child { display: flex; align-items: center; }
-    .stats p { font-size: clamp(17px, 1.5vw, 19px); max-width: 46ch; }
-    .stats .src { display: block; margin-top: 8px; }
-    .why-close { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
-    .why-close > p { padding: clamp(32px, 4vw, 48px) var(--pad) clamp(48px, 6vw, 72px); }
-    .why-close > p + p { border-left: 1px solid var(--line); color: var(--text-2); }
-    .why-close > p:first-child { font-size: clamp(19px, 1.9vw, 23px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.35; }
-    .why-close > p + p { max-width: none; }
-    .why-close > p + p span { display: block; max-width: 52ch; }
+    .doc { font-size: 16px; line-height: 1.55; overflow-wrap: anywhere; }
+    .doc .ln { color: var(--fg-2); margin-top: 10px; }
+    .doc .ln i { font-style: normal; color: var(--red); margin-right: .45em; }
+    .doc .li { padding-left: 1.1em; text-indent: -1.1em; }
+    .doc .h1 { color: var(--fg); font-size: 24px; letter-spacing: -0.025em; line-height: 1.2; margin-top: 0; }
+    .doc .h2 { color: var(--fg); font-size: 20px; letter-spacing: -0.02em; line-height: 1.25; margin-top: 34px; }
+    .doc .h3 { color: var(--fg); margin-top: 20px; }
+    .doc .li { margin-top: 4px; }
+    .doc .eb { color: var(--fg-3); font-size: 14px; margin-top: 34px; }
+    .doc .eb:first-child { margin-top: 0; }
+    .doc .eb + .h1, .doc .eb + .h2 { margin-top: 2px; }
 
-    /* The package: three layers */
-    .gap { padding-bottom: clamp(36px, 4.5vw, 56px); display: grid; grid-template-columns: var(--cols); }
-    .gap p { grid-column: 2; padding: 0 var(--pad); max-width: calc(62ch + 2 * var(--pad)); color: var(--ink-2); }
-    .layers { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); list-style: none; }
-    .layers > li { display: flex; flex-direction: column; padding: clamp(28px, 3.2vw, 40px) var(--pad) clamp(32px, 3.6vw, 44px); min-width: 0; }
-    .layers > li + li { border-left: 1px solid var(--line); }
-    .layer-h { display: flex; align-items: baseline; gap: 12px; }
-    .layer-h h3 { font-size: clamp(1.6rem, 2.4vw, 2rem); letter-spacing: -0.04em; line-height: 1.1; }
-    .layer-h .tag { margin-left: auto; }
-    .layers ul { list-style: none; margin-top: 20px; flex: 1; }
-    .layers ul li { display: flex; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--line); font-size: 15.5px; color: var(--ink-2); }
-    .layers ul li svg { width: 16px; height: 16px; color: var(--red); transform: translateY(3px); }
-    .changes { margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
-    .changes .tag { display: block; margin-bottom: 6px; }
-    .changes p { font-size: 16px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.4; }
+    .rows > div { display: grid; grid-template-columns: 112px 1fr; gap: 16px; padding: 13px 0; border-top: 1px solid var(--line); font-size: 16px; }
+    .rows > div:first-child { border-top: 0; padding-top: 0; }
+    .rows dt { color: var(--fg-3); font-size: 14px; padding-top: 2px; }
+    .rows dd { margin: 0; color: var(--fg-2); overflow-wrap: anywhere; }
+    .rows dd span { display: block; }
+    .rows dd span + span { margin-top: 5px; }
+    .rows dd b { font-weight: 500; color: var(--fg); }
+    .actions li { padding: 14px 0; border-top: 1px solid var(--line); }
+    .actions li:first-child { border-top: 0; padding-top: 0; }
+    .actions b { display: block; font-weight: 500; }
+    .actions a { display: block; color: var(--red); overflow-wrap: anywhere; text-underline-offset: 3px; font-size: 16px; }
+    .actions span { display: block; color: var(--fg-2); font-size: 15px; margin-top: 2px; }
 
-    /* How it works: sample scorecard + steps */
-    .how { display: grid; grid-template-columns: var(--cols); border-top: 1px solid var(--line); }
-    .how > * + * { border-left: 1px solid var(--line); }
-    .fig { padding: clamp(28px, 3.5vw, 44px) var(--pad); min-width: 0; }
-    .card { border: 1px solid var(--line); border-radius: 6px; background: var(--char-2); overflow: hidden; }
-    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 15px; }
-    .card-top b { font-weight: 500; }
-    .card ul { list-style: none; }
-    .card li { display: grid; grid-template-columns: 18px 1fr auto; gap: 12px; align-items: baseline; padding: 12px 18px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--on-char-2); }
-    .card li:first-child { border-top: 0; }
-    .card li svg { width: 16px; height: 16px; transform: translateY(3px); color: var(--on-char-3); }
-    .card li.fail { color: var(--on-char); }
-    .card li.fail svg { color: var(--red-bright); }
-    .card-foot { padding: 14px 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--on-char-2); }
-    .card-foot b { font-weight: 500; color: var(--on-char); }
-    .fig-tag { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; }
-    .steps { list-style: none; }
-    .steps li { display: grid; grid-template-columns: 44px 1fr; padding: clamp(20px, 2.2vw, 26px) var(--pad); border-top: 1px solid var(--line); }
-    .steps li:first-child { border-top: 0; }
-    .steps .num { padding-top: 5px; }
-    .step-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
-    .steps p { margin-top: 6px; font-size: 16px; color: var(--text-2); max-width: 54ch; }
-
-    /* Measures */
-    .measures { width: 100%; border-collapse: collapse; border-top: 1px solid var(--line); text-align: left; }
-    .measures th, .measures td { padding: 18px var(--pad); vertical-align: top; border-bottom: 1px solid var(--line); font-size: 16px; }
-    .measures thead th { padding-top: 14px; padding-bottom: 14px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
-    .measures tbody th[scope="row"] { width: 28%; font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
-    .measures td { color: var(--ink-2); }
-    .measures td:last-child { width: 28%; color: var(--ink); font-weight: 500; }
-    .measures th + td, .measures td + td, .measures thead th + th { border-left: 1px solid var(--line); }
-    .measures .group th { padding-top: 12px; padding-bottom: 12px; background: var(--paper-2); font-size: 14px; font-weight: 500; color: var(--ink); }
-    .measures .group th::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 10px; border-radius: 50%; background: var(--red); transform: translateY(-2px); }
-    .measures .group.soft th::before { background: none; box-shadow: inset 0 0 0 1px var(--ink-3); }
-    .measures .group th span { font-weight: 400; color: var(--ink-2); }
-    .measures tbody:last-child tr:last-child > * { border-bottom: 0; }
-    @media (max-width: 760px) {
-      .measures, .measures tbody, .measures tr, .measures th, .measures td { display: block; width: auto !important; }
-      .measures thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-      .measures tbody tr:not(.group) { padding: 18px 0; border-bottom: 1px solid var(--line); }
-      .measures tbody tr:not(.group) > * { padding-top: 0; padding-bottom: 0; border: 0 !important; }
-      .measures td { margin-top: 8px; }
-      .measures td::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
-      .measures tbody:last-child tr:last-child { border-bottom: 0; }
-    }
-
-    /* Scan form, full (closing section) */
-    .book-grid { display: grid; grid-template-columns: var(--cols); }
-    .book-head { padding: var(--sec-y) var(--pad); }
-    .book-head .lede { margin-top: 20px; color: var(--ink-2); }
-    .book-bring { list-style: none; margin-top: 28px; max-width: 40ch; }
-    .book-bring li { display: flex; gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-2); }
-    .book-bring li svg { width: 16px; height: 16px; color: var(--red); transform: translateY(3px); }
-    .book-side { border-left: 1px solid var(--line); padding-top: calc(var(--sec-y) - 6px); }
-    .scan-form.full > .field:first-child { padding-top: 0; }
-    .field { display: block; padding: 24px var(--pad); border-bottom: 1px solid var(--line); }
-    .field-label { display: flex; align-items: baseline; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
-    .field-hint { display: block; margin-top: 6px; font-size: 14px; font-weight: 400; color: var(--ink-3); }
-    .field input {
-      display: block; width: 100%; margin-top: 12px; padding: 12px 14px;
-      font: inherit; font-size: 16px; font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
-      background: #fff; border: 1px solid rgba(27, 25, 25, .18); border-radius: 6px;
-      transition: border-color .15s, box-shadow .15s;
-    }
-    .field ::placeholder { color: var(--ink-3); opacity: 1; }
-    .field input:hover { border-color: rgba(27, 25, 25, .35); }
-    .field input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(209, 47, 47, .14); }
-    .tried .field input:invalid { border-color: var(--red); }
-    .book-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; padding: 28px var(--pad) clamp(48px, 6vw, 72px); }
-    .book-note { font-size: 14px; color: var(--ink-3); }
-    .book-actions .scan-status:not(:empty) { flex-basis: 100%; margin-top: 0; }
-
-    /* Closing */
-    .closing { position: relative; overflow: hidden; }
-    .closing .frame { border-color: transparent; z-index: 1; }
-    .closing-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: clamp(96px, 12vw, 160px) var(--pad) clamp(32px, 4vw, 56px); }
-    .crew-space { aspect-ratio: 1.807; margin: 0 clamp(0px, 2vw, 24px); }
-    .closing-cta h2 { font-size: clamp(2.4rem, 5vw, 3.75rem); letter-spacing: -0.045em; }
-    .closing-cta p { color: var(--on-char-2); margin-top: 14px; max-width: 42ch; }
-    .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--pad) 36px; border-top: 1px solid var(--line-dark); font-size: 14px; color: var(--on-char-3); }
-    .foot-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-    .foot-meta a:hover { color: var(--on-char); }
-    .foot img { height: 16px; width: auto; display: block; opacity: .9; }
-
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .section-head, .stats li, .why-close, .how, .book-grid, .gap, .sc { grid-template-columns: 1fr; }
-      .sc-side { padding-bottom: 28px; }
-      .sc-main { border-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
-      .gap p { grid-column: 1; }
-      .stats li > div:first-child { padding-bottom: 0; }
-      .stats li > div + div { border-left: 0; padding-top: 12px; }
-      .why-close > p:first-child { padding-bottom: 0; }
-      .why-close > p + p { border-left: 0; padding-top: 18px; }
-      .how > * + *, .book-side { border-left: 0; border-top: 1px solid var(--line); }
-      .layers { grid-template-columns: 1fr; }
-      .layers > li + li { border-left: 0; border-top: 1px solid var(--line); }
-      .book-side { padding-top: 0; }
-      .scan-form.full > .field:first-child { padding-top: 24px; }
-    }
-
-    /* Motion layer */
-    .motion .band-rule { position: relative; border-top-color: transparent; }
-    .motion .band-rule::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease-expo); z-index: 2; }
+    /* ---------- Motion (all gated on .motion) ---------- */
+    .motion .band-rule { border-top-color: transparent; }
+    .motion .band-rule::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease-expo); }
     .motion .band-rule.in::before { transform: none; }
     .motion [data-rv] { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-quart), transform .7s var(--ease-quart); transition-delay: calc(var(--i, 0) * 80ms); }
     .motion [data-rv].in { opacity: 1; transform: none; }
-    .motion .layers ul li svg, .motion .card li svg { transform: translateY(3px) scale(0); transition: transform .45s var(--ease-expo) .25s; }
-    .motion .layers ul li.in svg, .motion .card li.in svg { transform: translateY(3px); }
-    @media print { .motion [data-rv] { opacity: 1; transform: none; } }
+    .motion .view-in { animation: rise .6s var(--ease-quart) backwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+    .motion canvas.bg-dots { opacity: 0; transition: opacity 1.4s var(--ease-quart); }
+    .motion canvas.bg-dots.in { opacity: 1; }
+    .motion canvas.tone { opacity: 0; transition: opacity 1.6s var(--ease-quart) .15s; }
+    .motion canvas.tone.in { opacity: 1; }
+    /* The agent's half of the hero reads in line by line */
+    .motion .peek .ln { animation: rise .6s var(--ease-quart) backwards; animation-delay: calc(700ms + var(--i, 0) * 110ms); }
+    /* Compare bullets tick in after their cell arrives */
+    .compare li:nth-child(2) { --j: 1; } .compare li:nth-child(3) { --j: 2; }
+    .motion .compare li { opacity: 0; transform: translateX(-8px); transition: opacity .5s var(--ease-quart), transform .5s var(--ease-quart); transition-delay: calc(280ms + var(--i, 0) * 80ms + var(--j, 0) * 90ms); }
+    .motion .compare .in li { opacity: 1; transform: none; }
+    /* Scorecard pips fill in one at a time */
+    .motion .pips i { transform-origin: left; animation: pip .4s var(--ease-quart) backwards; animation-delay: calc(var(--i, 0) * 45ms); }
+    @keyframes pip { from { opacity: 0; transform: scaleX(.2); } }
+    .scan-form input::placeholder { transition: opacity .25s; }
+    .scan-form input.swap::placeholder { opacity: 0; }
+    @media print { .motion [data-rv], .motion .compare li { opacity: 1; transform: none; } }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .pill:active { transform: none; }
-      .sc-progress li.on::before { animation: none; }
+    /* ---------- Small screens ---------- */
+    @media (max-width: 860px) {
+      .head, .hero .frame, .faq .frame, .av-step, .sc { grid-template-columns: 1fr; }
+      .head { align-items: start; gap: 20px; }
+      .hero .frame { min-height: 0; }
+      .hero-side { border-left: 0; border-top: 1px solid var(--line); grid-template-rows: none; grid-template-columns: 1fr 1fr; }
+      .hero-side > div { height: 260px; }
+      .hero-side > div + div { border-top: 0; border-left: 1px solid var(--line); }
+      .sc-main { border-left: 0; border-top: 1px solid var(--line); }
+      .cells.c3, .cells.c2 { grid-template-columns: 1fr; }
+      .cells.c4, .cells.stats { grid-template-columns: 1fr 1fr; }
+      .cells.c3 > *, .cells.c2 > * { border-left: 0; border-top: 1px solid var(--line); }
+      .cells.c3 > :first-child, .cells.c2 > :first-child { border-top: 0; }
+      .cells.c4 > :nth-child(odd) { border-left: 0; }
+      .cells.c4 > :nth-child(n+3) { border-top: 1px solid var(--line); }
+      .num { margin-bottom: 20px; }
+      .faq .faq-h { padding-bottom: 28px; position: static; }
+      .faq .faq-list { padding: 0; }
+      .sc-side { position: static; padding-bottom: var(--cell-y); }
+      .faq .faq-list { border-left: 0; border-top: 1px solid var(--line); }
+      .av-why { position: static; padding-bottom: 0; }
+      .av-data { border-left: 0; }
+    }
+    @media (max-width: 620px) {
+      .nav .pill { display: none; }
+      .nav .frame { grid-template-columns: 1fr auto; padding: 0 16px; }
+      .mark span { display: none; }
+      .switch button { min-width: 76px; padding: 0 12px; }
+      .rows > div { grid-template-columns: 1fr; gap: 2px; }
+      summary { font-size: 18px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .hero-side > div { height: 230px; }
+      .hero-side > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .scan-form, .gate-row { grid-template-columns: 1fr; }
+      .go { padding: 12px; border-top: 1px solid var(--line); }
+      .go .pill { width: 100%; }
     }
   </style>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "ProfessionalService",
-      "@id": "https://wolfgrey.ai/#org",
-      "name": "wolfgrey.ai",
-      "alternateName": "wolfgrey",
-      "url": "https://wolfgrey.ai/",
-      "logo": "https://wolfgrey.ai/logo.png",
-      "image": "https://wolfgrey.ai/og-image.png",
-      "description": "AI enablement firm for small and midsize service businesses.",
-      "email": "hey@wolfgrey.ai",
-      "sameAs": ["https://x.com/__wolfgrey__"]
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://wolfgrey.ai/agent-ready/#page",
-      "url": "https://wolfgrey.ai/agent-ready/",
-      "name": "AI Transition Package",
-      "description": "Enter your URL for a free agent-readiness scan and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.",
-      "isPartOf": { "@id": "https://wolfgrey.ai/#site" },
-      "about": { "@id": "https://wolfgrey.ai/agent-ready/#package" },
-      "publisher": { "@id": "https://wolfgrey.ai/#org" }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://wolfgrey.ai/agent-ready/#scan",
-      "name": "Agent-Readiness Scan",
-      "description": "An automated scan of your website URL that checks what search crawlers, answer engines and AI agents meet when they arrive, and returns a scorecard across three layers: find, understand and act.",
-      "serviceType": "Website AI agent-readiness scan",
-      "provider": { "@id": "https://wolfgrey.ai/#org" },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "url": "https://wolfgrey.ai/agent-ready/#scan",
-        "availability": "https://schema.org/InStock"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://wolfgrey.ai/agent-ready/#package",
-      "name": "AI Transition Package",
-      "description": "A fixed-scope, four-week engagement that makes a business website easy for AI agents to find, understand and act on. Three layers: Find (SEO), Understand (answer engine optimization) and Act (agent-ready quote, booking, contact and order paths), verified with a before-and-after scorecard.",
-      "serviceType": "SEO, answer engine optimization (AEO) and agent-readiness for business websites",
-      "provider": { "@id": "https://wolfgrey.ai/#org" },
-      "audience": { "@type": "BusinessAudience", "name": "Small businesses with $1 million or more in annual revenue whose website produces leads, bookings or orders" },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "What's included",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Find (SEO)", "description": "Crawl and index fixes, page speed, titles, internal links, sitemap, and robots rules that let search and AI crawlers in on purpose." } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Understand (AEO)", "description": "Structured data, key pages rewritten in plain statements an assistant can quote, and consistent name, address, phone and offer details." } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Act (agent-ready)", "description": "Quote, booking, contact and order paths an agent can complete, a machine-readable business summary, and an agent-ready product feed where products are sold." } }
+
+  <!-- Facts for machines. Everything here is also stated in the page text. -->
+  <script type="application/ld+json" id="facts">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://wolfgrey.ai/#org",
+        "name": "wolfgrey.ai",
+        "url": "https://wolfgrey.ai/",
+        "description": "An AI enablement firm. We put AI to work inside small and midsize service businesses.",
+        "audience": { "@type": "Audience", "audienceType": "Small and midsize service businesses: realtors, trades, accountants, law firms, clinics and agencies" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://wolfgrey.ai/agent-ready/",
+        "url": "https://wolfgrey.ai/agent-ready/",
+        "name": "Your website has two readers now",
+        "description": "People look at a website. AI agents read it. This page shows what an agent needs in order to take in a site quickly: text it can fetch, facts it can trust, and actions it can finish.",
+        "publisher": { "@id": "https://wolfgrey.ai/#org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is an agent-ready website?", "acceptedAnswer": { "@type": "Answer", "text": "A website an AI agent can find, understand and act on. The agent can reach the pages, read the facts, and complete a task such as booking a call or requesting a quote." } },
+          { "@type": "Question", "name": "Do we have to rebuild our site?", "acceptedAnswer": { "@type": "Answer", "text": "No. You keep the site you have. We rebuild what sits underneath it so that search engines, answer engines and agents can all use it." } },
+          { "@type": "Question", "name": "How do we find out where our site stands?", "acceptedAnswer": { "@type": "Answer", "text": "Run the free scan at https://wolfgrey.ai/agent-ready/#scan. It runs 15 checks on your URL and takes under a minute." } },
+          { "@type": "Question", "name": "What does the scan check?", "acceptedAnswer": { "@type": "Answer", "text": "Three things. Whether crawlers and AI agents can find the site, whether they can understand what the business offers, and whether they can act on it by reaching a form and filling it in." } },
+          { "@type": "Question", "name": "How long does the work take?", "acceptedAnswer": { "@type": "Answer", "text": "Four weeks. We work on the live site for three weeks, then rerun the same scan in week four. You grant access once and approve customer-facing wording once." } }
         ]
       }
-    }
-  ]
-}
+    ]
+  }
   </script>
 </head>
 <body>
@@ -456,31 +426,33 @@
     <symbol id="i-dash" viewBox="0 0 24 24"><path d="M7 12h10"/></symbol>
   </svg>
 
-  <nav class="nav" aria-label="Main">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="wolfgrey.ai home"><img src="/wolf-mark-white.png" alt="wolfgrey" width="28" height="32"></a>
-      <ul class="nav-links">
-        <li><a href="#why">Why now</a></li>
-        <li><a href="#package">The package</a></li>
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#measures">What we measure</a></li>
-      </ul>
-      <a class="pill pill-outline" href="#scan">Scan my site</a>
+  <header class="nav dark">
+    <div class="frame">
+      <a class="mark" href="/" aria-label="wolfgrey.ai home"><img src="/wolf-mark-white.png" alt="" width="28" height="28"><span>wolfgrey.ai</span></a>
+      <div class="switch" role="group" aria-label="View this page as">
+        <button type="button" data-set-view="human" aria-pressed="true">Human</button>
+        <button type="button" data-set-view="agent" aria-pressed="false">Agent</button>
+        <span class="thumb" aria-hidden="true"></span>
+      </div>
+      <a class="pill pill-red" href="#scan" data-set-view="human">Scan my site</a>
     </div>
-  </nav>
+  </header>
 
-  <main>
-    <header class="hero dark">
-      <canvas id="hero-dots" aria-hidden="true"></canvas>
+  <!-- ============================ HUMAN VIEW ============================
+       This is the page. The agent view below is generated from it. -->
+  <main id="human">
+
+    <section class="band dark hero" aria-labelledby="hero-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
       <div class="frame">
         <div class="hero-copy">
-          <p class="kicker">The AI Transition Package</p>
-          <h1>Half the web's traffic is no longer human. <span>Are you ready to do business with agents?</span></h1>
-          <p class="lede">Enter your URL and see what AI agents see on your website, what they tell your customers, and what it takes to fix it.</p>
-          <div class="scan-box">
-            <form class="scan-form compact" method="post" data-source="agent-ready-hero" aria-label="Free agent-readiness scan" novalidate>
+          <p class="eyebrow" data-rv>Agent-ready websites</p>
+          <h1 id="hero-h" data-rv>Your website has two readers now.</h1>
+          <p class="lede" data-rv>People look at your site. AI agents read it. Enter your URL to see what an agent gets from yours, or flip the switch to see what it gets from this page.</p>
+          <div class="scan-box" data-rv>
+            <form class="scan-form" method="post" data-source="agent-ready-hero" aria-label="Free agent-readiness scan" novalidate>
               <label>
-                <span class="tag">Website URL</span>
+                <span class="lab">Website URL</span>
                 <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
               </label>
               <div class="go"><button class="pill pill-red" type="submit">Scan my site</button></div>
@@ -489,579 +461,476 @@
             <p class="scan-note">Free scan. 15 checks. Takes under a minute.</p>
           </div>
         </div>
-        <div class="hero-art"></div>
-      </div>
-    </header>
-
-    <!-- Scorecard: hidden until a scan runs. Counts show first; the checks unlock for an email. -->
-    <section class="dark band-rule" id="scorecard" aria-labelledby="sc-h" hidden>
-      <div class="frame sc">
-        <div class="sc-side">
-          <p class="tag">Agent-readiness scorecard</p>
-          <h2 id="sc-h" tabindex="-1">Scanning…</h2>
-          <p class="sc-fig" hidden><b></b><span></span></p>
-          <ul class="sc-layers" hidden></ul>
-          <p class="sc-score" hidden></p>
-        </div>
-        <div class="sc-main">
-          <ol class="sc-progress" aria-hidden="true">
-            <li>Fetching your home page</li>
-            <li>Reading robots.txt and the sitemap</li>
-            <li>Looking for structured data</li>
-            <li>Arriving as an AI agent</li>
-            <li>Testing your forms</li>
-          </ol>
-          <p class="sc-error" role="alert" hidden></p>
-          <form class="gate" aria-labelledby="gate-h" novalidate hidden>
-            <h3 id="gate-h"></h3>
-            <p class="gate-sub">Enter your email to see which checks failed and what each one means.</p>
-            <div class="gate-row">
-              <label>
-                <span class="tag">Email</span>
-                <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
-              </label>
-              <div class="go"><button class="pill pill-red" type="submit">Show my scorecard</button></div>
-            </div>
-            <p class="gate-status" role="status" aria-live="polite"></p>
-            <p class="gate-note">We'll also email you about what it takes to fix them.</p>
-          </form>
-          <ul class="sc-rows" hidden></ul>
-          <div class="sc-next" hidden>
-            <p><b>Each failed check maps to a fix in the AI Transition Package.</b> We'll be in touch by email with what it takes to fix yours.</p>
-            <div class="sc-actions">
-              <a class="pill pill-red" href="/#book">Book a call</a>
-              <button class="text-btn" type="button" data-rescan>Scan another site</button>
-            </div>
+        <!-- Decorative: the same page, as each reader takes it in. The agent half is filled from this page's own text. -->
+        <div class="hero-side" aria-hidden="true">
+          <div class="person" data-rv>
+            <span class="who"><span class="dot"></span>A person sees</span>
+            <canvas class="tone" data-src="/wolf-hero-dots.png?v=2" data-fit="0.94" data-align="right"></canvas>
+          </div>
+          <div class="agent" data-rv>
+            <span class="who"><span class="dot"></span>An agent reads</span>
+            <div class="peek doc" id="peek"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why now -->
-    <section class="dark band-rule" id="why" aria-labelledby="why-h">
+    <section class="band light needs band-rule" aria-labelledby="needs-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
       <div class="frame">
-        <div class="section-head">
-          <div>
+        <div class="head">
+          <div data-rv>
+            <p class="eyebrow">What an agent needs</p>
+            <h2 id="needs-h">Three things, and none of them is design.</h2>
+          </div>
+          <p class="lede" data-rv>An agent does not browse. It fetches a page, looks for facts it can trust, and tries to finish a task. It can take in a website quickly when three things are true.</p>
+        </div>
+        <div class="cells c3">
+          <div data-rv>
+            <span class="num" aria-hidden="true">01</span>
+            <h3>Text it can fetch</h3>
+            <p class="body">The words are in the page itself, under clear headings. Nothing important is locked inside an image, an animation or a script.</p>
+          </div>
+          <div data-rv>
+            <span class="num" aria-hidden="true">02</span>
+            <h3>Facts it can trust</h3>
+            <p class="body">Who you are, what you do, where and when, stated plainly and repeated as structured data that matches what the page says.</p>
+          </div>
+          <div data-rv>
+            <span class="num" aria-hidden="true">03</span>
+            <h3>Actions it can finish</h3>
+            <p class="body">Booking, quote and contact forms with labeled fields and no dead ends, and no bot wall in front of a customer's agent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band dark compare band-rule" aria-labelledby="compare-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
+      <div class="frame">
+        <div class="head">
+          <div data-rv>
+            <p class="eyebrow">Same page</p>
+            <h2 id="compare-h">One page, read two ways.</h2>
+          </div>
+          <p class="lede" data-rv>Good design still wins the person. It does nothing for the agent, which keeps only what it can read and use.</p>
+        </div>
+        <div class="cells c2">
+          <div data-rv>
+            <h3>A person sees</h3>
+            <ul>
+              <li>Layout and spacing</li>
+              <li>Images and brand</li>
+              <li>Motion and polish</li>
+            </ul>
+          </div>
+          <div class="agent" data-rv>
+            <h3>An agent reads</h3>
+            <ul>
+              <li>Headings and sentences</li>
+              <li>Structured facts</li>
+              <li>Links and forms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band light why band-rule" aria-labelledby="why-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
+      <div class="frame">
+        <div class="head">
+          <div data-rv>
             <p class="eyebrow">Why now</p>
             <h2 id="why-h">Most web traffic is already automated.</h2>
           </div>
-          <p class="lede">And the part that acts for real customers is the fastest-growing part.</p>
+          <p class="lede" data-rv>And the part that acts for real customers is the fastest-growing part. Your customers have started asking an assistant instead of typing a search.</p>
         </div>
-
-        <!-- Statistics: each <li> is self-contained. Edit the figure and sentence, or delete the whole <li>. -->
-        <ul class="stats">
-          <li data-stat="bots-57">
-            <!-- Guardrail: this counts all bots. Keep "bots" or "automated" next to the figure. -->
-            <div><p class="stat-fig">57%</p></div>
-            <div>
-              <p>Bots passed humans in June 2026, at about 57% of web page traffic on Cloudflare's network.</p>
-              <span class="tag src">All automated traffic · Cloudflare</span>
-            </div>
-          </li>
-          <li data-stat="agents-7851">
-            <div><p class="stat-fig">7,851%</p></div>
-            <div>
-              <p>Growth in a year of traffic from agents that click, fill in forms and check out.</p>
-              <span class="tag src">HUMAN Security</span>
-            </div>
-          </li>
-          <li data-stat="requests-41">
-            <div><p class="stat-fig">41.5%</p></div>
-            <div>
-              <p>Rise in AI agent requests on DataDome's network in a single quarter, Q3 2026.</p>
-              <span class="tag src">DataDome</span>
-            </div>
-          </li>
-          <li data-stat="referrals-303">
-            <div><p class="stat-fig">303%</p></div>
-            <div>
-              <p>Rise in ChatGPT referrals to B2B websites in the year to June 2026.</p>
-              <span class="tag src">Demandbase</span>
-            </div>
-          </li>
-          <li data-stat="agent-payments">
-            <div><p class="stat-fig word">Agents can pay.</p></div>
-            <div>
-              <p>Google, OpenAI with Stripe, and the card networks have all shipped standards that let an agent pay on a customer's behalf.</p>
-            </div>
-          </li>
-        </ul>
-
-        <div class="why-close">
-          <p>Your customers have started asking an assistant instead of typing a search.</p>
-          <p>
-            <span>The assistant reads a handful of sites, picks the ones it can make sense of, and recommends or acts. A business it cannot read is not on the list.</span>
-            <span style="margin-top: 14px">The businesses that adapt this year will be the ones AI already knows when the volume arrives. The ones that wait will be catching up against competitors with a head start.</span>
-          </p>
+        <!-- Statistics: each cell is self-contained. The 57% counts all bots, so keep "bots" next to it. -->
+        <div class="cells c3">
+          <div data-rv>
+            <p class="fig">57%</p>
+            <p class="body">Bots passed humans in June 2026, at about 57% of web page traffic on Cloudflare's network.</p>
+            <p class="src">All automated traffic. Source: Cloudflare</p>
+          </div>
+          <div data-rv>
+            <p class="fig">7,851%</p>
+            <p class="body">Growth in a year of traffic from agents that click, fill in forms and check out.</p>
+            <p class="src">Source: HUMAN Security</p>
+          </div>
+          <div data-rv>
+            <p class="fig">303%</p>
+            <p class="body">Rise in ChatGPT referrals to B2B websites in the year to June 2026.</p>
+            <p class="src">Source: Demandbase</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- The offer -->
-    <section class="light" id="package" aria-labelledby="package-h">
+    <section class="band dark scan band-rule" id="scan" aria-labelledby="scan-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
       <div class="frame">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">The AI Transition Package</p>
-            <h2 id="package-h">Easy for AI agents to find, understand and act on.</h2>
+        <div class="sc">
+          <div class="sc-side" data-rv>
+            <p class="eyebrow">Free scan</p>
+            <h2 id="scan-h">Are you ready to do business with agents?</h2>
+            <p class="lede">Enter your URL. The scan arrives the way a crawler, an answer engine and an agent do, and shows what they can find, what they can understand, and where they give up.</p>
+            <form class="scan-form" method="post" data-source="agent-ready" data-label="Scan a website" data-action="Free scan of any website. 15 checks, under a minute." aria-label="Free agent-readiness scan" novalidate>
+              <label>
+                <span class="lab">Website URL</span>
+                <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
+              </label>
+              <div class="go"><button class="pill pill-red" type="submit">Scan my site</button></div>
+            </form>
+            <p class="scan-status" role="status" aria-live="polite"></p>
+            <p class="scan-note">Free scan. 15 checks. Takes under a minute.</p>
+            <!-- Filled when a scan runs -->
+            <div class="sc-sum" data-skip hidden>
+              <h3 id="sc-h" tabindex="-1"></h3>
+              <p class="sc-fig"><b></b><span></span></p>
+              <ul class="sc-layers"></ul>
+              <p class="sc-time"></p>
+              <p class="sc-score" hidden></p>
+            </div>
           </div>
-          <div>
-            <p class="lede">One fixed-scope engagement. You keep the site you have. We rebuild what sits underneath it so that search engines, answer engines and agents can all use it.</p>
+          <div class="sc-main" data-rv>
+            <ol class="sc-idle">
+              <li>
+                <span class="num" aria-hidden="true">01</span>
+                <div><h3>Find</h3><p class="body">Can crawlers get in? HTTPS, robots rules for AI crawlers, the sitemap, the page title and indexing.</p></div>
+              </li>
+              <li>
+                <span class="num" aria-hidden="true">02</span>
+                <div><h3>Understand</h3><p class="body">Can an assistant say what you do? Text that reads without JavaScript, and structured data for the business, its services and its FAQs.</p></div>
+              </li>
+              <li>
+                <span class="num" aria-hidden="true">03</span>
+                <div><h3>Act</h3><p class="body">Can an agent finish a task? A quote, booking or contact path, labeled form fields, and no CAPTCHA in the way.</p></div>
+              </li>
+            </ol>
+            <!-- Scorecard: counts show first; the checks unlock for an email. -->
+            <div data-skip>
+              <ol class="sc-progress" aria-hidden="true" hidden>
+                <li>Fetching your home page</li>
+                <li>Reading robots.txt and the sitemap</li>
+                <li>Looking for structured data</li>
+                <li>Arriving as an AI agent</li>
+                <li>Testing your forms</li>
+              </ol>
+              <p class="sc-error" role="alert" hidden></p>
+              <form class="gate" aria-labelledby="gate-h" novalidate hidden>
+                <h3 id="gate-h"></h3>
+                <p class="gate-sub"></p>
+                <div class="gate-row">
+                  <label>
+                    <span class="lab">Email</span>
+                    <input type="email" name="email" autocomplete="email" maxlength="255" placeholder="you@company.com" required>
+                  </label>
+                  <div class="go"><button class="pill pill-red" type="submit">Show my scorecard</button></div>
+                </div>
+                <p class="gate-status" role="status" aria-live="polite"></p>
+                <p class="gate-note">We'll also email you about what it takes to fix them.</p>
+              </form>
+              <ul class="sc-rows" hidden></ul>
+              <div class="sc-next" hidden>
+                <p><b>Each failed check is something we fix.</b> We'll be in touch by email with what it takes to fix yours.</p>
+                <div class="sc-actions">
+                  <a class="pill pill-red" href="/#book">Book a call</a>
+                  <button class="text-btn" type="button" data-rescan>Scan another site</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="gap">
-          <p>Your site was built for people who browse. Agents do not browse. They fetch a page, look for facts they can trust, and try to complete a task: get a price, check availability, book, order. If any of those steps fails, the agent moves to a competitor whose site works, and the customer never sees your name. We close that gap.</p>
-        </div>
-
-        <ol class="layers" aria-label="What's included: three layers">
-          <li>
-            <div class="layer-h"><span class="num">01</span><h3>Find</h3><span class="tag">SEO</span></div>
-            <ul>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Fix crawl and index problems</li>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Page speed, titles, internal links and sitemap</li>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Robots rules that let search and AI crawlers in on purpose, not block them by a default</li>
-            </ul>
-            <div class="changes">
-              <span class="tag">What it changes</span>
-              <p>Search engines and AI crawlers can reach every page that matters.</p>
-            </div>
-          </li>
-          <li>
-            <div class="layer-h"><span class="num">02</span><h3>Understand</h3><span class="tag">AEO</span></div>
-            <ul>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Structured data for the business, services, products, prices, hours, service area, reviews and FAQs</li>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Key pages rewritten to answer the questions customers ask, in plain statements an assistant can quote</li>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Name, address, phone and offer details that match everywhere they appear</li>
-            </ul>
-            <div class="changes">
-              <span class="tag">What it changes</span>
-              <p>Answer engines such as ChatGPT, Gemini, Claude, Perplexity and Google's AI results can state what you do, where, and for how much, and cite you for it.</p>
-            </div>
-          </li>
-          <li>
-            <div class="layer-h"><span class="num">03</span><h3>Act</h3><span class="tag">Agent-ready</span></div>
-            <ul>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Quote, booking, contact and order forms with labeled fields and no dead ends</li>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>No bot wall in front of a paying customer's agent</li>
-              <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>A machine-readable summary of the business and, where you sell products, an agent-ready product feed</li>
-            </ul>
-            <div class="changes">
-              <span class="tag">What it changes</span>
-              <p>An agent sent to get a quote, book a slot or place an order can finish the job on your site.</p>
-            </div>
-          </li>
-        </ol>
       </div>
     </section>
 
-    <!-- How it works -->
-    <section class="dark" id="how" aria-labelledby="how-h">
+    <section class="band light faq band-rule" aria-labelledby="faq-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
       <div class="frame">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">How it works</p>
-            <h2 id="how-h">It starts with a URL and finishes in four weeks.</h2>
-          </div>
-          <p class="lede">With almost nothing asked of you. You grant access once and approve customer-facing wording once.</p>
+        <div class="faq-h" data-rv>
+          <p class="eyebrow">Questions</p>
+          <h2 id="faq-h">What people ask us first.</h2>
         </div>
-        <div class="how">
-          <figure class="fig">
-            <div class="card">
-              <div class="card-top"><b>yourbusiness.com</b><span class="tag">Sample</span></div>
-              <ul>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>AI crawlers are blocked by robots.txt</span><span class="tag">Find</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>Sitemap found</span><span class="tag">Find</span></li>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>No services or prices marked up</span><span class="tag">Understand</span></li>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>Content needs JavaScript to be read</span><span class="tag">Understand</span></li>
-                <li class="fail"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg><span><span class="sr-only">Failed: </span>3 of 5 form fields have no label</span><span class="tag">Act</span></li>
-                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><span class="sr-only">Passed: </span>No bot wall in front of agents</span><span class="tag">Act</span></li>
-              </ul>
-              <p class="card-foot"><b>4 of 6 checks failed.</b> Each one maps to a fix in the package.</p>
-            </div>
-            <figcaption class="fig-tag"><span class="tag">Sample scorecard</span><span class="tag">Yours will differ</span></figcaption>
-          </figure>
-          <ol class="steps">
-            <li>
-              <span class="num">01</span>
-              <div>
-                <div class="step-h"><h3>Scan</h3><span class="tag">Free · under a minute</span></div>
-                <p>You enter your URL. Our scan checks what crawlers, answer engines and agents meet when they arrive, and gives you a scorecard: what they can find, what they can understand, and where they give up.</p>
-              </div>
-            </li>
-            <li>
-              <span class="num">02</span>
-              <div>
-                <div class="step-h"><h3>Proposal</h3><span class="tag">Same day</span></div>
-                <p>The scorecard is the proposal. Each failed check maps to a fix in the package.</p>
-              </div>
-            </li>
-            <li>
-              <span class="num">03</span>
-              <div>
-                <div class="step-h"><h3>Build</h3><span class="tag">Weeks 1 to 3</span></div>
-                <p>We do the find, understand and act work on the live site. You grant access once and approve customer-facing wording once.</p>
-              </div>
-            </li>
-            <li>
-              <span class="num">04</span>
-              <div>
-                <div class="step-h"><h3>Verify</h3><span class="tag">Week 4</span></div>
-                <p>We rerun the same scan. The engagement is finished when an agent can complete each revenue path, and you get the before-and-after scorecard.</p>
-              </div>
-            </li>
-            <li>
-              <span class="num">05</span>
-              <div>
-                <div class="step-h"><h3>Retainer</h3><span class="tag">Monthly</span></div>
-                <p>We keep servicing the site: rescans, AI visibility reporting, and updates as the assistants and standards change.</p>
-              </div>
-            </li>
-          </ol>
+        <div class="faq-list" data-rv>
+          <details open>
+            <summary>What is an agent-ready website?</summary>
+            <p>A website an AI agent can find, understand and act on. The agent can reach the pages, read the facts, and complete a task such as booking a call or requesting a quote.</p>
+          </details>
+          <details>
+            <summary>Do we have to rebuild our site?</summary>
+            <p>No. You keep the site you have. We rebuild what sits underneath it so that search engines, answer engines and agents can all use it.</p>
+          </details>
+          <details>
+            <summary>How do we find out where our site stands?</summary>
+            <p>Run the <a href="#scan">free scan</a>. It runs 15 checks on your URL and takes under a minute.</p>
+          </details>
+          <details>
+            <summary>What does the scan check?</summary>
+            <p>Three things. Whether crawlers and AI agents can find the site, whether they can understand what the business offers, and whether they can act on it by reaching a form and filling it in.</p>
+          </details>
+          <details>
+            <summary>How long does the work take?</summary>
+            <p>Four weeks. We work on the live site for three weeks, then rerun the same scan in week four. You grant access once and approve customer-facing wording once.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <!-- What you get, and how we measure it -->
-    <section class="light" id="measures" aria-labelledby="measures-h">
+    <section class="band dark closing band-rule" aria-labelledby="closing-h">
+      <canvas class="bg-dots" aria-hidden="true"></canvas>
       <div class="frame">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">What you get</p>
-            <h2 id="measures-h">Six measures, tested before and after.</h2>
+        <div class="closing-cta">
+          <h2 id="closing-h" data-rv>Be ready for both readers.</h2>
+          <p class="lede" data-rv>Scan your site to see what agents get from it today. If you would rather talk it through, book a call.</p>
+          <div class="ctas" data-rv>
+            <a class="pill pill-red" href="#scan">Scan my site</a>
+            <a class="pill" href="/#book" data-action="A four-question form.">Book a call</a>
           </div>
-          <p class="lede">The first four are ours to deliver, and we commit to them. The last two depend on the assistants, so we report them and work to move them, without promising a number.</p>
         </div>
-        <table class="measures">
-          <caption class="sr-only">What the AI Transition Package delivers and how each measure is tested</caption>
-          <thead>
-            <tr><th scope="col">Measure</th><th scope="col">How it is tested</th><th scope="col">Target at week 4</th></tr>
-          </thead>
-          <tbody>
-            <tr class="group"><th colspan="3" scope="rowgroup">We commit to these <span>· ours to deliver</span></th></tr>
-            <tr><th scope="row">Crawler access</th><td data-l="How it is tested">Search and AI crawlers request every key page</td><td data-l="Target at week 4">All key pages reachable</td></tr>
-            <tr><th scope="row">Structured data</th><td data-l="How it is tested">Validation of business, service, product and FAQ markup</td><td data-l="Target at week 4">No errors on key pages</td></tr>
-            <tr><th scope="row">Agent task completion</th><td data-l="How it is tested">AI agents attempt each revenue path: quote, booking, order</td><td data-l="Target at week 4">Every path completed</td></tr>
-            <tr><th scope="row">AI answer accuracy</th><td data-l="How it is tested">Assistants asked what the business does, where, and at what price</td><td data-l="Target at week 4">Correct on all three</td></tr>
-          </tbody>
-          <tbody>
-            <tr class="group soft"><th colspan="3" scope="rowgroup">We report these <span>· they depend on the assistants</span></th></tr>
-            <tr><th scope="row">AI visibility</th><td data-l="How it is tested">Share of 20 target customer questions where the business is mentioned or cited</td><td data-l="Target at week 4">Baseline set, then tracked monthly</td></tr>
-            <tr><th scope="row">AI referral visits</th><td data-l="How it is tested">Analytics segment for visits arriving from AI assistants</td><td data-l="Target at week 4">Baseline set, then tracked monthly</td></tr>
-          </tbody>
-        </table>
+        <canvas class="tone crew" data-src="/crew-dots.png?v=6" data-fit="1" data-align="center" data-floor="0.12" data-grain="340" data-max="3.5" role="img" aria-label="The wolfgrey team: raccoon, fox, wolf, bear and hawk, with a kitten"></canvas>
       </div>
     </section>
 
-    <!-- Scan (repeat) -->
-    <section class="light band-rule" id="scan" aria-labelledby="scan-h">
-      <div class="frame book-grid">
-        <div class="book-head">
-          <h2 id="scan-h">See what agents see.</h2>
-          <p class="lede">Enter your URL. Our scan checks what crawlers, answer engines and agents meet when they arrive, and gives you a scorecard.</p>
-          <ul class="book-bring">
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they can find</li>
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>What they can understand</li>
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Where they give up</li>
-          </ul>
-        </div>
-        <div class="book-side">
-          <form class="scan-form full" method="post" data-source="agent-ready" aria-labelledby="scan-h" novalidate>
-            <label class="field">
-              <span class="field-label">Website URL</span>
-              <span class="field-hint">Your home page address is enough.</span>
-              <input type="text" name="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" placeholder="yourbusiness.com" required>
-            </label>
-            <div class="book-actions">
-              <button class="pill pill-red" type="submit">Scan my site</button>
-              <span class="book-note">Free scan. 15 checks. Takes under a minute.</span>
-              <p class="scan-status" role="status" aria-live="polite"></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="closing dark">
-    <canvas id="foot-dots" aria-hidden="true"></canvas>
+  <!-- ============================ AGENT VIEW ============================
+       Empty until the switch is flipped. Filled by script from the markup above,
+       so it cannot drift from the page and adds nothing to what an agent fetches. -->
+  <section class="band light agent-view" id="agent" aria-labelledby="agent-h" hidden>
     <div class="frame">
-      <div class="closing-cta">
+      <div class="head">
         <div>
-          <h2>Be on the list.</h2>
-          <p>A business an assistant cannot read is not recommended. Find out where yours stands.</p>
+          <p class="eyebrow">Agent view</p>
+          <h2 id="agent-h" tabindex="-1">This page, in the order an agent reads it.</h2>
         </div>
-        <a class="pill pill-red" href="#scan">Scan my site</a>
+        <div>
+          <p class="lede">An agent does not see a design. It works through a page in six steps, and each step depends on the one before. Everything on the right is read from this page's own markup.</p>
+          <button class="pill" type="button" data-set-view="human">Back to the human view</button>
+        </div>
       </div>
-      <div class="crew-space" role="img" aria-label="The wolfgrey team: raccoon, fox, wolf, bear and hawk, with a kitten"></div>
-      <div class="foot">
+      <div class="cells c4 stats" id="av-stats"></div>
+      <ol class="av-steps">
+        <li class="av-step">
+          <div class="av-why">
+            <span class="num">01<span>Text it can fetch</span></span>
+            <h3>Can it get in?</h3>
+            <p class="body">The first request decides everything. If robots.txt turns the agent away, the page returns an error, or a bot wall answers instead, the visit ends here and nothing below is read.</p>
+          </div>
+          <div class="av-data">
+            <dl class="rows" id="av-access"></dl>
+          </div>
+        </li>
+        <li class="av-step">
+          <div class="av-why">
+            <span class="num">02<span>Text it can fetch</span></span>
+            <h3>What is this page?</h3>
+            <p class="body">Next it reads the title and the description. A search engine lists them, and an assistant uses them to decide whether the page is worth opening, so they should say plainly what the page is and who it is for.</p>
+          </div>
+          <div class="av-data">
+            <dl class="rows" id="av-identity"></dl>
+          </div>
+        </li>
+        <li class="av-step">
+          <div class="av-why">
+            <span class="num">03<span>Text it can fetch</span></span>
+            <h3>How is it organized?</h3>
+            <p class="body">Headings are the map. An agent skims them to find the part that answers the question it was sent with. One clear top heading and plain section headings do more here than any styling.</p>
+          </div>
+          <div class="av-data">
+            <div class="doc outline" id="av-outline"></div>
+          </div>
+        </li>
+        <li class="av-step">
+          <div class="av-why">
+            <span class="num">04<span>Text it can fetch</span></span>
+            <h3>What does it say?</h3>
+            <p class="body">Then it reads the sentences. This is all it can quote or repeat to a customer. Words that sit inside an image, an animation or a script that has to run first usually never reach it.</p>
+          </div>
+          <div class="av-data">
+            <div class="av-bar"><p id="av-count"></p><button class="pill" type="button" id="av-copy">Copy the text</button></div>
+            <details class="av-full">
+              <summary>Read the full text</summary>
+              <div class="doc" id="av-doc"></div>
+            </details>
+          </div>
+        </li>
+        <li class="av-step">
+          <div class="av-why">
+            <span class="num">05<span>Facts it can trust</span></span>
+            <h3>Which facts can it trust?</h3>
+            <p class="body">Structured data states who you are and what you offer in a format made for machines. An agent leans on it when it matches the page text, and discounts it when the two disagree.</p>
+          </div>
+          <div class="av-data">
+            <dl class="rows" id="av-facts"></dl>
+            <p class="av-note">Read from the structured data in this page. Every line is also stated in the text.</p>
+          </div>
+        </li>
+        <li class="av-step">
+          <div class="av-why">
+            <span class="num">06<span>Actions it can finish</span></span>
+            <h3>What can it do next?</h3>
+            <p class="body">A visit pays off only when the agent can act: follow a link or complete a form. Labeled fields tell it what to enter. An unlabeled field, a dead end or a CAPTCHA stops it.</p>
+          </div>
+          <div class="av-data">
+            <ul class="actions" id="av-actions"></ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <footer class="band dark foot">
+    <div class="frame">
+      <div class="foot-about">
         <img src="/logo-white.svg" alt="wolfgrey" width="73" height="16">
-        <span class="foot-meta"><a href="mailto:hey@wolfgrey.ai">hey@wolfgrey.ai</a><a href="https://x.com/__wolfgrey__">X</a><span>&copy; 2026 wolfgrey.ai</span></span>
+        <p>wolfgrey.ai is an AI enablement firm. We put AI to work inside small and midsize service businesses: realtors, trades, accountants, law firms, clinics and agencies.</p>
       </div>
+      <span class="foot-meta"><a href="mailto:hey@wolfgrey.ai">hey@wolfgrey.ai</a><a href="https://x.com/__wolfgrey__">X</a><span>&copy; 2026 wolfgrey.ai</span></span>
     </div>
   </footer>
 
   <script>
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function () {
+    'use strict';
+    const root = document.documentElement;
+    const human = document.getElementById('human');
+    const agent = document.getElementById('agent');
+    const BASE = 'https://wolfgrey.ai/agent-ready/';
+    const $ = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+    const abs = href => { try { return new URL(href, BASE).href; } catch (e) { return href; } };
 
-    /* ---------- Halftone dot fields (shared with the homepage) ---------- */
-    const hash = (x, y) => { const n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453; return n - Math.floor(n); };
-    const blob = (x, y) => (Math.sin(x * .011) + Math.sin(y * .013 + x * .004) + Math.sin((x + y) * .007)) / 3;
-
-    const sources = {};
-    function loadSource(url) {
-      if (!sources[url]) {
-        const img = new Image();
-        img.src = url;
-        sources[url] = img.decode().then(() => {
-          const c = document.createElement('canvas');
-          c.width = img.naturalWidth; c.height = img.naturalHeight;
-          const ctx = c.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-          return { w: c.width, h: c.height, data: ctx.getImageData(0, 0, c.width, c.height).data };
-        });
-      }
-      return sources[url];
-    }
-
-    function dotField(canvas, opts) {
-      const S = opts.step || 5;
-      const ready = opts.src ? loadSource(opts.src) : Promise.resolve(null);
-      const ink = opts.ink || '#F4F2F0', hotInk = opts.hot || '#FF4D4D';
-      let dots = [], dpr = 1, revealed = !opts.src, demo = () => {};
-
-      async function layout() {
-        const src = await ready;
-        const w = canvas.clientWidth, h = canvas.clientHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, opts.maxDpr || 2);
-        canvas.width = w * dpr; canvas.height = h * dpr;
-        canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const box = src ? opts.place(w, h, src.w / src.h) : null;
-        const sample = (x, y) => {
-          if (!box || x < box.x || x >= box.x + box.w || y < box.y || y >= box.y + box.h) return { a: 0, t: 0 };
-          const u = Math.floor((x - box.x) / box.w * src.w);
-          const v = Math.floor((y - box.y) / box.h * src.h);
-          const i = (v * src.w + u) * 4;
-          const lum = src.data[i] / 255, a = src.data[i + 3] / 255;
-          return { a, t: a * (opts.floor + (1 - opts.floor) * Math.pow(1 - lum, opts.curve)) * box.alpha };
-        };
-        const figure = (x, y, step) => {
-          const { t } = sample(x, y);
-          if (t <= 0.04 || hash(x * 0.7, y * 1.3) >= opts.keep + (1 - opts.keep) * t) return false;
-          let k = Math.sqrt(t);
-          if (opts.levels) k = Math.max(1, Math.round(k * opts.levels)) / opts.levels;
-          dots.push({ x, y, r: step * opts.size * k, a: opts.a0 + opts.a1 * t, d: hash(x, y) * 0.7 });
-          return true;
-        };
-        const F = typeof opts.fine === 'function' ? opts.fine(box) : opts.fine;
-        dots = [];
-        for (let y = S / 2; y < h; y += S) {
-          for (let x = S / 2; x < w; x += S) {
-            if (F ? sample(x, y).a > 0.1 : figure(x, y, S)) continue;
-            const bl = blob(x, y), c = Math.max(0, bl - opts.ambientCut);
-            if (hash(y, x) < 0.82) dots.push({ x, y, r: 0.8 + c * 0.6, a: opts.grid * (0.7 + 0.3 * bl) + c * 0.16, d: hash(x + 1, y) * 0.7 });
-          }
+    /* ---------- Page markup -> the text an agent keeps ---------- */
+    const SKIP = 'canvas, svg, script, style, button, [hidden], [data-skip], [aria-hidden="true"]';
+    function inline(el) {
+      let out = '';
+      el.childNodes.forEach(n => {
+        if (n.nodeType === 3) out += n.nodeValue;
+        else if (n.nodeType === 1 && !n.matches(SKIP)) {
+          if (n.tagName === 'A') out += '[' + inline(n).trim() + '](' + abs(n.getAttribute('href')) + ')';
+          else out += inline(n);
         }
-        if (F && box) {
-          for (let y = box.y + F / 2; y < Math.min(h, box.y + box.h); y += F) {
-            for (let x = box.x + F / 2; x < Math.min(w, box.x + box.w); x += F) {
-              if (sample(x, y).a > 0.1) figure(x, y, F);
-            }
-          }
-        }
-        draw(revealed || reduceMotion ? 1 : 0);
-      }
-
-      function draw(p) {
-        const ctx = canvas.getContext('2d');
-        ctx.save();
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.restore();
-        ctx.fillStyle = ink;
-        for (const d of dots) {
-          const k = Math.min(1, Math.max(0, (p - d.d) / 0.3));
-          if (!k) continue;
-          ctx.globalAlpha = d.a * k;
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.globalAlpha = 1;
-      }
-
-      function reveal() {
-        if (reduceMotion || document.hidden) { revealed = true; return draw(1); }
-        const start = performance.now();
-        const tick = now => {
-          const p = Math.min(1, (now - start) / 1600);
-          draw(p);
-          if (p < 1) requestAnimationFrame(tick);
-          else { revealed = true; demo(); }
-        };
-        requestAnimationFrame(tick);
-      }
-
-      let laidOut = '', timer;
-      const size = () => canvas.clientWidth + 'x' + canvas.clientHeight;
-      const relayout = () => {
-        if (size() === laidOut) return;
-        clearTimeout(timer);
-        timer = setTimeout(() => { laidOut = size(); layout().then(() => draw(revealed ? 1 : 0)); }, 120);
-      };
-      const ro = new ResizeObserver(relayout);
-      laidOut = size();
-      layout().then(() => { ro.observe(canvas); relayout(); opts.revealNow ? reveal() : null; });
-      document.fonts && document.fonts.ready.then(relayout);
-
-      if (opts.interactive && !reduceMotion) {
-        const R = 110, PUSH = 12, PAD = PUSH + S;
-        const ptr = { x: 0, y: 0, tx: 0, ty: 0, s: 0, ts: 0, cx: 0, cy: 0 };
-        let raf = 0, prev = null;
-        const frame = () => {
-          ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
-          ptr.s += (ptr.ts - ptr.s) * 0.1;
-          const on = ptr.s > 0.002;
-          const cur = on ? [ptr.x - R, ptr.y - R, ptr.x + R, ptr.y + R] : null;
-          const r = prev && cur ? [Math.min(prev[0], cur[0]), Math.min(prev[1], cur[1]), Math.max(prev[2], cur[2]), Math.max(prev[3], cur[3])] : prev || cur;
-          prev = cur;
-          if (r) {
-            const ctx = canvas.getContext('2d');
-            ctx.save();
-            ctx.beginPath(); ctx.rect(r[0], r[1], r[2] - r[0], r[3] - r[1]); ctx.clip();
-            ctx.clearRect(r[0], r[1], r[2] - r[0], r[3] - r[1]);
-            const hot = [];
-            ctx.fillStyle = ink;
-            for (const d of dots) {
-              if (d.x < r[0] - PAD || d.x > r[2] + PAD || d.y < r[1] - PAD || d.y > r[3] + PAD) continue;
-              let x = d.x, y = d.y, rad = d.r, a = d.a;
-              if (on) {
-                const dx = d.x - ptr.x, dy = d.y - ptr.y, dist = Math.hypot(dx, dy) || 1;
-                if (dist < R) {
-                  let f = 1 - dist / R; f *= f * ptr.s;
-                  x += dx / dist * f * PUSH; y += dy / dist * f * PUSH; rad *= 1 + f * 0.4; a = Math.min(1, a + f * 0.45);
-                  if (f > 0.55) { hot.push(x, y, rad); continue; }
-                }
-              }
-              ctx.globalAlpha = a;
-              ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
-            }
-            ctx.fillStyle = hotInk; ctx.globalAlpha = 0.85;
-            for (let i = 0; i < hot.length; i += 3) { ctx.beginPath(); ctx.arc(hot[i], hot[i + 1], hot[i + 2], 0, Math.PI * 2); ctx.fill(); }
-            ctx.restore();
-          }
-          const moving = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.3 || Math.abs(ptr.ts - ptr.s) > 0.004 || (!on && prev);
-          raf = moving ? requestAnimationFrame(frame) : 0;
-        };
-        const aim = () => {
-          const b = canvas.getBoundingClientRect();
-          ptr.tx = ptr.cx - b.left; ptr.ty = ptr.cy - b.top;
-        };
-        const host = opts.interactive;
-        const press = (cx, cy) => {
-          ptr.cx = cx; ptr.cy = cy; aim();
-          if (ptr.s < 0.01) { ptr.x = ptr.tx; ptr.y = ptr.ty; }
-          ptr.ts = 1;
-          if (!raf) raf = requestAnimationFrame(frame);
-        };
-        const release = () => { ptr.ts = 0; if (!raf) raf = requestAnimationFrame(frame); };
-        host.addEventListener('pointermove', e => {
-          if (e.pointerType === 'mouse' && revealed) press(e.clientX, e.clientY);
-        });
-        host.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') release(); });
-        const touch = e => { const t = e.touches[0]; if (t && revealed && !demoing) press(t.clientX, t.clientY); };
-        host.addEventListener('touchstart', touch, { passive: true });
-        host.addEventListener('touchmove', touch, { passive: true });
-        host.addEventListener('touchend', e => { if (!e.touches.length && !demoing) release(); }, { passive: true });
-        host.addEventListener('touchcancel', () => { if (!demoing) release(); }, { passive: true });
-
-        var demoing = false;
-        demo = () => {
-          if (!opts.demo || matchMedia('(hover: hover)').matches) return;
-          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight);
-          if (!pts) return;
-          const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { io.disconnect(); setTimeout(sweep, 250); } }, { threshold: 0.6 });
-          io.observe(opts.demoTarget || canvas);
-        };
-        const sweep = () => {
-          const pts = opts.demo(canvas.clientWidth, canvas.clientHeight);
-          const start = performance.now(), T = 2200;
-          demoing = true;
-          const step = now => {
-            const q = Math.min(1, (now - start) / T), e = q < .5 ? 2 * q * q : 1 - Math.pow(-2 * q + 2, 2) / 2;
-            const seg = e * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(seg)), f = seg - i;
-            const x = pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, y = pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f;
-            const b = canvas.getBoundingClientRect();
-            press(b.left + x, b.top + y);
-            if (q < 1) requestAnimationFrame(step);
-            else { demoing = false; release(); }
-          };
-          requestAnimationFrame(step);
-        };
-        window.addEventListener('scroll', () => { if (ptr.ts) { aim(); if (!raf) raf = requestAnimationFrame(frame); } }, { passive: true });
-      }
-
-      return { reveal, ready };
-    }
-
-    dotField(document.getElementById('hero-dots'), {
-      src: '/wolf-hero-dots.png?v=2',
-      step: 5, fine: box => box && box.w < 600 ? 2.5 : 0, maxDpr: 3, levels: 3, floor: 0, curve: 1, keep: 1, size: 0.44, a0: 0.08, a1: 0.62,
-      grid: 0.05, ambientCut: 0.25,
-      revealNow: true,
-      interactive: document.querySelector('.hero'),
-      place(w, h, ratio) {
-        if (w < 820) {
-          const slot = document.querySelector('.hero-art').getBoundingClientRect(), c = document.getElementById('hero-dots').getBoundingClientRect();
-          return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 1 };
-        }
-        const bh = h * 0.94, bw = bh * ratio;
-        return { x: Math.max(w * 0.5, w - bw - w * 0.02), y: h - bh, w: bw, h: bh, alpha: 1 };
-      },
-      demo(w) {
-        if (w >= 820) return null;
-        const s = document.querySelector('.hero-art').getBoundingClientRect(), c = document.getElementById('hero-dots').getBoundingClientRect();
-        const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
-        return [at(0.12, 0.3), at(0.5, 0.42), at(0.88, 0.3), at(0.55, 0.62)];
-      },
-      demoTarget: document.querySelector('.hero-art')
-    });
-
-    const footCanvas = document.getElementById('foot-dots');
-    const footField = dotField(footCanvas, {
-      src: '/crew-dots.png?v=6',
-      step: 5, fine: box => Math.min(3.5, Math.max(2.2, box.w / 340)), maxDpr: 3, levels: 3, floor: 0.12, curve: 1, keep: 1, size: 0.5, a0: 0.1, a1: 0.72,
-      grid: 0.05, ambientCut: 0.15,
-      interactive: document.querySelector('.closing'),
-      place() {
-        const slot = document.querySelector('.crew-space').getBoundingClientRect(), c = footCanvas.getBoundingClientRect();
-        return { x: slot.left - c.left, y: slot.top - c.top, w: slot.width, h: slot.height, alpha: 0.85 };
-      },
-      demo() {
-        const s = document.querySelector('.crew-space').getBoundingClientRect(), c = footCanvas.getBoundingClientRect();
-        const at = (u, v) => [s.left - c.left + s.width * u, s.top - c.top + s.height * v];
-        return [at(0.05, 0.25), at(0.35, 0.2), at(0.65, 0.3), at(0.95, 0.22)];
-      },
-      demoTarget: document.querySelector('.crew-space')
-    });
-    new IntersectionObserver((entries, obs) => {
-      if (entries[0].isIntersecting) { footField.ready.then(() => setTimeout(footField.reveal, 50)); obs.disconnect(); }
-    }, { threshold: 0.2 }).observe(footCanvas);
-
-    const gridIO = new IntersectionObserver(entries => entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      gridIO.unobserve(e.target);
-      const sec = e.target, light = sec.classList.contains('light');
-      const c = document.createElement('canvas');
-      c.className = 'bg-dots'; c.setAttribute('aria-hidden', 'true');
-      sec.prepend(c);
-      dotField(c, {
-        step: 5, grid: light ? 0.09 : 0.05, ambientCut: 0.3, maxDpr: 1.5,
-        ink: light ? '#1B1919' : '#F4F2F0', hot: light ? '#D12F2F' : '#FF4D4D',
-        interactive: sec
       });
-    }), { rootMargin: '300px 0px' });
-    document.querySelectorAll('main > section').forEach(sec => gridIO.observe(sec));
+      return out.replace(/\s+/g, ' ');
+    }
+    function walk(el, lines) {
+      for (const n of el.children) {
+        if (n.matches(SKIP)) continue;
+        const t = n.tagName;
+        if (t === 'H1' || t === 'H2' || t === 'H3') lines.push({ k: t.toLowerCase(), mark: '#'.repeat(+t[1]), text: inline(n).trim() });
+        else if (t === 'SUMMARY') lines.push({ k: 'h3', mark: '###', text: inline(n).trim() });
+        else if (t === 'P') lines.push({ k: n.classList.contains('eyebrow') ? 'eb' : 'p', mark: '', text: inline(n).trim() });
+        else if (t === 'LI' && !n.querySelector('h3, p')) lines.push({ k: 'li', mark: '-', text: inline(n).trim() });
+        else if (t === 'FORM') lines.push({ k: 'p', mark: '', text: formText(n) });
+        else walk(n, lines);
+      }
+      return lines;
+    }
+    const fieldsOf = form => [...form.querySelectorAll('label')].map(l => inline(l).trim()).filter(Boolean);
+    const formText = form => 'Form: ' + form.getAttribute('aria-label') + '. Fields: ' + fieldsOf(form).join(', ') + '. Button: ' + form.querySelector('button').textContent.trim() + '.';
+    const toText = lines => lines.map((l, i) => (i && l.k !== 'li' ? '\n' : '') + (l.mark ? l.mark + ' ' : '') + l.text).join('\n');
+    const render = (box, lines) => lines.forEach((l, i) => {
+      const d = $('div', 'ln ' + l.k);
+      d.style.setProperty('--i', i);
+      if (l.mark) d.append($('i', '', l.mark));
+      d.append(l.text);
+      box.append(d);
+    });
+
+    /* Read once, before anything on the page changes. The hero shows the first few lines. */
+    const lines = walk(human, []).concat(walk(document.querySelector('.foot-about'), [])).filter(l => l.text);
+    const docText = toText(lines);
+    render(document.getElementById('peek'), lines.slice(0, 8));
+
+    let built = false;
+    function build() {
+      if (built) return; built = true;
+      const id = x => document.getElementById(x);
+      const fill = (dd, vals) => dd.replaceChildren(...[].concat(vals).map(v => { const s = $('span'); if (Array.isArray(v)) s.append($('b', '', v[0]), ' ' + v[1]); else s.textContent = v; return s; }));
+      const row = (box, k, vals) => { const r = $('div'), dd = $('dd'); fill(dd, vals); r.append($('dt', '', k), dd); box.append(r); return dd; };
+      const meta = n => (document.querySelector('meta[name="' + n + '"]') || {}).content || '';
+      const heads = lines.filter(l => /^h\d$/.test(l.k));
+      const words = docText.split(/\s+/).filter(Boolean).length;
+
+      /* 01 Access: the address, the live robots.txt, and the page's own index rule */
+      const access = id('av-access');
+      row(access, 'Address', document.querySelector('link[rel="canonical"]').href);
+      const robots = row(access, 'robots.txt', 'Reading…');
+      row(access, 'Index rule', meta('robots') || 'None set, so the page can be indexed.');
+      row(access, 'JavaScript', 'Not needed. The text is in the HTML itself.');
+      fetch('/robots.txt').then(r => (r.ok ? r.text() : Promise.reject())).then(t => {
+        if (/^\s*</.test(t)) throw 0;
+        const rules = t.split('\n').map(x => x.trim()).filter(x => x && x[0] !== '#');
+        const closed = rules.filter(x => /^disallow\s*:\s*\S/i.test(x)).map(x => x.replace(/^disallow\s*:\s*/i, ''));
+        const maps = rules.filter(x => /^sitemap\s*:/i.test(x)).map(x => ['Sitemap', x.replace(/^sitemap\s*:\s*/i, '')]);
+        fill(robots, [closed.includes('/') ? 'Closed to some or all crawlers.' : closed.length ? 'Open, except ' + closed.join(', ') + '.' : 'Open to every crawler.'].concat(maps));
+      }).catch(() => fill(robots, 'Not found, so nothing is blocked.'));
+
+      /* 02 Identity: straight from the <head> */
+      const identity = id('av-identity');
+      row(identity, 'Title', document.title);
+      row(identity, 'Description', meta('description'));
+      row(identity, 'Language', document.documentElement.lang);
+
+      /* 03 Outline, 04 Text: both from the page markup */
+      render(id('av-outline'), heads);
+      id('av-count').textContent = words.toLocaleString() + ' words under ' + heads.length + ' headings.';
+      render(id('av-doc'), lines);
+
+      /* 05 Facts: straight from the JSON-LD block */
+      const facts = id('av-facts');
+      try {
+        const g = JSON.parse(id('facts').textContent)['@graph'];
+        const org = g.find(x => x['@type'] === 'Organization'), faq = g.find(x => x['@type'] === 'FAQPage');
+        row(facts, 'Name', org.name);
+        row(facts, 'Type', 'Organization');
+        row(facts, 'Website', org.url);
+        row(facts, 'What it is', org.description);
+        row(facts, 'Who it serves', org.audience.audienceType);
+        row(facts, 'Answers', faq.mainEntity.map(x => x.name));
+      } catch (e) { row(facts, 'Facts', 'No structured data found.'); }
+
+      /* 06 Actions: every link and form in the page that is marked as something an agent can do */
+      const actions = id('av-actions');
+      human.querySelectorAll('[data-action]').forEach(a => {
+        const isForm = a.tagName === 'FORM', href = isForm ? '#' + a.closest('section').id : a.getAttribute('href');
+        const li = $('li'), link = $('a', '', abs(href));
+        link.href = href;
+        if (isForm) link.dataset.setView = 'human';
+        li.append($('b', '', isForm ? a.dataset.label : a.textContent.trim()), link, $('span', '', a.dataset.action + (isForm ? ' Fields: ' + fieldsOf(a).join(', ') + '.' : '')));
+        actions.append(li);
+      });
+
+      /* What the agent came away with */
+      const stats = [[words.toLocaleString(), 'words of text'], ['About ' + (Math.round(docText.length / 40) * 10).toLocaleString(), 'tokens, estimated'], [heads.length, 'headings'], [actions.children.length, 'actions it can finish']];
+      stats.forEach(x => { const d = $('div'); d.append($('strong', '', x[0]), $('span', '', x[1])); id('av-stats').append(d); });
+    }
+
+    document.getElementById('av-copy').addEventListener('click', async e => {
+      const b = e.currentTarget;
+      try { await navigator.clipboard.writeText(docText); b.textContent = 'Copied'; }
+      catch (err) { const r = document.createRange(); r.selectNodeContents(document.getElementById('av-doc')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; }
+      setTimeout(() => { b.textContent = 'Copy the text'; }, 1800);
+    });
+
+    /* ---------- The switch ---------- */
+    function setView(view, user) {
+      const isAgent = view === 'agent';
+      if (user && (root.dataset.view || 'human') === view) return;
+      if (isAgent) build();
+      root.dataset.view = isAgent ? 'agent' : 'human';
+      human.hidden = isAgent; agent.hidden = !isAgent;
+      document.querySelectorAll('.switch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setView === root.dataset.view)));
+      const shown = isAgent ? agent : human;
+      shown.classList.remove('view-in'); void shown.offsetWidth; shown.classList.add('view-in');
+      if (user) {
+        history.replaceState(null, '', isAgent ? '#agent' : location.pathname + location.search);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        if (isAgent && !document.activeElement.closest('.switch')) document.getElementById('agent-h').focus({ preventScroll: true });
+      }
+    }
+    document.addEventListener('click', e => { const b = e.target.closest('[data-set-view]'); if (b) setView(b.dataset.setView, true); });
+    if (location.hash === '#agent') setView('agent', false);
 
     /* ---------- Scan, then scorecard ----------
        1. POST {url} to /api/scan: runs the checks, returns the counts and a sealed token.
@@ -1069,12 +938,13 @@
        The API is the wolfgrey-scan project on Vercel. */
     const SCAN_API = 'https://wolfgrey-scan.vercel.app';
     (() => {
-      const forms = [...document.querySelectorAll('.scan-form')];
-      const sec = document.getElementById('scorecard'), $ = s => sec.querySelector(s);
-      const head = $('#sc-h'), fig = $('.sc-fig'), layersEl = $('.sc-layers'), scoreEl = $('.sc-score');
-      const progress = $('.sc-progress'), errorEl = $('.sc-error'), gate = $('.gate'), rowsEl = $('.sc-rows'), next = $('.sc-next');
+      const sec = document.getElementById('scan'), q = s => sec.querySelector(s);
+      const forms = [...document.querySelectorAll('.scan-form')], main = q('.scan-form');
+      const sum = q('.sc-sum'), head = q('#sc-h'), fig = q('.sc-fig'), layersEl = q('.sc-layers'), scoreEl = q('.sc-score');
+      const idle = q('.sc-idle'), progress = q('.sc-progress'), errorEl = q('.sc-error'), gate = q('.gate'), rowsEl = q('.sc-rows'), next = q('.sc-next');
       const params = new URLSearchParams(location.search), batch = params.get('s');
       const sourceOf = form => batch ? `${form.dataset.source}:${batch.slice(0, 60)}` : params.get('utm_source') || params.get('ref') || form.dataset.source;
+      const smooth = () => (root.classList.contains('motion') ? 'smooth' : 'auto');
       let token = '', source = '', busy = false, ticker = 0;
 
       // "yourbusiness.com" -> URL; null if it is not a web address
@@ -1084,13 +954,13 @@
         try {
           const u = new URL(/^https?:\/\//i.test(v) ? v : 'https://' + v);
           return /^[^.]+(\.[^.]+)+$/.test(u.hostname) ? u : null;
-        } catch { return null; }
+        } catch (e) { return null; }
       };
-      const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
-      const icon = status => {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      const SVG = 'http://www.w3.org/2000/svg';
+      const icon = st => {
+        const svg = document.createElementNS(SVG, 'svg'), use = document.createElementNS(SVG, 'use');
         svg.setAttribute('class', 'i'); svg.setAttribute('aria-hidden', 'true');
-        use.setAttribute('href', status === 'pass' ? '#i-check' : status === 'fail' ? '#i-x' : '#i-dash');
+        use.setAttribute('href', st === 'pass' ? '#i-check' : st === 'fail' ? '#i-x' : '#i-dash');
         svg.append(use); return svg;
       };
       const LABEL = { pass: 'Passed', fail: 'Failed', untested: 'Not tested' };
@@ -1100,34 +970,49 @@
         if (!res.ok) throw Object.assign(new Error(out.message || 'Request failed'), { friendly: out.message });
         return out;
       };
-      const show = (...els) => [fig, layersEl, scoreEl, progress, errorEl, gate, rowsEl, next].forEach(n => { n.hidden = !els.includes(n); });
+      // Right-hand panel shows exactly the given parts; the summary sits under the form.
+      const show = (...els) => [idle, progress, errorEl, gate, rowsEl, next].forEach(n => { n.hidden = !els.includes(n); });
 
       function summary(r) {
         fig.firstElementChild.textContent = `${r.failed} of ${r.total}`;
         fig.lastElementChild.textContent = r.failed === 1 ? 'check failed' : 'checks failed';
+        let pip = 0;
         layersEl.replaceChildren(...Object.entries(r.layers).map(([name, n]) => {
-          const li = el('li'), pips = el('span', 'pips'), all = n.pass + n.fail + n.untested;
+          const li = $('li'), pips = $('span', 'pips'), all = n.pass + n.fail + n.untested;
           pips.setAttribute('aria-hidden', 'true');
-          for (const s of ['pass', 'fail', 'untested']) for (let i = 0; i < n[s]; i++) pips.append(el('i', s));
-          li.append(el('span', '', name), pips, el('small', '', `${n.pass} of ${all} passed`));
+          for (const s of ['pass', 'fail', 'untested']) for (let i = 0; i < n[s]; i++) { const el = $('i', s); el.style.setProperty('--i', pip++); pips.append(el); }
+          li.append($('span', '', name), pips, $('small', '', `${n.pass} of ${all} passed`));
           return li;
         }));
+        fig.hidden = layersEl.hidden = false; scoreEl.hidden = true;
       }
 
+      // Grouped by layer, with the failed checks first in each group
+      const ORDER = { fail: 0, untested: 1, pass: 2 };
       function rows(list, locked) {
-        rowsEl.replaceChildren(...list.map((c, i) => {
-          const li = el('li', c.status), body = el('div');
-          li.style.setProperty('--i', i);
-          if (locked) {
-            const bar = el('span', 'redact'); bar.style.width = 38 + (i * 37) % 45 + '%';
-            body.append(bar);
-          } else {
-            const b = el('b'); b.append(el('span', 'sr-only', LABEL[c.status] + ': '), c.title);
-            body.append(b, el('p', '', c.detail));
-          }
-          li.append(icon(c.status), body, el('span', 'tag', c.layer));
-          return li;
-        }));
+        const groups = new Map();
+        list.forEach(c => { if (!groups.has(c.layer)) groups.set(c.layer, []); groups.get(c.layer).push(c); });
+        const out = []; let i = 0;
+        groups.forEach((checks, layer) => {
+          const g = $('li', 'grp'), passed = checks.filter(c => c.status === 'pass').length;
+          g.style.setProperty('--i', i++);
+          g.append($('span', '', layer), $('small', '', `${passed} of ${checks.length} passed`));
+          out.push(g);
+          checks.slice().sort((a, b) => ORDER[a.status] - ORDER[b.status]).forEach(c => {
+            const li = $('li', c.status), body = $('div');
+            li.style.setProperty('--i', i++);
+            if (locked) {
+              const bar = $('span', 'redact'); bar.style.width = 38 + (i * 37) % 45 + '%';
+              body.append(bar);
+            } else {
+              const b = $('b'); b.append($('span', 'sr-only', LABEL[c.status] + ': '), c.title);
+              body.append(b, $('p', '', c.detail));
+            }
+            li.append(icon(c.status), body);
+            out.push(li);
+          });
+        });
+        rowsEl.replaceChildren(...out);
         locked ? rowsEl.setAttribute('aria-hidden', 'true') : rowsEl.removeAttribute('aria-hidden');
       }
 
@@ -1136,25 +1021,27 @@
         busy = true;
         const host = target.hostname.replace(/^www\./, '');
         forms.forEach(f => { f.querySelector('button').disabled = true; f.parentNode.querySelector('.scan-status').textContent = ''; });
-        head.textContent = `Scanning ${host}…`;
+        head.textContent = `Scanning ${host}…`; q('.sc-time').textContent = '';
+        fig.hidden = layersEl.hidden = scoreEl.hidden = true; sum.hidden = false;
         show(progress);
         const steps = [...progress.children]; let at = 0;
         const tick = () => steps.forEach((li, i) => { li.classList.toggle('done', i < at); li.classList.toggle('on', i === at); });
         tick(); clearInterval(ticker);
         ticker = setInterval(() => { if (at < steps.length - 1) { at++; tick(); } }, 650);
-        sec.hidden = false;
-        sec.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-        head.focus({ preventScroll: true });
+        // From the hero, travel to the scorecard. From the section's own form, just keep the progress in view.
+        if (form === main) progress.scrollIntoView({ behavior: smooth(), block: 'nearest' });
+        else { sec.scrollIntoView({ behavior: smooth(), block: 'start' }); head.focus({ preventScroll: true }); }
         try {
-          const [r] = await Promise.all([post('/api/scan', { url: target.href }), new Promise(ok => setTimeout(ok, 1600))]);
+          const t0 = performance.now();
+          const [r] = await Promise.all([post('/api/scan', { url: target.href }).then(x => { q('.sc-time').textContent = 'Scanned in ' + ((performance.now() - t0) / 1000).toFixed(1) + ' seconds.'; return x; }), new Promise(ok => setTimeout(ok, 1600))]);
           token = r.token; source = sourceOf(form);
           head.textContent = r.host;
           summary(r);
           rows(r.rows, true);
-          $('#gate-h').textContent = r.failed ? `${r.failed} of ${r.total} checks failed on ${r.host}.` : `${r.host} passed all ${r.passed} checks we could run.`;
-          gate.querySelector('.gate-sub').textContent = r.failed ? 'Enter your email to see which checks failed and what each one means.' : 'Enter your email to see the full scorecard.';
-          gate.classList.remove('tried'); gate.querySelector('.gate-status').textContent = '';
-          show(fig, layersEl, gate, rowsEl);
+          q('#gate-h').textContent = r.failed ? `${r.failed} of ${r.total} checks failed on ${r.host}.` : `${r.host} passed all ${r.passed} checks we could run.`;
+          q('.gate-sub').textContent = r.failed ? 'Enter your email to see which checks failed and what each one means.' : 'Enter your email to see the full scorecard.';
+          gate.classList.remove('tried'); q('.gate-status').textContent = '';
+          show(gate, rowsEl);
           head.focus({ preventScroll: true });
         } catch (e) {
           head.textContent = host;
@@ -1183,49 +1070,167 @@
       gate.addEventListener('submit', async e => {
         e.preventDefault();
         gate.classList.add('tried');
-        const email = gate.elements.email, status = gate.querySelector('.gate-status'), btn = gate.querySelector('button');
-        const say = (msg, sending) => { status.textContent = msg; status.classList.toggle('sending', !!sending); };
+        const email = gate.elements.email, st = q('.gate-status'), btn = gate.querySelector('button');
+        const say = (msg, sending) => { st.textContent = msg; st.classList.toggle('sending', !!sending); };
         if (!email.checkValidity()) { email.focus(); say('Enter the email address for your scorecard.'); return; }
         btn.disabled = true; say('Opening your scorecard…', true);
         try {
           const r = await post('/api/lead', { token, email: email.value.trim(), source });
           rows(r.checks, false);
-          scoreEl.replaceChildren('Agent-readiness score: ', el('b', '', `${r.score} out of 100`), r.untested ? ` · ${r.untested} not tested` : '');
-          show(fig, layersEl, scoreEl, rowsEl, next);
+          scoreEl.replaceChildren('Agent-readiness score: ', $('b', '', `${r.score} out of 100`), r.untested ? ` · ${r.untested} not tested` : '');
+          scoreEl.hidden = false;
+          show(rowsEl, next);
           head.focus({ preventScroll: true });
         } catch (err) {
           say(err.friendly || "That didn't go through. Try again, or email hey@wolfgrey.ai.");
         } finally { btn.disabled = false; }
       });
 
-      $('[data-rescan]').addEventListener('click', () => {
-        sec.hidden = true; token = '';
-        forms.forEach(f => { f.elements.url.value = ''; });
-        document.querySelector('.hero').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-        forms[0].elements.url.focus({ preventScroll: true });
+      q('[data-rescan]').addEventListener('click', () => {
+        sum.hidden = true; token = '';
+        forms.forEach(f => { f.elements.url.value = ''; f.classList.remove('tried'); });
+        show(idle);
+        sec.scrollIntoView({ behavior: smooth() });
+        main.elements.url.focus({ preventScroll: true });
       });
+
+      // While the field is empty, the placeholder walks through the kinds of business we work with
+      if (root.classList.contains('motion')) {
+        const names = ['yourbusiness.com', 'yourlawfirm.com', 'yourclinic.com', 'youragency.com', 'yourbrokerage.com'];
+        let n = 0;
+        setInterval(() => {
+          if (document.hidden) return;
+          n = (n + 1) % names.length;
+          forms.forEach(f => {
+            const u = f.elements.url;
+            if (u.value || document.activeElement === u) return;
+            u.classList.add('swap');
+            setTimeout(() => { u.placeholder = names[n]; u.classList.remove('swap'); }, 250);
+          });
+        }, 2800);
+      }
+
+      // Any "Scan my site" link lands in the field, ready to type
+      document.addEventListener('click', e => { if (e.target.closest('a[href="#scan"]')) setTimeout(() => main.elements.url.focus({ preventScroll: true })); });
     })();
 
-    console.log('%cwolfgrey.ai', 'font: 500 14px Satoshi, sans-serif; color: #D12F2F', '\nBuilt alongside the same AI agents we set up for clients. Curious how? hey@wolfgrey.ai');
+    console.log('%cwolfgrey.ai', 'font: 500 14px Satoshi, sans-serif; color: #D12F2F', '\nYou read the source. So do agents. Flip the switch in the nav to see what they keep. hey@wolfgrey.ai');
 
-    /* ---------- Scroll reveals ---------- */
-    if (!reduceMotion) {
-      const groups = ['.hero-copy > *', '.section-head > *', '.stats li', '.why-close > *', '.gap', '.layers > li', '.layers ul li', '.fig', '.card li', '.steps li', '.measures tbody tr', '.book-head > *', '.book-side', '.closing-cta > *'];
-      for (const sel of groups) {
-        const byParent = new Map();
-        document.querySelectorAll(sel).forEach(el => {
-          if (el.hasAttribute('data-rv')) return;
-          const i = byParent.get(el.parentNode) || 0;
-          byParent.set(el.parentNode, i + 1);
-          el.dataset.rv = '';
-          el.style.setProperty('--i', i);
-        });
-      }
-      const io = new IntersectionObserver(entries => entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      }), { rootMargin: '0px 0px -8% 0px' });
-      document.querySelectorAll('[data-rv], .band-rule').forEach(el => io.observe(el));
+    /* ---------- Halftone figures: an image redrawn as dots (hero wolf, footer team) ---------- */
+    const toneIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); toneIO.unobserve(en.target); } }), { threshold: .2 }) : null;
+    document.querySelectorAll('canvas.tone').forEach(canvas => {
+      const fit = +canvas.dataset.fit || 1, floor = +canvas.dataset.floor || 0, right = canvas.dataset.align === 'right';
+      const img = new Image();
+      img.src = canvas.dataset.src;
+      img.decode().then(() => {
+        const s = document.createElement('canvas'); s.width = img.naturalWidth; s.height = img.naturalHeight;
+        const sx = s.getContext('2d'); sx.drawImage(img, 0, 0);
+        const px = sx.getImageData(0, 0, s.width, s.height).data, ctx = canvas.getContext('2d');
+        let last = '';
+        const layout = () => {
+          const W = canvas.clientWidth, H = canvas.clientHeight, key = W + 'x' + H;
+          if (!W || !H || key === last) return;
+          last = key;
+          const dpr = Math.min(window.devicePixelRatio || 1, 3), ratio = s.width / s.height;
+          canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#F4F2F0';
+          let bh = H * fit, bw = bh * ratio;
+          if (bw > W) { bw = W; bh = bw / ratio; }
+          const bx = right ? W - bw : (W - bw) / 2, by = H - bh;
+          const step = Math.min(+canvas.dataset.max || 5, Math.max(2.2, bw / (+canvas.dataset.grain || 150)));
+          for (let y = by + step / 2; y < H; y += step) for (let x = bx + step / 2; x < bx + bw; x += step) {
+            const i = (Math.floor((y - by) / bh * s.height) * s.width + Math.floor((x - bx) / bw * s.width)) * 4;
+            const a = px[i + 3] / 255, t = a * (floor + (1 - floor) * (1 - px[i] / 255));
+            if (t <= .04) continue;
+            const k = Math.max(1, Math.round(Math.sqrt(t) * 3)) / 3;
+            ctx.globalAlpha = .09 + .66 * t;
+            ctx.beginPath(); ctx.arc(x, y, step * .47 * k, 0, 6.2832); ctx.fill();
+          }
+        };
+        new ResizeObserver(layout).observe(canvas);
+        toneIO ? toneIO.observe(canvas) : canvas.classList.add('in');
+      }).catch(() => {});
+    });
+
+    /* ---------- Reveal on scroll ---------- */
+    const rv = document.querySelectorAll('[data-rv], .band-rule');
+    document.querySelectorAll('.frame, .cells, .head, .hero-copy, .hero-side, .sc, .closing-cta').forEach(p => { let i = 0; for (const c of p.children) if (c.hasAttribute('data-rv')) c.style.setProperty('--i', i++); });
+    if ('IntersectionObserver' in window && root.classList.contains('motion')) {
+      const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px' });
+      rv.forEach(el => io.observe(el));
+    } else rv.forEach(el => el.classList.add('in'));
+
+    /* ---------- Dot lattice: 5px grid, soft clusters, parts around the cursor ---------- */
+    const STEP = 5, R = 78, PUSH = 15, CORE = 20;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    function hash(x, y) { let n = Math.imul(x, 374761393) + Math.imul(y, 668265263); n = Math.imul(n ^ (n >>> 13), 1274126177); return ((n ^ (n >>> 16)) >>> 0) / 4294967296; }
+    function noise(x, y) {
+      const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+      const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+      const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+      return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
     }
+    const fields = [];
+    function dotField(canvas, seed) {
+      const dark = canvas.parentElement.classList.contains('dark');
+      const ink = dark ? '#F4F2F0' : '#1B1919', core = dark ? '#FF4D4D' : '#D12F2F';
+      const a0 = dark ? .05 : .035, a1 = dark ? .2 : .13;
+      const ctx = canvas.getContext('2d');
+      let base = null, W = 0, H = 0, dpr = 1, mx = -1e4, my = -1e4, queued = false;
+      const density = (x, y) => {
+        const n = noise(x / 140 + seed, y / 140) * .65 + noise(x / 46 + 9, y / 46 + seed) * .35;
+        const t = Math.min(1, Math.max(0, (n - .5) / .28));
+        return t * t * (3 - 2 * t);
+      };
+      const dot = (c, x, y, d) => { c.globalAlpha = a0 + d * a1; const s = 1 + d * .9; c.fillRect(x - s / 2, y - s / 2, s, s); };
+      function layout() {
+        W = canvas.clientWidth; H = canvas.clientHeight;
+        if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+        base = document.createElement('canvas'); base.width = canvas.width; base.height = canvas.height;
+        const b = base.getContext('2d');
+        b.setTransform(dpr, 0, 0, dpr, 0, 0); b.fillStyle = ink;
+        for (let y = STEP / 2; y < H; y += STEP) for (let x = STEP / 2; x < W; x += STEP) dot(b, x, y, density(x, y));
+        draw(); canvas.classList.add('in');
+      }
+      function draw() {
+        queued = false;
+        if (!base) return;
+        ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(base, 0, 0);
+        if (mx < -R || my < -R || mx > W + R || my > H + R) return;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const x0 = Math.floor((mx - R) / STEP) * STEP, y0 = Math.floor((my - R) / STEP) * STEP;
+        const span = Math.ceil((2 * R) / STEP + 1) * STEP;
+        ctx.clearRect(x0, y0, span, span);
+        for (let gy = y0 + STEP / 2; gy < y0 + span; gy += STEP) for (let gx = x0 + STEP / 2; gx < x0 + span; gx += STEP) {
+          const dx = gx - mx, dy = gy - my, dist = Math.hypot(dx, dy);
+          let px = gx, py = gy;
+          if (dist < R && dist > .01) { const k = 1 - dist / R, p = k * k * PUSH; px += (dx / dist) * p; py += (dy / dist) * p; }
+          const near = Math.hypot(px - mx, py - my) < CORE;
+          ctx.fillStyle = near ? core : ink;
+          dot(ctx, px, py, Math.max(density(gx, gy), near ? .5 : 0));
+        }
+      }
+      let last = '';
+      new ResizeObserver(() => { const s = canvas.clientWidth + 'x' + canvas.clientHeight; if (s !== last) { last = s; layout(); } }).observe(canvas);
+      fields.push({ move(cx, cy) {
+        const b = canvas.getBoundingClientRect();
+        const inside = cx > b.left - R && cx < b.right + R && cy > b.top - R && cy < b.bottom + R;
+        if (!inside && mx === -1e4) return;
+        if (inside) { mx = cx - b.left; my = cy - b.top; } else { mx = my = -1e4; }
+        if (!queued) { queued = true; requestAnimationFrame(draw); }
+      } });
+    }
+    document.querySelectorAll('canvas.bg-dots').forEach((c, i) => dotField(c, i * 7.3));
+    if (finePointer && !reduce) {
+      addEventListener('pointermove', e => { if (e.pointerType === 'mouse') fields.forEach(f => f.move(e.clientX, e.clientY)); }, { passive: true });
+      root.addEventListener('pointerleave', () => fields.forEach(f => f.move(-1e5, -1e5)));
+    }
+  })();
   </script>
 </body>
 </html>
