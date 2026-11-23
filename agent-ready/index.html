@@ -368,10 +368,13 @@
       .av-data { border-left: 0; }
     }
     @media (max-width: 620px) {
-      .nav .pill { display: none; }
-      .nav .frame { grid-template-columns: 1fr auto; padding: 0 16px; }
+      .nav .pill { height: 38px; padding: 0 16px; font-size: 15px; }
+      .nav .pill .more { display: none; }
+      .nav .frame { grid-template-columns: auto 1fr auto; gap: 10px; padding: 0 16px; }
+      .switch { justify-self: center; height: 38px; }
+      .closing canvas.crew { width: 100%; }
       .mark span { display: none; }
-      .switch button { min-width: 76px; padding: 0 12px; }
+      .switch button { min-width: 68px; padding: 0 12px; }
       .rows > div { grid-template-columns: 1fr; gap: 2px; }
       summary { font-size: 18px; }
       .hero-side { grid-template-columns: 1fr; }
@@ -434,7 +437,7 @@
         <button type="button" data-set-view="agent" aria-pressed="false">Agent</button>
         <span class="thumb" aria-hidden="true"></span>
       </div>
-      <a class="pill pill-red" href="#scan" data-set-view="human">Scan my site</a>
+      <a class="pill pill-red" href="#scan" data-set-view="human">Scan<span class="more">&nbsp;my site</span></a>
     </div>
   </header>
 
@@ -705,7 +708,7 @@
           <h2 id="agent-h" tabindex="-1">This page, in the order an agent reads it.</h2>
         </div>
         <div>
-          <p class="lede">An agent does not see a design. It works through a page in six steps, and each step depends on the one before. Everything on the right is read from this page's own markup.</p>
+          <p class="lede">An agent does not see a design. It works through a page in six steps, and each step depends on the one before. Everything shown for each step is read from this page's own markup.</p>
           <button class="pill" type="button" data-set-view="human">Back to the human view</button>
         </div>
       </div>
